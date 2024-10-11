@@ -11,20 +11,22 @@ Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21}.
         \item $\S$ is a countable set of states,
         \item $\ACT$ is a set of action symbols,
         \item $\dist(\S)$ is the set of probability distributions over $\S$,
-        \item $\ra \subseteq \S \times \ACT \times \dist(\S)$ is a transition relation,
-        \item $\sim\subseteq \DS{i} \times \AGT \times \DS{i}$ is an indistinguishability relation between plans for each agent over $\DS{i}\subseteq$, and
+        \item ${\ra} \subseteq \S \times \ACT \times \dist(\S)$ is a transition relation,
+        \item ${\sim}\subseteq \DS{i} \times \AGT \times \DS{i}$ is an indistinguishability relation between plans for each agent over $\DS{i}\subseteq$, and
         \item $\V: \S \ra 2^\PROP$ is a valuation function.
     \end{itemize}
-    We denote by $[\plan]_{\sim_i}:=\set{\plan' \in \DS{i} \mid \plan \sim_i \plan'}$ is $\plan$'s equivalence relation with respect to $\DS{i}$  and define $\Unc(i) := \set{[\plan]_{\sim_i} \mid \plan\in\DS{i}}$. The set $\Unc:=\set{\Unc(i) \mid i\in\AGT}$ is called the  \emph{uncertainty set} of $\model$. For simplicity sake, we sometimes denote $\model=\tup{\S,\ACT,\dist(\S),\ra,\Unc,\V}$ to refer to a PLTS, i.e., we will use its uncertainty set instead of the indistinguishability relation.
+    By $[\plan]_{\sim_i}:=\set{\plan' \in \DS{i} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{i}$, then we define $\Unc(i) := \set{[\plan]_{\sim_i} \mid \plan\in\DS{i}}$. The set $\Unc:=\set{\Unc(i) \mid i\in\AGT}$ is called the \emph{uncertainty set} of $\model$. For simplicity sake, we sometimes denote $\model=\tup{\S,\ACT,\dist(\S),\ra,\Unc,\V}$ to refer to a PLTS, i.e., we will use its uncertainty set instead of the indistinguishability relation.
 \end{definition}
+
+In general, we will assume that PLTS are complete, as for those we can always complete the execution of a plan to a \emph{sink state}.
 
 \begin{definition}
     \label{def:syntax}
     The set of formulas (a.k.a. the language) of $\PKh$ is defined by the following BNF:
     \[
-        \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh_i^\rho(\psi,\varphi),
+        \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh_i^q(\psi,\varphi),
     \]
-    where $p\in\PROP$, $i\in\AGT$ and $\rho\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^\rho(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$, with probability $\rho$''}
+    where $p\in\PROP$, $i\in\AGT$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^q(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$, with probability $q$''}
 \end{definition}
 
 \begin{definition} \label{def:semantics}
@@ -34,10 +36,12 @@ Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21}.
     \model, s \models p & \iffdef & p \in \V(s) \\
     \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
     \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
-    \model, s \models \kh_i^\rho(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc(i) \;\text{such that:} \\
-    & & \ \ \text{\rm (1)} \ \plans \text{ is $\rho$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
-    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans}_\rho \truthset{\model}{\varphi}, 
+    \model, s \models \kh_i^q(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc(i) \;\text{such that:} \\
+    & & \ \ \text{\rm (1)} \ \plans \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans} \truthset{\model}{\varphi}, 
     \end{array}
-    \]     \raul{$\rho$-executable and $ \reach{\plans}_\rho$ to be defined}
+    \]     \raul{$q$-executable and $ \reach{\plans}_q$ to be defined}
     where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
 \end{definition}
+
+The general idea in condition 1 of the clause for $\kh$ establishes that all the plans in $\plans$ have a probablity of at least $q$ of succeeding. Since all plans in $\plans$ are indistinguishability, this needs to be guaranteed no matter which plan is chosen. However, there are at least two alternatives in this definition: one considering \emph{adaptability}, meaning that there is at least one possible execution of each plan in $\plans$ for which probability $q$ is guaranteed, and considering \emph{non-adaptability} whenever we need this guarantee on each possible execution of every plan in $\plans$. Condition 2 establishes that successfull states are reached with probability of at least $q$.

@@ -1,0 +1,40 @@
+\section{Preliminaries}
+
+\begin{definition}\label{def:plts}
+    Let $\PROP$ be a countable set of propositional symbols and let $\AGT$ be a finite set of agents.  
+    A \emph{Probabilistic Labeled Transition System (PLTS)} $\model$ is a tuple
+    $\tup{\S,\ACT,\dist(S),\ra,\sim,\V}$ such that:
+    \begin{itemize}
+        \item $\S$ is a countable set of states,
+        \item $\ACT$ is a set of action symbols,
+        \item $\dist(S)$ is the set of probability distributions over $\S$,
+        \item $\ra \subseteq \S \times \ACT \times \dist(\S)$ is a transition relation,
+        \item $\sim\subseteq \DS{i} \times \AGT \times \DS{i}$ is an indistinguishability relation between plans for each agent over $\DS{i}\subseteq$, and
+        \item $\V: \S \ra 2^\PROP$ is a valuation function.
+    \end{itemize}
+    We denote by $[\plan]_{\sim_i}:=\set{\plan' \mid \plan \sim_i \plan'}$ and $\Unc(i) := \set{[\plan]_{\sim_i} \mid \plan\in\DS{i}}$. The set $\Unc:=\set{\Unc(i) \mid i\in\AGT}$ is called the  \emph{uncertainty set} of $\model$. For simplicity sake, we sometimes denote $\model=\tup{\S,\ACT,\dist(S),\ra,\Unc,\V}$ to refer to a PLTS, i.e., we will use its uncertainty set instead of the indistinguishability relation.
+\end{definition}
+
+\begin{definition}
+    \label{def:syntax}
+    The set of formulas (a.k.a. the language) of $\PKh$ is defined by the following BNF:
+    \[
+        \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh_i^\rho(\psi,\varphi),
+    \]
+    where $p\in\PROP$, $i\in\AGT$ and $\rho\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh^\rho(\psi,\varphi)$ are read as \emph{``aget $i$ knows how to achieve $\varphi$ given $\psi$, with probability $\rho$''}
+\end{definition}
+
+\begin{definition} \label{def:semantics}
+    Let $\model = \tup{\S,\ACT,\dist(S),\ra,\Unc,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:
+    \[
+    \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+    \model, s \models p & \iffdef & p \in \V(s) \\
+    \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
+    \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
+    \model, s \models \khi(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc(i) \;\text{such that:} \\
+    & & \ \ \text{\rm (1)} \ \plans \text{ is $\rho$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans} \truthset{\model}{\varphi},
+    \end{array}
+    \]    
+    where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
+\end{definition}

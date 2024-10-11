@@ -1,13 +1,13 @@
-% \newtheorem{theorem}{Theorem}
-% \newtheorem{proposition}{Proposition}[section]
-% \newtheorem{corollary}{Corollary}[section]
-% \newtheorem{lemma}{Lemma}[section]
-% \newtheorem{fact}{Fact}[section]
-% \newtheorem{remark}{Remark}[section]
-% \newtheorem{claim}{Claim}[section]
-% 
-% \newtheorem{definition}{Definition}[section]
-% \newtheorem{example}{Example}[section]
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{corollary}{Corollary}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{fact}{Fact}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{claim}{Claim}[section]
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
 
 %------------------------------------------------------------------------------------------------
 
@@ -86,15 +86,10 @@
 \newcommand{\FORMS}{{\rm \sf Form}\xspace}
 
 % syntax
-\newcommand{\ability}{\operatorname{\mathsf{S}}}
-\newcommand{\obliged}{\operatorname{\mathsf{O}}}
-\newcommand{\normed}{\operatorname{\mathsf{N}}}
 \newcommand{\kh}{{\mathsf{Kh}}}
 \newcommand{\khi}{{\mathsf{Kh}_i}}
 \newcommand{\kc}{{\mathsf{Kc}}}
-\newcommand{\kci}{{\mathsf{Kc}_i}}
-\newcommand{\arbitrary}{{\mathsf{X}}}
-\newcommand{\permitted}{\operatorname{\mathsf{P}}}
+
 
 %\newcommand{\limp}{\rightarrow}
 \newcommand{\ra}{\rightarrow}
@@ -106,61 +101,35 @@
 \newcommand{\E}{{\operatorname{\sf E}}}
 
 \newcommand{\SAT}{\mathsf{Sat}}
-\newcommand{\HS}{\mathscr{H}}
-\newcommand{\hs}{\mathcal{H}}
-% \newcommand{\state}{\mathcal{S}}
-\newcommand{\pre}{\mathcal{P}}
-\newcommand{\post}{\mathcal{Q}}
-\newcommand{\other}{\mathcal{R}}
-\newcommand{\pres}{\mathbb{P}}
-\newcommand{\posts}{\mathbb{Q}}
-\newcommand{\rels}{\mathbb{R}}
 
-\newcommand{\sign}{\gamma}
-
-\newcommand{\witness}{\mathbb{W}}
-\newcommand{\WITNESS}{\mathbf{W}}
-
-\newcommand{\closed}{Cl}
 \newcommand{\size}[1]{{|}{#1}{|}}
-\newcommand{\demand}{dem}
-\newcommand{\universe}{st}
-\newcommand{\labels}{lbl}
-\newcommand{\subform}{sf}
 
-%\renewcommand{\models}{\vDash}
-\newcommand{\modelsQBF}{\Vdash}
-% languages
-%\newcommand{\KHilogic}{\ensuremath{\sf DKhL}\xspace}
-\newcommand{\kclogic}{\ensuremath{\sf DLKc}\xspace}
-\newcommand{\KHlogic}{\ensuremath{\mathsf{L}_{\kh}}\xspace}
-\newcommand{\QBFlogic}{\ensuremath{\mathsf{QBF}}\xspace}
-
-% translation
-\newcommand{\tr}[1]{\operatorname{tr}_{#1}}
-
+\newcommand{\dist}{\mathsf{Dist}}
 
 % models
 %\newcommand{\modlts}{\mathcal{S}}
 \newcommand{\lmodel}{\mathfrak{L}} % lts model
 %\newcommand{\umodel}{\mathfrak{M}} % uncertain model
 \newcommand{\nmodel}{\mathfrak{N}} % normative model
-\newcommand{\model}{\mathfrak{M}}
+\newcommand{\model}{\mathfrak{L}}
 %\newcommand{\moddults}{\mathcal{D}}
-\newcommand{\cults}{\mathcal{C}}
-\newcommand{\clts}{\mathcal{C}_2}
-\newcommand{\canonical}{\model^\Gamma_c}
+% \newcommand{\cults}{\mathcal{C}}
+% \newcommand{\clts}{\mathcal{C}_2}
+% \newcommand{\canonical}{\model^\Gamma_c}
 
-\newcommand{\W}{\operatorname{W}}
-\newcommand{\R}{\operatorname{R}}
+\newcommand{\PKh}{\mathcal{L}_{\kh^\rho}}
+
+% \newcommand{\R}{\operatorname{R}}
 \renewcommand{\S}{\operatorname{S}}
 \newcommand{\Unc}{\operatorname{U}}
-\newcommand{\N}{\operatorname{N}}
 \newcommand{\V}{\operatorname{V}}
 
 \newcommand{\plan}{\pi}
 \newcommand{\plans}{\Pi}
 \newcommand{\PLANS}{\ACT^{*}}
+
+\newcommand{\reach}[1]{\xrightarrow{#1}}
+
 
 \newcommand{\strategy}{\Sigma}
 \newcommand{\D}[1]{\operatorname{D}_{#1}}
@@ -182,37 +151,36 @@
 
 % notions of executability
 \newcommand{\stexec}{\operatorname{SE}}
-\newcommand{\wkexec}{\operatorname{WE}}
 
 
 % axiom systems
-\newcommand{\axm}[1]{{\rm \textsf{#1}}}
-% \newcommand{\KHaxiom}{\ensuremath{\mathcal{L}^{\lts}_{\kh}}\xspace}
-% \newcommand{\KHiaxiom}{\ensuremath{\mathcal{L}^{\ults}_{\khi}}\xspace}
-% \newcommand{\KCiaxiom}{\ensuremath{\mathcal{L}^{\nts}_{\kci,\obliged,\ability}}\xspace}
-\newcommand{\axset}{\mathcal{DL}}
-\newcommand{\kcaxiom}{\ensuremath{\mathcal{DLK}c}\xspace}
+% \newcommand{\axm}[1]{{\rm \textsf{#1}}}
+% % \newcommand{\KHaxiom}{\ensuremath{\mathcal{L}^{\lts}_{\kh}}\xspace}
+% % \newcommand{\KHiaxiom}{\ensuremath{\mathcal{L}^{\ults}_{\khi}}\xspace}
+% % \newcommand{\KCiaxiom}{\ensuremath{\mathcal{L}^{\nts}_{\kci,\obliged,\ability}}\xspace}
+% \newcommand{\axset}{\mathcal{DL}}
+% \newcommand{\kcaxiom}{\ensuremath{\mathcal{DLK}c}\xspace}
 
 
 % completeness proof
-\newcommand{\smcs}{\boldsymbol{\Phi}}
-% \newcommand{\restkh}[1]{#1\vert_{\kh}}
-% \newcommand{\restnkh}[1]{#1\vert_{\lnot\kh}}
-% \newcommand{\restkhi}[1]{#1\vert_{\khi}}
-% \newcommand{\restnkhi}[1]{#1\vert_{\lnot\khi}}
-\newcommand{\restkc}[1]{#1|_{{\kc}}}
-\newcommand{\restnkc}[1]{#1|_{{\lnot\kc}}}
-\newcommand{\restkci}[1]{#1|_{{\kci}}}
-\newcommand{\restnkci}[1]{#1|_{{\lnot\kci}}}
-\newcommand{\restn}[1]{#1|_{{\normed}}}
-\newcommand{\restnn}[1]{#1|_{{\lnot\normed}}}
-\newcommand{\rests}[1]{#1|_{{\ability}}}
-\newcommand{\restns}[1]{#1|_{{\lnot\ability}}}
-\newcommand{\resta}[1]{#1|_{{\A}}}
-\newcommand{\restna}[1]{#1|_{{\lnot\A}}}
+% \newcommand{\smcs}{\boldsymbol{\Phi}}
+% % \newcommand{\restkh}[1]{#1\vert_{\kh}}
+% % \newcommand{\restnkh}[1]{#1\vert_{\lnot\kh}}
+% % \newcommand{\restkhi}[1]{#1\vert_{\khi}}
+% % \newcommand{\restnkhi}[1]{#1\vert_{\lnot\khi}}
+% \newcommand{\restkc}[1]{#1|_{{\kc}}}
+% \newcommand{\restnkc}[1]{#1|_{{\lnot\kc}}}
+% \newcommand{\restkci}[1]{#1|_{{\kci}}}
+% \newcommand{\restnkci}[1]{#1|_{{\lnot\kci}}}
+% \newcommand{\restn}[1]{#1|_{{\normed}}}
+% \newcommand{\restnn}[1]{#1|_{{\lnot\normed}}}
+% \newcommand{\rests}[1]{#1|_{{\ability}}}
+% \newcommand{\restns}[1]{#1|_{{\lnot\ability}}}
+% \newcommand{\resta}[1]{#1|_{{\A}}}
+% \newcommand{\restna}[1]{#1|_{{\lnot\A}}}
 
-\newcommand{\restarbitrary}[1]{#1|_{\arbitrary}}
-\newcommand{\restnarbitrary}[1]{#1|_{\lnot\arbitrary}}
+% \newcommand{\restarbitrary}[1]{#1|_{\arbitrary}}
+% \newcommand{\restnarbitrary}[1]{#1|_{\lnot\arbitrary}}
 
 % \newcommand{\resta}[1]{#1\vert_{\A}}
 % \newcommand{\restna}[1]{#1\vert_{\lnot\A}}
@@ -306,36 +274,30 @@
 
 %------------------------------------------------------------------------------------------------
 
-\DeclareMathOperator{\vars}{vars}
-\DeclareMathOperator{\sat}{\SAT}
-\DeclareMathOperator{\unsat}{\mathsf{Unsat}}
-\DeclareMathOperator{\taut}{TQBF}
-\DeclareMathOperator{\binnum}{bin}
-
 \renewcommand{\iff}{\ensuremath{\mathrel{\text{iff}}}}
 
 \newcommand{\tset}[1]{\llbracket #1 \rrbracket}
 
-\newcommand{\zerodisplayskips}{%
-  \setlength{\abovedisplayskip}{5pt}%
-  \setlength{\belowdisplayskip}{5pt}%
-  \setlength{\abovedisplayshortskip}{5pt}%
-  \setlength{\belowdisplayshortskip}{5pt}}
-\appto{\normalsize}{\zerodisplayskips}
-\appto{\small}{\zerodisplayskips}
-\appto{\footnotesize}{\zerodisplayskips}
+% \newcommand{\zerodisplayskips}{%
+%   \setlength{\abovedisplayskip}{5pt}%
+%   \setlength{\belowdisplayskip}{5pt}%
+%   \setlength{\abovedisplayshortskip}{5pt}%
+%   \setlength{\belowdisplayshortskip}{5pt}}
+% \appto{\normalsize}{\zerodisplayskips}
+% \appto{\small}{\zerodisplayskips}
+% \appto{\footnotesize}{\zerodisplayskips}
 
-\DeclareMathOperator{\dom}{dom}
-\DeclareMathOperator{\img}{img}
-\DeclareMathOperator{\depth}{\mathsf{md}}
-\DeclareMathOperator{\sforms}{\mathsf{sf}}
-\DeclareMathOperator{\nnf}{nnf}
-\DeclareMathOperator{\cnf}{cnf}
-\DeclareMathOperator{\C}{\mathrm{\Pi}}
-\DeclareMathOperator{\even}{even}
-\DeclareMathOperator{\odd}{odd}
-\DeclareMathOperator{\zeros}{zeros}
+% \DeclareMathOperator{\dom}{dom}
+% \DeclareMathOperator{\img}{img}
+% \DeclareMathOperator{\depth}{\mathsf{md}}
+% \DeclareMathOperator{\sforms}{\mathsf{sf}}
+% \DeclareMathOperator{\nnf}{nnf}
+% \DeclareMathOperator{\cnf}{cnf}
+% \DeclareMathOperator{\C}{\mathrm{\Pi}}
+% \DeclareMathOperator{\even}{even}
+% \DeclareMathOperator{\odd}{odd}
+% \DeclareMathOperator{\zeros}{zeros}
 
 \newcommand{\CPL}{\ensuremath{\mathsf{CPL}}}
 
-\providecommand{\lxor}{\oplus}%{\veebar}
+% \providecommand{\lxor}{\oplus}%{\veebar}

@@ -10,7 +10,7 @@ Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21}.
     \begin{itemize}
         \item $\S$ is a countable set of states,
         \item $\ACT$ is a set of action symbols,
-        \item $\dist(S)$ is the set of probability distributions over $\S$,
+        \item $\dist(\S)$ is the set of probability distributions over $\S$,
         \item $\ra \subseteq \S \times \ACT \times \dist(\S)$ is a transition relation,
         \item $\sim\subseteq \DS{i} \times \AGT \times \DS{i}$ is an indistinguishability relation between plans for each agent over $\DS{i}\subseteq$, and
         \item $\V: \S \ra 2^\PROP$ is a valuation function.
@@ -24,7 +24,7 @@ Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21}.
     \[
         \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh_i^\rho(\psi,\varphi),
     \]
-    where $p\in\PROP$, $i\in\AGT$ and $\rho\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^\rho(\psi,\varphi)$ are read as \emph{``aget $i$ knows how to achieve $\varphi$ given $\psi$, with probability $\rho$''}
+    where $p\in\PROP$, $i\in\AGT$ and $\rho\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^\rho(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$, with probability $\rho$''}
 \end{definition}
 
 \begin{definition} \label{def:semantics}
@@ -36,8 +36,8 @@ Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21}.
     \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
     \model, s \models \kh_i^\rho(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc(i) \;\text{such that:} \\
     & & \ \ \text{\rm (1)} \ \plans \text{ is $\rho$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
-    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans} \truthset{\model}{\varphi},
+    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans}_\rho \truthset{\model}{\varphi}, 
     \end{array}
-    \]    
+    \]     \raul{$\rho$-executable and $ \reach{\plans}_\rho$ to be defined}
     where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
 \end{definition}

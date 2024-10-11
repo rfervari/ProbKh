@@ -1,0 +1,341 @@
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{proposition}{Proposition}[section]
+% \newtheorem{corollary}{Corollary}[section]
+% \newtheorem{lemma}{Lemma}[section]
+% \newtheorem{fact}{Fact}[section]
+% \newtheorem{remark}{Remark}[section]
+% \newtheorem{claim}{Claim}[section]
+% 
+% \newtheorem{definition}{Definition}[section]
+% \newtheorem{example}{Example}[section]
+
+%------------------------------------------------------------------------------------------------
+
+\usepackage{cleveref}
+
+% Abbreviated Cref
+\Crefname{algorithm}{Alg.}{Algs.}
+\Crefname{definition}{Def.}{Defs.}
+% \Crefname{equation}{Eq.}{Eqs.}
+% \Crefname{fact}{Fact}{Facts}
+\Crefname{figure}{Fig.}{Figs.}
+\Crefname{proposition}{Prop.}{Props.}
+% \Crefname{lemma}{Lemma}{Lemmas}
+\Crefname{theorem}{Thm.}{Thms.}
+\Crefname{example}{Ex.}{Exs.}
+\Crefname{corollary}{Cor.}{Cors.}
+% \Crefname{enumi}{Item}{Items}
+\Crefname{section}{Sec.}{Secs.}
+\Crefname{appendix}{App.}{Apps.}
+% \Crefname{table}{Table}{Tables}
+% \Crefname{inlineenumi}{Item}{Items}
+% % \Crefname{cond-khi}{}{}
+% % \Crefname{inline-cond-khi}{}{}
+% \Crefname{table}{Tab.}{Tabs.}
+
+
+
+\usepackage{tikz}
+\usetikzlibrary{arrows,decorations,shapes,automata,positioning,decorations.pathmorphing,patterns}
+
+\tikzset{
+  every picture/.style = {
+    thick,
+    ->,
+    >=stealth',
+    node distance = 1.5em and 3em,
+  }
+  ,
+  cross line/.style = {
+    preaction = {
+      draw=white,
+      -,
+      line width=4pt
+    }
+  }
+  , % states
+  state/.style = {
+    rectangle,
+    rounded corners = 5pt,
+    font = \footnotesize,
+    draw,
+    minimum width = 1em,
+    minimum height = 1em
+  }
+  , % labels of states
+  label-state/.style = {
+    sloped,
+    font = \scriptsize,
+    label distance = -2pt
+  }
+  , % labels of edges
+  label-edge/.style = {
+    font = \scriptsize,
+    label distance = -2pt
+  }
+}
+
+
+%------------------------------------------------------------------------------------------------
+
+% basic sets
+\newcommand{\PROP}{{\rm \sf Prop}\xspace}
+\newcommand{\ACT}{{\rm \sf Act}\xspace}
+\newcommand{\AGT}{{\rm \sf Agt}\xspace}
+
+\newcommand{\FORMS}{{\rm \sf Form}\xspace}
+
+% syntax
+\newcommand{\ability}{\operatorname{\mathsf{S}}}
+\newcommand{\obliged}{\operatorname{\mathsf{O}}}
+\newcommand{\normed}{\operatorname{\mathsf{N}}}
+\newcommand{\kh}{{\mathsf{Kh}}}
+\newcommand{\khi}{{\mathsf{Kh}_i}}
+\newcommand{\kc}{{\mathsf{Kc}}}
+\newcommand{\kci}{{\mathsf{Kc}_i}}
+\newcommand{\arbitrary}{{\mathsf{X}}}
+\newcommand{\permitted}{\operatorname{\mathsf{P}}}
+
+%\newcommand{\limp}{\rightarrow}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\lra}{\leftrightarrow}
+
+\newcommand{\liff}{\leftrightarrow}
+
+\newcommand{\A}{{\operatorname{\sf A}}}
+\newcommand{\E}{{\operatorname{\sf E}}}
+
+\newcommand{\SAT}{\mathsf{Sat}}
+\newcommand{\HS}{\mathscr{H}}
+\newcommand{\hs}{\mathcal{H}}
+% \newcommand{\state}{\mathcal{S}}
+\newcommand{\pre}{\mathcal{P}}
+\newcommand{\post}{\mathcal{Q}}
+\newcommand{\other}{\mathcal{R}}
+\newcommand{\pres}{\mathbb{P}}
+\newcommand{\posts}{\mathbb{Q}}
+\newcommand{\rels}{\mathbb{R}}
+
+\newcommand{\sign}{\gamma}
+
+\newcommand{\witness}{\mathbb{W}}
+\newcommand{\WITNESS}{\mathbf{W}}
+
+\newcommand{\closed}{Cl}
+\newcommand{\size}[1]{{|}{#1}{|}}
+\newcommand{\demand}{dem}
+\newcommand{\universe}{st}
+\newcommand{\labels}{lbl}
+\newcommand{\subform}{sf}
+
+%\renewcommand{\models}{\vDash}
+\newcommand{\modelsQBF}{\Vdash}
+% languages
+%\newcommand{\KHilogic}{\ensuremath{\sf DKhL}\xspace}
+\newcommand{\kclogic}{\ensuremath{\sf DLKc}\xspace}
+\newcommand{\KHlogic}{\ensuremath{\mathsf{L}_{\kh}}\xspace}
+\newcommand{\QBFlogic}{\ensuremath{\mathsf{QBF}}\xspace}
+
+% translation
+\newcommand{\tr}[1]{\operatorname{tr}_{#1}}
+
+
+% models
+%\newcommand{\modlts}{\mathcal{S}}
+\newcommand{\lmodel}{\mathfrak{L}} % lts model
+%\newcommand{\umodel}{\mathfrak{M}} % uncertain model
+\newcommand{\nmodel}{\mathfrak{N}} % normative model
+\newcommand{\model}{\mathfrak{M}}
+%\newcommand{\moddults}{\mathcal{D}}
+\newcommand{\cults}{\mathcal{C}}
+\newcommand{\clts}{\mathcal{C}_2}
+\newcommand{\canonical}{\model^\Gamma_c}
+
+\newcommand{\W}{\operatorname{W}}
+\newcommand{\R}{\operatorname{R}}
+\renewcommand{\S}{\operatorname{S}}
+\newcommand{\Unc}{\operatorname{U}}
+\newcommand{\N}{\operatorname{N}}
+\newcommand{\V}{\operatorname{V}}
+
+\newcommand{\plan}{\pi}
+\newcommand{\plans}{\Pi}
+\newcommand{\PLANS}{\ACT^{*}}
+
+\newcommand{\strategy}{\Sigma}
+\newcommand{\D}[1]{\operatorname{D}_{#1}}
+\newcommand{\DS}[1]{\operatorname{P}_{#1}}
+
+\newcommand{\lts}{\textup{LTS}\xspace}
+%\newcommand{\ublts}{\textup{LTS}\xspace}
+\newcommand{\nts}{\textup{NLTS}\xspace}
+
+\newcommand{\truthset}[2]{\llbracket #2 \rrbracket^{#1}}
+
+%\newcommand{\cmodel}{\modults^\Gamma}
+
+
+\newcommand{\iffdef}{\ensuremath{\mbox{\it iff}_{\mbox{\tiny\it  def}}}}
+
+\newcommand{\sel}{\mathsf{sel}}
+\newcommand{\proj}{\mathsf{pr}}
+
+% notions of executability
+\newcommand{\stexec}{\operatorname{SE}}
+\newcommand{\wkexec}{\operatorname{WE}}
+
+
+% axiom systems
+\newcommand{\axm}[1]{{\rm \textsf{#1}}}
+% \newcommand{\KHaxiom}{\ensuremath{\mathcal{L}^{\lts}_{\kh}}\xspace}
+% \newcommand{\KHiaxiom}{\ensuremath{\mathcal{L}^{\ults}_{\khi}}\xspace}
+% \newcommand{\KCiaxiom}{\ensuremath{\mathcal{L}^{\nts}_{\kci,\obliged,\ability}}\xspace}
+\newcommand{\axset}{\mathcal{DL}}
+\newcommand{\kcaxiom}{\ensuremath{\mathcal{DLK}c}\xspace}
+
+
+% completeness proof
+\newcommand{\smcs}{\boldsymbol{\Phi}}
+% \newcommand{\restkh}[1]{#1\vert_{\kh}}
+% \newcommand{\restnkh}[1]{#1\vert_{\lnot\kh}}
+% \newcommand{\restkhi}[1]{#1\vert_{\khi}}
+% \newcommand{\restnkhi}[1]{#1\vert_{\lnot\khi}}
+\newcommand{\restkc}[1]{#1|_{{\kc}}}
+\newcommand{\restnkc}[1]{#1|_{{\lnot\kc}}}
+\newcommand{\restkci}[1]{#1|_{{\kci}}}
+\newcommand{\restnkci}[1]{#1|_{{\lnot\kci}}}
+\newcommand{\restn}[1]{#1|_{{\normed}}}
+\newcommand{\restnn}[1]{#1|_{{\lnot\normed}}}
+\newcommand{\rests}[1]{#1|_{{\ability}}}
+\newcommand{\restns}[1]{#1|_{{\lnot\ability}}}
+\newcommand{\resta}[1]{#1|_{{\A}}}
+\newcommand{\restna}[1]{#1|_{{\lnot\A}}}
+
+\newcommand{\restarbitrary}[1]{#1|_{\arbitrary}}
+\newcommand{\restnarbitrary}[1]{#1|_{\lnot\arbitrary}}
+
+% \newcommand{\resta}[1]{#1\vert_{\A}}
+% \newcommand{\restna}[1]{#1\vert_{\lnot\A}}
+
+%------------------------------------------------------------------------------------------------
+
+% utils
+\newcommand{\card}[1]{{\mid}{#1}{\mid}}
+\newcommand{\tup}[1]{\langle{#1}\rangle}
+\newcommand{\cset}[1]{\{{#1}\}}
+\newcommand{\csetc}[3]{\{ #1 \in #2 \mid #3 \}}
+\newcommand{\csetsc}[2]{\{{#1}\mid {#2}\}}
+\newcommand{\setof}[2]{\{{#1}\mid {#2}\}}
+\newcommand{\set}[1]{\{{#1}\}}
+
+% \newcommand\SetSymbol[1][]{\nonscript\:#1\vert\allowbreak\nonscript\:\mathopen{}}
+% \providecommand\given{} % to make it exist
+% \DeclarePairedDelimiterX\Set[1]{\left\{}{\right\}}{\renewcommand\given{\SetSymbol[\delimsize]}#1}
+
+
+\newcommand{\subformulas}{\mathsf{sf}}
+\newcommand{\dmd}{dmd}
+
+% \NewDocumentCommand{\setargs}{>{\SplitArgument{1}{;}}m}
+% {\setargsaux#1}
+% \NewDocumentCommand{\setargsaux}{mm}
+% {\IfNoValueTF{#2}{#1} {#1\nonscript\:\delimsize\vert\allowbreak\nonscript\:\mathopen{}#2}}%
+% \def\Set{\set*}%
+
+\newcommand{\ssparagraph}[1]{\smallskip\noindent\textbf{#1}\,}
+
+\newenvironment{smallarray}[1]
+ {\null\,\vcenter\bgroup\scriptsize
+  \renewcommand{\arraystretch}{0.7}%
+  \arraycolsep=.13885em
+  \hbox\bgroup$\array{@{}#1@{}}}
+ {\endarray$\egroup\egroup\,\null}
+
+%------------------------------------------------------------------------------------------------
+
+
+% To write notes in the text
+\newcommand{\raul}[1]{\todo[color=yellow!55]{{\bf Raul:} #1}\xspace}
+\newcommand{\bigraul}[1]{\todo[inline,color=yellow!55]{{\bf Raul:} #1}}
+
+\newcommand{\val}[1]{\todo[color=blue!20]{{\bf Val:} #1}\xspace}
+\newcommand{\bigval}[1]{\todo[inline,color=blue!20]{{\bf Val:} #1}}
+
+\newcommand{\carlos}[1]{\todo[color=green!20]{{\bf Carlos:} #1}\xspace}
+\newcommand{\bigcarlos}[1]{\todo[inline,color=green!20]{{\bf Carlos:} #1}}
+
+\newcommand{\andres}[1]{\todo[color=cyan!20]{{\bf ARS:} #1}\xspace}
+\newcommand{\bigandres}[1]{\todo[inline,color=cyan!20]{{\bf ARS:} #1}}
+
+\newcommand{\pablo}[1]{\todo[color=red!55]{{\bf Pablo:} #1}\xspace}
+\newcommand{\bigpablo}[1]{\todo[inline,color=red!55]{{\bf Pablo:} #1}}
+
+\newcommand{\colornuevo}{teal}
+%\newcommand{\lineanueva}[1]{\textcolor{red}{#1}}
+\newenvironment{textonuevo}
+{\color{\colornuevo}}
+{\normalcolor}
+
+\newcommand{\colornota}{Peach}
+\newenvironment{notas}
+{\smallskip \hlight{NOTES:}\;\color{\colornota}}
+{\normalcolor}
+
+\newcommand{\colorincompleto}{red}
+\newenvironment{incompleto}
+{\color{\colorincompleto}}
+{\normalcolor}
+
+% \colorlet{colorhighlight}{Yellow}
+% \newcommand{\hlight}[1]{{\setlength{\fboxsep}{2pt}\colorbox{colorhighlight}{#1}}}
+% \newcommand{\hlightmath}[1]{{\setlength{\fboxsep}{2pt}\colorbox{colorhighlight}{\ensuremath{#1}}}}
+
+%------------------------------------------------------------------------------------------------
+
+% Complexity classes
+\newcommand{\NP}{{\rm\textsf{NP}}\xspace}
+\newcommand{\CoNP}{{\rm\textsf{Co-NP}}\xspace}
+
+\newcommand{\Poly}{{\rm\textsf{P}}\xspace}
+\newcommand{\PSPACE}{{\rm\textsf{PSpace}}\xspace}
+\newcommand{\NPSPACE}{{\rm\textsf{NPSpace}}\xspace}
+\newcommand{\EXPTIME}{{\rm\textsf{ExpTime}}\xspace}
+\newcommand{\NEXPTIME}{{\rm\textsf{NExpTime}}\xspace}
+\newcommand{\LSPACE}{{\rm\textsf{LSpace}}\xspace}
+\newcommand{\PH}{{\rm\textsf{PH}}\xspace}
+
+%------------------------------------------------------------------------------------------------
+
+\DeclareMathOperator{\vars}{vars}
+\DeclareMathOperator{\sat}{\SAT}
+\DeclareMathOperator{\unsat}{\mathsf{Unsat}}
+\DeclareMathOperator{\taut}{TQBF}
+\DeclareMathOperator{\binnum}{bin}
+
+\renewcommand{\iff}{\ensuremath{\mathrel{\text{iff}}}}
+
+\newcommand{\tset}[1]{\llbracket #1 \rrbracket}
+
+\newcommand{\zerodisplayskips}{%
+  \setlength{\abovedisplayskip}{5pt}%
+  \setlength{\belowdisplayskip}{5pt}%
+  \setlength{\abovedisplayshortskip}{5pt}%
+  \setlength{\belowdisplayshortskip}{5pt}}
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\img}{img}
+\DeclareMathOperator{\depth}{\mathsf{md}}
+\DeclareMathOperator{\sforms}{\mathsf{sf}}
+\DeclareMathOperator{\nnf}{nnf}
+\DeclareMathOperator{\cnf}{cnf}
+\DeclareMathOperator{\C}{\mathrm{\Pi}}
+\DeclareMathOperator{\even}{even}
+\DeclareMathOperator{\odd}{odd}
+\DeclareMathOperator{\zeros}{zeros}
+
+\newcommand{\CPL}{\ensuremath{\mathsf{CPL}}}
+
+\providecommand{\lxor}{\oplus}%{\veebar}

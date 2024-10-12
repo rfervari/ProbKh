@@ -3,6 +3,7 @@
 
 Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21}.
 
+
 \begin{definition}\label{def:plts}
     Let $\PROP$ be a countable set of propositional symbols and let $\AGT$ be a finite set of agents.  
     A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
@@ -12,15 +13,21 @@ Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21}.
         \item $\ACT$ is a countable set of action symbols,
         \item $\dist(\S)$ is the set of probability distributions over $\S$,
         \item ${\ra} \subseteq \S \times \ACT \times \dist(\S)$ is a transition relation,
-        \item ${\sim}\subseteq \DS{i} \times \AGT \times \DS{i}$ is an indistinguishability relation between plans for each agent over $\DS{i}\subseteq\ACT^*$, and
+        \item ${\sim}$ is a collection of relations ${\sim_i}\subseteq \DS{i}\times \DS{i}$ for each $\in\AGT$, where $\DS{i}\subseteq\ACT^*$ and every $\sim_i$ is an equivalence relation over $\DS{i}$, and 
         \item $\V: \S \ra 2^\PROP$ is a valuation function.
     \end{itemize}
+    Elements of $\ACT^*$ are called \emph{plans}, and each $\sim_i$ is called the indistinguishability relation between plans for agent $i$. 
+    % We write $\plan\sim_i\plan'$ whenever $(\plan,i,\plan')\in{\sim}$, and we define $\DS{i}:=\set{\plan \mid \text{ there is } \plan' \text{ s.t. } \plan\sim_i\plan'}$. 
     By $[\plan]_{\sim_i}:=\set{\plan' \in \DS{i} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{i}$, then we define $\Unc(i) := \set{[\plan]_{\sim_i} \mid \plan\in\DS{i}}$. The set $\Unc:=\set{\Unc(i) \mid i\in\AGT}$ is called the \emph{uncertainty set} of $\model$. For simplicity sake, we sometimes denote $\model=\tup{\S,\ACT,\dist(\S),\ra,\Unc,\V}$ to refer to a PLTS, i.e., we will use its uncertainty set instead of the indistinguishability relation.
 \end{definition}
+
+Notice that, as it is defined in~\cite{AFSVQ21}, $\Unc(i)$ represents the perception agent $i$ has about the reality. In turn, the relation $\sim_i$ is not an equivalence relation over $\ACT^*$ but over $\DS{i}$, as the latter contains only the plans she considers available or suitable for her purposes, while those in $\ACT^*\setminus\DS{i}$ are not considered by $i$, even if they are suitable plans. 
+
 
 \begin{center}
 \includegraphics[scale=0.1]{PLTS.jpg}
 \end{center}
+
 
 In general, we will assume that PLTS are complete, as for those we can always complete the execution of a plan to a \emph{sink state}.
 

@@ -1,6 +1,8 @@
 \section{Knowing How with Linear Plans}
 \label{sec:khlinearplans}
 
+\subsection{Basic Definitions}
+
 We start by introducing the most basic notion of knowing how as defined in e.g.~\cite{Wang15lori,Wang16,Wang2016}.
 
 
@@ -39,6 +41,8 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
     \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
 \end{definition}
 
+\subsection{The Probabilistic Approach}
+
 \begin{definition}\label{def:plts}
     Let $\PROP$ be a countable set of propositional symbols. 
     A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
@@ -52,16 +56,19 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
     \end{figure}
 
 \begin{definition}\label{def:strategy-comp-exec}
-    Let $\model=\tup{\S,\ACT,\dist(\S),\ra,\V}$ be a PLTS, a \emph{strategy} is a funcion $\strategy: \S\times(\ACT\times\S)^* \ra (\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strategy$ is \emph{$\plan$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
+    Let $\model=\tup{\S,\ACT,\dist(\S),\ra,\V}$ be a PLTS, a \emph{strategy} is a funcion $\strategy: \S\times(\ACT\times\S)^* \ra (\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strategy$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
     \begin{enumerate}
         \item $\strategy(\rho)= s \reach{a} \mu$ implies $\last(\rho)=s$ and $s\reach{a}\mu$ in $\model$, and 
-        \item $\bar{\rho}\in\pref(\plan)$ implies $\bar{\rho}a\in\pref(\plan)$.
+        \item $\bar{\rho}\in\pref(\plans)$ implies $\bar{\rho}a\in\pref(\plans)$.
     \end{enumerate}
-    Let $q\in[0,1]$, we say that $\plan$ is \emph{$q$-executable} at $s\in\S$, if and only if, 
+    For $\plan\in\ACT^*$, we say that $\sigma$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
+
+    Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, 
     \[
         \infim_{\{\strategy \mid \strategy \text{ is } \plan\text{-comp.}\}} \probability^\strategy_\model(\plan)\geq q.
     \]
-    Finally, $\plan$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$.
+    Finally, $\plans$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$. 
+    A plan $\plan$ is \emph{$q$-executable} at $s$ (respectively, at $B$) if $\{\plan\}$ is $q$-executable at $s$ (respectively, at $B$). 
 \end{definition}
 
 \begin{definition}
@@ -73,7 +80,7 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
         % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
         \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plan \in \ACT^* \;\text{such that:} \\
         & & \ \ \text{\rm (1)} \ \plan \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
-        & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
+        & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
         \end{array}
         \] 
         where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
@@ -84,14 +91,7 @@ The model-checking problem for $\PKh$ is undecidable.
 \end{theorem}
 
 \begin{proof}
-    Suppose we want to check whether $\model,s\models\kh^q(\psi,\varphi)$. 
-    Let us consider condition (2) in the semantics. Then,
-    \begin{align}
-        & \plan \text{ is $q$-executable at } s \\
-        \text{ iff } \ \ &  \infim_{\{\strategy \mid \strategy \text{ is } \plan\text{-comp.}\}} \probability^\strategy_\model(\plan)\geq q \\ 
-        \text{ iff } \ \ & \forall\sigma: \probability^\sigma_\model(\plan) \geq q \\ 
-        \text{ iff } \ \ & \neg\exists\sigma: \probability^\sigma_\model(\plan) < q \\
-        \text{ iff } \ \ & \neg\exists\sigma: \probability^\sigma_\model(\plan) \geq 1 - q
-    \end{align}
-    The latter solves the problem of checking whether the language recognized by a probabilistic (deterministic) automata is empty, which is undecidable.
+    Suppose we want to check whether $\model,s\models\kh^q(\psi,\varphi)$.  W.l.o.g., consider $\model$ is complete and deterministic. 
+    From the semantics, we need to check if there is $\plan\in\ACT^*$ satisfying conditions (1) and (2). Consider condition (1), i.e., we need to check whether $\plan$ is $q$-executable at all $s\in\truthset{\model}{\psi}$. Fix such an $s$. Since $\model$ is deterministic and complete, it all boils down to check whether there is $\plan\in\ACT^*$ such that $\probability^\strategy_\model(\plan)\geq q$ (notice that $\strategy$ is unique by determinism of $\model$). 
+    The latter solves the problem of checking whether the language recognized by a probabilistic (deterministic) automata is empty, which is undecidable~\cite{MadaniHC99}. 
 \end{proof}

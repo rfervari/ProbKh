@@ -32,12 +32,6 @@ Notice that, as it is defined in~\cite{AFSVQ21,AFSVQ23}, $\Unc(i)$ represents th
 %     \end{enumerate}
 % \end{definition}
 
-
-\begin{definition}\label{def:comp-exec-sets}
-    Let $\model=\tup{\S,\ACT,\dist(\S),\ra,Unc,\V}$ be a PLTSU, and let $\plans\subseteq 2^{\ACT^*}$, we say that $\strategy$ is \emph{$\plans$-compatible} if and only if, it is $\plan$-compatible for all $\plan\in\plans$. 
-    Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, each $\plan\in\plans$ is $q$-executable at $s$ and $\plans$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$.
-\end{definition}
-
 In general, we will assume that PLTS are complete, as for those we can always complete the execution of a plan to a \emph{sink state}.
 
 \begin{definition}

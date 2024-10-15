@@ -3,6 +3,19 @@
 
 We start by introducing the most basic notion of knowing how as defined in e.g.~\cite{Wang15lori,Wang16,Wang2016}.
 
+
+\begin{definition}\label{def:lts}
+    Let $\PROP$ be a countable set of propositional symbols. 
+    A \emph{Labeled Transition System (LTS)}  is a tuple
+    $\model=\tup{\S,\ACT,\ra,\V}$ such that:
+    \begin{itemize}
+        \item $\S$ is a countably non-empty set of states,
+        \item $\ACT$ is a countable set of action symbols,
+        \item ${\ra} \subseteq \S \times \ACT \times \dist(\S)$ is a transition relation,
+    \end{itemize}
+    Elements of $\ACT^*$ are called \emph{plans}.
+\end{definition}
+
 \begin{definition}
     \label{def:syntax}
     The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
@@ -12,7 +25,7 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
     where $p\in\PROP$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$''}
 \end{definition}
 
-\begin{definition} \label{def:semantics}
+\begin{definition} \label{def:semantics-kh}
     Let $\model = \tup{\S,\ACT,\ra,\V}$ be an LTS and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
     \[
     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
@@ -24,4 +37,10 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
     & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
     \end{array}
     \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
+\end{definition}
+
+\begin{definition}\label{def:plts}
+    Let $\PROP$ be a countable set of propositional symbols. 
+    A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
+    $\model=\tup{\S,\ACT,\dist(\S),\ra,\V}$ such that $\tup{\S,\ACT,\ra,\V}$ is an LTS and $\dist(\S)$ is the set of probability distributions over $\S$.
 \end{definition}

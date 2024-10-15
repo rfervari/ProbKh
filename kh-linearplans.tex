@@ -1,0 +1,25 @@
+\section{Knowing How with Linear Plans}
+\label{sec:khlinearplans}
+
+\begin{definition}
+    \label{def:syntax}
+    The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
+    \[
+        \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh(\psi,\varphi),
+    \]
+    where $p\in\PROP$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$''}
+\end{definition}
+
+\begin{definition} \label{def:semantics}
+    Let $\model = \tup{\S,\ACT,\ra,\V}$ be an LTS and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
+    \[
+    \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+    \model, s \models p & \iffdef & p \in \V(s) \\
+    \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
+    \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
+    \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plan \in \ACT^* \;\text{such that:} \\
+    & & \ \ \text{\rm (1)} \ \plan \text{ is SE-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
+    \end{array}
+    \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
+\end{definition}

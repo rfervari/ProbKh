@@ -24,24 +24,25 @@ Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21,AFSVQ2
 
 Notice that, as it is defined in~\cite{AFSVQ21,AFSVQ23}, $\Unc(i)$ represents the perception agent $i$ has about the reality. In turn, the relation $\sim_i$ is not an equivalence relation over $\ACT^*$ but over $\DS{i}$, as the latter contains only the plans she considers available or suitable for her purposes, while those in $\ACT^*\setminus\DS{i}$ are not considered by $i$, even if they are suitable plans. 
 
-\begin{definition} \label{def:executability} \raul{TBC}
-    Let  $\model=\tup{\S,\ACT,\dist(\S),\ra,\Unc,\V}$ be a PLTSU, let $\plan\in\ACT^*$ be a plan, and let $q\in[0,1]$ a probability, we need to define two notions:
-    \begin{enumerate}
-        \item We say $\plan$ is \emph{$q$-executable} at $s\in\S$ iff ...  Extend it for set of plans and set of states.
-        \item For $s,t\in\S$, we write $s \reach{\plan}_q t$ iff ... Extend it for set of plans and set of states.
-    \end{enumerate}
+% \begin{definition} \label{def:executability} \raul{TBC}
+%     Let  $\model=\tup{\S,\ACT,\dist(\S),\ra,\Unc,\V}$ be a PLTSU, let $\plan\in\ACT^*$ be a plan, and let $q\in[0,1]$ a probability, we need to define two notions:
+%     \begin{enumerate}
+%         \item We say $\plan$ is \emph{$q$-executable} at $s\in\S$ iff ...  Extend it for set of plans and set of states.
+%         \item For $s,t\in\S$, we write $s \reach{\plan}_q t$ iff ... Extend it for set of plans and set of states.
+%     \end{enumerate}
+% \end{definition}
+
+
+\begin{definition}\label{def:comp-exec-sets}
+    Let $\model=\tup{\S,\ACT,\dist(\S),\ra,Unc,\V}$ be a PLTSU, and let $\plans\subseteq 2^{\ACT^*}$, we say that $\strategy$ is \emph{$\plans$-compatible} if and only if, it is $\plan$-compatible for all $\plan\in\plans$. 
+    Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, each $\plan\in\plans$ is $q$-executable at $s$ and $\plans$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$.
 \end{definition}
-
-\begin{center}
-\includegraphics[scale=0.1]{PLTS.jpg}
-\end{center}
-
 
 In general, we will assume that PLTS are complete, as for those we can always complete the execution of a plan to a \emph{sink state}.
 
 \begin{definition}
     \label{def:syntax}
-    The set of formulas (a.k.a. the language) of $\PKh$ is defined by the following BNF:
+    The set of formulas (a.k.a. the language) of $\PKhunc$ is defined by the following BNF:
     \[
         \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh_i^q(\psi,\varphi),
     \]
@@ -49,7 +50,7 @@ In general, we will assume that PLTS are complete, as for those we can always co
 \end{definition}
 
 \begin{definition} \label{def:semantics}
-    Let $\model = \tup{\S,\ACT,\dist(\S),\ra,\Unc,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:
+    Let $\model = \tup{\S,\ACT,\dist(\S),\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
     \[
     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
     \model, s \models p & \iffdef & p \in \V(s) \\

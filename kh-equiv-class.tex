@@ -1,6 +1,9 @@
 \section{Knowing How over Indistinguishability classes}
 \label{sec:kh:indistinguishability}
 
+
+\subsection{A First Approach: Non-Adaptable Plans}
+
 Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21,AFSVQ23}.
 
 
@@ -45,7 +48,31 @@ In general, we will assume that PLTS are complete, as for those we can always co
 %     where $p\in\PROP$, $i\in\AGT$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^q(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$, with probability $q$''}
 % \end{definition}
 
-\begin{definition} \label{def:semantics}
+\begin{definition} \label{def:semantics-non-adap}
+    Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
+    \[
+    \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+    % \model, s \models p & \iffdef & p \in \V(s) \\
+    % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
+    % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
+    \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that for all } \plan\in\plans: \\
+    & & \ \ \text{\rm (1)} \ \plan \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
+    \end{array}
+    \]     \raul{1 and 2 to be merge into one.}
+    \noindent where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
+\end{definition}
+
+This definition bears a resemblance to the one in \Cref{sec:khlinearplan}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. This way, we obtain a result similar to the one in the previous section.
+
+
+\subsection{A Second Approach: Adaptable Plans}
+
+\begin{theorem}\label{th:mc-khp-nadapt-undecidable}
+    The model-checking problem for $\PKhunc$ under the semantics from \Cref{def:semantics:non-adap} is undecidable.
+\end{theorem}
+
+\begin{definition} \label{def:semantics-adap}
     Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
     \[
     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
@@ -65,3 +92,7 @@ The general idea in condition 1 of the clause for $\kh$ establishes that all the
 \begin{remark}
     Notice that an equivalence class $\plans$ can be defined in terms of a Deterministic Finite State Automata (DFA) $\mathcal{A}_{\plans}$. This way, the operation of checking $q$-executability can be perfomed over the product $\model\times\mathcal{A}_{\plans}$. In short, $\plans$ is $q$-executable at $s$ iff for each $\plan\in\plans$, there exists one MDP in  $\model\times\mathcal{A}_{\plans}$ in which the probability of executing $\plan$ is at least $q$. This will be used while designing a model-checking algorithm (connected with algorithms from~\cite{AFSVQ21,AFSVQ23,DF23}).
 \end{remark}
+
+\begin{theorem}\label{th:mc-khp-adapt-decidable}
+    The model-checking problem for $\PKhunc$ under the semantics from \Cref{def:semantics:adap} is decidable. Moreover, if each $\plans\in\Unc$ is given as input as a deterministic FSA, the problem is in $\PTIME$.
+\end{theorem}

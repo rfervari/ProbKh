@@ -65,12 +65,14 @@ In general, we will assume that PLTS are complete, as for those we can always co
 
 This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. This way, we obtain a result similar to the one in the previous section.
 
-
-\subsection{A Second Approach: Adaptable Plans}
-
 \begin{theorem}\label{th:mc-khp-nadapt-undecidable}
     The model-checking problem for $\PKhunc$ under the semantics from Definition~\ref{def:semantics-non-adap} is undecidable.
 \end{theorem}
+
+
+\subsection{A Second Approach: Adaptable Plans}
+
+Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptable}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately.
 
 \begin{definition} \label{def:semantics-adap}
     Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:

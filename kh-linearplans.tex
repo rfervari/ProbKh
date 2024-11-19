@@ -47,7 +47,7 @@ Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state
     \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
     \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
     \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plan \in \ACT^* \;\text{such that:} \\
-    & & \ \ \text{\rm (1)} \ \plan \text{ is SE-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+    & & \ \ \text{\rm (1)} \ \plan \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
     & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
     \end{array}
     \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
@@ -58,6 +58,8 @@ Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state
 \end{proposition}
 
 \subsection{The Probabilistic Approach}
+
+Naturally, our first approach will be extending $\Khlogic$ with some form of probabilistic behaviour. We will start by introducing PLTS, an extension of LTS with probabilities.
 
 \begin{definition}\label{def:plts}
     Let $\PROP$ be a countable set of propositional symbols. 
@@ -70,6 +72,8 @@ Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state
             \includegraphics[scale=0.1]{PLTS.jpg}
         \end{center}
     \end{figure}
+
+We need to capture the notion of executability with probability at least $q$, for some $q\in[0,1]$. 
 
 \begin{definition}\label{def:strategy-comp-exec}
     Let $\model=\tup{\S,\ACT,\ra,\V}$ be a PLTS, a \emph{strategy} is a function $\strategy: \S\times(\ACT\times\S)^* \ra \dist(\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strategy$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
@@ -86,6 +90,23 @@ Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state
     Finally, $\plans$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$. 
     A plan $\plan$ is \emph{$q$-executable} at $s$ (respectively, at $B$) if $\{\plan\}$ is $q$-executable at $s$ (respectively, at $B$). 
 \end{definition}
+
+Notice that, whenever $q=1$, we are in the case of SE from~\Cref{def:plans}. The extended language with probabilities is given below.
+
+
+\begin{definition}
+    \label{def:syntax-extended}
+    The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
+    \[
+        \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh^q(\psi,\varphi),
+    \]
+    where $p\in\PROP$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$ with probability at least $q$''}.
+\end{definition}
+
+
+
+
+Now we proceed by introducing the semantics of the new modality.
 
 \begin{definition}
     Let $\model = \tup{\S,\ACT,\ra,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:

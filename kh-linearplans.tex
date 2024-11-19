@@ -3,8 +3,7 @@
 
 \subsection{Basic Definitions}
 
-We start by introducing the most basic notion of knowing how as defined in e.g.~\cite{Wang15lori,Wang16,Wang2016}.
-
+We start by introducing the most basic notion of knowing how as defined in e.g.~\cite{Wang15lori,Wang16,Wang2016}. Formulas describing the abilities of an agent of achieving a certain goal, are interpreted over Labeled Transition Systems, which indicate what actions are available for execution at each state, and how they transform one state into another.
 
 \begin{definition}\label{def:lts}
     Let $\PROP$ be a countable set of propositional symbols. 
@@ -15,11 +14,19 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
         \item $\ACT$ is a countable set of action symbols,
         \item ${\ra} \subseteq \S \times \ACT \times \S$ is a transition relation (sometimes we denote by $\reach{a}$ the set $\set{(s,t) \mid (s,a,t){\in}{\ra}}$, for $a\in\ACT$).
     \end{itemize}
+\end{definition}
+
+In order to determine when an agent knows how to achieve a goal, we need to characterize those sequences of actions (or plans) that result appropriate for such a purpose. This is the notion of \emph{strongly executable} plans about, indicating that a plan is ``fail proof''. This notion, discussed already in~\cite{Wang15lori,Wang16,Wang2016} was inspired by conformant planning (see e.g.~\cite{Smith&Weld98,Bonet2010}).
+
+\begin{definition}\label{def:plans}
+    Let $\model=\tup{\S,\ACT,\ra,\V}$ be an LTS. 
     Elements of $\ACT^*$ are called \emph{plans} (with $\epsilon$ the empty plan).  Let $\plan\in\ACT^*$, $\size{\plan}$ denotes its length ($\size{\epsilon}:=0$).
     For  $0\leq i \leq \size{\plan}$, the plan $\plan_i$ denotes the initial segment of $\plan$ up to (and including) the $i^{th}$ position (with $\plan_0 := \epsilon$). The action $\plan[i]$ is the one appearing in $\plan$ at the $i^{th}$ position. We define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
 
-    We say that a plan $\plan\in\ACT^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $T\subseteq \S$ if and only if it is SE at every $s\in T$.
+    We say that a plan $\plan\in\ACT^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $T\subseteq \S$ if and only if it is SE at every $s\in T$. The notation $T \reach{\plan} U$ (for $T,U\subseteq\S$) indicates that for all $s\in T$, there is $t\in U$ such that $s\reach{\plan} t$.
 \end{definition}
+
+Now we are ready to introduce the language of knowing how.
 
 \begin{definition}
     \label{def:syntax}
@@ -29,6 +36,8 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
     \]
     where $p\in\PROP$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$''}
 \end{definition}
+
+Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state. 
 
 \begin{definition} \label{def:semantics-kh}
     Let $\model = \tup{\S,\ACT,\ra,\V}$ be an LTS and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
@@ -43,6 +52,10 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
     \end{array}
     \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
 \end{definition}
+
+\begin{proposition}[\cite{DemriF23}]
+    The model-checking problem for $\Khlogic$ is \PSPACE-complete.
+\end{proposition}
 
 \subsection{The Probabilistic Approach}
 

@@ -10,7 +10,7 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
     A \emph{Labeled Transition System (LTS)}  is a tuple
     $\model=\tup{\S,\ACT,\ra,\V}$ such that:
     \begin{itemize}
-        \item $\S$ is a countably non-empty set of states,
+        \item $\S$ is a countably non-empty set of states, \raul{Directamente finito?}
         \item $\ACT$ is a countable set of action symbols,
         \item ${\ra} \subseteq \S \times \ACT \times \S$ is a transition relation (sometimes we denote by $\reach{a}$ the set $\set{(s,t) \mid (s,a,t){\in}{\ra}}$, for $a\in\ACT$).
     \end{itemize}
@@ -52,6 +52,13 @@ Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state
     \end{array}
     \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
 \end{definition}
+
+The model-checking problem for a given logic is defined as follows, where models and formulas are instantiated with those corrresponding to each particular case. 
+
+\begin{description} \itemsep 0cm
+    \item[Input:] A model $\model$, a state $s$ in $\model$ and a formula $\varphi$;
+    \item[Output:] $\model,s\models\varphi$?
+\end{description}
 
 \begin{proposition}[\cite{DemriF23}]
     The model-checking problem for $\Khlogic$ is \PSPACE-complete.

@@ -1,6 +1,7 @@
 \section{Knowing How over Indistinguishability classes}
 \label{sec:kh:indistinguishability}
 
+The results in the previous section show a huge jump in the computational behaviour of knowing-how: while model-checking in the standard case is \PSPACE-complete, considering probabilities leads to undecidability of the same problem. Here, we will deal with the version of knowing-how, in which an agent only considers plans that belong to its uncertainty/awareness class. We will introduce two logics considering probabilities, one generalizing the logic from~\cite{AFSVQ21,AFSVQ23} (each plan in a class must be an appropriate plan) and another one in which it will suffice to have certain appropriate plans in a class. For the former, the model-checking problem again becomes undecidable (contrary to the \PTIME problem of the logic without probabilities, see e.g.~\cite{AFSVQ21,AFSVQ23,DF23}), while for the second, the problem is decidable. In what follows, apart from the technical results, we will motivate the use of the decidable logic in some examples.
 
 \subsection{A First Approach: Non-Adaptable Plans}
 
@@ -63,7 +64,9 @@ In general, we will assume that PLTS are complete, as for those we can always co
     \noindent where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
 \end{definition}
 
-This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. This way, we obtain a result similar to the one in the previous section.
+This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. We call this version of the logic \emph{non-adaptable} for such a reason, as the agent cannot use the ``good plans'' whenever she considers them ``equally good'' as others.  We will discuss later an alternative to this notion.
+
+For this logic, we obtain a result similar to the one in the previous section.
 
 \begin{theorem}\label{th:mc-khp-nadapt-undecidable}
     The model-checking problem for $\PKhunc$ under the semantics from Definition~\ref{def:semantics-non-adap} is undecidable.
@@ -72,7 +75,7 @@ This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans
 
 \subsection{A Second Approach: Adaptable Plans}
 
-Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptable}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately.
+Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptable}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately. Thus, the agent can use those plans that are good for her purposes, even in presence of non-appropriate plans that she considers indistinguishable from the good ones. \raul{Esto hay que venderlo un poco mejor.}
 
 \begin{definition} \label{def:semantics-adap}
     Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:

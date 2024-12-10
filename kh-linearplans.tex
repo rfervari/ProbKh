@@ -5,16 +5,16 @@
 
 We start by introducing the most basic notion of knowing how as defined in e.g.~\cite{Wang15lori,Wang16,Wang2016}. Formulas describing the abilities of an agent of achieving a certain goal, are interpreted over Labeled Transition Systems, which indicate what actions are available for execution at each state, and how they transform one state into another.
 
-\begin{definition}\label{def:lts}
-    Let $\PROP$ be a countable set of propositional symbols. 
-    A \emph{Labeled Transition System (LTS)}  is a tuple
-    $\model=\tup{\S,\ACT,\ra,\V}$ such that:
-    \begin{itemize}
-        \item $\S$ is a countably non-empty set of states, \raul{Directamente finito?}
-        \item $\ACT$ is a countable set of action symbols,
-        \item ${\ra} \subseteq \S \times \ACT \times \S$ is a transition relation (sometimes we denote by $\reach{a}$ the set $\set{(s,t) \mid (s,a,t){\in}{\ra}}$, for $a\in\ACT$).
-    \end{itemize}
-\end{definition}
+% \begin{definition}\label{def:lts}
+%     Let $\PROP$ be a countable set of propositional symbols. 
+%     A \emph{Labeled Transition System (LTS)}  is a tuple
+%     $\model=\tup{\S,\ACT,\ra,\V}$ such that:
+%     \begin{itemize}
+%         \item $\S$ is a countably non-empty set of states, \raul{Directamente finito?}
+%         \item $\ACT$ is a countable set of action symbols,
+%         \item ${\ra} \subseteq \S \times \ACT \times \S$ is a transition relation (sometimes we denote by $\reach{a}$ the set $\set{(s,t) \mid (s,a,t){\in}{\ra}}$, for $a\in\ACT$).
+%     \end{itemize}
+% \end{definition}
 
 In order to determine when an agent knows how to achieve a goal, we need to characterize those sequences of actions (or plans) that result appropriate for such a purpose. This is the notion of \emph{strongly executable} plans about, indicating that a plan is ``fail proof''. This notion, discussed already in~\cite{Wang15lori,Wang16,Wang2016} was inspired by conformant planning (see e.g.~\cite{Smith&Weld98,Bonet2010}).
 
@@ -66,39 +66,49 @@ The model-checking problem for a given logic is defined as follows, where models
 
 \subsection{The Probabilistic Approach}
 
-Naturally, our first approach will be extending $\Khlogic$ with some form of probabilistic behaviour. We will start by introducing PLTS, an extension of LTS with probabilities.
+Naturally, our first approach will be extending $\Khlogic$ with some form of probabilistic behaviour. 
 
-\begin{definition}\label{def:plts}
-    Let $\PROP$ be a countable set of propositional symbols. 
-    A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
-    $\model=\tup{\S,\ACT,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \ACT \times \dist(\S)$, where  $\dist(\S)$ is the set of probability distributions over $\S$.
-\end{definition}
+% We will start by introducing PLTS, an extension of LTS with probabilities.
 
-    \begin{figure}[t]
-        \begin{center}
-            \includegraphics[scale=0.1]{PLTS.jpg}
-        \end{center}
-    \end{figure}
+% \begin{definition}\label{def:plts}
+%     Let $\PROP$ be a countable set of propositional symbols. 
+%     A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
+%     $\model=\tup{\S,\ACT,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \ACT \times \dist(\S)$, where  $\dist(\S)$ is the set of probability distributions over $\S$.
+% \end{definition}
 
-We need to capture the notion of executability with probability at least $q$, for some $q\in[0,1]$. 
+% We will start by introducing PLTS, an extension of LTS with probabilities.
 
-\begin{definition}\label{def:strategy-comp-exec}
-    Let $\model=\tup{\S,\ACT,\ra,\V}$ be a PLTS, a \emph{strategy} is a function $\strat: \S\times(\ACT\times\S)^* \ra \dist(\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strat$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
-    \begin{enumerate}
-        \item $\strat(\rho)(s,a,\mu)>0$ implies $\last(\rho)=s$ and $s\reach{a}\mu$ in $\model$, and 
-        \item $\bar{\rho}\in\pref(\plans)$ implies $\bar{\rho}a\in\pref(\plans)$.
-    \end{enumerate}
-    For $\plan\in\ACT^*$, we say that $\sigma$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
+% \begin{definition}\label{def:plts}
+%     Let $\PROP$ be a countable set of propositional symbols. 
+%     A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
+%     $\model=\tup{\S,\ACT,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \ACT \times \dist(\S)$, where  $\dist(\S)$ is the set of probability distributions over $\S$.
+% \end{definition}
 
-    Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, 
-    \[
-        \infim_{\{\strat \mid \strat \text{ is } \plans\text{-comp.}\}} \Prob^\strat_{s}(\plans)\geq q.
-    \]
-    Finally, $\plans$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$. 
-    A plan $\plan$ is \emph{$q$-executable} at $s$ (respectively, at $B$) if $\{\plan\}$ is $q$-executable at $s$ (respectively, at $B$). 
-\end{definition}
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[scale=0.1]{PLTS.jpg}
+    \end{center}
+\end{figure}
 
-\bigpedro{todo lo de arriba en esta subsecci\'on deber\'ia irse, la mayor\'ia de las cosas est\'an definidas en los preliminaries, queda la idea de $\plans$-compatible que viene debajo}
+% We need to capture the notion of executability with probability at least $q$, for some $q\in[0,1]$. 
+
+% \begin{definition}\label{def:strategy-comp-exec}
+%     Let $\model=\tup{\S,\ACT,\ra,\V}$ be a PLTS, a \emph{strategy} is a function $\strat: \S\times(\ACT\times\S)^* \ra \dist(\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strat$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
+%     \begin{enumerate}
+%         \item $\strat(\rho)(s,a,\mu)>0$ implies $\last(\rho)=s$ and $s\reach{a}\mu$ in $\model$, and 
+%         \item $\bar{\rho}\in\pref(\plans)$ implies $\bar{\rho}a\in\pref(\plans)$.
+%     \end{enumerate}
+%     For $\plan\in\ACT^*$, we say that $\sigma$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
+
+%     Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, 
+%     \[
+%         \infim_{\{\strat \mid \strat \text{ is } \plans\text{-comp.}\}} \Prob^\strat_{s}(\plans)\geq q.
+%     \]
+%     Finally, $\plans$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$. 
+%     A plan $\plan$ is \emph{$q$-executable} at $s$ (respectively, at $B$) if $\{\plan\}$ is $q$-executable at $s$ (respectively, at $B$). 
+% \end{definition}
+
+% \bigpedro{todo lo de arriba en esta subsecci\'on deber\'ia irse, la mayor\'ia de las cosas est\'an definidas en los preliminaries, queda la idea de $\plans$-compatible que viene debajo}
 
 
 

@@ -1,0 +1,113 @@
+%%%% kr-instructions.tex -- version 1.3 (11-Jan-2021)
+
+% \typeout{KR2024 Instructions for Authors}
+
+% These are the instructions for authors for KR-24.
+
+\documentclass{article}
+\pdfpagewidth=8.5in
+\pdfpageheight=11in
+
+\usepackage{kr}
+
+% Use the postscript times font!
+\usepackage{times}
+
+\usepackage{settings}
+\input{macros}
+
+\urlstyle{same}
+
+% the following package is optional:
+%\usepackage{latexsym}
+
+% See https://www.overleaf.com/learn/latex/theorems_and_proofs
+% for a nice explanation of how to define new theorems, but keep
+% in mind that the amsthm package is already included in this
+% template and that you must *not* alter the styling.
+% \newtheorem{example}{Example}
+% \newtheorem{theorem}{Theorem}
+
+% Following comment is from ijcai97-submit.tex:
+% The preparation of these files was supported by Schlumberger Palo Alto
+% Research, AT\&T Bell Laboratories, and Morgan Kaufmann Publishers.
+% Shirley Jowell, of Morgan Kaufmann Publishers, and Peter F.
+% Patel-Schneider, of AT\&T Bell Laboratories collaborated on their
+% preparation.
+
+% These instructions can be modified and used in other conferences as long
+% as credit to the authors and supporting agencies is retained, this notice
+% is not changed, and further modification or reuse is not restricted.
+% Neither Shirley Jowell nor Peter F. Patel-Schneider can be listed as
+% contacts for providing assistance without their prior permission.
+
+% To use for other conferences, change references to files and the
+% conference appropriate and use other authors, contacts, publishers, and
+% organizations.
+% Also change the deadline and address for returning papers and the length and
+% page charge instructions.
+% Put where the files are available in the appropriate places.
+%PDF Info Is REQUIRED.
+\pdfinfo{
+/TemplateVersion (KR.2022.0, KR.2023.0, KR.2024.0)
+}
+
+
+
+\title{How lucky are you to know your way}
+
+% Single author syntax
+\iffalse % (remove the multiple-author syntax below and \iffalse ... \fi here)
+\author{%
+    Author name
+    \affiliations
+    Affiliation
+    \emails
+    email@example.com    % email
+}
+\fi
+% Multiple author syntax
+\author{%
+Valentin Cassano$^{1,2}$\and
+Pablo F. Castro$^{1,2}$\and
+Pedro R. D'Argenio$^{1,3}$\and
+Raul Fervari$^{1,3}$ \\
+\affiliations
+$^1$Consejo Nacional de Investigaciones Cient\'ificas y T\'ecnicas (CONICET), Argentina\\
+$^2$Universidad Nacional de R\'io Cuarto, Argentina\\
+$^3$Universidad Nacional de C\'ordoba, Argentina\\
+\emails
+\{pcastro, valentin\}@dc.exa.unrc.edu.ar,
+\{pedro.dargenio, rfervari\}@unc.edu.ar
+}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+  In this paper we introduce a probabilistic version of knowing how modalities. More precisely, our logics extend existing approaches to model the ability of an agent to achieve a goal, with a certain probability. Models of the logic are extended with probability distributions over the actions that can be executed. In turn, we investigate different variant logics with this new feature. First, we enrich with probabilities the linear plan-based logic of knowing how. Then, we consider indistinguishability classes, and obtain two logics, one that we call with `non-adaptable' plans, and another called with `adaptable' plans. For all these logics we investigate the computational complexity of their model-checking problem, obtaining uncedidability results for the first and the second logic, while for the last one the problem is decidable in polynomial time.
+\end{abstract}
+
+\input{introduction}
+\input{preliminaries}
+\input{kh-linearplans}
+\input{kh-equiv-class}
+
+\section*{Acknowledgments}
+
+
+
+\appendix
+
+% \section{Technical Appendix}
+% \label{sec:appendix}
+
+
+
+%% The file kr.bst is a bibliography style file for BibTeX 0.99c
+\bibliographystyle{kr}
+\bibliography{references}
+
+\end{document}
+

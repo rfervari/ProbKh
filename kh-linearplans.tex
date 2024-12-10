@@ -83,20 +83,92 @@ Naturally, our first approach will be extending $\Khlogic$ with some form of pro
 We need to capture the notion of executability with probability at least $q$, for some $q\in[0,1]$. 
 
 \begin{definition}\label{def:strategy-comp-exec}
-    Let $\model=\tup{\S,\ACT,\ra,\V}$ be a PLTS, a \emph{strategy} is a function $\strategy: \S\times(\ACT\times\S)^* \ra \dist(\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strategy$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
+    Let $\model=\tup{\S,\ACT,\ra,\V}$ be a PLTS, a \emph{strategy} is a function $\strat: \S\times(\ACT\times\S)^* \ra \dist(\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strat$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
     \begin{enumerate}
-        \item $\strategy(\rho)(s,a,\mu)>0$ implies $\last(\rho)=s$ and $s\reach{a}\mu$ in $\model$, and 
+        \item $\strat(\rho)(s,a,\mu)>0$ implies $\last(\rho)=s$ and $s\reach{a}\mu$ in $\model$, and 
         \item $\bar{\rho}\in\pref(\plans)$ implies $\bar{\rho}a\in\pref(\plans)$.
     \end{enumerate}
     For $\plan\in\ACT^*$, we say that $\sigma$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
 
     Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, 
     \[
-        \infim_{\{\strategy \mid \strategy \text{ is } \plans\text{-comp.}\}} \probability^\strategy_{s}(\plans)\geq q.
+        \infim_{\{\strat \mid \strat \text{ is } \plans\text{-comp.}\}} \Prob^\strat_{s}(\plans)\geq q.
     \]
     Finally, $\plans$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$. 
     A plan $\plan$ is \emph{$q$-executable} at $s$ (respectively, at $B$) if $\{\plan\}$ is $q$-executable at $s$ (respectively, at $B$). 
 \end{definition}
+
+\bigpedro{todo lo de arriba en esta subsecci\'on deber\'ia irse, la mayor\'ia de las cosas est\'an definidas en los preliminaries, queda la idea de $\plans$-compatible que viene debajo}
+
+
+
+Given a set of plans $\plans\subseteq\ACT^*$, we want to consider
+strategies that follow as faithfully as possible the plans of
+$\plans$.  Therefore, we say that a strategy $\sigma$ is
+\emph{$\plans$-compatible} if for all $\rho\in\execf$ such that
+$\bar{\rho}\in\pref(\plans)$,
+%
+\begin{enumerate}
+\item%
+  $\strat(\rho)(a,\mu)>0$ implies $\bar{\rho}a\in\pref(\plans)$, and
+\item%
+  $\strat(\rho)(\complete)>0$ implies that either
+  $\bar{\rho}\in\plans$ or
+  $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
+\end{enumerate}
+%
+The first item states that $\strat$ can chose an $a$-labelled
+transition after the partial plan $\bar{\rho}$ if the continuation of
+$\bar{\rho}a$ is also a partial plan.
+%
+The second item states that $\strat$ is allowed to terminate after the
+partial plan $\bar{\rho}$ if either $\bar{\rho}$ is itself a valid
+plan, or $\bar{\rho}$ cannot be continued by the PLTS within some
+valid plan.
+%
+Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
+strategies.
+%
+%% Given a plan $\plan\in\ACT^*$, we say that a strategy $\strat$ is
+%% $\plan$-compatible iff it is $\{\plan\}$-compatible.
+\pedro{poner ejemplos de $\plans$-compatible respecto de alg\'un running
+  example}
+
+
+Let $\plans$ be a set of plans that are believed to perform
+equivalently in order to reach some goal state in $G\subseteq\S$.  We
+define the set of \emph{successful complete (finite) execution} that
+reach $G$ following some plan in $\plans$ by
+$\Succ(\plans,G)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}\in\plans
+  \text{ and } \last(\rho)\in G}\}$.
+%
+We are interested in that any $\plans$-compatible strategy $\sigma$
+starting from a given state $s\in\S$ reaches a state in $G$ with a
+minimum desired probability, say $q$.  That is, we would like that
+%
+\begin{equation}\label{eq:plans:goal:q}
+  \inf_{\sigma \in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G)) \geq q.
+\end{equation}
+%
+More generally, we would like that this holds from any particularly
+assumed state in a set $A\subseteq\S$ (say, a precondition).  So, we
+write $A \reach{\plans}_q G$ if and only if for all state $s\in A$,
+the condition in \cref{eq:plans:goal:q} holds.
+%
+Thus $A \reach{\plans}_q G$ means that any state in $A$ can reach the
+goal $G$ with at least probability $q$ following some plan in $\plans$
+\textcolor{red}{in an adaptively manner}.
+\pedro{ejemplo de esto tambi\'en}
+
+
+\bigpedro{creo que es importante pensar ahora la estructura del paper}
+
+
+
+
+\bigpedro{desde el cartel hasta aqu\'i es nuevo}
+
+
 
 Notice that, whenever $q=1$, we are in the case of SE from~\Cref{def:plans}. \raul{Chequear esto} The extended language with probabilities is given below.
 
@@ -136,6 +208,6 @@ The model-checking problem for $\PKh$ is undecidable.
 
 \begin{proof}
     Suppose we want to check whether $\model,s\models\kh^q(\psi,\varphi)$.  W.l.o.g., consider $\model$ is complete and deterministic. 
-    From the semantics, we need to check if there is $\plan\in\ACT^*$ satisfying conditions (1) and (2). Consider condition (1), i.e., we need to check whether $\plan$ is $q$-executable at all $s\in\truthset{\model}{\psi}$. Fix such an $s$. Since $\model$ is deterministic and complete, it all boils down to check whether there is $\plan\in\ACT^*$ such that $\probability^\strategy_s(\plan)\geq q$ (notice that $\strategy$ is unique by determinism of $\model$). 
+    From the semantics, we need to check if there is $\plan\in\ACT^*$ satisfying conditions (1) and (2). Consider condition (1), i.e., we need to check whether $\plan$ is $q$-executable at all $s\in\truthset{\model}{\psi}$. Fix such an $s$. Since $\model$ is deterministic and complete, it all boils down to check whether there is $\plan\in\ACT^*$ such that $\Prob^\strat_s(\plan)\geq q$ (notice that $\strat$ is unique by determinism of $\model$). 
     The latter solves the problem of checking whether the language recognized by a probabilistic (deterministic) automata is empty, which is undecidable~\cite{MadaniHC99}. 
 \end{proof}

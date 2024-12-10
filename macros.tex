@@ -78,6 +78,9 @@
 
 %------------------------------------------------------------------------------------------------
 
+\newcommand{\powerset}{\mathscr{P}}% requires package mathrsfs
+\newcommand{\powersetf}{\powerset_{\mathsf{f}}}
+
 % basic sets
 \newcommand{\PROP}{{\rm \sf Prop}\xspace}
 \newcommand{\ACT}{{\rm \sf Act}\xspace}
@@ -105,8 +108,12 @@
 \newcommand{\size}[1]{{|}{#1}{|}}
 
 \newcommand{\dist}{\mathsf{Dist}}
+\newcommand{\support}{\mathsf{Supp}}
+\newcommand{\Dirac}{\Delta}
+\newcommand{\Cyl}{\mathrm{Cyl}}
 
 \newcommand{\comp}{\circ}
+
 
 % models
 %\newcommand{\modlts}{\mathcal{S}}
@@ -135,8 +142,18 @@
 
 \newcommand{\reach}[1]{\xrightarrow{#1}}
 
+\newcommand{\complete}{\bot}
+\newcommand{\exec}{\mathit{Exec}}
+\newcommand{\cexec}{\mathit{CExec}}
+\newcommand{\execf}{\exec_{\mathsf{f}}}
+\newcommand{\execw}{\exec_\omega}
+\newcommand{\cexecf}{\cexec_{\mathsf{f}}}
 
-\newcommand{\strategy}{\sigma}
+\newcommand{\Succ}{\mathit{Succ}}
+
+\newcommand{\Comp}{\mathit{Comp}}
+
+\newcommand{\strat}{\sigma}
 \newcommand{\D}[1]{\operatorname{D}_{#1}}
 \newcommand{\DS}[1]{\operatorname{D}_{#1}}
 
@@ -158,9 +175,11 @@
 \newcommand{\stexec}{\operatorname{SE}}
 
 \newcommand{\last}{\mathrm{last}}
+\newcommand{\first}{\mathrm{first}}
 \newcommand{\pref}{\mathrm{pref}}
 \newcommand{\infim}{\mathrm{inf}}
-\newcommand{\probability}{\mathrm{P}}
+\newcommand{\Prob}{\mathbb{P}}
+
 
 
 % axiom systems

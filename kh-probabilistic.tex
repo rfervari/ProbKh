@@ -1,165 +1,165 @@
 \section{The Probabilistic Approach}
 
 
-\subsection{ProbAbilistic Knowing How With Linear Plans}
-Naturally, Our First Approach Will Be Extending $\Khlogic$ With Some Form Of Probabilistic Behaviour. 
+\subsection{Probabilistic Knowing How with Linear Plans}
+Naturally, our first approach will be extending $\Khlogic$ with some form of probabilistic behaviour. 
 
-% We Will Start By Introducing PLTS, An Extension Of LTS With Probabilities.
+% We will start by introducing PLTS, an extension of LTS with probabilities.
 
-% \Begin{Definition}\Label{Def:Plts}
-%     Let $\PROP$ Be A Countable Set Of Propositional Symbols. 
-%     A \Emph{Probabilistic Labeled Transition System (PLTS)}  Is A Tuple
-%     $\Model=\Tup{\S,\ACT,\Ra,\V}$, Defined Exactly As An LTS Except That ${\Ra}\Subseteq \S \Times \ACT \Times \Dist(\S)$, Where  $\Dist(\S)$ Is The Set Of Probability Distributions Over $\S$.
-% \End{Definition}
+% \begin{definition}\label{def:plts}
+%     Let $\PROP$ be a countable set of propositional symbols. 
+%     A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
+%     $\model=\tup{\S,\ACT,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \ACT \times \dist(\S)$, where  $\dist(\S)$ is the set of probability distributions over $\S$.
+% \end{definition}
 
-% We Will Start By Introducing PLTS, An Extension Of LTS With Probabilities.
+% We will start by introducing PLTS, an extension of LTS with probabilities.
 
-% \Begin{Definition}\Label{Def:Plts}
-%     Let $\PROP$ Be A Countable Set Of Propositional Symbols. 
-%     A \Emph{Probabilistic Labeled Transition System (PLTS)}  Is A Tuple
-%     $\Model=\Tup{\S,\ACT,\Ra,\V}$, Defined Exactly As An LTS Except That ${\Ra}\Subseteq \S \Times \ACT \Times \Dist(\S)$, Where  $\Dist(\S)$ Is The Set Of Probability Distributions Over $\S$.
-% \End{Definition}
+% \begin{definition}\label{def:plts}
+%     Let $\PROP$ be a countable set of propositional symbols. 
+%     A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
+%     $\model=\tup{\S,\ACT,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \ACT \times \dist(\S)$, where  $\dist(\S)$ is the set of probability distributions over $\S$.
+% \end{definition}
 
-\Begin{Figure}[T]
-    \Begin{Center}
-        \Includegraphics[Scale=0.1]{PLTS.Jpg}
-    \End{Center}
-\End{Figure}
+\begin{figure}[t]
+    \begin{center}
+        \includegraphics[scale=0.1]{PLTS.jpg}
+    \end{center}
+\end{figure}
 
-% We Need To Capture The Notion Of Executability With Probability At Least $Q$, For Some $Q\In[0,1]$. 
+% We need to capture the notion of executability with probability at least $q$, for some $q\in[0,1]$. 
 
-% \Begin{Definition}\Label{Def:Strategy-Comp-Exec}
-%     Let $\Model=\Tup{\S,\ACT,\Ra,\V}$ Be A PLTS, A \Emph{Strategy} Is A Function $\Strat: \S\Times(\ACT\Times\S)^* \Ra \Dist(\S\Times\ACT\Times\Dist(\S))$. Let $\Plan\In\ACT^*$, We Say That $\Strat$ Is \Emph{$\Plans$-Compatible} If And Only If, For All $\Rho\In \S\Times(\ACT\Times\S)^*$, The Following Conditions Hold:
-%     \Begin{Enumerate}
-%         \Item $\Strat(\Rho)(S,A,\Mu)>0$ Implies $\Last(\Rho)=S$ And $S\Reach{A}\Mu$ In $\Model$, And 
-%         \Item $\Bar{\Rho}\In\Pref(\Plans)$ Implies $\Bar{\Rho}A\In\Pref(\Plans)$.
-%     \End{Enumerate}
-%     For $\Plan\In\ACT^*$, We Say That $\Sigma$ Is \Emph{$\Plan$-Compatible} If It Is $\{\Plan\}$-Compatible. 
+% \begin{definition}\label{def:strategy-comp-exec}
+%     Let $\model=\tup{\S,\ACT,\ra,\V}$ be a PLTS, a \emph{strategy} is a function $\strat: \S\times(\ACT\times\S)^* \ra \dist(\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strat$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
+%     \begin{enumerate}
+%         \item $\strat(\rho)(s,a,\mu)>0$ implies $\last(\rho)=s$ and $s\reach{a}\mu$ in $\model$, and 
+%         \item $\bar{\rho}\in\pref(\plans)$ implies $\bar{\rho}a\in\pref(\plans)$.
+%     \end{enumerate}
+%     For $\plan\in\ACT^*$, we say that $\sigma$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
 
-%     Let $Q\In[0,1]$, We Say That $\Plans$ Is \Emph{$Q$-Executable} At $S\In\S$, If And Only If, 
+%     Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, 
 %     \[
-%         \Infim_{\{\Strat \Mid \Strat \Text{ Is } \Plans\Text{-Comp.}\}} \Prob^\Strat_{S}(\Plans)\Geq Q.
+%         \infim_{\{\strat \mid \strat \text{ is } \plans\text{-comp.}\}} \Prob^\strat_{s}(\plans)\geq q.
 %     \]
-%     Finally, $\Plans$ Is \Emph{$Q$-Executable} At $B\Subseteq\S$, If And Only If, It Is $Q$-Executable At Every $S\In B$. 
-%     A Plan $\Plan$ Is \Emph{$Q$-Executable} At $S$ (Respectively, At $B$) If $\{\Plan\}$ Is $Q$-Executable At $S$ (Respectively, At $B$). 
-% \End{Definition}
+%     Finally, $\plans$ is \emph{$q$-executable} at $B\subseteq\S$, if and only if, it is $q$-executable at every $s\in B$. 
+%     A plan $\plan$ is \emph{$q$-executable} at $s$ (respectively, at $B$) if $\{\plan\}$ is $q$-executable at $s$ (respectively, at $B$). 
+% \end{definition}
 
-% \Bigpedro{Todo Lo De Arriba En Esta Subsecci\'on Deber\'ia Irse, La Mayor\'ia De Las Cosas Est\'an Definidas En Los Preliminaries, Queda La Idea De $\Plans$-Compatible Que Viene Debajo}
+% \bigpedro{todo lo de arriba en esta subsecci\'on deber\'ia irse, la mayor\'ia de las cosas est\'an definidas en los preliminaries, queda la idea de $\plans$-compatible que viene debajo}
 
 
 
-Given A Set Of Plans $\Plans\Subseteq\ACT^*$, We Want To Consider
-Strategies That Follow As Faithfully As Possible The Plans Of
-$\Plans$.  Therefore, We Say That A Strategy $\Sigma$ Is
-\Emph{$\Plans$-Compatible} If For All $\Rho\In\Execf$ Such That
-$\Bar{\Rho}\In\Pref(\Plans)$,
+Given a set of plans $\plans\subseteq\ACT^*$, we want to consider
+strategies that follow as faithfully as possible the plans of
+$\plans$.  Therefore, we say that a strategy $\sigma$ is
+\emph{$\plans$-compatible} if for all $\rho\in\execf$ such that
+$\bar{\rho}\in\pref(\plans)$,
 %
-\Begin{Enumerate}
-\Item%
-  $\Strat(\Rho)(A,\Mu)>0$ Implies $\Bar{\Rho}A\In\Pref(\Plans)$, And
-\Item%
-  $\Strat(\Rho)(\Complete)>0$ Implies That Either
-  $\Bar{\Rho}\In\Plans$ Or
-  $\Bar{\Rho}\{A\Mid{\Last(\Rho)\Reach{A}\Mu}\}\Cap\Pref(\Plans) = \Emptyset$. 
-\End{Enumerate}
+\begin{enumerate}
+\item%
+  $\strat(\rho)(a,\mu)>0$ implies $\bar{\rho}a\in\pref(\plans)$, and
+\item%
+  $\strat(\rho)(\complete)>0$ implies that either
+  $\bar{\rho}\in\plans$ or
+  $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
+\end{enumerate}
 %
-The First Item States That $\Strat$ Can Chose An $A$-Labelled
-Transition After The Partial Plan $\Bar{\Rho}$ If The Continuation Of
-$\Bar{\Rho}A$ Is Also A Partial Plan.
+The first item states that $\strat$ can chose an $a$-labelled
+transition after the partial plan $\bar{\rho}$ if the continuation of
+$\bar{\rho}a$ is also a partial plan.
 %
-The Second Item States That $\Strat$ Is Allowed To Terminate After The
-Partial Plan $\Bar{\Rho}$ If Either $\Bar{\Rho}$ Is Itself A Valid
-Plan, Or $\Bar{\Rho}$ Cannot Be Continued By The PLTS Within Some
-Valid Plan.
+The second item states that $\strat$ is allowed to terminate after the
+partial plan $\bar{\rho}$ if either $\bar{\rho}$ is itself a valid
+plan, or $\bar{\rho}$ cannot be continued by the PLTS within some
+valid plan.
 %
-Let $\Comp(\Plans)$ Denote The Set Of All $\Plans$-Compatible
-Strategies.
+Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
+strategies.
 %
-%% Given A Plan $\Plan\In\ACT^*$, We Say That A Strategy $\Strat$ Is
-%% $\Plan$-Compatible Iff It Is $\{\Plan\}$-Compatible.
-\Pedro{Poner Ejemplos De $\Plans$-Compatible Respecto De Alg\'un Running
-  Example}
+%% Given a plan $\plan\in\ACT^*$, we say that a strategy $\strat$ is
+%% $\plan$-compatible iff it is $\{\plan\}$-compatible.
+\pedro{poner ejemplos de $\plans$-compatible respecto de alg\'un running
+  example}
 
 
-Let $\Plans$ Be A Set Of Plans That Are Believed To Perform
-Equivalently In Order To Reach Some Goal State In $G\Subseteq\S$.  We
-Define The Set Of \Emph{Successful Complete (Finite) Execution} That
-Reach $G$ Following Some Plan In $\Plans$ By
-$\Succ(\Plans,G)=\{{\Rho\Complete\In\Cexecf}\Mid{\Bar{\Rho}\In\Plans
-  \Text{ And } \Last(\Rho)\In G}\}$.
+Let $\plans$ be a set of plans that are believed to perform
+equivalently in order to reach some goal state in $G\subseteq\S$.  We
+define the set of \emph{successful complete (finite) execution} that
+reach $G$ following some plan in $\plans$ by
+$\Succ(\plans,G)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}\in\plans
+  \text{ and } \last(\rho)\in G}\}$.
 %
-We Are Interested In That Any $\Plans$-Compatible Strategy $\Sigma$
-Starting From A Given State $S\In\S$ Reaches A State In $G$ With A
-Minimum Desired Probability, Say $Q$.  That Is, We Would Like That
+We are interested in that any $\plans$-compatible strategy $\sigma$
+starting from a given state $s\in\S$ reaches a state in $G$ with a
+minimum desired probability, say $q$.  That is, we would like that
 %
-\Begin{Equation}\Label{Eq:Plans:Goal:Q}
-  \Inf_{\Sigma \In\Comp(\Plans)}\Prob^\Strat_S(\Succ(\Plans,G)) \Geq Q.
-\End{Equation}
+\begin{equation}\label{eq:plans:goal:q}
+  \inf_{\sigma \in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G)) \geq q.
+\end{equation}
 %
-More Generally, We Would Like That This Holds From Any Particularly
-Assumed State In A Set $A\Subseteq\S$ (Say, A Precondition).  So, We
-Write $A \Reach{\Plans}_Q G$ If And Only If For All State $S\In A$,
-The Condition In \Cref{Eq:Plans:Goal:Q} Holds.
+More generally, we would like that this holds from any particularly
+assumed state in a set $A\subseteq\S$ (say, a precondition).  So, we
+write $A \reach{\plans}_q G$ if and only if for all state $s\in A$,
+the condition in \cref{eq:plans:goal:q} holds.
 %
-Thus $A \Reach{\Plans}_Q G$ Means That Any State In $A$ Can Reach The
-Goal $G$ With At Least Probability $Q$ Following Some Plan In $\Plans$
-\Textcolor{Red}{In An Adaptively Manner}.
-\Pedro{Ejemplo De Esto Tambi\'en}
+Thus $A \reach{\plans}_q G$ means that any state in $A$ can reach the
+goal $G$ with at least probability $q$ following some plan in $\plans$
+\textcolor{red}{in an adaptively manner}.
+\pedro{ejemplo de esto tambi\'en}
 
 
-\Bigpedro{Creo Que Es Importante Pensar Ahora La Estructura Del Paper}
-
-
-
-
-\Bigpedro{Desde El Cartel Hasta Aqu\'i Es Nuevo}
+\bigpedro{creo que es importante pensar ahora la estructura del paper}
 
 
 
-Notice That, Whenever $Q=1$, We Are In The Case Of SE From~\Cref{Def:Plans}. \Raul{Chequear Esto} The Extended Language With Probabilities Is Given Below.
+
+\bigpedro{desde el cartel hasta aqu\'i es nuevo}
 
 
-\Begin{Definition}
-    \Label{Def:Syntax-Extended}
-    The Set Of Formulas (A.K.A. The Language) Of $\Khlogic$ Is Defined By The Following BNF:
+
+Notice that, whenever $q=1$, we are in the case of SE from~\Cref{def:plans}. \raul{Chequear esto} The extended language with probabilities is given below.
+
+
+\begin{definition}
+    \label{def:syntax-extended}
+    The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
     \[
-        \Varphi, \Psi ::= P \Mid \Neg \Varphi \Mid \Varphi \Vee \Psi \Mid \Kh^Q(\Psi,\Varphi),
+        \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh^q(\psi,\varphi),
     \]
-    Where $P\In\PROP$ And $Q\In[0,1]$. Other Boolean Operators Are Defined As Usual. Formulas Of The Form $\Kh(\Psi,\Varphi)$ Are Read As \Emph{``The Agent Knows How To Achieve $\Varphi$ Given $\Psi$ With Probability At Least $Q$''}.
-\End{Definition}
+    where $p\in\PROP$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$ with probability at least $q$''}.
+\end{definition}
 
 
 
 
-Now We Proceed By Introducing The Semantics Of The New Modality.
+Now we proceed by introducing the semantics of the new modality.
 
-\Begin{Definition}
-    Let $\Model = \Tup{\S,\ACT,\Ra,\V}$ Be A PLTS And Let $S\In\S$, The Satisfiability Relation $\Models$ For $\PKh$ Is Inductively Defined As:
+\begin{definition}
+    Let $\model = \tup{\S,\ACT,\ra,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:
     \[
-        \Begin{Array}{L@{\ \ \ }C@{\ \ \  }L}
-        % \Model, S \Models P & \Iffdef & P \In \V(S) \\
-        % \Model, S\Models \Neg\Varphi & \Iffdef & \Model, S \Not\Models \Varphi \\
-        % \Model, S \Models \Psi\Vee\Varphi & \Iffdef & \Model, S \Models \Psi \Mbox{ Or }\Model, W \Models \Varphi \\
-        \Model, S \Models \Kh^Q(\Psi,\Varphi) & \Iffdef & \Text{There Is } \Plan \In \ACT^* \;\Text{Such That:} \\
-        & & \ \ \Text{\Rm (1)} \ \Plan \Text{ Is $Q$-Executable At }  \Truthset{\Model}{\Psi}\; \Text{And} \\
-        & & \ \ \Text{\Em (2)} \ \Truthset{\Model}{\Psi} \Reach{\Plan}_Q \Truthset{\Model}{\Varphi}, 
-        \End{Array}
-        \] \Raul{1 And 2 Will Be Merged Into One Condition.}
-        Where: $\Truthset{\Model}{\Chi} := \Csetsc{S\In\S}{\Model,W\Models\Chi}$. Define: $\Model\Models\Varphi$ Iff  $\Truthset{\Model}{\Varphi}=\S$, And $\Models\Varphi$ Iff $\Model\Models\Varphi$, For All PLTS $\Model$.
-\End{Definition}
+        \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+        % \model, s \models p & \iffdef & p \in \V(s) \\
+        % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
+        % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
+        \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plan \in \ACT^* \;\text{such that:} \\
+        & & \ \ \text{\rm (1)} \ \plan \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+        & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
+        \end{array}
+        \] \raul{1 and 2 will be merged into one condition.}
+        where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
+\end{definition}
 
-\Begin{Theorem}\Label{Th:Mc-Khp-Undecidable}
-The Model-Checking Problem For $\PKh$ Is Undecidable.
-\End{Theorem}
+\begin{theorem}\label{th:mc-khp-undecidable}
+The model-checking problem for $\PKh$ is undecidable.
+\end{theorem}
 
-\Begin{Proof}
-    Suppose We Want To Check Whether $\Model,S\Models\Kh^Q(\Psi,\Varphi)$.  W.L.O.G., Consider $\Model$ Is Complete And Deterministic. 
-    From The Semantics, We Need To Check If There Is $\Plan\In\ACT^*$ Satisfying Conditions (1) And (2). Consider Condition (1), I.E., We Need To Check Whether $\Plan$ Is $Q$-Executable At All $S\In\Truthset{\Model}{\Psi}$. Fix Such An $S$. Since $\Model$ Is Deterministic And Complete, It All Boils Down To Check Whether There Is $\Plan\In\ACT^*$ Such That $\Prob^\Strat_S(\Plan)\Geq Q$ (Notice That $\Strat$ Is Unique By Determinism Of $\Model$). 
-    The Latter Solves The Problem Of Checking Whether The Language Recognized By A Probabilistic (Deterministic) Automata Is Empty, Which Is Undecidable~\Cite{MadaniHC99}. 
-\End{Proof}
+\begin{proof}
+    Suppose we want to check whether $\model,s\models\kh^q(\psi,\varphi)$.  W.l.o.g., consider $\model$ is complete and deterministic. 
+    From the semantics, we need to check if there is $\plan\in\ACT^*$ satisfying conditions (1) and (2). Consider condition (1), i.e., we need to check whether $\plan$ is $q$-executable at all $s\in\truthset{\model}{\psi}$. Fix such an $s$. Since $\model$ is deterministic and complete, it all boils down to check whether there is $\plan\in\ACT^*$ such that $\Prob^\strat_s(\plan)\geq q$ (notice that $\strat$ is unique by determinism of $\model$). 
+    The latter solves the problem of checking whether the language recognized by a probabilistic (deterministic) automata is empty, which is undecidable~\cite{MadaniHC99}. 
+\end{proof}
 
 
-\Subsection{A First Approach: Non-Adaptive Plans}
+\subsection{A First Approach: Non-Adaptable Plans}
 
 The results in the above show a huge jump in the computational behaviour of knowing-how: while model-checking in the standard case is \PSPACE-complete, considering probabilities leads to undecidability of the same problem. Here, we will deal with the version of knowing-how, in which an agent only considers plans that belong to its uncertainty/awareness class. We will introduce two logics considering probabilities, one generalizing the logic from~\cite{AFSVQ21,AFSVQ23} (each plan in a class must be an appropriate plan) and another one in which it will suffice to have certain appropriate plans in a class. For the former, the model-checking problem again becomes undecidable (contrary to the \PTIME problem of the logic without probabilities, see e.g.~\cite{AFSVQ21,AFSVQ23,DF23}), while for the second, the problem is decidable. In what follows, apart from the technical results, we will motivate the use of the decidable logic in some examples.
 
@@ -222,7 +222,7 @@ In general, we will assume that PLTS are complete, as for those we can always co
     \noindent where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
 \end{definition}
 
-This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. We call this version of the logic \emph{non-adaptive} for such a reason, as the agent cannot use the ``good plans'' whenever she considers them ``equally good'' as others.  We will discuss later an alternative to this notion.
+This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. We call this version of the logic \emph{non-adaptable} for such a reason, as the agent cannot use the ``good plans'' whenever she considers them ``equally good'' as others.  We will discuss later an alternative to this notion.
 
 For this logic, we obtain a result similar to the one in the previous section.
 
@@ -231,9 +231,9 @@ For this logic, we obtain a result similar to the one in the previous section.
 \end{theorem}
 
 
-\subsection{A Second Approach: Adaptive Plans}
+\subsection{A Second Approach: Adaptable Plans}
 
-Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptive}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately. Thus, the agent can use those plans that are good for her purposes, even in presence of non-appropriate plans that she considers indistinguishable from the good ones. \raul{Esto hay que venderlo un poco mejor.}
+Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptable}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately. Thus, the agent can use those plans that are good for her purposes, even in presence of non-appropriate plans that she considers indistinguishable from the good ones. \raul{Esto hay que venderlo un poco mejor.}
 
 \begin{definition} \label{def:semantics-adap}
     Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:

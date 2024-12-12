@@ -1,4 +1,85 @@
-\section{The Probabilistic Approach}
+\section{Probabilistic Knowing How}
+
+\subsection{Linear Plans}
+
+Naturally, our first approach will be extending $\Khlogic$ with some
+form of probabilistic behaviour.
+
+Given a plan $\plan\in\ACT^*$, we want to consider
+strategies that follow as faithfully as possible the plan
+$\plan$.  Therefore, we say that a strategy $\sigma$ is
+\emph{$\plans$-compatible} if for all $\rho\in\execf$ such that
+$\bar{\rho}\in\pref(\plans)$,
+%
+\begin{enumerate}
+\item%
+  $\strat(\rho)(a,\mu)>0$ implies $\bar{\rho}a\in\pref(\plans)$, and
+\item%
+  $\strat(\rho)(\complete)>0$ implies that either
+  $\bar{\rho}\in\plans$ or
+  $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
+\end{enumerate}
+%
+The first item states that $\strat$ can chose an $a$-labelled
+transition after the partial plan $\bar{\rho}$ if the continuation of
+$\bar{\rho}a$ is also a partial plan.
+%
+The second item states that $\strat$ is allowed to terminate after the
+partial plan $\bar{\rho}$ if either $\bar{\rho}$ is itself a valid
+plan, or $\bar{\rho}$ cannot be continued by the PLTS within some
+valid plan.
+%
+Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
+strategies.
+%
+%% Given a plan $\plan\in\ACT^*$, we say that a strategy $\strat$ is
+%% $\plan$-compatible iff it is $\{\plan\}$-compatible.
+\pedro{poner ejemplos de $\plans$-compatible respecto de alg\'un running
+  example}
+
+
+Let $\plans$ be a set of plans that are believed to perform
+equivalently in order to reach some goal state in $G\subseteq\S$.  We
+define the set of \emph{successful complete (finite) execution} that
+reach $G$ following some plan in $\plans$ by
+$\Succ(\plans,G)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}\in\plans
+  \text{ and } \last(\rho)\in G}\}$.
+%
+We are interested in that any $\plans$-compatible strategy $\sigma$
+starting from a given state $s\in\S$ reaches a state in $G$ with a
+minimum desired probability, say $q$.  That is, we would like that
+%
+\begin{equation}\label{eq:plans:goal:q}
+  \inf_{\sigma \in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G)) \geq q.
+\end{equation}
+%
+More generally, we would like that this holds from any particularly
+assumed state in a set $A\subseteq\S$ (say, a precondition).  So, we
+write $A \reach{\plans}_q G$ if and only if for all state $s\in A$,
+the condition in \cref{eq:plans:goal:q} holds.
+%
+Thus $A \reach{\plans}_q G$ means that any state in $A$ can reach the
+goal $G$ with at least probability $q$ following some plan in $\plans$
+\textcolor{red}{in an adaptively manner}.
+\pedro{ejemplo de esto tambi\'en}
+
+
+
+
+\subsection{Indistinguishable clases}
+
+
+
+\subsection{Indistinguishability with adaptiveness}
+
+
+
+
+
+
+
+
+\bigpedro{asta aqu\'i lo nuevo de la secci\'on, desde aqu\'i lo viejo}
 
 
 \subsection{Probabilistic Knowing How with Linear Plans}
@@ -159,7 +240,7 @@ The model-checking problem for $\PKh$ is undecidable.
 \end{proof}
 
 
-\subsection{A First Approach: Non-Adaptable Plans}
+\subsection{A First Approach: Non-Adaptive Plans}
 
 The results in the above show a huge jump in the computational behaviour of knowing-how: while model-checking in the standard case is \PSPACE-complete, considering probabilities leads to undecidability of the same problem. Here, we will deal with the version of knowing-how, in which an agent only considers plans that belong to its uncertainty/awareness class. We will introduce two logics considering probabilities, one generalizing the logic from~\cite{AFSVQ21,AFSVQ23} (each plan in a class must be an appropriate plan) and another one in which it will suffice to have certain appropriate plans in a class. For the former, the model-checking problem again becomes undecidable (contrary to the \PTIME problem of the logic without probabilities, see e.g.~\cite{AFSVQ21,AFSVQ23,DF23}), while for the second, the problem is decidable. In what follows, apart from the technical results, we will motivate the use of the decidable logic in some examples.
 
@@ -222,7 +303,7 @@ In general, we will assume that PLTS are complete, as for those we can always co
     \noindent where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
 \end{definition}
 
-This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. We call this version of the logic \emph{non-adaptable} for such a reason, as the agent cannot use the ``good plans'' whenever she considers them ``equally good'' as others.  We will discuss later an alternative to this notion.
+This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. We call this version of the logic \emph{non-adaptive} for such a reason, as the agent cannot use the ``good plans'' whenever she considers them ``equally good'' as others.  We will discuss later an alternative to this notion.
 
 For this logic, we obtain a result similar to the one in the previous section.
 
@@ -231,9 +312,9 @@ For this logic, we obtain a result similar to the one in the previous section.
 \end{theorem}
 
 
-\subsection{A Second Approach: Adaptable Plans}
+\subsection{A Second Approach: Adaptive Plans}
 
-Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptable}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately. Thus, the agent can use those plans that are good for her purposes, even in presence of non-appropriate plans that she considers indistinguishable from the good ones. \raul{Esto hay que venderlo un poco mejor.}
+Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptive}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately. Thus, the agent can use those plans that are good for her purposes, even in presence of non-appropriate plans that she considers indistinguishable from the good ones. \raul{Esto hay que venderlo un poco mejor.}
 
 \begin{definition} \label{def:semantics-adap}
     Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:

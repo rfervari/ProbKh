@@ -5,7 +5,7 @@
 Naturally, our first approach will be extending $\Khlogic$ with some
 form of probabilistic behaviour.
 
-Given a plan $\plan\in\ACT^*$, we want to consider
+Given a plan $\plan\in\Act^*$, we want to consider
 strategies that follow as faithfully as possible the plan
 $\plan$.  Therefore, we say that a strategy $\sigma$ is
 \emph{$\plans$-compatible} if for all $\rho\in\execf$ such that
@@ -32,7 +32,7 @@ valid plan.
 Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
 strategies.
 %
-%% Given a plan $\plan\in\ACT^*$, we say that a strategy $\strat$ is
+%% Given a plan $\plan\in\Act^*$, we say that a strategy $\strat$ is
 %% $\plan$-compatible iff it is $\{\plan\}$-compatible.
 \pedro{poner ejemplos de $\plans$-compatible respecto de alg\'un running
   example}
@@ -88,17 +88,17 @@ Naturally, our first approach will be extending $\Khlogic$ with some form of pro
 % We will start by introducing PLTS, an extension of LTS with probabilities.
 
 % \begin{definition}\label{def:plts}
-%     Let $\PROP$ be a countable set of propositional symbols. 
+%     Let $\Prop$ be a countable set of propositional symbols. 
 %     A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
-%     $\model=\tup{\S,\ACT,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \ACT \times \dist(\S)$, where  $\dist(\S)$ is the set of probability distributions over $\S$.
+%     $\model=\tup{\S,\Act,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \Act \times \Dist(\S)$, where  $\Dist(\S)$ is the set of probability distributions over $\S$.
 % \end{definition}
 
 % We will start by introducing PLTS, an extension of LTS with probabilities.
 
 % \begin{definition}\label{def:plts}
-%     Let $\PROP$ be a countable set of propositional symbols. 
+%     Let $\Prop$ be a countable set of propositional symbols. 
 %     A \emph{Probabilistic Labeled Transition System (PLTS)}  is a tuple
-%     $\model=\tup{\S,\ACT,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \ACT \times \dist(\S)$, where  $\dist(\S)$ is the set of probability distributions over $\S$.
+%     $\model=\tup{\S,\Act,\ra,\V}$, defined exactly as an LTS except that ${\ra}\subseteq \S \times \Act \times \Dist(\S)$, where  $\Dist(\S)$ is the set of probability distributions over $\S$.
 % \end{definition}
 
 \begin{figure}[t]
@@ -110,12 +110,12 @@ Naturally, our first approach will be extending $\Khlogic$ with some form of pro
 % We need to capture the notion of executability with probability at least $q$, for some $q\in[0,1]$. 
 
 % \begin{definition}\label{def:strategy-comp-exec}
-%     Let $\model=\tup{\S,\ACT,\ra,\V}$ be a PLTS, a \emph{strategy} is a function $\strat: \S\times(\ACT\times\S)^* \ra \dist(\S\times\ACT\times\dist(\S))$. Let $\plan\in\ACT^*$, we say that $\strat$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\ACT\times\S)^*$, the following conditions hold:
+%     Let $\model=\tup{\S,\Act,\ra,\V}$ be a PLTS, a \emph{strategy} is a function $\strat: \S\times(\Act\times\S)^* \ra \Dist(\S\times\Act\times\Dist(\S))$. Let $\plan\in\Act^*$, we say that $\strat$ is \emph{$\plans$-compatible} if and only if, for all $\rho\in \S\times(\Act\times\S)^*$, the following conditions hold:
 %     \begin{enumerate}
 %         \item $\strat(\rho)(s,a,\mu)>0$ implies $\last(\rho)=s$ and $s\reach{a}\mu$ in $\model$, and 
 %         \item $\bar{\rho}\in\pref(\plans)$ implies $\bar{\rho}a\in\pref(\plans)$.
 %     \end{enumerate}
-%     For $\plan\in\ACT^*$, we say that $\sigma$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
+%     For $\plan\in\Act^*$, we say that $\sigma$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
 
 %     Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, 
 %     \[
@@ -129,7 +129,7 @@ Naturally, our first approach will be extending $\Khlogic$ with some form of pro
 
 
 
-Given a set of plans $\plans\subseteq\ACT^*$, we want to consider
+Given a set of plans $\plans\subseteq\Act^*$, we want to consider
 strategies that follow as faithfully as possible the plans of
 $\plans$.  Therefore, we say that a strategy $\sigma$ is
 \emph{$\plans$-compatible} if for all $\rho\in\execf$ such that
@@ -156,7 +156,7 @@ valid plan.
 Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
 strategies.
 %
-%% Given a plan $\plan\in\ACT^*$, we say that a strategy $\strat$ is
+%% Given a plan $\plan\in\Act^*$, we say that a strategy $\strat$ is
 %% $\plan$-compatible iff it is $\{\plan\}$-compatible.
 \pedro{poner ejemplos de $\plans$-compatible respecto de alg\'un running
   example}
@@ -206,7 +206,7 @@ Notice that, whenever $q=1$, we are in the case of SE from~\Cref{def:plans}. \ra
     \[
         \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh^q(\psi,\varphi),
     \]
-    where $p\in\PROP$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$ with probability at least $q$''}.
+    where $p\in\Prop$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$ with probability at least $q$''}.
 \end{definition}
 
 
@@ -215,13 +215,13 @@ Notice that, whenever $q=1$, we are in the case of SE from~\Cref{def:plans}. \ra
 Now we proceed by introducing the semantics of the new modality.
 
 \begin{definition}
-    Let $\model = \tup{\S,\ACT,\ra,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:
+    Let $\model = \tup{\S,\Act,\ra,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:
     \[
         \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
         % \model, s \models p & \iffdef & p \in \V(s) \\
         % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
         % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
-        \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plan \in \ACT^* \;\text{such that:} \\
+        \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plan \in \Act^* \;\text{such that:} \\
         & & \ \ \text{\rm (1)} \ \plan \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
         & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
         \end{array}
@@ -235,7 +235,7 @@ The model-checking problem for $\PKh$ is undecidable.
 
 \begin{proof}
     Suppose we want to check whether $\model,s\models\kh^q(\psi,\varphi)$.  W.l.o.g., consider $\model$ is complete and deterministic. 
-    From the semantics, we need to check if there is $\plan\in\ACT^*$ satisfying conditions (1) and (2). Consider condition (1), i.e., we need to check whether $\plan$ is $q$-executable at all $s\in\truthset{\model}{\psi}$. Fix such an $s$. Since $\model$ is deterministic and complete, it all boils down to check whether there is $\plan\in\ACT^*$ such that $\Prob^\strat_s(\plan)\geq q$ (notice that $\strat$ is unique by determinism of $\model$). 
+    From the semantics, we need to check if there is $\plan\in\Act^*$ satisfying conditions (1) and (2). Consider condition (1), i.e., we need to check whether $\plan$ is $q$-executable at all $s\in\truthset{\model}{\psi}$. Fix such an $s$. Since $\model$ is deterministic and complete, it all boils down to check whether there is $\plan\in\Act^*$ such that $\Prob^\strat_s(\plan)\geq q$ (notice that $\strat$ is unique by determinism of $\model$). 
     The latter solves the problem of checking whether the language recognized by a probabilistic (deterministic) automata is empty, which is undecidable~\cite{MadaniHC99}. 
 \end{proof}
 
@@ -248,29 +248,29 @@ Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21,AFSVQ2
 
 
 \begin{definition}\label{def:plts}
-    Let $\PROP$ be a countable set of propositional symbols and let $\AGT$ be a finite set of agents.  
+    Let $\Prop$ be a countable set of propositional symbols and let $\AGT$ be a finite set of agents.  
     A \emph{Probabilistic Labeled Transition System with uncertainty (PLTSU)}  is a tuple
-    $\model=\tup{\S,\ACT,\ra,\sim,\V}$ s.t. $\tup{\S,\ACT,\ra,\V}$ is a PLTS, and 
+    $\model=\tup{\S,\Act,\ra,\sim,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is a PLTS, and 
     \begin{itemize}
         % \item $\S$ is a countably non-empty set of states,
-        % \item $\ACT$ is a countable set of action symbols,
-        % \item $\dist(\S)$ is the set of probability distributions over $\S$,
-        % \item ${\ra} \subseteq \S \times \ACT \times \dist(\S)$ is a transition relation,
-        \item ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\ACT^*$) is an equivalence relation over $\DS{}$. 
-        % \item $\V: \S \ra 2^\PROP$ is a valuation function.
+        % \item $\Act$ is a countable set of action symbols,
+        % \item $\Dist(\S)$ is the set of probability distributions over $\S$,
+        % \item ${\ra} \subseteq \S \times \Act \times \Dist(\S)$ is a transition relation,
+        \item ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$. 
+        % \item $\V: \S \ra 2^\Prop$ is a valuation function.
     \end{itemize}
-    %Elements of $\ACT^*$ are called \emph{plans}, and 
+    %Elements of $\Act^*$ are called \emph{plans}, and 
     Each $\sim$ is called the indistinguishability relation between plan. 
     % We write $\plan\sim_i\plan'$ whenever $(\plan,i,\plan')\in{\sim}$, and we define $\DS{i}:=\set{\plan \mid \text{ there is } \plan' \text{ s.t. } \plan\sim_i\plan'}$. 
     By $[\plan]_{\sim}:=\set{\plan' \in \DS{} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{}$, then we define the \emph{indistinguishability set of $\model$} as $\Unc := \set{[\plan]_{\sim} \mid \plan\in\DS{}}$. 
     %The set $\Unc:=\set{\Unc(i) \mid i\in\AGT}$ is called the \emph{uncertainty set} of $\model$. 
-    For simplicity sake, we sometimes denote $\model=\tup{\S,\ACT,\ra,\Unc,\V}$ to refer to a PLTS, i.e., we will use its uncertainty set instead of the indistinguishability relation.
+    For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to a PLTS, i.e., we will use its uncertainty set instead of the indistinguishability relation.
 \end{definition}
 
-Notice that, as it is defined in~\cite{AFSVQ21,AFSVQ23}, $\Unc$ represents the perception the agent has about the reality. In turn, the relation $\sim$ is not an equivalence relation over $\ACT^*$ but over $\DS{}$, as the latter contains only the plans she considers available or suitable for her purposes, while those in $\ACT^*\setminus\DS{}$ are not considered by the agent, even if they are suitable plans. 
+Notice that, as it is defined in~\cite{AFSVQ21,AFSVQ23}, $\Unc$ represents the perception the agent has about the reality. In turn, the relation $\sim$ is not an equivalence relation over $\Act^*$ but over $\DS{}$, as the latter contains only the plans she considers available or suitable for her purposes, while those in $\Act^*\setminus\DS{}$ are not considered by the agent, even if they are suitable plans. 
 
 % \begin{definition} \label{def:executability} \raul{TBC}
-%     Let  $\model=\tup{\S,\ACT,\dist(\S),\ra,\Unc,\V}$ be a PLTSU, let $\plan\in\ACT^*$ be a plan, and let $q\in[0,1]$ a probability, we need to define two notions:
+%     Let  $\model=\tup{\S,\Act,\Dist(\S),\ra,\Unc,\V}$ be a PLTSU, let $\plan\in\Act^*$ be a plan, and let $q\in[0,1]$ a probability, we need to define two notions:
 %     \begin{enumerate}
 %         \item We say $\plan$ is \emph{$q$-executable} at $s\in\S$ iff ...  Extend it for set of plans and set of states.
 %         \item For $s,t\in\S$, we write $s \reach{\plan}_q t$ iff ... Extend it for set of plans and set of states.
@@ -285,11 +285,11 @@ In general, we will assume that PLTS are complete, as for those we can always co
 %     \[
 %         \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh_i^q(\psi,\varphi),
 %     \]
-%     where $p\in\PROP$, $i\in\AGT$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^q(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$, with probability $q$''}
+%     where $p\in\Prop$, $i\in\AGT$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^q(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$, with probability $q$''}
 % \end{definition}
 
 \begin{definition} \label{def:semantics-non-adap}
-    Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
+    Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
     \[
     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
     % \model, s \models p & \iffdef & p \in \V(s) \\
@@ -317,7 +317,7 @@ For this logic, we obtain a result similar to the one in the previous section.
 Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptive}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately. Thus, the agent can use those plans that are good for her purposes, even in presence of non-appropriate plans that she considers indistinguishable from the good ones. \raul{Esto hay que venderlo un poco mejor.}
 
 \begin{definition} \label{def:semantics-adap}
-    Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
+    Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
     \[
     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
     % \model, s \models p & \iffdef & p \in \V(s) \\

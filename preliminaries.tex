@@ -4,22 +4,22 @@
 
 A (discrete) \emph{probability distribution} $\mu$ over a denumerable
 set $S$ is a function $\mu: S \rightarrow [0, 1] $ such that
-$\mu(S) = \sum_{s \in S} \mu(s) = 1$.  Let $\dist(S)$ denote the set
-of all probability distributions on $S$.  $\Dirac_s \in \dist(S)$
+$\mu(S) = \sum_{s \in S} \mu(s) = 1$.  Let $\Dist(S)$ denote the set
+of all probability distributions on $S$.  $\Dirac_s \in \Dist(S)$
 denotes the Dirac distribution for $s \in S$, i.e., $\Dirac_s(s) =1$
 and $\Dirac_s(s') = 0$ for all $s' \in S$ such that $s'\neq s$.
 %% The
 %% \textit{support} set of $\mu$ is defined by
 %% $\support{\mu} = \{s \mid {\mu(s) > 0}\}$.
 
-Let $\PROP$ be a countable set of propositional symbols.
+Let $\Prop$ be a countable set of propositional symbols.
 %
 A \emph{probabilistic labeled transition System (PLTS)} is a tuple
-$\model=\tup{\S,\ACT,\ra,\V}$ where $\S$ is a finite set of
-\emph{states}, $\ACT$ is a finite set of \emph{actions},
-${\ra}\subseteq {\S \times \ACT \times \dist(\S)}$ is the
+$\model=\tup{\S,\Act,\ra,\V}$ where $\S$ is a finite set of
+\emph{states}, $\Act$ is a finite set of \emph{actions},
+${\ra}\subseteq {\S \times \Act \times \Dist(\S)}$ is the
 \emph{(probabilistic) transition relation}, and
-$\V:\S\to\powerset(\PROP)$ is the \emph{valuation function}.
+$\V:\S\to\powerset(\Prop)$ is the \emph{valuation function}.
 %
 We denote $s\reach{a}\mu$ whenever $(s,a,\mu)\in{\ra}$ and let
 $T(s)=\{(a,\mu)\mid {s\reach{a}\mu}\}$ be the set of all transitions
@@ -33,13 +33,13 @@ instead of $s\reach{a}\Dirac_{s'}$.
 
 An \emph{execution} of $\model$ is a finite or infinite alternating
 sequence of states and actions $s_0\, a_1\, s_1\, a_2\, s_2\ldots$.
-$\execf= \S\times(\ACT\times\S)^*$ denotes the set of all
-\emph{finite executions} and $\execw= \S\times(\ACT\times\S)^\omega$
+$\execf= \S\times(\Act\times\S)^*$ denotes the set of all
+\emph{finite executions} and $\execw= \S\times(\Act\times\S)^\omega$
 denotes the set of all \emph{infinite executions}.
 %
 We introduce the symbol $\complete$ to indicate that a finite
 execution has been intentionally ended and let $\cexecf=
-\S\times(\ACT\times\S)^*\times\{\complete\}$ denote the set of all
+\S\times(\Act\times\S)^*\times\{\complete\}$ denote the set of all
 \emph{complete finite executions}.  Infinite executions are also
 considered complete and hence $\cexec=\cexecf\cup\execw$ is the
 set of all \emph{complete executions}.
@@ -57,7 +57,7 @@ denoted by $\rho\leq\rho'$, if $\rho=\rho'[..|\rho|]$ or $\rho=\rho'$
 (this last case is needed if $\rho\in\cexecf$).
 
 A \emph{strategy} for a PLTS $\model$ is a function $\strat:
-\execf \to \dist((\ACT\times\dist(S))\cup\{\complete\})$ that assigns
+\execf \to \Dist((\Act\times\Dist(S))\cup\{\complete\})$ that assigns
 a discrete probability distribution to each finite (non-complete)
 execution $\rho\in\execf$ such that $\strat(\rho)(a,\mu) > 0$ only
 if $\last(\rho)\reach{a}\mu$.  Thus, a strategy can choose with some
@@ -105,7 +105,7 @@ uniquely defined in the sigma algebra~\cite{Segala95}.
 Some definitions to be added here:
 
 \begin{itemize}
-    \item probability distributions over $\S$: $\dist(\S)$ \textcolor{green}{$\surd$}
+    \item probability distributions over $\S$: $\Dist(\S)$ \textcolor{green}{$\surd$}
     \item probability $\Prob$  \textcolor{green}{$\surd$}
     \item the infimum $\infim$  \textcolor{orange}{[en realidad no es $\inf$ lo que hay que definir, sino lo que est\'a adentro y lo defino m\'as adelante]}
       \pedro{BTW: por qu\'e definiste $\infim$ si ya existe $\inf$?}

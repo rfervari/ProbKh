@@ -8,11 +8,11 @@ We start by introducing the most basic notion of knowing how as defined in e.g.~
 In order to determine when an agent knows how to achieve a goal, we need to characterize those sequences of actions (or plans) that result appropriate for such a purpose. This is the notion of \emph{strongly executable} plans about, indicating that a plan is ``fail proof''. This notion, discussed already in~\cite{Wang15lori,Wang16,Wang2016} was inspired by conformant planning (see e.g.~\cite{Smith&Weld98,Bonet2010}).
 
 \begin{definition}\label{def:plans}
-    Let $\model=\tup{\S,\ACT,\ra,\V}$ be an LTS. 
-    Elements of $\ACT^*$ are called \emph{plans} (with $\epsilon$ the empty plan).  Let $\plan\in\ACT^*$, $\size{\plan}$ denotes its length ($\size{\epsilon}:=0$).
+    Let $\model=\tup{\S,\Act,\ra,\V}$ be an LTS. 
+    Elements of $\Act^*$ are called \emph{plans} (with $\epsilon$ the empty plan).  Let $\plan\in\Act^*$, $\size{\plan}$ denotes its length ($\size{\epsilon}:=0$).
     For  $0\leq i \leq \size{\plan}$, the plan $\plan_i$ denotes the initial segment of $\plan$ up to (and including) the $i^{th}$ position (with $\plan_0 := \epsilon$). The action $\plan[i]$ is the one appearing in $\plan$ at the $i^{th}$ position. We define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
 
-    We say that a plan $\plan\in\ACT^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $T\subseteq \S$ if and only if it is SE at every $s\in T$. The notation $T \reach{\plan} U$ (for $T,U\subseteq\S$) indicates that for all $s\in T$, there is $t\in U$ such that $s\reach{\plan} t$.
+    We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $T\subseteq \S$ if and only if it is SE at every $s\in T$. The notation $T \reach{\plan} U$ (for $T,U\subseteq\S$) indicates that for all $s\in T$, there is $t\in U$ such that $s\reach{\plan} t$.
 \end{definition}
 
 Now we are ready to introduce the language of knowing how.
@@ -23,19 +23,19 @@ Now we are ready to introduce the language of knowing how.
     \[
         \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh(\psi,\varphi),
     \]
-    where $p\in\PROP$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$''}
+    where $p\in\Prop$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$''}
 \end{definition}
 
 Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state. 
 
 \begin{definition} \label{def:semantics-kh}
-    Let $\model = \tup{\S,\ACT,\ra,\V}$ be an LTS and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
+    Let $\model = \tup{\S,\Act,\ra,\V}$ be an LTS and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
     \[
     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
     \model, s \models p & \iffdef & p \in \V(s) \\
     \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
     \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
-    \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plan \in \ACT^* \;\text{such that:} \\
+    \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plan \in \Act^* \;\text{such that:} \\
     & & \ \ \text{\rm (1)} \ \plan \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
     & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
     \end{array}
@@ -56,22 +56,22 @@ The model-checking problem for a given logic is defined as follows, where models
 \subsection{Indistinguishability Classes in Knowing How}
 
 \begin{definition}[Uncertainty-based \lts]\label{def:ults}
-    An \emph{uncertainty-based \lts} (LTSU) for $\PROP$, $\ACT$ and $\AGT$ is a tuple     $\model=\tup{\S,\ACT,\ra,\sim,\V}$ s.t. $\tup{\S,\ACT,\ra,\V}$ is an LTS, and 
+    An \emph{uncertainty-based \lts} (LTSU) for $\Prop$, $\Act$ and $\AGT$ is a tuple     $\model=\tup{\S,\Act,\ra,\sim,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is an LTS, and 
         \begin{itemize}
-            \item ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\ACT^*$) is an equivalence relation over $\DS{}$ ($\sim$ called the indistinguishability relation between plans). 
+            \item ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$ ($\sim$ called the indistinguishability relation between plans). 
         \end{itemize}
         By $[\plan]_{\sim}:=\set{\plan' \in \DS{} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{}$, then we define the \emph{indistinguishability set of $\model$} as $\Unc := \set{[\plan]_{\sim} \mid \plan\in\DS{}}$. 
-        For simplicity sake, we sometimes denote $\model=\tup{\S,\ACT,\ra,\Unc,\V}$ to refer to an LTSU, i.e., we will use its uncertainty set instead of the indistinguishability relation.
+        For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to an LTSU, i.e., we will use its uncertainty set instead of the indistinguishability relation.
     \end{definition}
     
     Intuitively, $\DS{} = \bigcup_{\plans \in \Unc} \plans$ is the set of plans that the  agent is aware she has at her disposal, and each $\plans \in \Unc$ is an indistinguishability class. 
     
-    Given her uncertainty over $\ACT^*$, the abilities of the agent depend not on what a single plan can achieve, but rather on what a set of them can guarantee.
+    Given her uncertainty over $\Act^*$, the abilities of the agent depend not on what a single plan can achieve, but rather on what a set of them can guarantee.
     
     \medskip
     
     \begin{definition}
-    Let $\plans \subseteq \ACT^*$ and $U \cup \set{u} \subseteq \S$, define $\reach{\plans} = \bigcup_{\plan \in \plans} \ra_{\plan}$, $\reach{\plans}(u) := \bigcup_{\plan \in \plans} \ra{\plan}(u)$, and $\ra{\plans}(U) := \bigcup_{u \in U} \ra{\plans}(u)$.
+    Let $\plans \subseteq \Act^*$ and $U \cup \set{u} \subseteq \S$, define $\reach{\plans} = \bigcup_{\plan \in \plans} \ra_{\plan}$, $\reach{\plans}(u) := \bigcup_{\plan \in \plans} \ra{\plan}(u)$, and $\ra{\plans}(U) := \bigcup_{u \in U} \ra{\plans}(u)$.
     \end{definition}
     
     \medskip
@@ -82,12 +82,12 @@ The model-checking problem for a given logic is defined as follows, where models
     
     
     \begin{definition}[Strong executability of plans]\label{def:plans-exec}
-    Let $\model=\tup{\S,\ACT,\ra,\Unc,\V}$ be an LTSU. A \emph{set of plans} $\plans \subseteq \ACT^*$ is \emph{strongly executable} at $u \in \S$ if and only if \emph{every} plan $\plan \in \plans$ is \emph{strongly executable} at~$u$.
+    Let $\model=\tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU. A \emph{set of plans} $\plans \subseteq \Act^*$ is \emph{strongly executable} at $u \in \S$ if and only if \emph{every} plan $\plan \in \plans$ is \emph{strongly executable} at~$u$.
     % $\stexec(\plans) = \bigcap_{\plan \in \plans} \stexec(\plan)$ is the set of the states in $\W$ where $\plans$ is SE.
     \end{definition}
 
     \begin{definition} \label{def:semantics-kh-uncertain}
-        Let $\model = \tup{\S,\ACT,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
+        Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
         \[
         \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
         \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that:} \\

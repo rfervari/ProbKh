@@ -35,8 +35,14 @@
 
 
 
-\usepackage{tikz}
-\usetikzlibrary{arrows,decorations,shapes,automata,positioning,decorations.pathmorphing,patterns}
+%% \usepackage{tikz}
+%% \usetikzlibrary{arrows,decorations,shapes,automata,positioning,decorations.pathmorphing,patterns}
+
+\usepackage{tikz, tikzscale, pgfplots}
+\usetikzlibrary{arrows,arrows.meta,calc,automata,positioning,decorations.pathreplacing,shapes.geometric,shapes.misc,graphs,backgrounds,shadows.blur,snakes}
+
+\tikzset{align at top/.style={baseline=(current bounding box.north)}}
+\tikzstyle{every node}=[font=\scriptsize]
 
 \tikzset{
   every picture/.style = {
@@ -55,12 +61,23 @@
   }
   , % states
   state/.style = {
-    rectangle,
-    rounded corners = 5pt,
+    circle,
+%    rectangle,
+%    rounded corners = 5pt,
     font = \footnotesize,
     draw,
-    minimum width = 1em,
-    minimum height = 1em
+    inner sep = 0pt,
+    minimum size = 1.6em
+%    minimum width = 1em,
+%    minimum height = 1em
+  }
+  , % nail for distribution
+  dot/.style = {
+    fill,
+    circle,
+    inner sep=0mm,
+    minimum size=1.25mm,
+    line width=0mm
   }
   , % labels of states
   label-state/.style = {
@@ -156,6 +173,20 @@
 \newcommand{\strat}{\sigma}
 \newcommand{\D}[1]{\operatorname{D}_{#1}}
 \newcommand{\DS}[1]{\operatorname{D}_{#1}}
+
+% macros for examples
+
+\newcommand{\actionfont}{\mathit}
+\newcommand{\lift}{\actionfont{lft}}
+\newcommand{\stairs}{\actionfont{str}}
+\newcommand{\ramp}{\actionfont{rmp}}
+\newcommand{\panic}{\actionfont{pnc}}
+\newcommand{\mobile}{\actionfont{mbl}}
+
+\newcommand{\goal}{\text{\textcolor{green!60!black}{\ding{51}}}}
+\newcommand{\fail}{\text{\textcolor{red!80!black}{\ding{55}}}}
+
+
 
 \newcommand{\lts}{\textup{LTS}\xspace}
 %\newcommand{\ublts}{\textup{LTS}\xspace}

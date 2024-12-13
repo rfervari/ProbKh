@@ -32,11 +32,16 @@ plan or $\bar{\rho}$ cannot be continued by the PLTS within the plan.
 Let $\Comp(\plan)$ denote the set of all $\plan$-compatible
 strategies.
 
+It is important to remark that, since $\plan$ is finite, for any
+$\plan$-compatible strategy $\strat$ and state $s$,
+$\Prob^\strat_s(\execw)=0$.  That is, any $\plan$-compatible strategy
+leads to termination with probability $1$.
+
 
 \begin{example}[Running]\label{ex:running}
   \Cref{fig:emergencyescape} depicts a PLTS modelling possible ways to
-  escape a building in an emergency situation and alerting of the
-  emergency situation.  Their, states are represented by circles and
+  escape a building in a fire emergency situation including alerting
+  the event.  Their, states are represented by circles and
   distributions by the dot in the middle of transitions.  The outgoing
   dashed arrows are labelled with the respective probability values.
   Thus, for instance, $s_0\reach{\lift}\mu_1$ with $\mu_1(s_1)=0.1$
@@ -48,9 +53,9 @@ strategies.
   through a panic button or by calling 911 using the mobile phone.
   %
   Label $\goal$ indicates that the exit and the alert have been
-  successfully performed.  This happens only in states $s_9$,
-  $s_{10}$, and $s_{12}$ (thus
-  $\V(s_9)=\V(s_{10})=\V(s_{12})=\{\goal\}$).  States labeled with
+  successfully performed.  This happens only in states $s_7$,
+  $s_8$, and $s_{10}$ (thus
+  $\V(s_7)=\V(s_8)=\V(s_{10})=\{\goal\}$).  States labeled with
   $\fail$ indicate that the last performed action has failed.
   %
   Thus, it is possibe to take a lift through transition
@@ -58,57 +63,171 @@ strategies.
   exiting through the alternative lift (transition
   $s_0\reach{\lift}\mu_2$) fails with probability $1$.
   %
-  Also notice that exiting through any or the stairs may fail with
-  probability $0.1$.  One of the stairs allows as to get to the panic
-  button with probability $0.9$ while the other enable us to make
-  phone call.  Exiting through the ramp does not fail but allows us to
-  press the panic button with probability $0.5$ or to make the phone
-  call available also with probability $0.5$.
+  Exiting through one of the stairs allows us to get to the panic
+  button with probability $0.9$ and enables the mobile call with
+  probability $0.1$ while exiting through the other stairs yields to
+  the same situation but with the probabilities inverted.  Exiting
+  through the ramp allows us to press the panic button with
+  probability $0.5$ or to make the phone call also with probability
+  $0.5$.
   %
   Notice that while the panic button always successfully rises the
   alarm, the mobile phone call may fail with probability $0.1$.
 
-
-  \pedro{@Ra\'ul: Le\'e el texto del ejemplo, plis, que sos el
+  \bigpedro{\textcolor{red}{\textbf{@Ra\'ul}}: Le\'e el texto del ejemplo, plis, que sos el
     par\'ametro para ver si est\'a bien la explicaci\'on}
 
-  \pedro{poner ejemplos de $\plan$-compatible}
-
-  
+  Let $\plan_1 = \lift\,\mobile$.  Define strategy $\strat_1$ so that
+  %
+  \[
+  \begin{array}{l}
+    \strat_1(s_0)(\lift,\mu_1)=\strat_1(s_0)(\lift,\mu_2)=0.5\\
+    \strat_1(s_0\,\lift\,s_1)(\complete)=\strat_1(s_0\,\lift\,s_3)(\complete)=1\\
+    \strat_1(s_0\,\lift\,s_2)(\mobile,\mu_6)=1\\
+    \strat_1(s_0\,\lift\,s_2\,\mobile\,s_6)(\complete)=
+    \strat_1(s_0\,\lift\,s_2\,\mobile\,s_7)(\complete)=1
+  \end{array}
+  \]
+  %
+  It is easy to check that $\strat_1$ is $\plan_1$-compatible.
+  %
+  Also, notice that $\strat'_1$, defined so that
+  $\strat'_1(s_0)(\lift,\mu_2)=\strat'_1(s_0\,\lift\,s_3)(\complete)=1$,
+  is also $\plan_1$-compatible despite that $\strat'_1$ never manages to
+  complete the plan $\plan_1$.
+  %
+  Instead, $\strat''_1$, defined so that
+  $\strat''_1(s_0)(\lift,\mu_1)=\strat'_1(s_0\,\lift\,s_1)(\complete)=\strat'_1(s_0\,\lift\,s_2)(\complete)=1$,
+  is not $\plan_1$-compatible since
+  $\strat'_1(s_0\,\lift\,s_2)(\complete)>0$ but
+  ${s_2\reach{\mobile}\mu_6}$.
 \end{example}
 
 
+%% \begin{figure*}
+%%   \centering
+
+%%   \scalebox{1}{
+%%     \begin{tikzpicture}[on grid,auto,align at top]
+%%       \node[state] (s00)                                  {$s_0$};
+%%       \node[state] (s01) [below left=2.3 and 5 of s00]    {$s_1$};
+%%       \node[state] (s02) [below left=2.3 and 4 of s00]    {$s_2$};
+%%       \node[state] (s03) [below left=2.3 and 2.75 of s00] {$s_3$};
+%%       \node[state] (s04) [below left=2.3 and 1.5 of s00]  {$s_4$};
+%%       \node[state] (s05) [below right=2.3 and 0.5 of s00] {$s_5$};
+%%       \node[state] (s06) [below right=2.3 and 2.5 of s00] {$s_6$};
+%%       \node[state] (s07) [below right=2.3 and 5 of s00]   {$s_7$};
+%%       \node[state] (s08) [below left=2.0 and 0.5 of s02]  {$s_8$};
+%%       \node[state] (s09) [below right=2.0 and 0.5 of s02] {$s_9$};
+%%       \node[state] (s10) [below left=2.0 and 0.5 of s04]  {$s_{10}$};
+%%       \node[state] (s11) [below right=2.0 and 0.5 of s04] {$s_{11}$};
+%%       \node[state] (s12) [below=2.0 of s05]               {$s_{12}$};
+%%       \node[state] (s13) [below left=2.0 and 0.5 of s06]  {$s_{13}$};
+%%       \node[state] (s14) [below right=2.0 and 0.5 of s06] {$s_{14}$};
+%%       \node[state] (s15) [below left=2.0 and 0.5 of s07]  {$s_{15}$};
+%%       \node[state] (s16) [below right=2.0 and 0.5 of s07] {$s_{16}$};
+
+%%       \node (ok1) [below right=0.2 and 0.45 of s09] {\normalsize $\goal$};
+%%       \node (ok2) [below right=0.2 and 0.45 of s11] {\normalsize $\goal$};
+%%       \node (ok3) [below right=0.2 and 0.45 of s12] {\normalsize $\goal$};
+%%       \node (ok4) [below right=0.2 and 0.45 of s14] {\normalsize $\goal$};
+%%       \node (ok5) [below right=0.2 and 0.45 of s16] {\normalsize $\goal$};
+
+%%       \node (nok1) [below left=0.2 and 0.45 of s01]  {\normalsize $\fail$};
+%%       \node (nok2) [below left=0.2 and 0.45 of s03]  {\normalsize $\fail$};
+%%       \node (nok3) [below left=0.2 and 0.45 of s08]  {\normalsize $\fail$};
+%%       \node (nok4) [below left=0.2 and 0.45 of s10]  {\normalsize $\fail$};
+%%       \node (nok5) [below left=0.2 and 0.45 of s13]  {\normalsize $\fail$};
+%%       \node (nok6) [below left=0.2 and 0.45 of s15]  {\normalsize $\fail$};
+
+%%       \node[dot] (d01) [below left=1.3 and 3 of s00]    {};
+%%       \node[dot] (d02) [below left=1.3 and 1.5 of s00]  {};
+%%       \node[dot] (d03) [below left=1.3 and 0.5 of s00]  {};
+%%       \node[dot] (d04) [below right=1.3 and 1.4 of s00] {};
+%%       \node[dot] (d05) [below right=1.3 and 3 of s00]   {};
+%%       \node[dot] (d06) [below=1.0 of s02]               {};
+%%       \node[dot] (d07) [below=1.0 of s04]               {};
+%%       \node[dot] (d08) [below=1.0 of s05]               {};
+%%       \node[dot] (d09) [below=1.0 of s06]               {};
+%%       \node[dot] (d10) [below=1.0 of s07]               {};
+
+%%       \node (m01) [above left=0.1 and 0.3 of d01]  {$\mu_1$};
+%%       \node (m02) [above left=0.1 and 0.3 of d02]  {$\mu_2$};
+%%       \node (m03) [above right=0.1 and 0.3 of d03] {$\mu_3$};
+%%       \node (m04) [above right=0.2 and 0.2 of d04] {$\mu_4$};
+%%       \node (m05) [above right=0.2 and 0.2 of d05] {$\mu_5$};
+%%       \node (m06) [above right=0.1 and 0.3 of d06] {$\mu_6$};
+%%       \node (m07) [above right=0.1 and 0.3 of d07] {$\mu_7$};
+%%       \node (m08) [right=0.3 of d08]               {$\mu_8$};
+%%       \node (m09) [above left=0.1 and 0.3 of d09]  {$\mu_9$};
+%%       \node (m10) [above left=0.1 and 0.3 of d10]  {$\mu_{10}$};
+
+%%       \path[-,line width=0.5pt]
+%%       (s00) edge [] node[left,xshift=1,yshift=3]   {\small $\lift$}   (d01)
+%%       (s00) edge [] node[left,xshift=-3,yshift=-3] {\small $\lift$}   (d02)
+%%       (s00) edge [] node[left,xshift=1,yshift=-5]  {\small $\stairs$}  (d03)
+%%       (s00) edge [] node[left,xshift=8,yshift=-8]  {\small $\ramp$}   (d04)
+%%       (s00) edge [] node[right,xshift=-1,yshift=3] {\small $\stairs$}  (d05)
+%%       (s02) edge [] node[left]                     {\small $\mobile$} (d06)
+%%       (s04) edge [] node[left]                     {\small $\mobile$} (d07)
+%%       (s05) edge [] node[left]                     {\small $\panic$}  (d08)
+%%       (s06) edge [] node[right]                    {\small $\mobile$} (d09)
+%%       (s07) edge [] node[right]                     {\small $\mobile$} (d10)
+%%       ;
+
+%%       \path[-{Latex[length=2.2mm,width=1.4mm]},line width=0.5pt,dashed]
+%%       (d01) edge [] node[left]                      {$0.2$} (s01)
+%%       (d01) edge [] node[right]                     {$0.8$} (s02)
+%%       (d02) edge [] node[left]                      {$1$}   (s03)
+%%       (d03) edge [] node[left]                      {$0.1$} (s04)
+%%       (d03) edge [] node[right]                     {$0.9$} (s05)
+%%       (d04) edge [] node[right,xshift=-4,yshift=-5] {$0.5$} (s05)
+%%       (d04) edge [] node[left,xshift=4,yshift=-5]   {$0.5$} (s06)
+%%       (d05) edge [] node[left,yshift=5]             {$0.9$} (s06)
+%%       (d05) edge [] node[right]                     {$0.1$} (s07)
+%%       (d06) edge [] node[left]                      {$0.1$} (s08)
+%%       (d06) edge [] node[right]                     {$0.9$} (s09)
+%%       (d07) edge [] node[left]                      {$0.1$} (s10)
+%%       (d07) edge [] node[right]                     {$0.9$} (s11)
+%%       (d08) edge [] node[left]                      {$1$}   (s12)
+%%       (d09) edge [] node[left]                      {$0.1$} (s13)
+%%       (d09) edge [] node[right]                     {$0.9$} (s14)
+%%       (d10) edge [] node[left]                      {$0.1$} (s15)
+%%       (d10) edge [] node[right]                     {$0.9$} (s16)
+%%       ;
+      
+%%     \end{tikzpicture}
+%%   }
+  
+%%   \caption{PLTS modelling possible emergency escape situations in a building}\label{fig:emergencyescape}
+%% \end{figure*}
 
 
-\begin{figure*}
-  \centering
-
-  \scalebox{1}{
+\begin{figure}
+  \centering%
+  \!\!%
+  \scalebox{0.86}{
     \begin{tikzpicture}[on grid,auto,align at top]
       \node[state] (s00)                                  {$s_0$};
       \node[state] (s01) [below left=2.3 and 4 of s00]    {$s_1$};
       \node[state] (s02) [below left=2.3 and 3 of s00]    {$s_2$};
       \node[state] (s03) [below left=2.3 and 1.75 of s00] {$s_3$};
-      \node[state] (s04) [below left=2.3 and 0.5 of s00]  {$s_4$};
-      \node[state] (s05) [below right=2.3 and 0.5 of s00] {$s_5$};
-      \node[state] (s06) [below right=2.3 and 3 of s00]   {$s_6$};
-      \node[state] (s07) [below right=2.3 and 4 of s00]   {$s_7$};
-      \node[state] (s08) [below left=2.0 and 0.5 of s02]  {$s_8$};
-      \node[state] (s09) [below right=2.0 and 0.5 of s02] {$s_9$};
-      \node[state] (s10) [below=2.0 of s05]               {$s_{10}$};
-      \node[state] (s11) [below left=2.0 and 0.5 of s06]  {$s_{11}$};
-      \node[state] (s12) [below right=2.0 and 0.5 of s06] {$s_{12}$};
+      \node[state] (s04) [below=2.3 of s00]               {$s_4$};
+      \node[state] (s05) [below right=2.3 and 4 of s00]   {$s_5$};
+      \node[state] (s06) [below left=2.0 and 0.5 of s02]  {$s_6$};
+      \node[state] (s07) [below right=2.0 and 0.5 of s02] {$s_7$};
+      \node[state] (s08) [below=2.0 of s04]               {$s_8$};
+      \node[state] (s09) [below left=2.0 and 0.5 of s05]  {$s_9$};
+      \node[state] (s10) [below right=2.0 and 0.5 of s05] {$s_{10}$};
 
-      \node (ok1) [below right=0.2 and 0.45 of s09] {\normalsize $\goal$};
-      \node (ok2) [below right=0.2 and 0.45 of s10] {\normalsize $\goal$};
-      \node (ok3) [below right=0.2 and 0.45 of s12] {\normalsize $\goal$};
+      \node (ok1) [below right=0.2 and 0.45 of s07] {\normalsize $\goal$};
+      \node (ok2) [below right=0.2 and 0.45 of s08] {\normalsize $\goal$};
+      \node (ok3) [below right=0.2 and 0.45 of s10] {\normalsize $\goal$};
 
       \node (nok1) [below left=0.2 and 0.45 of s01]  {\normalsize $\fail$};
       \node (nok2) [below left=0.2 and 0.45 of s03]  {\normalsize $\fail$};
-      \node (nok3) [below left=0.2 and 0.45 of s04]  {\normalsize $\fail$};
-      \node (nok4) [below right=0.2 and 0.45 of s07] {\normalsize $\fail$};
-      \node (nok5) [below left=0.2 and 0.45 of s08]  {\normalsize $\fail$};
-      \node (nok6) [below left=0.2 and 0.45 of s11]  {\normalsize $\fail$};
+      \node (nok5) [below left=0.2 and 0.45 of s06]  {\normalsize $\fail$};
+      \node (nok6) [below left=0.2 and 0.45 of s09]  {\normalsize $\fail$};
 
       \node[dot] (d1) [below left=1.3 and 3 of s00]    {};
       \node[dot] (d2) [below left=1.3 and 1 of s00]    {};
@@ -116,12 +235,12 @@ strategies.
       \node[dot] (d4) [below right=1.3 and 1.7 of s00] {};
       \node[dot] (d5) [below right=1.3 and 3 of s00]   {};
       \node[dot] (d6) [below=1.0 of s02]               {};
-      \node[dot] (d7) [below=1.0 of s05]               {};
-      \node[dot] (d8) [below=1.0 of s06]               {};
+      \node[dot] (d7) [below=1.0 of s04]               {};
+      \node[dot] (d8) [below=1.0 of s05]               {};
 
       \node (m1) [above left=0.1 and 0.3 of d1]  {$\mu_1$};
       \node (m2) [above left=0.1 and 0.3 of d2]  {$\mu_2$};
-      \node (m3) [above right=0.1 and 0.3 of d3] {$\mu_3$};
+      \node (m3) [left=0.3 of d3]                {$\mu_3$};
       \node (m4) [above right=0.2 and 0.2 of d4] {$\mu_4$};
       \node (m5) [above right=0.2 and 0.2 of d5] {$\mu_5$};
       \node (m6) [above right=0.1 and 0.3 of d6] {$\mu_6$};
@@ -135,45 +254,129 @@ strategies.
       (s00) edge [] node[left,xshift=8,yshift=-8]  {\small $\ramp$}   (d4)
       (s00) edge [] node[right,xshift=-1,yshift=3] {\small $\stairs$}  (d5)
       (s02) edge [] node[left]                     {\small $\mobile$} (d6)
-      (s05) edge [] node[left]                     {\small $\panic$}  (d7)
-      (s06) edge [] node[right]                    {\small $\mobile$} (d8)
+      (s04) edge [] node[left]                     {\small $\panic$}  (d7)
+      (s05) edge [] node[right]                    {\small $\mobile$} (d8)
       ;
 
       \path[-{Latex[length=2.2mm,width=1.4mm]},line width=0.5pt,dashed]
-      (d1) edge [] node[left]                      {$0.2$} (s01)
-      (d1) edge [] node[right]                     {$0.8$} (s02)
-      (d2) edge [] node[left]                      {$1$}   (s03)
-      (d3) edge [] node[left]                      {$0.1$} (s04)
-      (d3) edge [] node[right]                     {$0.9$} (s05)
-      (d4) edge [] node[right,xshift=-4,yshift=-5] {$0.5$} (s05)
-      (d4) edge [] node[left,xshift=4,yshift=-5]   {$0.5$} (s06)
-      (d5) edge [] node[left,yshift=5]             {$0.9$} (s06)
-      (d5) edge [] node[right]                     {$0.1$} (s07)
-      (d6) edge [] node[left]                      {$0.1$} (s08)
-      (d6) edge [] node[right]                     {$0.9$} (s09)
-      (d7) edge [] node[left]                      {$1$}   (s10)
-      (d8) edge [] node[left]                      {$0.1$} (s11)
-      (d8) edge [] node[right]                     {$0.9$} (s12)
+      (d1) edge []              node[left]           {$0.2$} (s01)
+      (d1) edge []              node[right]          {$0.8$} (s02)
+      (d2) edge []              node[left]           {$1$}   (s03)
+      (d3) edge []              node[left]           {$0.9$} (s04)
+      (d3) edge [bend right=17] node[right,pos=0.07] {$0.1$} (s05)
+      (d4) edge [bend left=18]  node[left,pos=0.1]   {$0.5$} (s04)
+      (d4) edge [bend right=18] node[right,pos=0.1]  {$0.5$} (s05)
+      (d5) edge []              node[right]          {$0.9$} (s05)
+      (d5) edge [bend left=19]  node[right,pos=0.17] {$0.1$} (s04)
+      (d6) edge []              node[left]           {$0.1$} (s06)
+      (d6) edge []              node[right]          {$0.9$} (s07)
+      (d7) edge []              node[left]           {$1$}   (s08)
+      (d8) edge []              node[left]           {$0.1$} (s09)
+      (d8) edge []              node[right]          {$0.9$} (s10)
       ;
       
     \end{tikzpicture}
   }
   
-  \caption{PLTS modelling possible emergency escape situations in a building}\label{fig:emergencyescape}
-\end{figure*}
+  \caption{PLTS modelling possible fire emergency escape situations in a building}\label{fig:emergencyescape}
+\end{figure}
 
-We
-define the set of \emph{successful complete (finite) execution} that
-reach $G$ following plan $\plan$ by
+
+
+%% \begin{figure*}
+%%   \centering
+
+%%   \scalebox{1}{
+%%     \begin{tikzpicture}[on grid,auto,align at top]
+%%       \node[state] (s00)                                  {$s_0$};
+%%       \node[state] (s01) [below left=2.3 and 4 of s00]    {$s_1$};
+%%       \node[state] (s02) [below left=2.3 and 3 of s00]    {$s_2$};
+%%       \node[state] (s03) [below left=2.3 and 1.75 of s00] {$s_3$};
+%%       \node[state] (s04) [below left=2.3 and 0.5 of s00]  {$s_4$};
+%%       \node[state] (s05) [below right=2.3 and 0.5 of s00] {$s_5$};
+%%       \node[state] (s06) [below right=2.3 and 3 of s00]   {$s_6$};
+%%       \node[state] (s07) [below right=2.3 and 4 of s00]   {$s_7$};
+%%       \node[state] (s08) [below left=2.0 and 0.5 of s02]  {$s_8$};
+%%       \node[state] (s09) [below right=2.0 and 0.5 of s02] {$s_9$};
+%%       \node[state] (s10) [below=2.0 of s05]               {$s_{10}$};
+%%       \node[state] (s11) [below left=2.0 and 0.5 of s06]  {$s_{11}$};
+%%       \node[state] (s12) [below right=2.0 and 0.5 of s06] {$s_{12}$};
+
+%%       \node (ok1) [below right=0.2 and 0.45 of s09] {\normalsize $\goal$};
+%%       \node (ok2) [below right=0.2 and 0.45 of s10] {\normalsize $\goal$};
+%%       \node (ok3) [below right=0.2 and 0.45 of s12] {\normalsize $\goal$};
+
+%%       \node (nok1) [below left=0.2 and 0.45 of s01]  {\normalsize $\fail$};
+%%       \node (nok2) [below left=0.2 and 0.45 of s03]  {\normalsize $\fail$};
+%%       \node (nok3) [below left=0.2 and 0.45 of s04]  {\normalsize $\fail$};
+%%       \node (nok4) [below right=0.2 and 0.45 of s07] {\normalsize $\fail$};
+%%       \node (nok5) [below left=0.2 and 0.45 of s08]  {\normalsize $\fail$};
+%%       \node (nok6) [below left=0.2 and 0.45 of s11]  {\normalsize $\fail$};
+
+%%       \node[dot] (d1) [below left=1.3 and 3 of s00]    {};
+%%       \node[dot] (d2) [below left=1.3 and 1 of s00]    {};
+%%       \node[dot] (d3) [below=1.3 of s00]               {};
+%%       \node[dot] (d4) [below right=1.3 and 1.7 of s00] {};
+%%       \node[dot] (d5) [below right=1.3 and 3 of s00]   {};
+%%       \node[dot] (d6) [below=1.0 of s02]               {};
+%%       \node[dot] (d7) [below=1.0 of s05]               {};
+%%       \node[dot] (d8) [below=1.0 of s06]               {};
+
+%%       \node (m1) [above left=0.1 and 0.3 of d1]  {$\mu_1$};
+%%       \node (m2) [above left=0.1 and 0.3 of d2]  {$\mu_2$};
+%%       \node (m3) [above right=0.1 and 0.3 of d3] {$\mu_3$};
+%%       \node (m4) [above right=0.2 and 0.2 of d4] {$\mu_4$};
+%%       \node (m5) [above right=0.2 and 0.2 of d5] {$\mu_5$};
+%%       \node (m6) [above right=0.1 and 0.3 of d6] {$\mu_6$};
+%%       \node (m7) [right=0.3 of d7]               {$\mu_7$};
+%%       \node (m8) [above left=0.1 and 0.3 of d8]  {$\mu_8$};
+
+%%       \path[-,line width=0.5pt]
+%%       (s00) edge [] node[left,xshift=1,yshift=3]   {\small $\lift$}   (d1)
+%%       (s00) edge [] node[left,xshift=-3,yshift=-3] {\small $\lift$}   (d2)
+%%       (s00) edge [] node[left,xshift=1,yshift=-5]  {\small $\stairs$}  (d3)
+%%       (s00) edge [] node[left,xshift=8,yshift=-8]  {\small $\ramp$}   (d4)
+%%       (s00) edge [] node[right,xshift=-1,yshift=3] {\small $\stairs$}  (d5)
+%%       (s02) edge [] node[left]                     {\small $\mobile$} (d6)
+%%       (s05) edge [] node[left]                     {\small $\panic$}  (d7)
+%%       (s06) edge [] node[right]                    {\small $\mobile$} (d8)
+%%       ;
+
+%%       \path[-{Latex[length=2.2mm,width=1.4mm]},line width=0.5pt,dashed]
+%%       (d1) edge [] node[left]                      {$0.2$} (s01)
+%%       (d1) edge [] node[right]                     {$0.8$} (s02)
+%%       (d2) edge [] node[left]                      {$1$}   (s03)
+%%       (d3) edge [] node[left]                      {$0.1$} (s04)
+%%       (d3) edge [] node[right]                     {$0.9$} (s05)
+%%       (d4) edge [] node[right,xshift=-4,yshift=-5] {$0.5$} (s05)
+%%       (d4) edge [] node[left,xshift=4,yshift=-5]   {$0.5$} (s06)
+%%       (d5) edge [] node[left,yshift=5]             {$0.9$} (s06)
+%%       (d5) edge [] node[right]                     {$0.1$} (s07)
+%%       (d6) edge [] node[left]                      {$0.1$} (s08)
+%%       (d6) edge [] node[right]                     {$0.9$} (s09)
+%%       (d7) edge [] node[left]                      {$1$}   (s10)
+%%       (d8) edge [] node[left]                      {$0.1$} (s11)
+%%       (d8) edge [] node[right]                     {$0.9$} (s12)
+%%       ;
+      
+%%     \end{tikzpicture}
+%%   }
+  
+%%   \caption{PLTS modelling possible emergency escape situations in a building}\label{fig:emergencyescape}
+%% \end{figure*}
+
+
+We define the set of \emph{successful complete (finite) execution}
+that reach $G$ following plan $\plan$ by
 $\Succ(\plan,G)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}=\plan
   \text{ and } \last(\rho)\in G}\}$.
 %
-We are interested in that any $\plan$-compatible strategy $\sigma$
+We are interested in that any $\plan$-compatible strategy $\strat$
 starting from a given state $s\in\S$ reaches a state in $G$ with a
 minimum desired probability, say $q$.  That is, we would like that
 %
 \begin{equation}\label{eq:plan:goal:q}
-  \inf_{\sigma \in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G)) \geq q.
+  \inf_{\strat \in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G)) \geq q.
 \end{equation}
 %
 More generally, we would like that this holds from any particularly
@@ -184,11 +387,60 @@ the condition in \cref{eq:plan:goal:q} holds.
 Thus $A \reach{\plan}_q G$ means that any state in $A$ can reach the
 goal $G$ with at least probability $q$ following plan $\plan$.
 
-\pedro{ejemplo de esto tambi\'en}
+\begin{example}
+  Continuing with \Cref{ex:running}, let
+  $G_{\goal}$
+  be the set of all states in which $\goal$ holds (i.e. $G_{\goal} = \{s_7, s_8, s_{10}\}$).
+  %
+  Then $\{s_0\}\reach{\plan_1}_qG_{\goal}$ iff $q=0$.  This
+  is a consequence of strategy $\strat'_1$ which is
+  $\plan_1$-compatible but
+  $\Prob^{\strat'_1}_{s_0}(\Succ(\plan_1,G_{\goal}))=0$ ($\plan_1$ and
+  $\strat'_1$ are as in \Cref{ex:running}).
 
+  For plan $\plan_2 = \stairs\,\mobile$,
+  $\{s_0\}\reach{\plan_2}_qG_{\goal}$ iff $q\leq0.09$.  This is due to
+  $\plan_2$-compatible strategy $\strat_2$ defined so that
+    %
+  \[
+  \begin{array}{l}
+    \strat_2(s_0)(\stairs,\mu_3)=1\\
+    \strat_2(s_0\,\stairs\,s_4)(\complete)=
+    \strat_2(s_0\,\stairs\,s_5)(\mobile,\mu_8)=1\\
+    \strat_2(s_0\,\stairs\,s_5\,\mobile\,s_9)(\complete)=
+    \strat_2(s_0\,\stairs\,s_5\,\mobile\,s_{10})(\complete)=1
+  \end{array}
+  \]
+  %
+  for which
+  $\Prob^{\strat_2}_{s_0}(\Succ(\plan_2,G_{\goal}))=\Prob^{\strat_2}_{s_0}(\{s_0\,\stairs\,s_5\,\mobile\,s_{10}\,\complete\})=0$
+  (the first equality is a consequence of \
+  $s_0\,\stairs\,s_5\,\mobile\,s_{10}\,\complete$ \ being the only
+  complete execution in $\Succ(\plan_2,G_{\goal})$ with non-zero
+  probability).
 
+  
+\end{example}
 
-\bigpedro{aqu\'i habr\'ia que comparar la idea de $\plan$-compatible con SE y decir que $\pi$ es SE at $s$ si $\inf_{\sigma \in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,S)) = 1 $ y mas precisamente que $\plan$ is (SE at $A$ and $A \reach{\plan} G$ in the LTS) iff ($A \reach{\plan}_1 G$ in the PLTS view of the LTS).}
+If we observe an LTS as a PLTS (as defined in
+\Cref{sec:preliminaries}) there is a strong connection between
+$\plan$-compatible strategies and strong executability of $\plan$.
+This connection is also lifted to relate $A \reach{\plan} G$ and $A
+\reach{\plan}_1 G$ as stated in the next proposition.
+
+\begin{proposition}
+  For every LTS $\model=\tup{\S,\Act,\ra,\V}$, state $s\in\S$, plan
+  $\plan\in\Act^*$, and $A,G\subseteq\S$,
+  \begin{enumerate}
+  \item%
+    $\plan$ is SE at $s$ iff $\inf_{\strat
+    \in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,S))=1$, and
+  \item%
+    $\plan$ is SE at $A$ and $A \reach{\plan} G$ iff $A \reach{\plan}_1 G$.
+  \end{enumerate}
+\end{proposition}
+
+\pedro{hacer la demostraci\'on de esta prop}
 
 
 
@@ -207,7 +459,7 @@ goal $G$ with at least probability $q$ following plan $\plan$.
 
 
 
-\bigpedro{asta aqu\'i lo nuevo de la secci\'on, desde aqu\'i lo viejo}
+\bigpedro{hasta aqu\'i lo nuevo de la secci\'on, desde aqu\'i lo viejo}
 
 
 \subsection{Probabilistic Knowing How with Linear Plans}
@@ -243,7 +495,7 @@ Naturally, our first approach will be extending $\Khlogic$ with some form of pro
 %         \item $\strat(\rho)(s,a,\mu)>0$ implies $\last(\rho)=s$ and $s\reach{a}\mu$ in $\model$, and 
 %         \item $\bar{\rho}\in\pref(\plans)$ implies $\bar{\rho}a\in\pref(\plans)$.
 %     \end{enumerate}
-%     For $\plan\in\Act^*$, we say that $\sigma$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
+%     For $\plan\in\Act^*$, we say that $\strat$ is \emph{$\plan$-compatible} if it is $\{\plan\}$-compatible. 
 
 %     Let $q\in[0,1]$, we say that $\plans$ is \emph{$q$-executable} at $s\in\S$, if and only if, 
 %     \[
@@ -259,7 +511,7 @@ Naturally, our first approach will be extending $\Khlogic$ with some form of pro
 
 Given a set of plans $\plans\subseteq\Act^*$, we want to consider
 strategies that follow as faithfully as possible the plans of
-$\plans$.  Therefore, we say that a strategy $\sigma$ is
+$\plans$.  Therefore, we say that a strategy $\strat$ is
 \emph{$\plans$-compatible} if for all $\rho\in\execf$ such that
 $\bar{\rho}\in\pref(\plans)$,
 %
@@ -297,12 +549,12 @@ reach $G$ following some plan in $\plans$ by
 $\Succ(\plans,G)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}\in\plans
   \text{ and } \last(\rho)\in G}\}$.
 %
-We are interested in that any $\plans$-compatible strategy $\sigma$
+We are interested in that any $\plans$-compatible strategy $\strat$
 starting from a given state $s\in\S$ reaches a state in $G$ with a
 minimum desired probability, say $q$.  That is, we would like that
 %
 \begin{equation}\label{eq:plans:goal:q}
-  \inf_{\sigma \in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G)) \geq q.
+  \inf_{\strat \in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G)) \geq q.
 \end{equation}
 %
 More generally, we would like that this holds from any particularly

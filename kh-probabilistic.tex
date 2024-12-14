@@ -8,18 +8,21 @@ understand how plans work in a probabilistic model.
 %
 Thus, given a plan $\plan\in\Act^*$, we want to consider
 strategies that follow as faithfully as possible the plan
-$\plan$.  Therefore, we say that a strategy $\sigma$ is
-\emph{$\plan$-compatible} if for all $\rho\in\execf$ such that
-$\bar{\rho}\in\pref(\plan)$,
-%
-\begin{enumerate}
-\item%
-  $\strat(\rho)(a,\mu)>0$ implies $\bar{\rho}a\in\pref(\plan)$, and
-\item%
-  $\strat(\rho)(\complete)>0$ implies that either
-  $\bar{\rho}=\plan$ or
-  $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plan) = \emptyset$. 
-\end{enumerate}
+$\plan$. This is captured in the next definition.
+
+\begin{definition}\label{def:plan:compat}
+  A strategy $\sigma$ is \emph{$\plan$-compatible} if for all
+  $\rho\in\execf$ such that $\bar{\rho}\in\pref(\plan)$,
+  %
+  \begin{enumerate}
+  \item%
+    $\strat(\rho)(a,\mu)>0$ implies $\bar{\rho}a\in\pref(\plan)$, and
+  \item%
+    $\strat(\rho)(\complete)>0$ implies that either
+    $\bar{\rho}=\plan$ or
+    $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plan) = \emptyset$. 
+  \end{enumerate}
+\end{definition}
 %
 The first item states that $\strat$ can chose an $a$-labelled
 transition after the partial plan $\bar{\rho}$ if the continuation of
@@ -34,18 +37,19 @@ strategies.
 
 It is important to remark that, since $\plan$ is finite, for any
 $\plan$-compatible strategy $\strat$ and state $s$,
-$\Prob^\strat_s(\execw)=0$.  That is, any $\plan$-compatible strategy
-leads to termination with probability $1$.
+$\Prob^\strat_s(\execw)=0$ (or equivalently,
+$\Prob^\strat_s(\cexecf)=1$).  That is, any $\plan$-compatible
+strategy leads to termination with probability $1$.
 
 
 \begin{example}[Running]\label{ex:running}
   \Cref{fig:emergencyescape} depicts a PLTS modelling possible ways to
   escape a building in a fire emergency situation including alerting
-  the event.  Their, states are represented by circles and
+  the event.  There, states are represented by circles and
   distributions by the dot in the middle of transitions.  The outgoing
   dashed arrows are labelled with the respective probability values.
-  Thus, for instance, $s_0\reach{\lift}\mu_1$ with $\mu_1(s_1)=0.1$
-  and $\mu_1(s_2)=0.9$.
+  Thus, for instance, $s_0\reach{\lift}\mu_1$ with $\mu_1(s_1)=0.2$
+  and $\mu_1(s_2)=0.8$.
   %
   Actions $\lift$, $\stairs$, and $\ramp$ indicate that the exit might
   be reached through the lift, the stairs or the ramp.  Actions
@@ -73,9 +77,6 @@ leads to termination with probability $1$.
   %
   Notice that while the panic button always successfully rises the
   alarm, the mobile phone call may fail with probability $0.1$.
-
-  \bigpedro{\textcolor{red}{\textbf{@Ra\'ul}}: Le\'e el texto del ejemplo, plis, que sos el
-    par\'ametro para ver si est\'a bien la explicaci\'on}
 
   Let $\plan_1 = \lift\,\mobile$.  Define strategy $\strat_1$ so that
   %
@@ -413,12 +414,14 @@ goal $G$ with at least probability $q$ following plan $\plan$.
   \]
   %
   for which
-  $\Prob^{\strat_2}_{s_0}(\Succ(\plan_2,G_{\goal}))=\Prob^{\strat_2}_{s_0}(\{s_0\,\stairs\,s_5\,\mobile\,s_{10}\,\complete\})=0$
+  $\Prob^{\strat_2}_{s_0}(\Succ(\plan_2,G_{\goal}))=\Prob^{\strat_2}_{s_0}(\{s_0\,\stairs\,s_5\,\mobile\,s_{10}\,\complete\})=0.09$
   (the first equality is a consequence of \
   $s_0\,\stairs\,s_5\,\mobile\,s_{10}\,\complete$ \ being the only
   complete execution in $\Succ(\plan_2,G_{\goal})$ with non-zero
   probability).
-
+  %
+  All other $\plan_2$-compatible strategy yields a probability larger
+  than $0.09$.
   
 \end{example}
 
@@ -428,21 +431,111 @@ $\plan$-compatible strategies and strong executability of $\plan$.
 This connection is also lifted to relate $A \reach{\plan} G$ and $A
 \reach{\plan}_1 G$ as stated in the next proposition.
 
-\begin{proposition}
+\begin{proposition}\label{prop:nonprob:prob}
   For every LTS $\model=\tup{\S,\Act,\ra,\V}$, state $s\in\S$, plan
   $\plan\in\Act^*$, and $A,G\subseteq\S$,
   \begin{enumerate}
-  \item%
-    $\plan$ is SE at $s$ iff $\inf_{\strat
-    \in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,S))=1$, and
-  \item%
+  \item\label{prop:nonprob:prob:i}%
+    $\plan$ is SE at $s$ iff
+    $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,\S))=1$,
+    and
+  \item\label{prop:nonprob:prob:ii}%
     $\plan$ is SE at $A$ and $A \reach{\plan} G$ iff $A \reach{\plan}_1 G$.
   \end{enumerate}
 \end{proposition}
 
-\pedro{hacer la demostraci\'on de esta prop}
+\begin{proof}
+  First we observe that
+  %
+  $\Succ(\plan,S) = \{{\rho\complete}\mid{\bar{\rho}=\plan}\}$
+  %
+  and hence
+  %
+  \begin{equation}\label{eq:proof:nonprob:prob:probsucc}
+    \textstyle
+    \Prob^\strat_s(\Succ(\plan,\S)) =
+    \Prob^\strat_s(\{{\rho\complete}\mid{\bar{\rho}=\plan}\wedge{\first(\rho)=s}\})
+    %\sum_{\substack{\bar{\rho}=\plan\\\first(\rho)=s}}\Prob^\strat_s(\{\rho\complete\})
+  \end{equation}
+  %
+%%   \[\Prob^\strat_s(\Succ(\plan,\S)) =
+%%   \Prob^\strat_s(\{{\rho\complete}\mid{\bar{\rho}=\plan}\}) =
+%%   \sum_{\substack{\bar{\rho}=\plan\\\first(\rho)=s}}\Prob^\strat_s(\{\rho\complete\})\]
+%%   %
+  for all $s\in\S$ and $\strat\in\Comp(\plan)$. In particular, the
+  equality considers the fact that
+  $\Prob^\strat_s(\{\rho\complete\})=0$ if $s\neq\first(\rho)$.
 
+  We first show implication $(\Rightarrow)$ of
+  \cref{prop:nonprob:prob:i}.
+  %
+  For this suppose $\plan$ is SE at $s$ and
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,\S))<1$.
+  %
+  Because of \cref{eq:proof:nonprob:prob:probsucc}, there must exists
+  $\strat\in\Comp(\plan)$ and $\rho\in\execf$ such that
+  $\bar{\rho}\neq\pi$, $\first(\rho)=s$, and
+  $\Prob^\strat_s(\{\rho\complete\})>0$ $(\star)$.
+  %
+  Say $\rho=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n$ with $s_0=s$.
 
+  Suppose first that $\bar{\rho}\leq\plan$ (the prefix should be
+  proper).  Because of \cref{eq:def:prob:ii}, necessarily
+  $\strat(\rho)(\complete) > 0$.  Besides, since $\plan$ is SE for $s$
+  and $s\reach{\bar{\rho}}s_n$ then, for some $t\in\S$,
+  $s_n\reach{\plan[n{+}1]}t$ (i.e.\ $s_n\reach{\plan[n{+}1]}\Dirac_t$).
+  %
+  Because $\bar{\rho}(\plan[n{+}1])\in\pref(\plan)$,
+  $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plan)\neq\emptyset$.
+  Therefore, by \Cref{def:plan:compat}, $\strat(\rho)(\complete) = 0$
+  inducing a contradicion.
+
+  So $\bar{\rho}\notin\pref(\plan)$ and either $\plan\leq\bar{\rho}$
+  (properly) or exists some $1\leq i \leq\min(|\plan|,|\bar{\rho}|)$
+  such that $\plan[i]\neq\bar{\rho}[i]$.
+
+  If $\plan\leq\bar{\rho}$, then $\bar{\rho}[..|\plan|]=\plan$ and
+  hence, by \Cref{def:plan:compat}, necessarily
+  $\strat(\rho[..|\plan|])(\complete) = 1$.  By \cref{eq:def:prob:ii},
+  this implies that $\Prob^\strat_s(\{\rho\complete\})=0$,
+  contradicting $(\star)$.
+
+  If instead $\plan[i]\neq\bar{\rho}[i]=a_i$ with
+  $1\leq i \leq\min(|\plan|,|\bar{\rho}|)$, by \cref{eq:def:prob:ii},
+  $\strat(\rho[..(i-1)])(a_i,\mu) > 0$ for some
+  $\mu\in\Dist(\S)$ with $s_i\reach{a_i}\mu$.
+  However $\overline{\rho[..i]}a_i \notin \pref(\plan)$
+  (because $\plan[i]\neq a_i$) which, by
+  \Cref{def:plan:compat}, contradicts the assumption that
+  $\strat\in\Comp(\plan)$.
+
+  This proves implication $(\Rightarrow)$ of \cref{prop:nonprob:prob:i}.
+
+  For implication $(\Leftarrow)$ of \cref{prop:nonprob:prob:i} suppose
+  $s\reach{\plan[..i]}t$ for $i<|\plan|$, that is, there are $s_0$,
+  $s_1$, \ldots $s_i$ such that $s=s_0$, $t=s_i$, and
+  $s_k\reach{\plan[k{+}1]}\Dirac_{s_{k{+}1}}$ for all $0\leq k < i$.
+  %
+  Take a $\plan$-compatible strategy $\strat$ such that, for all
+  $0\leq k < i$,
+  $\strat(s_0\,\plan[1]\,s_1\ldots s_{k{-}1}\,\plan[k]\,s_k)(\plan[k{+}1],\Dirac_{s_{k{+}1}})=1$.
+  Notice that such strategy exists and hence
+  $\Prob^\strat_s(\Succ(\plan,\S))=1$ by assumption.
+  %
+  By \cref{eq:proof:nonprob:prob:probsucc} and \cref{eq:def:prob:ii}
+  there must exists some $\rho\in\execf$ such that $\bar{\rho}=\plan$,
+  $s_0\,\plan[1]\,s_1\ldots s_{k{-}1}\,\plan[i]\,s_i = \rho[..i]$ and
+  $\Prob^\strat_s(\{\rho\complete\})>0$.  By \cref{eq:def:prob:ii}, in
+  particular, there exist $s_{i{+}1}$ such that
+  $\strat(\rho[..i])(\plan[i{+}1],\Dirac_{s_{i{+}1}})> 0$ which
+  implies that $s_i\reach{\plan[i{+}1]}\Dirac_{s_{i{+}1}}$, or
+  equivalently, $t\reach{\plan[i{+}1]}s_{i{+}1}$, since $t=s_i$.
+  %
+  Therefore $\plan$ is SE in $s$ , which \cref{prop:nonprob:prob:i}.
+  
+  \pedro{falta \cref{prop:nonprob:prob:ii}. }
+
+\end{proof}
 
 
 

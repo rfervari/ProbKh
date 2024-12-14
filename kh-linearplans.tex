@@ -12,7 +12,7 @@ In order to determine when an agent knows how to achieve a goal, we need to char
     Elements of $\Act^*$ are called \emph{plans} (with $\epsilon$ the empty plan).  Let $\plan\in\Act^*$, $\size{\plan}$ denotes its length ($\size{\epsilon}:=0$).
     For  $0\leq i \leq \size{\plan}$, the plan $\plan_i$ denotes the initial segment of $\plan$ up to (and including) the $i^{th}$ position (with $\plan_0 := \epsilon$). The action $\plan[i]$ is the one appearing in $\plan$ at the $i^{th}$ position. We define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
 
-    We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $T\subseteq \S$ if and only if it is SE at every $s\in T$. The notation $U \reach{\plan} T$ (for $U,T\subseteq\S$) indicates that for all $s\in U$,  $s\reach{\plan} t$ implies $t\in T$.
+    We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$\pedro{deber\'ia ser $1\leq i \leq \size{\plan}-1$} and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $T\subseteq \S$ if and only if it is SE at every $s\in T$. The notation $U \reach{\plan} T$ (for $U,T\subseteq\S$) indicates that for all $s\in U$,  $s\reach{\plan} t$ implies $t\in T$.
 \end{definition}
 
 Now we are ready to introduce the language of knowing how.

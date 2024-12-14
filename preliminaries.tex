@@ -45,9 +45,11 @@ considered complete and hence $\cexec=\cexecf\cup\execw$ is the
 set of all \emph{complete executions}.
 
 For $\rho = s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n \in \execf$ and
-$0\leq k\leq n$, let $|\rho|=n$ and let
-$\rho[..k] = s_0\, a_1\, s_1\ldots s_{k-1}\, a_k\, s_k$ be the $k$-th
-prefix of $\rho$.
+$0\leq k\leq n$, let $|\rho|=n$, $\first(\rho)=s_0$ and
+$\last(\rho)=s_n$.
+%
+Let also $\rho[..k] = s_0\, a_1\, s_1\ldots s_{k-1}\, a_k\, s_k$ be
+the $k$-th prefix of $\rho$.
 %
 Similarly, we can define $\rho[..k]$ for $\rho\in\cexec$.
 In particular, notice that $\rho[..0]=s_0$.
@@ -76,19 +78,19 @@ set of all cylinder sets as follows.
 %
 For $\rho = s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n \in \execf$,
 %
-\begin{align*}
-  &\Prob^\strat_s(\Cyl(\rho)) =\\
-  &\quad \Dirac_{s_0}\cdot\prod\limits_{i=1}^n\sum\limits_{(a_i,\mu)\in T(s_{i-1})}\strat(\rho[..(i{-}1)])(a_i,\mu)\cdot\mu(s_i)
-\end{align*}
+\begin{align}
+  &\Prob^\strat_s(\Cyl(\rho)) = {}\label{eq:def:prob:i}\\
+  &\quad \Dirac_s(s_0)\cdot\prod\limits_{i=1}^n\sum\limits_{(a_i,\mu)\in T(s_{i-1})}\strat(\rho[..(i{-}1)])(a_i,\mu)\cdot\mu(s_i)\notag
+\end{align}
 %
 and for
 $\rho = s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n\, \complete \in \cexecf$,
 %
-\begin{align*}
-  &\Prob^\strat_s(\Cyl(\rho)) =\\
-  &\quad \Dirac_{s_0}\cdot\left(\prod\limits_{i=1}^n\sum\limits_{(a_i,\mu)\in T(s_{i-1})}\strat(\rho[..(i{-}1)])(a_i,\mu)\cdot\mu(s_i)\right)\\
-  &\phantom{\quad \Dirac_{s_0}} \cdot\strat(\rho[..n])(\complete).
-\end{align*}
+\begin{align}
+  &\Prob^\strat_s(\Cyl(\rho)) = {}\label{eq:def:prob:ii}\\
+  &\quad \Dirac_s(s_0)\cdot\left(\prod\limits_{i=1}^n\sum\limits_{(a_i,\mu)\in T(s_{i-1})}\strat(\rho[..(i{-}1)])(a_i,\mu)\cdot\mu(s_i)\right)\notag\\
+  &\phantom{\quad \Dirac_s(s_0)} \cdot \ \strat(\rho)(\complete).\notag
+\end{align}
 %
 Charathedeory's extension theorem guarantees that $\Prob^\strat_s$ is
 uniquely defined in the sigma algebra~\cite{Segala95}.
@@ -105,18 +107,15 @@ uniquely defined in the sigma algebra~\cite{Segala95}.
 
 \bigskip
 
-Some definitions to be added here:
+\textcolor{red}{Some definitions to be added here:}
 
 \begin{itemize}
-    \item probability distributions over $\S$: $\Dist(\S)$ \textcolor{green}{$\surd$}
-    \item probability $\Prob$  \textcolor{green}{$\surd$}
-    \item the infimum $\infim$  \textcolor{orange}{[en realidad no es $\inf$ lo que hay que definir, sino lo que est\'a adentro y lo defino m\'as adelante]}
-      \pedro{BTW: por qu\'e definiste $\infim$ si ya existe $\inf$?}
     \item prefix and set of prefixes $\pref$ \textcolor{orange}{[solo para ejecuciones, pero falta todo lo de lenguaje]}
-    \item \textcolor{red}{To be added:}
+    \item
       Given $\rho = s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n \in \execf$,
       let $\bar{\rho} = a_1\, a_2\ldots a_n$.
       In particular $\bar{\rho} = \epsilon$ whenever $n=0$.
-
+    \item
+      $\plan \plans = \{\plan\plan'\mid\plan'\in\plans\}$
 \end{itemize}
 

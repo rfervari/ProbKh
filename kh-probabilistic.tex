@@ -43,13 +43,13 @@ strategy leads to termination with probability $1$.
 
 
 \begin{example}[Running]\label{ex:running}
-  \Cref{fig:emergencyescape} depicts a PLTS modelling possible ways to
-  escape a building in a fire emergency situation including alerting
-  the event.  There, states are represented by circles and
-  distributions by the dot in the middle of transitions.  The outgoing
-  dashed arrows are labelled with the respective probability values.
-  Thus, for instance, $s_0\reach{\lift}\mu_1$ with $\mu_1(s_1)=0.2$
-  and $\mu_1(s_2)=0.8$.
+  \Cref{fig:emergencyescape} depicts the PLTS $\modelex$ modelling
+  possible ways to escape a building in a fire emergency situation
+  including alerting the event.  There, states are represented by
+  circles and distributions by the dot in the middle of transitions.
+  The outgoing dashed arrows are labelled with the respective
+  probability values.  Thus, for instance, $s_0\reach{\lift}\mu_1$
+  with $\mu_1(s_1)=0.2$ and $\mu_1(s_2)=0.8$.
   %
   Actions $\lift$, $\stairs$, and $\ramp$ indicate that the exit might
   be reached through the lift, the stairs or the ramp.  Actions
@@ -57,10 +57,11 @@ strategy leads to termination with probability $1$.
   through a panic button or by calling 911 using the mobile phone.
   %
   Label $\goal$ indicates that the exit and the alert have been
-  successfully performed.  This happens only in states $s_7$,
-  $s_8$, and $s_{10}$ (thus
-  $\V(s_7)=\V(s_8)=\V(s_{10})=\{\goal\}$).  States labeled with
-  $\fail$ indicate that the last performed action has failed.
+  successfully performed.  This happens only in states $s_7$, $s_8$,
+  and $s_{10}$ (thus $\V(s_7)=\V(s_8)=\V(s_{10})=\{\goal\}$).  States
+  labeled with $\fail$ indicate that the last performed action has
+  failed.  In particular we distinguish the initial state by letting
+  $\V(s_0)=\init$.
   %
   Thus, it is possibe to take a lift through transition
   $s_0\reach{\lift}\mu_1$ and failed with probability $0.2$ while
@@ -221,6 +222,8 @@ strategy leads to termination with probability $1$.
       \node[state] (s09) [below left=2.0 and 0.5 of s05]  {$s_9$};
       \node[state] (s10) [below right=2.0 and 0.5 of s05] {$s_{10}$};
 
+      \node (init) [above right=0.25 and 0.55 of s00] {\small $\init$};
+
       \node (ok1) [below right=0.2 and 0.45 of s07] {\normalsize $\goal$};
       \node (ok2) [below right=0.2 and 0.45 of s08] {\normalsize $\goal$};
       \node (ok3) [below right=0.2 and 0.45 of s10] {\normalsize $\goal$};
@@ -279,7 +282,7 @@ strategy leads to termination with probability $1$.
     \end{tikzpicture}
   }
   
-  \caption{PLTS modelling possible fire emergency escape situations in a building}\label{fig:emergencyescape}
+  \caption{PLTS $\modelex$ modelling possible fire emergency escape situations in a building}\label{fig:emergencyescape}
 \end{figure}
 
 
@@ -443,7 +446,9 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
     $\plan$ is SE at $A$ and $A \reach{\plan} G$ iff $A \reach{\plan}_1 G$.
   \end{enumerate}
 \end{proposition}
-
+%
+\pedro{ver si dejamos la prueba aqu\'i o la mandamos al ap\'endice}%
+%
 \begin{proof}
   First we observe that
   %
@@ -532,16 +537,226 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
   equivalently, $t\reach{\plan[i{+}1]}s_{i{+}1}$, since $t=s_i$.
   %
   Therefore $\plan$ is SE in $s$ , which \cref{prop:nonprob:prob:i}.
-  
-  \pedro{falta \cref{prop:nonprob:prob:ii}. }
 
+  For \cref{prop:nonprob:prob:ii}, it sufficies to show that for all
+  $s\in A$, $\plan$ is SE at $s$ and $s \reach{\plan} t$ for some
+  $t\in G$ iff
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$,
+
+  For the implication $(\Rightarrow)$, assume $\plan$ is SE at $s$ and
+  $s \reach{\plan} t$ implies $t\in G$.
+  %
+  Suppose
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))<1$.
+  Since
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,\S))=1$ (by
+  \cref{prop:nonprob:prob:i}), there must be a strategy
+  $\strat\in\Comp(\plan)$ such that
+  $\Prob^\strat_s(\{\rho\complete\})>0$ for some $\rho\in\execf$ with
+  $\bar{\rho}=\plan$ and $\first(\rho)=s$ (because of
+  \cref{eq:proof:nonprob:prob:probsucc}) and also $\last(\rho)\notin G$.
+  %
+  By \cref{eq:def:prob:i,eq:def:prob:ii}, also
+  $\Prob^\strat_s(\{\rho\})>0$ from which $s\reach{\plan}\last(\rho)$,
+  contradicting the assumption that $s \reach{\plan} t$ implies
+  $t\in G$.
+
+  For $(\Leftarrow)$, suppose
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$.
+  Since $G\subseteq\S$,
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,\S))=1$, and
+  hence $\plan$ is SE at $s$ by \cref{prop:nonprob:prob:i}.
+  %
+  Suppose now that $s \reach{\plan} t$, that is, there are $s_0$,
+  $s_1$, \ldots $s_{|\plan|}$ such that $s=s_0$, $t=s_{|\plan|}$, and
+  $s_k\reach{\plan[k{+}1]}\Dirac_{s_{k{+}1}}$ for all $0\leq k < |\plan|$.
+  %
+  We can construct a $\plan$-compatible strategy $\strat$
+  such that, for all $0\leq k < |\plan|$,
+  $\strat(s_0\,\plan[1]\,s_1\ldots s_{k{-}1}\,\plan[k]\,s_k)(\plan[k{+}1],\Dirac_{s_{k{+}1}})=1$,
+  and, in adition, for
+  $\rho = s_0\,\plan[1]\,s_1\ldots s_{|\plan|{-}1}\,\plan[k]\,s_{|\plan|}$,
+  $\strat(\rho)(\complete)=1$.
+  %
+  Thus $\Prob^\strat_s(\{\rho\bot\})>0$.  Since
+  $\Prob^\strat_s(\Succ(\plan,G))=1$, $\rho\bot\in\Succ(\plan,G)$
+  and therefore $t=\last(\rho)\in G$, which finally proves
+  \cref{prop:nonprob:prob:ii}.
 \end{proof}
 
+
+\Cref{prop:nonprob:prob} set the bases to understand what we expect in
+a probabiilistic setting: we would like to validate whether an agent
+knows how to achieve a goal \emph{with at least some given probability
+of success}.  That is, plans might not be perfect in a setting where
+actions are subject to failure or to random outcome.
+%
+Therefore we introduce a probabilistic variant of $\kh$,
+$\kh^q(\psi,\varphi)$, which is interpreted as \emph{``the agent knows
+how to achieve a goal $\varphi$ given that $\psi$ hold with
+probability at least $q$''}.
+
+
+\begin{definition}\label{def:syntax:PKh}
+  The language $\PKh$ is defined by
+  \pedro{lo de ``The set of formulas (a.k.a. the language)...'' ya fue dicho anes asi que lo simplifico aqui}
+  \[
+  \varphi, \psi ::=
+  p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh^q(\psi,\varphi),
+  \]
+  where $p\in\Prop$ and $q\in(0,1]$.
+  \pedro{es necesario ``Other Boolean operators are defined as
+    usual.''??}
+\end{definition}
+
+
+\Cref{prop:nonprob:prob:ii} in \Cref{prop:nonprob:prob} shows that
+expression $A\reach{\plan}_1 G$ captures both the idea of strong
+executability and the successful realization of a goal $G$.  In a
+probabilistic setting, plans are allowed to fail, so the idea of
+strong executability is inconvinient.  Instead, we are interested that
+a plan $\plan$ is realizable with at least probability $q$, and
+moreover, we are only interestead of the realization of $\plan$ if it
+achieves the goal $G$.  That is why we define $A\reach{\plan}_q G$ to
+mean that from any state in $A$ can the goal $G$ is achieved with plan
+$\plan$ with at least probability $q$.  This is central for the
+definition of the semantics of $\PKh$.
+
+\begin{definition}\label{def:semantics:PKh}
+  Let $\model = \tup{\S,\Act,\ra,\V}$ be a PLTS and let $s\in\S$.  The
+  satisfiability relation $\models$ for $\PKh$ is defined inductively 
+  as usual for the boolean operators and, in addition, by
+  \[
+  \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+    \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plan \in \Act^* \;\text{such that} \\
+    & & \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
+  \end{array}
+  \]
+  where $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,s\models\chi}$.
+  %
+  Define $\model\models\varphi$ iff $\truthset{\model}{\varphi}=\S$,
+  and $\models\varphi$ iff $\model\models\varphi$, for all PLTS
+  $\model$.
+  \pedro{vamos a usar todo esto \'ultimo?}
+\end{definition}
+
+In \Cref{def:syntax:PKh} we requested that the bound probability
+$q>0$.  The choice is due to the fact that $\truthset{\model}{\psi}
+\reach{\plan}_0 \truthset{\model}{\varphi}$ is always true since any
+probability is larger than or equal to $0$.
+
+\begin{example}
+  For the running example, for every state $s$,
+  $\modelex, s \models \kh^{0.5}(\init,\goal)$.
+  %
+  This is explained through plan $\ramp\,\panic$.
+  %
+  Notice also that $\modelex, s \models \neg \kh^q(\init,\goal)$ for
+  any $q>0.5$. One may think this is not the case since, for example,
+  there is a way to successully realize the plan $\stairs\,\panic$
+  with probability $0.9$.  However, there is also another way to
+  realize the same plan with probability $0.1$ (and hence
+  $\truthset{\model}{\init} \reach{\stairs\,\panic}_q \truthset{\model}{\goal}$
+  iff $q\leq 0.1$).
+\end{example}
+
+In the following we show that there is strong connection between
+$\Khlogic$ and $\PKh$ when limitting to LTSs models. We first present
+the next lemma which basically states that in LTS, plans that are
+realizable with some probability are also realized with
+probability~$1$.
+
+\begin{lemma}\label{lm:someprob:prob1}
+  For every LTS $\model = \tup{\S,\Act,\ra,\V}$, $s\in\S$ and
+  $A,G\subseteq\S$,
+  %
+  \begin{enumerate}
+  \item\label{lm:someprob:prob1:i}%
+    $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))>0$ iff\newline
+    $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$, and
+  \item\label{lm:someprob:prob1:ii}%
+    $A\reach{\plan}_q G$ for some $q>0$ iff $A\reach{\plan}_1 G$.
+  \end{enumerate}
+\end{lemma}
+%
+\pedro{ver si dejamos la prueba aqu\'i o la mandamos al ap\'endice}%
+%
+\begin{proof}
+  For implication $(\Rightarrow)$ of \cref{lm:someprob:prob1:i}
+  suppose by contradiction that
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))<1$.
+  %
+  Then there are $\strat\in\Comp(\plan)$ and $\rho\in\execf$ such that
+  $\Prob^\strat_s(\{\rho\complete\})>0$ and
+  $\rho\complete\notin\Succ(\plan,G)$.
+%%   , that is, either $\bar{\rho}$ or $\last(\rho)\notin G$.
+  %
+  Say $\rho=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n$.  Necessarily
+  $s_0=s$.
+  %
+  Define strategy $\strat^\star$ such that, for all $0\leq i>n$,
+  $\strat^\star(s_0\, a_1\, s_1\ldots s_{i-1}\, a_i\, s_i)(a_{i+1},\Dirac_{s_{i+1}})=1$,
+  $\strat^\star(\rho)(\complete)=1$, and
+  $\strat^\star(\rho')=\strat(\rho')$ for all other $\rho'\in\execf$.
+  %
+  Since $\strat$ is $\plan$-compatible and  for all $0\leq i>n$,
+  $\strat(s_0\, a_1\, s_1\ldots s_{i-1}\, a_i\, s_i)(a_{i+1},\Dirac_{s_{i+1}})>0$,
+  it should not be hard to check that $\strat^\star$ is also
+  $\plan$-compatible.
+  %
+  Using \cref{eq:def:prob:ii}, we calculate that
+  $\Prob^{\strat^\star}_s(\{\rho\complete\})=1$ and hence
+  $\Prob^{\strat^\star}_s(\Succ(\plan,G))=0$ contradicting the
+  hypothesis that $\Prob^{\strat^\star}_s(\Succ(\plan,G))~0$.
+  %
+  Since implication $(\Leftarrow)$ is direct,
+  \cref{lm:someprob:prob1:i} is hence proved.
+
+  \Cref{lm:someprob:prob1:ii} is a direct consequence of
+  \cref{lm:someprob:prob1:i}.
+\end{proof}
+
+Define the mapping $\fgetprob:\PKh\to\Khlogic$ recursively by
+\pedro{no me convence $\fgetprob$. Otro s\'imbolo/nomenclatura?}
+%
+\begin{align*}
+  & \fgetprob(p) = p
+  && \fgetprob(\varphi \vee \psi) = \fgetprob(\varphi) \vee \fgetprob(\psi)\\
+  & \fgetprob(\neg \varphi) = \neg \fgetprob(\varphi)
+  && \fgetprob(\kh^q(\psi,\varphi)) = \kh(\fgetprob(\psi),\fgetprob(\varphi))
+\end{align*}
+%
+The following proposition states a complete correspondence between
+$\Khlogic$ and $\PKh$.
+%
+\pedro{Raul, verifica esta oraci\'on y la proposici\'on (hay alguna
+  mejor forma de decirla?)}
+%
+\begin{proposition}\label{prop:Kh:PKh}
+  \begin{enumerate*}[(1)]
+  \item\label{prop:Kh:PKh:i}%
+    For all $\psi\in\Khlogic$ exists some
+    $\varphi\in\PKh$ such that $\fgetprob(\varphi)=\psi$.
+    Moreover,
+  \item\label{prop:Kh:PKh:ii}%
+    For all LTS $\model = \tup{\S,\Act,\ra,\V}$, $s\in\S$ and
+    $\varphi\in\PKh$,
+    $\model,s\models\varphi$ iff $\model,s\models\fgetprob(\varphi)$.
+  \end{enumerate*}
+\end{proposition}
+
+Both items in the proposition can be proven by structural induction on
+the formula. In particular, the proof of \cref{prop:Kh:PKh:ii} uses
+\Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
+
+\bigpedro{falta teorema indecidibilidad}
 
 
 \subsection{Indistinguishable Clases}
 
 
+
+\bigpedro{\textcolor{red}{\textbf{s\'uper importante!!!!}} guarda que para esta parte la idea de SE \textcolor{red}{\textbf{s\'i}} juega un rol (si es que la cuantificaci\'on es ``for some'' en la Def. 5) porque pide que todos los planes sean SE a\'un cuando no llevan nunca al goal}
 
 \subsection{Indistinguishability with Adaptiveness}
 

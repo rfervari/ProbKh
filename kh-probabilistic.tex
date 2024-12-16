@@ -496,17 +496,17 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
   inducing a contradicion.
 
   So $\bar{\rho}\notin\pref(\plan)$ and either $\plan\leq\bar{\rho}$
-  (properly) or exists some $1\leq i \leq\min(|\plan|,|\bar{\rho}|)$
+  (properly) or exists some $1\leq i \leq\min(\size{\plan},\size{\bar{\rho}})$
   such that $\plan[i]\neq\bar{\rho}[i]$.
 
-  If $\plan\leq\bar{\rho}$, then $\bar{\rho}[..|\plan|]=\plan$ and
+  If $\plan\leq\bar{\rho}$, then $\bar{\rho}[..\size{\plan}]=\plan$ and
   hence, by \Cref{def:plan:compat}, necessarily
-  $\strat(\rho[..|\plan|])(\complete) = 1$.  By \cref{eq:def:prob:ii},
+  $\strat(\rho[..\size{\plan}])(\complete) = 1$.  By \cref{eq:def:prob:ii},
   this implies that $\Prob^\strat_s(\{\rho\complete\})=0$,
   contradicting $(\star)$.
 
   If instead $\plan[i]\neq\bar{\rho}[i]=a_i$ with
-  $1\leq i \leq\min(|\plan|,|\bar{\rho}|)$, by \cref{eq:def:prob:ii},
+  $1\leq i \leq\min(\size{\plan},\size{\bar{\rho}})$, by \cref{eq:def:prob:ii},
   $\strat(\rho[..(i-1)])(a_i,\mu) > 0$ for some
   $\mu\in\Dist(\S)$ with $s_i\reach{a_i}\mu$.
   However $\overline{\rho[..i]}a_i \notin \pref(\plan)$
@@ -517,7 +517,7 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
   This proves implication $(\Rightarrow)$ of \cref{prop:nonprob:prob:i}.
 
   For implication $(\Leftarrow)$ of \cref{prop:nonprob:prob:i} suppose
-  $s\reach{\plan[..i]}t$ for $i<|\plan|$, that is, there are $s_0$,
+  $s\reach{\plan[..i]}t$ for $i<\size{\plan}$, that is, there are $s_0$,
   $s_1$, \ldots $s_i$ such that $s=s_0$, $t=s_i$, and
   $s_k\reach{\plan[k{+}1]}\Dirac_{s_{k{+}1}}$ for all $0\leq k < i$.
   %
@@ -568,14 +568,14 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
   hence $\plan$ is SE at $s$ by \cref{prop:nonprob:prob:i}.
   %
   Suppose now that $s \reach{\plan} t$, that is, there are $s_0$,
-  $s_1$, \ldots $s_{|\plan|}$ such that $s=s_0$, $t=s_{|\plan|}$, and
-  $s_k\reach{\plan[k{+}1]}\Dirac_{s_{k{+}1}}$ for all $0\leq k < |\plan|$.
+  $s_1$, \ldots $s_{\size{\plan}}$ such that $s=s_0$, $t=s_{\size{\plan}}$, and
+  $s_k\reach{\plan[k{+}1]}\Dirac_{s_{k{+}1}}$ for all $0\leq k < \size{\plan}$.
   %
   We can construct a $\plan$-compatible strategy $\strat$
-  such that, for all $0\leq k < |\plan|$,
+  such that, for all $0\leq k < \size{\plan}$,
   $\strat(s_0\,\plan[1]\,s_1\ldots s_{k{-}1}\,\plan[k]\,s_k)(\plan[k{+}1],\Dirac_{s_{k{+}1}})=1$,
   and, in adition, for
-  $\rho = s_0\,\plan[1]\,s_1\ldots s_{|\plan|{-}1}\,\plan[k]\,s_{|\plan|}$,
+  $\rho = s_0\,\plan[1]\,s_1\ldots s_{\size{\plan}{-}1}\,\plan[k]\,s_{\size{\plan}}$,
   $\strat(\rho)(\complete)=1$.
   %
   Thus $\Prob^\strat_s(\{\rho\bot\})>0$.  Since

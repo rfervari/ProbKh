@@ -39,7 +39,8 @@ Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state
     & & \ \ \text{\rm (1)} \ \plan \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
     & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
     \end{array}
-    \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
+    \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. 
+    % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
 \end{definition}
 
 The model-checking problem for a given logic is defined as follows, where models and formulas are instantiated with those corrresponding to each particular case. 
@@ -74,7 +75,7 @@ The model-checking problem for a given logic is defined as follows, where models
     
     \medskip
     
-    In what follows, we introduce the notion of strong executability of plans (see, e.g.,~\cite{Wang15lori,AFSVQ23}), a condition which determines that a given plan or a set of them, is appropriate in order to achieve a certain goal.
+    In what follows, we introduce the notion of strong executability for a set of plans (see, e.g.,~\cite{AFSVQ23}), generalizing the notion introduced for a single plan.
     
     \medskip
     
@@ -92,7 +93,8 @@ The model-checking problem for a given logic is defined as follows, where models
         & & \ \ \text{\rm (1)} \ \plans \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
         & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans} \truthset{\model}{\varphi}, 
         \end{array}
-        \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
+        \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. 
+        % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
     \end{definition}
     
 

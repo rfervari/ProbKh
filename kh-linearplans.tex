@@ -69,7 +69,7 @@ The model-checking problem for a given logic is defined as follows, where models
     \medskip
     
     \begin{definition}
-       Let $\plans \subseteq \Act^*$ and $A\cup G\cup\set{s,t} \subseteq \S$, we write $s\reach{\plans} t$ whenever  $s \reach{\plan} t$ for some $\plan\in\plans$, and $A \reach{\plans} G$ whenever for all $s\in A$, $s\reach{\plans} t$ implies $t\in G$. 
+       Let $\plans \subseteq \Act^*$ and $A,G \subseteq \S$, we write $A\reach{\plans} G$ if for all $s\in A$ $\plan\in\plans$ and $t\in \S$,  $s \reach{\plan} t$ implies $t\in G$. 
     \end{definition}
     
     \medskip

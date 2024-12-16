@@ -12,7 +12,7 @@ In order to determine when an agent knows how to achieve a goal, we need to char
     Elements of $\Act^*$ are called \emph{plans} (with $\epsilon$ the empty plan).  Let $\plan\in\Act^*$, $\size{\plan}$ denotes its length ($\size{\epsilon}:=0$).
     For  $0\leq i \leq \size{\plan}$, the plan $\plan_i$ denotes the initial segment of $\plan$ up to (and including) the $i^{th}$ position (with $\plan_0 := \epsilon$). The action $\plan[i]$ is the one appearing in $\plan$ at the $i^{th}$ position. We define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
 
-    We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $T\subseteq \S$ if and only if it is SE at every $s\in T$. The notation $U \reach{\plan} T$ (for $U,T\subseteq\S$) indicates that for all $s\in U$,  $s\reach{\plan} t$ implies $t\in T$.
+    We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $A\subseteq \S$ if and only if it is SE at every $s\in A$. The notation $A \reach{\plan} G$ (for $A,G\subseteq\S$) indicates that for all $s\in A$,  $s\reach{\plan} t$ implies $t\in G$.
 \end{definition}
 
 Now we are ready to introduce the language of knowing how.
@@ -56,11 +56,9 @@ The model-checking problem for a given logic is defined as follows, where models
 \subsection{Indistinguishability Classes in Knowing How}
 
 \begin{definition}[Uncertainty-based \lts]\label{def:ults}
-    An \emph{uncertainty-based \lts} (LTSU) for $\Prop$, $\Act$ and $\AGT$ is a tuple     $\model=\tup{\S,\Act,\ra,\sim,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is an LTS, and 
-        \begin{itemize}
-            \item ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$ ($\sim$ called the indistinguishability relation between plans). 
-        \end{itemize}
-        By $[\plan]_{\sim}:=\set{\plan' \in \DS{} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{}$, then we define the \emph{indistinguishability set of $\model$} as $\Unc := \set{[\plan]_{\sim} \mid \plan\in\DS{}}$. 
+    An \emph{uncertainty-based \lts} (LTSU) for $\Prop$, $\Act$ and $\AGT$ is a tuple     $\model=\tup{\S,\Act,\ra,\sim,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is an LTS, and ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$ (called the indistinguishability relation between plans). 
+
+    By $[\plan]_{\sim}:=\set{\plan' \in \DS{} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{}$, then we define the \emph{indistinguishability set of $\model$} as $\Unc := \set{[\plan]_{\sim} \mid \plan\in\DS{}}$. 
         For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to an LTSU, i.e., we will use its uncertainty set instead of the indistinguishability relation.
     \end{definition}
     
@@ -71,7 +69,7 @@ The model-checking problem for a given logic is defined as follows, where models
     \medskip
     
     \begin{definition}
-       Let $\plans \subseteq \Act^*$ and $U,T,\set{s,t} \subseteq \S$, we write $s\reach{\plans} t$ whenever  $s \reach{\plan} t$ for some $\plan\in\plans$, and $U \reach{\plans} T$ whenever for all $s\in U$, $s\reach{\plans} t$ implies $t\in T$. 
+       Let $\plans \subseteq \Act^*$ and $A\cup G\cup\set{s,t} \subseteq \S$, we write $s\reach{\plans} t$ whenever  $s \reach{\plan} t$ for some $\plan\in\plans$, and $A \reach{\plans} G$ whenever for all $s\in A$, $s\reach{\plans} t$ implies $t\in G$. 
     \end{definition}
     
     \medskip

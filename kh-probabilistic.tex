@@ -749,7 +749,29 @@ Both items in the proposition can be proven by structural induction on
 the formula. In particular, the proof of \cref{prop:Kh:PKh:ii} uses
 \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
 
-\bigpedro{falta teorema indecidibilidad}
+
+Let $\model$ be a PFA. Then $\model,s\models\kh^q(\init,\fin)$ holds
+if there is a plan $\plan\in \Act^*$ such that
+$\truthset{\model}{\init}\reach{\plan}_q\truthset{\model}{\fin}$, that
+is, if
+$\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{s_{\textsf{i}}}(\Succ(\plan,F)) \geq q$,
+where $\truthset{\model}{\init}=\{s_{\textsf{i}}\}$ and
+$F=\{{s\in\S}\mid{\fin\in\V(s)}\}$.
+%
+Since a PFA is deterministic,
+$\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{s_{\textsf{i}}}(\Succ(\plan,F)) =
+\Prob^{\strat_\plan}_{s_{\textsf{i}}}(\Succ(\plan,F))$
+with $\strat_\plan$ defined as in \Cref{sec:preliminaries}.
+%
+As a consequence checking $\model,s\models\kh^q(\init,\fin)$ is
+equivalent to the emptyness problem in PFA.  By
+\Cref{prop:empty:PFA:undecidable}, this yields the following theorem.
+
+\begin{theorem}\label{th:mc:PKh:undecidable}
+  The model-checking problem for $\PKh$ is undecidable.
+\end{theorem}
+
+
 
 
 \subsection{Indistinguishable Clases}

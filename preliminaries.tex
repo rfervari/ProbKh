@@ -138,7 +138,10 @@ the $\mu_1=\mu_2$.
 %
 A \emph{probabilistic finite automata} (PFA)~\cite{Rabin63,Paz71} is a
 deterministic PLTS $\model=\tup{\S,\Act,\ra,\V}$ on the set
-$\Prop=\{\fin\}$, i.e., $\V:\S\to\powerset(\{\fin\})$.
+$\Prop=\{\init,\fin\}$, i.e., $\V:\S\to\powerset(\{\init.\fin\})$,
+such that there is a single state $s_{\textsf{i}}\in\S$, called
+\emph{initial}, with $\init\in\V(s_{\textsf{i}})$.
+%
 $F=\{{s\in\S}\mid{\fin\in\V(s)}\}$ is the set of \emph{final} states.
 
 Given an execution
@@ -164,13 +167,12 @@ regardless of its definition for all $\rho$ such that
 $\bar{\rho}\not\leq\plan$.
 %
 The word $\plan$ is accepted by the PFA $\model$ with probability
-$q\in[0,1]$ from $s\in\S$ if
-$\Prob_s^{\strat_\plan}(\Succ(\plan,F))\geq q$, where
+$q\in[0,1]$ if $\Prob_{s_{\textsf{i}}}^{\strat_\plan}(\Succ(\plan,F))\geq q$, where
 $\Succ(\plan,F)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}=\plan \text{ and } \last(\rho)\in F}\}$.
 %
 Let $L(\models,q)$ be the set of all such words.
 
-\begin{proposition}{\cite{MadaniHC99}}
+\begin{proposition}{\cite{MadaniHC99}}\label{prop:empty:PFA:undecidable}
   The emptyness problem in PFA (i.e., checking if
   $L(\model,q)=\emptyset$) is undecidable.
 \end{proposition}

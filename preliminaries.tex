@@ -4,7 +4,7 @@
 
 % Languages and traces
 
-Let $\Act$ be a finite set of \emph{actions}, also called
+\paragraph{Words.} Let $\Act$ be a finite set of \emph{actions}, also called
 \emph{alphabet} and let $\plan\in\Act^*$ be a word with alphabet
 $\Act$.  We use $\size{\plan}$ to denote the length of $\plan$ (with
 $\size{\epsilon}=0$) and $\plan[i]$, for $0<i\leq\size{\plan}$,
@@ -27,6 +27,7 @@ $\plan\plans=\{\plan\plan'\mid{\plan'\in\plans}\}$.
 
 % Probabilities
 
+\paragraph{(Probabilistic) Labeled Transition Systems.} 
 A (discrete) \emph{probability distribution} $\mu$ over a denumerable
 set $S$ is a function $\mu: S \rightarrow [0, 1] $ such that
 $\mu(S) = \sum_{s \in S} \mu(s) = 1$.  Let $\Dist(S)$ denote the set
@@ -132,7 +133,7 @@ uniquely defined in the sigma algebra~\cite{Segala95}.
 % PFA
 
 
-A PLTS is deterministic if for all $s\in\S$, $a\in\Act$, and
+\paragraph{Probabilistic Finite Automata.} A PLTS is deterministic if for all $s\in\S$, $a\in\Act$, and
 $\mu_1,\mu_2\in\Dist(\S)$, if $s\reach{a}\mu_1$ and $s\reach{a}\mu_2$
 then $\mu_1=\mu_2$.
 %

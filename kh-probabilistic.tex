@@ -40,6 +40,12 @@ $\plan$-compatible strategy $\strat$ and state $s$,
 $\Prob^\strat_s(\execw)=0$ (or equivalently,
 $\Prob^\strat_s(\cexecf)=1$).  That is, any $\plan$-compatible
 strategy leads to termination with probability $1$.
+%
+Also notice that in PFA, the strategy $\sigma_\plan$ as defined in
+\Cref{sec:preliminaries} is the only one $\plan$-compatible.  By
+``only one'', we mean that any strategy defined so that it satisfy the
+same conditions as $\sigma_\plan$ yields the same probability measure
+$\Prob_s^{\strat_\plan}$.
 
 
 \begin{example}[Running]\label{ex:running}
@@ -654,9 +660,10 @@ probability is larger than or equal to $0$.
   Notice also that $\modelex, s \models \neg \kh^q(\init,\goal)$ for
   any $q>0.5$. One may think this is not the case since, for example,
   there is a way to successully realize the plan $\stairs\,\panic$
-  with probability $0.9$.  However, there is also another way to
-  realize the same plan with probability $0.1$ (and hence
-  $\truthset{\model}{\init} \reach{\stairs\,\panic}_q \truthset{\model}{\goal}$
+  with probability $0.9$ (starting with $s_0\reach{\stairs}\mu_5$)).
+  However, by starting instead with $s_0\reach{\stairs}\mu_3$, the
+  same plan yields probability $0.1$ (and hence
+  $\truthset{\model}{\init}\reach{\stairs\,\panic}_q\truthset{\model}{\goal}$
   iff $q\leq 0.1$).
 \end{example}
 
@@ -771,14 +778,28 @@ equivalent to the emptyness problem in PFA.  By
   The model-checking problem for $\PKh$ is undecidable.
 \end{theorem}
 
-
+The above result shows a huge jump in the computational behaviour of
+knowing-how: while model-checking for $\Khlogic$ is \PSPACE-complete,
+considering probabilities leads to undecidability of the same problem.
 
 
 \subsection{Indistinguishable Clases}
 
+Just like we did for $\Khlogic$, we want to extend $\Khunc$ to a probabilistic setting.
 
 
-\bigpedro{\textcolor{red}{\textbf{s\'uper importante!!!!}} guarda que para esta parte la idea de SE \textcolor{red}{\textbf{s\'i}} juega un rol (si es que la cuantificaci\'on es ``for some'' en la Def. 5) porque pide que todos los planes sean SE a\'un cuando no llevan nunca al goal}
+
+\bigpedro{\textcolor{red}{\textbf{s\'uper importante!!!!}} guarda que para esta parte la idea de SE \textcolor{red}{\textbf{s\'i}} juega un rol porque pide que todos los planes sean SE a\'un cuando no llevan nunca al goal}
+
+\bigpedro{Para charla con la gente (particularmente con Ra\'ul):
+  \par
+  - el comentario anterior\par
+  - la macro \fgetprob (no me gusta)\par
+  - la letra $\model$ para los LTS/PLTS/PFA (para las logicas usamos $\mathcal{L}$)\par
+  - la relaci\'on de indistinguibilidad (no podemos decir directamente que los planes de cada $\plans\in\Unc$ son indistinguibles entre s\'i?)\par
+  - en probabilidades, la notaci\'on $A\reach{\plans}_qG$ est\'a reservada para adaptabilidad y su significado colisiona con el de la notaci\'on $A\reach{\plans}G$.% En este sentido me gustar\'ia que la \Cref{def:semantics-kh-uncertain} se parezca m\'as a la \Cref{def:semantic-extended}
+}
+
 
 \subsection{Indistinguishability with Adaptiveness}
 
@@ -925,6 +946,7 @@ Notice that, whenever $q=1$, we are in the case of SE from~\Cref{def:plans}. \ra
 Now we proceed by introducing the semantics of the new modality.
 
 \begin{definition}
+    \label{def:semantic-extended}
     Let $\model = \tup{\S,\Act,\ra,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:
     \[
         \begin{array}{l@{\ \ \ }c@{\ \ \  }l}

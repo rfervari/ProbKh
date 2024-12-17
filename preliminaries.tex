@@ -6,16 +6,16 @@
 
 Let $\Act$ be a finite set of \emph{actions}, also called
 \emph{alphabet} and let $\plan\in\Act^*$ be a word with alphabet
-$\Act$.  $\size{\plan}$ denotes length of $\plan$ (with
+$\Act$.  We use $\size{\plan}$ to denote the length of $\plan$ (with
 $\size{\epsilon}=0$) and $\plan[i]$, for $0<i\leq\size{\plan}$,
-denotes the $i$th element of $\plan$.
+denotes the $i$-th element of $\plan$.
 %
-For $0\leq i\leq\size{\plan}$, $\plan[..i]$ denotes the $i$th prefix
+For $0\leq i\leq\size{\plan}$, $\plan[..i]$ denotes the $i$-th prefix
 of $\plan$, i.e., the initial segment of $\plan$ up to (and including)
-the $i^{th}$ position (with $\plan[..0] = \epsilon$).
+the $i$-th position (with $\plan[..0] = \epsilon$).
 %
-$\plan$ is a \emph{prefix} of $\plan'$, denoted $\plan\leq\plan'$, if
-$\plan=\plan'[..i]$ for some $0\leq i\leq\size{\plan}$. for a set
+We say that $\plan$ is a \emph{prefix} of $\plan'$, denoted $\plan\leq\plan'$, if
+$\plan=\plan'[..i]$ for some $0\leq i\leq\size{\plan}$. For a set
 $\plans\subseteq\Act^*$, let
 $\pref(\plans)=\{\rho'\in\Act^*\mid{\exists{\rho\in\plans}\colon{\rho'\leq\rho}}\}$
 the set of all prefixes of $\plans$.  In particular, we write
@@ -30,8 +30,8 @@ $\plan\plans=\{\plan\plan'\mid{\plan'\in\plans}\}$.
 A (discrete) \emph{probability distribution} $\mu$ over a denumerable
 set $S$ is a function $\mu: S \rightarrow [0, 1] $ such that
 $\mu(S) = \sum_{s \in S} \mu(s) = 1$.  Let $\Dist(S)$ denote the set
-of all probability distributions on $S$.  $\Dirac_s \in \Dist(S)$
-denotes the Dirac distribution for $s \in S$, i.e., $\Dirac_s(s) =1$
+of all probability distributions on $S$, and let $\Dirac_s \in \Dist(S)$
+denote the Dirac distribution for $s \in S$, i.e., $\Dirac_s(s) =1$
 and $\Dirac_s(s') = 0$ for all $s' \in S$ such that $s'\neq s$.
 %% The
 %% \textit{support} set of $\mu$ is defined by
@@ -84,7 +84,7 @@ the $k$-th prefix of $\rho$.
 Similarly, we can define $\rho[..k]$ for $\rho\in\cexec$.
 In particular, notice that $\rho[..0]=s_0$.
 %
-$\rho \in \execf\cup\cexecf$ is a \emph{prefix} of $\rho' \in \cexec$,
+We say that $\rho \in \execf\cup\cexecf$ is a \emph{prefix} of $\rho' \in \cexec$,
 denoted by $\rho\leq\rho'$, if $\rho=\rho'[..\size{\rho}]$ or $\rho=\rho'$
 (this last case is needed if $\rho\in\cexecf$).
 %
@@ -134,11 +134,11 @@ uniquely defined in the sigma algebra~\cite{Segala95}.
 
 A PLTS is deterministic if for all $s\in\S$, $a\in\Act$, and
 $\mu_1,\mu_2\in\Dist(\S)$, if $s\reach{a}\mu_1$ and $s\reach{a}\mu_2$
-the $\mu_1=\mu_2$.
+then $\mu_1=\mu_2$.
 %
 A \emph{probabilistic finite automata} (PFA)~\cite{Rabin63,Paz71} is a
 deterministic PLTS $\model=\tup{\S,\Act,\ra,\V}$ on the set
-$\Prop=\{\init,\fin\}$, i.e., $\V:\S\to\powerset(\{\init.\fin\})$,
+$\Prop=\{\init,\fin\}$, i.e., $\V:\S\to\powerset(\{\init,\fin\})$,
 such that there is a single state $s_{\textsf{i}}\in\S$, called
 \emph{initial}, with $\init\in\V(s_{\textsf{i}})$.
 %
@@ -164,13 +164,13 @@ that for all $\rho\in\execf$ with $\bar{\rho}\leq\plan$,
 (Since the PFA is deterministic, for any $s\in\S$, $\strat_\plan$
 defines the same probability measure $\Prob_s^{\strat_\plan}$
 regardless of its definition for all $\rho$ such that
-$\bar{\rho}\not\leq\plan$.
+$\bar{\rho}\not\leq\plan$.) 
 %
 The word $\plan$ is accepted by the PFA $\model$ with probability
 $q\in[0,1]$ if $\Prob_{s_{\textsf{i}}}^{\strat_\plan}(\Succ(\plan,F))\geq q$, where
 $\Succ(\plan,F)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}=\plan \text{ and } \last(\rho)\in F}\}$.
 %
-Let $L(\models,q)$ be the set of all such words.
+Let $L(\model,q)$ be the set of all such words.
 
 \begin{proposition}{\cite{MadaniHC99}}\label{prop:empty:PFA:undecidable}
   The emptyness problem in PFA (i.e., checking if

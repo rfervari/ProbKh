@@ -24,7 +24,7 @@ $\plan$. This is captured in the next definition.
   \end{enumerate}
 \end{definition}
 %
-The first item states that $\strat$ can chose an $a$-labelled
+The first item states that $\strat$ can chose an $a$-labeled
 transition after the partial plan $\bar{\rho}$ if the continuation of
 $\bar{\rho}a$ is also a partial plan.
 %
@@ -49,11 +49,11 @@ $\Prob_s^{\strat_\plan}$.
 
 
 \begin{example}[Running]\label{ex:running}
-  \Cref{fig:emergencyescape} depicts the PLTS $\modelex$ modelling
+  \Cref{fig:emergencyescape} depicts the PLTS $\modelex$ modeling
   possible ways to escape a building in a fire emergency situation
   including alerting the event.  There, states are represented by
   circles and distributions by the dot in the middle of transitions.
-  The outgoing dashed arrows are labelled with the respective
+  The outgoing dashed arrows are labeled with the respective
   probability values.  Thus, for instance, $s_0\reach{\lift}\mu_1$
   with $\mu_1(s_1)=0.2$ and $\mu_1(s_2)=0.8$.
   %
@@ -76,7 +76,7 @@ $\Prob_s^{\strat_\plan}$.
   %
   Exiting through one of the stairs allows us to get to the panic
   button with probability $0.9$ and enables the mobile call with
-  probability $0.1$ while exiting through the other stairs yields to
+  probability $0.1$, while exiting through the other stairs yields to
   the same situation but with the probabilities inverted.  Exiting
   through the ramp allows us to press the panic button with
   probability $0.5$ or to make the phone call also with probability
@@ -207,7 +207,7 @@ $\Prob_s^{\strat_\plan}$.
 %%     \end{tikzpicture}
 %%   }
   
-%%   \caption{PLTS modelling possible emergency escape situations in a building}\label{fig:emergencyescape}
+%%   \caption{PLTS modeling possible emergency escape situations in a building}\label{fig:emergencyescape}
 %% \end{figure*}
 
 
@@ -288,7 +288,7 @@ $\Prob_s^{\strat_\plan}$.
     \end{tikzpicture}
   }
   
-  \caption{PLTS $\modelex$ modelling possible fire emergency escape situations in a building}\label{fig:emergencyescape}
+  \caption{PLTS $\modelex$ modeling possible fire emergency escape situations in a building}\label{fig:emergencyescape}
 \end{figure}
 
 
@@ -372,7 +372,7 @@ $\Prob_s^{\strat_\plan}$.
 %%     \end{tikzpicture}
 %%   }
   
-%%   \caption{PLTS modelling possible emergency escape situations in a building}\label{fig:emergencyescape}
+%%   \caption{PLTS modeling possible emergency escape situations in a building}\label{fig:emergencyescape}
 %% \end{figure*}
 
 
@@ -409,7 +409,7 @@ goal $G$ with at least probability $q$ following plan $\plan$.
   $\strat'_1$ are as in \Cref{ex:running}).
 
   For plan $\plan_2 = \stairs\,\mobile$,
-  $\{s_0\}\reach{\plan_2}_qG_{\goal}$ iff $q\leq0.09$.  This is due to
+  $\{s_0\}\reach{\plan_2}_qG_{\goal}$ iff $q\geq0.09$.  This is due to
   $\plan_2$-compatible strategy $\strat_2$ defined so that
     %
   \[
@@ -422,7 +422,7 @@ goal $G$ with at least probability $q$ following plan $\plan$.
   \end{array}
   \]
   %
-  for which
+  with 
   $\Prob^{\strat_2}_{s_0}(\Succ(\plan_2,G_{\goal}))=\Prob^{\strat_2}_{s_0}(\{s_0\,\stairs\,s_5\,\mobile\,s_{10}\,\complete\})=0.09$
   (the first equality is a consequence of \
   $s_0\,\stairs\,s_5\,\mobile\,s_{10}\,\complete$ \ being the only
@@ -534,17 +534,17 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
   $\Prob^\strat_s(\Succ(\plan,\S))=1$ by assumption.
   %
   By \cref{eq:proof:nonprob:prob:probsucc} and \cref{eq:def:prob:ii}
-  there must exists some $\rho\in\execf$ such that $\bar{\rho}=\plan$,
+  there must exist some $\rho\in\execf$ such that $\bar{\rho}=\plan$,
   $s_0\,\plan[1]\,s_1\ldots s_{k{-}1}\,\plan[i]\,s_i = \rho[..i]$ and
   $\Prob^\strat_s(\{\rho\complete\})>0$.  By \cref{eq:def:prob:ii}, in
-  particular, there exist $s_{i{+}1}$ such that
+  particular, there exists $s_{i{+}1}$ such that
   $\strat(\rho[..i])(\plan[i{+}1],\Dirac_{s_{i{+}1}})> 0$ which
   implies that $s_i\reach{\plan[i{+}1]}\Dirac_{s_{i{+}1}}$, or
   equivalently, $t\reach{\plan[i{+}1]}s_{i{+}1}$, since $t=s_i$.
   %
-  Therefore $\plan$ is SE in $s$ , which \cref{prop:nonprob:prob:i}.
+  Therefore $\plan$ is SE in $s$, which proves~\cref{prop:nonprob:prob:i}.
 
-  For \cref{prop:nonprob:prob:ii}, it sufficies to show that for all
+  For \cref{prop:nonprob:prob:ii}, it suffices to show that for all
   $s\in A$, $\plan$ is SE at $s$ and $s \reach{\plan} t$ for some
   $t\in G$ iff
   $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$,
@@ -558,7 +558,7 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
   $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,\S))=1$ (by
   \cref{prop:nonprob:prob:i}), there must be a strategy
   $\strat\in\Comp(\plan)$ such that
-  $\Prob^\strat_s(\{\rho\complete\})>0$ for some $\rho\in\execf$ with
+  $\Prob^\strat_s(\{\rho\complete\})>0$, for some $\rho\in\execf$ with
   $\bar{\rho}=\plan$ and $\first(\rho)=s$ (because of
   \cref{eq:proof:nonprob:prob:probsucc}) and also $\last(\rho)\notin G$.
   %
@@ -591,28 +591,25 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
 \end{proof}
 
 
-\Cref{prop:nonprob:prob} set the bases to understand what we expect in
-a probabiilistic setting: we would like to validate whether an agent
+\Cref{prop:nonprob:prob} sets the bases to understand what we expect in
+a probabilistic setting: we would like to validate whether an agent
 knows how to achieve a goal \emph{with at least some given probability
 of success}.  That is, plans might not be perfect in a setting where
 actions are subject to failure or to random outcome.
 %
 Therefore we introduce a probabilistic variant of $\kh$,
-$\kh^q(\psi,\varphi)$, which is interpreted as \emph{``the agent knows
-how to achieve a goal $\varphi$ given that $\psi$ hold with
+denoted n$\kh^q(\psi,\varphi)$ here, which is interpreted as \emph{``the agent knows
+how to achieve a goal $\varphi$ given that $\psi$ holds, with
 probability at least $q$''}.
 
 
 \begin{definition}\label{def:syntax:PKh}
   The language $\PKh$ is defined by
-  \pedro{lo de ``The set of formulas (a.k.a. the language)...'' ya fue dicho anes asi que lo simplifico aqui}
   \[
   \varphi, \psi ::=
   p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh^q(\psi,\varphi),
   \]
   where $p\in\Prop$ and $q\in(0,1]$.
-  \pedro{es necesario ``Other Boolean operators are defined as
-    usual.''??}
 \end{definition}
 
 
@@ -620,33 +617,33 @@ probability at least $q$''}.
 expression $A\reach{\plan}_1 G$ captures both the idea of strong
 executability and the successful realization of a goal $G$.  In a
 probabilistic setting, plans are allowed to fail, so the idea of
-strong executability is inconvinient.  Instead, we are interested that
+strong executability is inconvenient.  Instead, we are interested that
 a plan $\plan$ is realizable with at least probability $q$, and
-moreover, we are only interestead of the realization of $\plan$ if it
+moreover, we are only interested in the realization of $\plan$ if it
 achieves the goal $G$.  That is why we define $A\reach{\plan}_q G$ to
-mean that from any state in $A$ can the goal $G$ is achieved with plan
+mean that from any state in $A$, the goal $G$ is achieved with plan
 $\plan$ with at least probability $q$.  This is central for the
 definition of the semantics of $\PKh$.
 
 \begin{definition}\label{def:semantics:PKh}
   Let $\model = \tup{\S,\Act,\ra,\V}$ be a PLTS and let $s\in\S$.  The
   satisfiability relation $\models$ for $\PKh$ is defined inductively 
-  as usual for the boolean operators and
+  as usual for the Boolean operators and
   \[
   \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
     \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there exists } \plan \in \Act^*  \\
     & & \text{s.t. } \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
   \end{array}
   \]
-  where $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,s\models\chi}$.
+  where $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,s\models\chi}$.
   %
-  Define $\model\models\varphi$ iff $\truthset{\model}{\varphi}=\S$,
-  and $\models\varphi$ iff $\model\models\varphi$, for all PLTS
-  $\model$.
-  \pedro{vamos a usar todo esto \'ultimo?}
+  %Define $\model\models\varphi$ iff $\truthset{\model}{\varphi}=\S$,
+  %and $\models\varphi$ iff $\model\models\varphi$, for all PLTS
+  %$\model$.
+  %\pedro{vamos a usar todo esto \'ultimo?}
 \end{definition}
 
-In \Cref{def:syntax:PKh} we requested that the bound probability
+In \Cref{def:syntax:PKh} we requested that the probability bound is
 $q>0$.  The choice is due to the fact that $\truthset{\model}{\psi}
 \reach{\plan}_0 \truthset{\model}{\varphi}$ is always true since any
 probability is larger than or equal to $0$.
@@ -668,7 +665,7 @@ probability is larger than or equal to $0$.
 \end{example}
 
 In the following we show that there is strong connection between
-$\Khlogic$ and $\PKh$ when limitting to LTSs models. We first present
+$\Khlogic$ and $\PKh$ when limiting to LTSs models. We first present
 the next lemma which basically states that in LTS, plans that are
 realizable with some probability are also realized with
 probability~$1$.
@@ -733,11 +730,8 @@ Define the mapping $\fgetprob:\PKh\to\Khlogic$ recursively by
   && \fgetprob(\kh^q(\psi,\varphi)) = \kh(\fgetprob(\psi),\fgetprob(\varphi))
 \end{align*}
 %
-The following proposition states a complete correspondence between
-$\Khlogic$ and $\PKh$.
-%
-\pedro{Raul, verifica esta oraci\'on y la proposici\'on (hay alguna
-  mejor forma de decirla?)}
+The following proposition states the exact correspondence between
+$\Khlogic$ and $\PKh$ over LTSs.
 %
 \begin{proposition}\label{prop:Kh:PKh}
   \begin{enumerate*}[(1)]
@@ -1011,7 +1005,7 @@ $\bar{\rho}\in\pref(\plans)$,
   $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
 \end{enumerate}
 %
-The first item states that $\strat$ can chose an $a$-labelled
+The first item states that $\strat$ can chose an $a$-labeled
 transition after the partial plan $\bar{\rho}$ if the continuation of
 $\bar{\rho}a$ is also a partial plan.
 %

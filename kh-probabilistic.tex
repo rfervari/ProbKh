@@ -409,7 +409,7 @@ goal $G$ with at least probability $q$ following plan $\plan$.
   $\strat'_1$ are as in \Cref{ex:running}).
 
   For plan $\plan_2 = \stairs\,\mobile$,
-  $\{s_0\}\reach{\plan_2}_qG_{\goal}$ iff $q\geq0.09$.  This is due to
+  $\{s_0\}\reach{\plan_2}_qG_{\goal}$ iff $q\leq0.09$.  This is due to
   $\plan_2$-compatible strategy $\strat_2$ defined so that
     %
   \[
@@ -598,7 +598,7 @@ of success}.  That is, plans might not be perfect in a setting where
 actions are subject to failure or to random outcome.
 %
 Therefore we introduce a probabilistic variant of $\kh$,
-denoted n$\kh^q(\psi,\varphi)$ here, which is interpreted as \emph{``the agent knows
+denoted $\kh^q(\psi,\varphi)$ here, which is interpreted as \emph{``the agent knows
 how to achieve a goal $\varphi$ given that $\psi$ holds, with
 probability at least $q$''}.
 
@@ -617,12 +617,12 @@ probability at least $q$''}.
 expression $A\reach{\plan}_1 G$ captures both the idea of strong
 executability and the successful realization of a goal $G$.  In a
 probabilistic setting, plans are allowed to fail, so the idea of
-strong executability is inconvenient.  Instead, we are interested that
+strong executability is inconvenient.  Instead, we are interested in that
 a plan $\plan$ is realizable with at least probability $q$, and
 moreover, we are only interested in the realization of $\plan$ if it
 achieves the goal $G$.  That is why we define $A\reach{\plan}_q G$ to
 mean that from any state in $A$, the goal $G$ is achieved with plan
-$\plan$ with at least probability $q$.  This is central for the
+$\plan$ with at least probability~$q$.  This is central for the
 definition of the semantics of $\PKh$.
 
 \begin{definition}\label{def:semantics:PKh}
@@ -644,7 +644,7 @@ definition of the semantics of $\PKh$.
 \end{definition}
 
 In \Cref{def:syntax:PKh} we requested that the probability bound is
-$q>0$.  The choice is due to the fact that $\truthset{\model}{\psi}
+${q>0}$.  The choice is due to the fact that $\truthset{\model}{\psi}
 \reach{\plan}_0 \truthset{\model}{\varphi}$ is always true since any
 probability is larger than or equal to $0$.
 
@@ -698,12 +698,12 @@ probability~$1$.
   Say $\rho=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n$.  Necessarily
   $s_0=s$.
   %
-  Define strategy $\strat^\star$ such that, for all $0\leq i>n$,
+  Define strategy $\strat^\star$ such that, for all $0\leq i<n$,
   $\strat^\star(s_0\, a_1\, s_1\ldots s_{i-1}\, a_i\, s_i)(a_{i+1},\Dirac_{s_{i+1}})=1$,
   $\strat^\star(\rho)(\complete)=1$, and
   $\strat^\star(\rho')=\strat(\rho')$ for all other $\rho'\in\execf$.
   %
-  Since $\strat$ is $\plan$-compatible and  for all $0\leq i>n$,
+  Since $\strat$ is $\plan$-compatible and  for all $0\leq i<n$,
   $\strat(s_0\, a_1\, s_1\ldots s_{i-1}\, a_i\, s_i)(a_{i+1},\Dirac_{s_{i+1}})>0$,
   it should not be hard to check that $\strat^\star$ is also
   $\plan$-compatible.
@@ -711,7 +711,7 @@ probability~$1$.
   Using \cref{eq:def:prob:ii}, we calculate that
   $\Prob^{\strat^\star}_s(\{\rho\complete\})=1$ and hence
   $\Prob^{\strat^\star}_s(\Succ(\plan,G))=0$ contradicting the
-  hypothesis that $\Prob^{\strat^\star}_s(\Succ(\plan,G))~0$.
+  hypothesis that $\Prob^{\strat^\star}_s(\Succ(\plan,G))>0$.
   %
   Since implication $(\Leftarrow)$ is direct,
   \cref{lm:someprob:prob1:i} is hence proved.
@@ -720,7 +720,7 @@ probability~$1$.
   \cref{lm:someprob:prob1:i}.
 \end{proof}
 
-Define the mapping $\fgetprob:\PKh\to\Khlogic$ recursively by
+Below we recursively define the mapping $\fgetprob:\PKh\to\Khlogic$ which removes probability bounds from formulas by
 \pedro{no me convence $\fgetprob$. Otro s\'imbolo/nomenclatura?}
 %
 \begin{align*}
@@ -734,23 +734,26 @@ The following proposition states the exact correspondence between
 $\Khlogic$ and $\PKh$ over LTSs.
 %
 \begin{proposition}\label{prop:Kh:PKh}
-  \begin{enumerate*}[(1)]
-  \item\label{prop:Kh:PKh:i}%
-    For all $\psi\in\Khlogic$ exists some
-    $\varphi\in\PKh$ such that $\fgetprob(\varphi)=\psi$.
-    Moreover,
-  \item\label{prop:Kh:PKh:ii}%
+  % \begin{enumerate*}[(1)]
+  % \item\label{prop:Kh:PKh:i}%
+    % For all $\psi\in\Khlogic$ exists some
+    % $\varphi\in\PKh$ such that $\fgetprob(\varphi)=\psi$.
+    % Moreover,
+  % \item\label{prop:Kh:PKh:ii}%
     For all LTS $\model = \tup{\S,\Act,\ra,\V}$, $s\in\S$ and
     $\varphi\in\PKh$,
     $\model,s\models\varphi$ iff $\model,s\models\fgetprob(\varphi)$.
-  \end{enumerate*}
+  % \end{enumerate*}
 \end{proposition}
 
-Both items in the proposition can be proven by structural induction on
-the formula. In particular, the proof of \cref{prop:Kh:PKh:ii} uses
+%Both items in 
+The proposition can be proven by structural induction on
+the formula, and using
 \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
+% In particular, the proof of \cref{prop:Kh:PKh:ii} uses
+%\Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
 
-
+Now we proceed to analyze the computational behavior of $\PKh$. 
 Let $\model$ be a PFA. Then $\model,s\models\kh^q(\init,\fin)$ holds
 if there is a plan $\plan\in \Act^*$ such that
 $\truthset{\model}{\init}\reach{\plan}_q\truthset{\model}{\fin}$, that

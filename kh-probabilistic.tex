@@ -788,15 +788,14 @@ spirit of $\Khlogic$ in which plans are a priori commitments that are
 followed as pre-established.
 
 First, we need to extend PLTSs with the agent's perception to
-reflect uncertainty. This is given by the set $\Unc$ below.
+reflect uncertainty, given by a set $\Unc$ as in
+\Cref{def:ults}.
 
 \begin{definition}\label{def:pltsu}
     An \emph{uncertainty-based \lts} (PLTSU) is a tuple
     $\model=\tup{\S,\Act,\ra,\Unc,\V}$ such that
     $\tup{\S,\Act,\ra,\V}$ is an PLTS, and $\Unc\subseteq
-    \powerset(\Act^*)\setminus \emptyset$ is a non-empty collection of
-    pairwise disjoint non-empty sets of plans as in
-    \Cref{def:ults}.
+    \powerset(\Act^*)\setminus \emptyset$ is the agent's perception.
 \end{definition}
 
 In this setting, we reinterpret that $\kh^q(\psi,\varphi)$ can only be
@@ -1087,7 +1086,7 @@ Now we proceed by introducing the semantics of the new modality.
         & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
         \end{array}
         \] \raul{1 and 2 will be merged into one condition.}
-        where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
+        where: $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
 \end{definition}
 
 \begin{theorem}\label{th:mc-khp-undecidable}

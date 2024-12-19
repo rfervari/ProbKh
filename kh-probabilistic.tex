@@ -1,6 +1,6 @@
-\section{Probabilistic Knowing How}
+\section{Probabilistic Knowing How}\label{sec:prob}
 
-\subsection{Linear Plans}
+\subsection{Linear Plans}\label{subsec:prob:linear}
 
 Naturally, our first approach will be extending $\Khlogic$ with some
 form of probabilistic behaviour.  For this, we first need to
@@ -402,7 +402,7 @@ goal $G$ with at least probability $q$ following plan $\plan$.
   $G_{\goal}$
   be the set of all states in which $\goal$ holds (i.e. $G_{\goal} = \{s_7, s_8, s_{10}\}$).
   %
-  Then $\{s_0\}\reach{\plan_1}_qG_{\goal}$ iff $q=0$.  This
+  Then $\{s_0\}\reach{\plan_1}_qG_{\goal}$ iff $q=0$. This
   is a consequence of strategy $\strat'_1$ which is
   $\plan_1$-compatible but
   $\Prob^{\strat'_1}_{s_0}(\Succ(\plan_1,G_{\goal}))=0$ ($\plan_1$ and
@@ -617,12 +617,12 @@ probability at least $q$''}.
 expression $A\reach{\plan}_1 G$ captures both the idea of strong
 executability and the successful realization of a goal $G$.  In a
 probabilistic setting, plans are allowed to fail, so the idea of
-strong executability is inconvenient.  Instead, we are interested that
+strong executability is inconvenient.  Instead, we are interested in that
 a plan $\plan$ is realizable with at least probability $q$, and
 moreover, we are only interested in the realization of $\plan$ if it
 achieves the goal $G$.  That is why we define $A\reach{\plan}_q G$ to
 mean that from any state in $A$, the goal $G$ is achieved with plan
-$\plan$ with at least probability $q$.  This is central for the
+$\plan$ with at least probability~$q$.  This is central for the
 definition of the semantics of $\PKh$.
 
 \begin{definition}\label{def:semantics:PKh}
@@ -644,7 +644,7 @@ definition of the semantics of $\PKh$.
 \end{definition}
 
 In \Cref{def:syntax:PKh} we requested that the probability bound is
-$q>0$.  The choice is due to the fact that $\truthset{\model}{\psi}
+${q>0}$.  The choice is due to the fact that $\truthset{\model}{\psi}
 \reach{\plan}_0 \truthset{\model}{\varphi}$ is always true since any
 probability is larger than or equal to $0$.
 
@@ -698,12 +698,12 @@ probability~$1$.
   Say $\rho=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n$.  Necessarily
   $s_0=s$.
   %
-  Define strategy $\strat^\star$ such that, for all $0\leq i>n$,
+  Define strategy $\strat^\star$ such that, for all $0\leq i<n$,
   $\strat^\star(s_0\, a_1\, s_1\ldots s_{i-1}\, a_i\, s_i)(a_{i+1},\Dirac_{s_{i+1}})=1$,
   $\strat^\star(\rho)(\complete)=1$, and
   $\strat^\star(\rho')=\strat(\rho')$ for all other $\rho'\in\execf$.
   %
-  Since $\strat$ is $\plan$-compatible and  for all $0\leq i>n$,
+  Since $\strat$ is $\plan$-compatible and  for all $0\leq i<n$,
   $\strat(s_0\, a_1\, s_1\ldots s_{i-1}\, a_i\, s_i)(a_{i+1},\Dirac_{s_{i+1}})>0$,
   it should not be hard to check that $\strat^\star$ is also
   $\plan$-compatible.
@@ -711,7 +711,7 @@ probability~$1$.
   Using \cref{eq:def:prob:ii}, we calculate that
   $\Prob^{\strat^\star}_s(\{\rho\complete\})=1$ and hence
   $\Prob^{\strat^\star}_s(\Succ(\plan,G))=0$ contradicting the
-  hypothesis that $\Prob^{\strat^\star}_s(\Succ(\plan,G))~0$.
+  hypothesis that $\Prob^{\strat^\star}_s(\Succ(\plan,G))>0$.
   %
   Since implication $(\Leftarrow)$ is direct,
   \cref{lm:someprob:prob1:i} is hence proved.
@@ -720,7 +720,7 @@ probability~$1$.
   \cref{lm:someprob:prob1:i}.
 \end{proof}
 
-Define the mapping $\fgetprob:\PKh\to\Khlogic$ recursively by
+Below we recursively define the mapping $\fgetprob:\PKh\to\Khlogic$ which removes probability bounds from formulas by
 \pedro{no me convence $\fgetprob$. Otro s\'imbolo/nomenclatura?}
 %
 \begin{align*}
@@ -734,23 +734,26 @@ The following proposition states the exact correspondence between
 $\Khlogic$ and $\PKh$ over LTSs.
 %
 \begin{proposition}\label{prop:Kh:PKh}
-  \begin{enumerate*}[(1)]
-  \item\label{prop:Kh:PKh:i}%
-    For all $\psi\in\Khlogic$ exists some
-    $\varphi\in\PKh$ such that $\fgetprob(\varphi)=\psi$.
-    Moreover,
-  \item\label{prop:Kh:PKh:ii}%
-    for all LTS $\model = \tup{\S,\Act,\ra,\V}$, $s\in\S$ and
+  % \begin{enumerate*}[(1)]
+  % \item\label{prop:Kh:PKh:i}%
+    % For all $\psi\in\Khlogic$ exists some
+    % $\varphi\in\PKh$ such that $\fgetprob(\varphi)=\psi$.
+    % Moreover,
+  % \item\label{prop:Kh:PKh:ii}%
+    For all LTS $\model = \tup{\S,\Act,\ra,\V}$, $s\in\S$ and
     $\varphi\in\PKh$,
     $\model,s\models\varphi$ iff $\model,s\models\fgetprob(\varphi)$.
-  \end{enumerate*}
+  % \end{enumerate*}
 \end{proposition}
 
-Both items in the proposition can be proven by structural induction on
-the formula. In particular, the proof of \cref{prop:Kh:PKh:ii} uses
+%Both items in 
+The proposition can be proven by structural induction on
+the formula, and using
 \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
+% In particular, the proof of \cref{prop:Kh:PKh:ii} uses
+%\Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
 
-
+Now we proceed to analyze the computational behavior of $\PKh$. 
 Let $\model$ be a PFA. Then $\model,s\models\kh^q(\init,\fin)$ holds
 if there is a plan $\plan\in \Act^*$ such that
 $\truthset{\model}{\init}\reach{\plan}_q\truthset{\model}{\fin}$, that
@@ -777,29 +780,28 @@ knowing-how: while model-checking for $\Khlogic$ is \PSPACE-complete,
 considering probabilities leads to undecidability of the same problem.
 
 
-\subsection{Indistinguishable Clases}
+\subsection{Indistinguishable Clases}\label{subsec:prob:indist:committed}
 
 Just like we did for $\Khlogic$, we want to extend $\Khunc$ to a
 probabilistic setting.  A first natural approach is to keep the same
 spirit of $\Khlogic$ in which plans are a priori commitments that are
-follows as pre-established.
+followed as pre-established.
 
-First, we need to extend PLTSs with \textcolor{red}{perceptions} to
-reflect uncertainty.
+First, we need to extend PLTSs with the agent's perception to
+reflect uncertainty. This is given by the set $\Unc$ below.
 
 \begin{definition}\label{def:pltsu}
     An \emph{uncertainty-based \lts} (PLTSU) is a tuple
     $\model=\tup{\S,\Act,\ra,\Unc,\V}$ such that
-    $\tup{\S,\Act,\ra,\V}$ is an PLTS, and
-    $\Unc\subseteq \powerset(\Act^*)\setminus \emptyset$ is a
-    \textcolor{red}{perception}.
+    $\tup{\S,\Act,\ra,\V}$ is an PLTS, and $\Unc\subseteq
+    \powerset(\Act^*)\setminus \emptyset$ is an agent's perception.
 \end{definition}
 
 In this setting, we reinterpret that $\kh^q(\psi,\varphi)$ can only be
 successful if there is a class $\plans\in\Unc$ such that every
 $\plan\in\plans$ that start at $\psi$ ends in $\varphi$ with
 probability at least $q$.  Since the interpretation of the agent is
-that all plans in $\plans$ are equivalent, then all of them has to
+that all plans in $\plans$ are equivalent, then all of them must 
 perform as desired.  This idea tries to extend to probability the
 non-probabilistic semantics of \Cref{def:semantics-kh-uncertain}.
 Under this new idea, we call the logic $\PKhunc$ and its semantics is
@@ -809,14 +811,14 @@ captured in the next definition.
 \begin{definition}\label{def:semantics:PKhunc}
   Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$.  The
   satisfiability relation $\models$ for $\PKhunc$ is defined inductively 
-  as usual for the boolean operators and
+  as usual for the Boolean operators and
   \[
   \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
     \model, s \models \kh^q(\psi,\varphi) & \iffdef &  \text{there exists } {\plans \in \Unc} \text{ s.t.} \\
     & & \text{for all } {\plan\in\plans}, {\truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}}, 
   \end{array}
   \]    
-  where $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,s\models\chi}$.
+  where $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,s\models\chi}$.
   %
 \end{definition}
 
@@ -828,8 +830,8 @@ captured in the next definition.
   %
   Define
   $\Unc_1 = \{ \{\plan_1\}, \{\plan_2,\plan_3\}, \{\plan_4,\plan_5\}\}$
-  and let $\modelex^1$ be the LTSU with LTS $\modelex$ and
-  \textcolor{red}{perception} $\Unc_1$.
+  and let $\modelex^1$ be the PLTSU extending the PLTS $\modelex$ with
+  the agent's perception $\Unc_1$.
   %
   Then, for all $s\in\S$,
   $\modelex^1,s \models \kh^{0.45}(\init,\goal)$.
@@ -841,11 +843,11 @@ captured in the next definition.
 
   Consider now
   $\Unc_2 = \{ \{\plan_1\}, \{\plan_2,\plan_3,\plan_4,\plan_5\}\}$
-  and the LTSU $\modelex^2$ defined by $\modelex$ with
-  \textcolor{red}{perception} $\Unc_2$.
+  and let $\modelex^2$ be the PLTSU extending the PLTS $\modelex$ with
+  the agent's perception $\Unc_2$.
   %
   Notice that
-  $\inf_{\strat\in\Comp(\plan_1)}\Prob^\strat_{s_0}(\Succ(\plan_1,\goal))=0$
+  $\inf_{\strat\in\Comp(\plan_1)}\Prob^\strat_{s_0}(\Succ(\plan_1,\goal)){=}0$
   and hence class $\{\plan_1\}$ does not provide any probability of
   success.
   %
@@ -860,31 +862,31 @@ captured in the next definition.
 \pedro{si cambiamos la logica, cambiar $\fgetprob$}
 %
 The following proposition states the exact correspondence between
-$\Khunc$ and $\PKhunc$ on LTSs.
+$\Khunc$ and $\PKhunc$ over LTSUs.
+%
 %
 \begin{proposition}\label{prop:Khunc:PKhunc}
-  \begin{enumerate*}[(1)]
-  \item\label{prop:Khunc:PKhunc:i}%
-    For all $\psi\in\Khunc$ exists some
-    $\varphi\in\PKhunc$ such that $\fgetprob(\varphi)=\psi$.
-    Moreover,
-  \item\label{prop:Khunc:PKhunc:ii}%
-    for all LTS $\model = \tup{\S,\Act,\ra,\V}$, $s\in\S$ and
+  % \begin{enumerate*}[(1)]
+  % \item\label{prop:Khunc:PKhunc:i}%
+    % For all $\psi\in\Khunc$ exists some
+    % $\varphi\in\PKhunc$ such that $\fgetprob(\varphi)=\psi$.
+    % Moreover,
+  % \item\label{prop:Khunc:PKhunc:ii}%
+    For all LTSU $\model = \tup{\S,\Act,\ra,\Unc,\V}$, $s\in\S$ and
     $\varphi\in\PKhunc$,
     $\model,s\models\varphi$ iff $\model,s\models\fgetprob(\varphi)$.
-  \end{enumerate*}
+  % \end{enumerate*}
 \end{proposition}
 
-Both items in the proposition can be proven by structural induction on
-the formula. In particular, the proof of \cref{prop:Kh:PKh:ii} uses
-\Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
-
+%Both items in 
+The proposition can be proven by structural induction on
+the formula, and again using \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
+%  In particular, the proof of \cref{prop:Kh:PKh:ii} uses
+% \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
+\bigraul{revisado y corregido hasta aca; hay que ver que hacemos con lo que sigue}
 It turns out that the model checking for $\PKhunc$ is also undecidable
-contrary to the \PTIME problem to the relative non-prbabilistic logic
+contrary to the \PTIME problem to the relative non-probabilistic logic
 \cite{DF23}.
-\pedro{podemos poner una sola ref?}
-%% (see e.g.~\cite{AFSVQ21,AFSVQ23,DF23}).
-%% \pedro{podemos poner una sola ref?}
 
 
 \begin{theorem}\label{th:mc:PKhunc:undecidable}
@@ -917,7 +919,7 @@ contrary to the \PTIME problem to the relative non-prbabilistic logic
   
 
 
-\subsection{Indistinguishability with Adaptiveness}
+\subsection{Indistinguishability with Adaptiveness}\label{subsec:prob:indist:adaptive}
 
 An alternative way to extend $\Khunc$ to a probabilistic setting is to
 consider \emph{adaptive} plans.
@@ -927,21 +929,20 @@ $\modelex^1,s \models \kh^{0.45}(\init,\goal)$ (witnessed by class
 $\{\plan_4,\plan_5\}$), $\modelex^1,s \models \neg\kh^q(\init,\goal)$
 for all $q>0.45$.
 %
-However, since the agent perception is that $\plan_4$ and $\plan_5$
+However, since the agent's perception is that $\plan_4$ and $\plan_5$
 are equivalent, there is no reason to commit to one plan that is about
-to fail while it is still to continue with the other.  Since the class
-$\{\plan_4,\plan_5\}$ does not distinguish among its plans we might as
-well measure the class success as a whole.
+to fail while it is still possible to continue with the other.  Since
+the class $\{\plan_4,\plan_5\}$ does not distinguish among its plans
+we might as well measure the class success as a whole.
 %
 Thus, the decision whether to continue with $\plan_4$ and $\plan_5$
-after transition $s_0\reach{\ramp}\mu_4$ depende of the random outcome
-induced by $\mu_4$ in which case we expect the class to succeed with
-probability $0.95$.
+after transition $s_0\reach{\ramp}\mu_4$ depends of the random outcome
+induced by $\mu_4$.  Notice that, by proceeding adaptively, the
+likelyhood to succeed in this case reaches $0.95$.
 
 In this new view, the concept of a single plan compatibility becomes
-too strong and we rather ask strategies to be compatible with a whole
-class as follows.
-
+too strong.  Thus, we rather ask strategies to be compatible with a
+whole class as follows.
 
 \begin{definition}\label{def:plans:compat}
   Given a set of plans $\plans\subseteq\Act^*$, a strategy $\sigma$ is
@@ -957,18 +958,157 @@ class as follows.
     $\{\bar{\rho}a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
   \end{enumerate}
   %
-  Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
+  Let $\Comp(\plans)$ denotes the set of all $\plans$-compatible
   strategies.
 \end{definition}
+%
+Notice that a strategy is $\{\plan\}$-compatible iff it is also
+$\plan$-compatible.
 
+\begin{example}\label{ex:running:strat-comp-adapt}
+  Consider the the agent's perception $\Unc_1$ of
+  \Cref{ex:running:pkhunc} and let $\plans_{2,3}=\{\plan_2,\plan_3\}$
+  and $\plans_{4,5}=\{\plan_4,\plan_5\}$ be two of its clases.
+  %
+  Strategy $\strat_3$, defined so that
+  \[
+  \begin{array}{l}
+    \strat_3(s_0)(\stairs,\mu_3)=\strat_3(s_0)(\stairs,\mu_5)=0.5\\
+    \strat_3(s_0\,\stairs\,s_4)(\panic,\mu_7)=\strat_3(s_0\,\stairs\,s_5)(\mobile,\mu_8)=1\\
+    \strat_3(s_0\,\stairs\,s_4\,\panic\,s_8)(\complete)=1\\
+    \strat_3(s_0\,\stairs\,s_5\,\mobile\,s_9)(\complete)=
+    \strat_3(s_0\,\stairs\,s_5\,\mobile\,s_{10})(\complete)=1,
+  \end{array}
+  \]
+  %
+  is $\plans_{2,3}$-compatible but not
+  $\plan_2$-compatible or $\plan_3$-compatible.
+  %
+  Notice the adaptive characteristics of $\strat_3$ that chooses to
+  perform $s_4\reach{\panic}\mu_7$ after $\stairs$ if in state $s_4$
+  but chooses $s_4\reach{\mobile}\mu_8$ after $\stairs$ if in
+  state $s_5$.
 
-\begin{example}
-
-
-  
-
+  Similarly, strategy $\strat_4$, discussed at the beginning of this
+  subsection, is defined defined so that
+  %
+  \[
+  \begin{array}{l}
+    \strat_4(s_0)(\ramp,\mu_4)=1\\
+    \strat_4(s_0\,\ramp\,s_4)(\panic,\mu_7)=\strat_4(s_0\,\ramp\,s_5)(\mobile,\mu_8)=1\\
+    \strat_4(s_0\,\ramp\,s_4\,\panic\,s_8)(\complete)=1\\
+    \strat_4(s_0\,\ramp\,s_5\,\mobile\,s_9)(\complete)=
+    \strat_4(s_0\,\ramp\,s_5\,\mobile\,s_{10})(\complete)=1,
+  \end{array}
+  \]
+  %
+  and can be verified to be $\plans_{4,5}$-compatible. However, it is
+  neither $\plan_4$-compatible nor $\plan_5$-compatible.
 \end{example}
 
+We extend some conceptes already defined for single plans to sets of
+plans.  So, let $\plans\subseteq\Act^*$ be a set of plans and le
+$G\subseteq\S$ be a set of goal states.  The set of successful
+complete executions reaching $G$ with a plan in $\plans$ is defined
+by
+$\Succ(\plans,G)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}\in\plans \text{ and } \last(\rho)\in G}\}$.
+%
+The expression
+%
+\begin{equation}\label{eq:plans:goal:q}
+  \inf_{\strat \in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G)) \geq q.
+\end{equation}
+%
+states that a $\plans$-compatible strategy $\strat$
+starting from a given state $s\in\S$ reaches a state in $G$ with at
+least probability $q$.
+%
+More generally, we extend this concept to a set of assumed starting
+states $A\subseteq\S$ by writing $A \reach{\plans}_q G$ iff for all
+state $s\in A$, the condition in \cref{eq:plans:goal:q} holds.
+%
+Thus $A \reach{\plans}_q G$ means that any state in $A$ can reach the
+goal $G$ with at least probability $q$ following some plan in $\plans$
+\emph{in an adaptive manner}.
+
+\begin{example}\label{ex:running:plans-exec}
+  Following with the example, for $\modelex^1$,
+  $\{s_0\}\reach{\plans_{4,5}}_{0.95}G_{\goal}$ which is witnessed by
+  strategy $\strat_4$ and yields the value anticipated at the
+  introduction of \Cref{subsec:prob:indist:adaptive}.
+
+  For $\modelex^2$, if
+  $\plans_{\star}=\{\plan_2,\plan_3,\plan_4,\plan_5\}\in\Unc_2$,
+  $\{s_0\}\reach{\plans_{\star}}_{0.91}G_{\goal}$, witnessed by the
+  $\plans_{\star}$-compatible strategy $\strat_5$ define so that
+  %
+  \[
+  \begin{array}{l}
+    \strat_5(s_0)(\stairs,\mu_3)=1\\
+    \strat_5(s_0\,\stairs\,s_4)(\panic,\mu_7)=\strat_5(s_0\,\stairs\,s_5)(\mobile,\mu_8)=1\\
+    \strat_5(s_0\,\stairs\,s_4\,\panic\,s_8)(\complete)=1\\
+    \strat_5(s_0\,\stairs\,s_5\,\mobile\,s_9)(\complete)=
+    \strat_5(s_0\,\stairs\,s_5\,\mobile\,s_{10})(\complete)=1,
+  \end{array}
+  \]
+  
+  For both $\modelex^1$ and $\modelex^2$,
+  $\{s_0\}\reach{\{\plan_1\}}_qG_{\goal}$ iff $q=0$, as expected from
+  \Cref{ex:running:plan-exec}.
+\end{example}
+
+In this new context, $\kh^q(\psi,\varphi)$ is reinterpreted so that
+there is an indistinguishable class $\plans\in\Unc$ such that for
+every state that satisfies $\psi$, $\varphi$ is reached with
+probability at least $q$ following any plan in $\plans$ with every
+$\plans$-compatible strategy.
+%
+Under this new concept, we call the logic $\PKhadapt$ and its
+semantics is captured in the next definition.
+
+\begin{definition}\label{def:semantics:PKhadapt}
+  Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$.  The
+  satisfiability relation $\models$ for $\PKhadapt$ is defined inductively 
+  as usual for the Boolean operators and
+  \[
+  \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+    \model, s \models \kh^q(\psi,\varphi) & \iffdef &  \text{there exists } {\plans \in \Unc}  \\
+    & & \text{s.t. } {\truthset{\model}{\psi} \reach{\plans}_q \truthset{\model}{\varphi}}, 
+  \end{array}
+  \]    
+  where $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,s\models\chi}$.
+  %
+\end{definition}
+
+\pedro{\textbf{\color{red}@Ra\'ul:} este comentario t\'ecnico est\'a tratando de atajar a aquel revisor que te rechazo la priemera vuelta del paper con Andr\'es.  Fijate que te parece (o si te parece)}
+Notice that there is a \emph{universal} cuantification on
+$\plans$-compatible strategies implicit in the ``$\inf$'' within
+expression
+$\truthset{\model}{\psi}\reach{\plans}_q\truthset{\model}{\varphi}$
+(see \cref{eq:plans:goal:q}).
+%
+This quantification parallels the universal quantification of plans in
+$\plans$ in \Cref{def:semantics-kh-uncertain}.
+%
+However, in \Cref{def:semantics:PKhadapt} plans in $\plans$ are
+neither existential nor universally quantified.  Instead they are
+\emph{probabililisticly}
+\pedro{Cuidado! aunque les suene que deber\'ia ser ``probabilistic\textbf{al}ly'' esto \'ultimo es una transliteraci\'on incorrecta}
+quantified for each $\plans$-compatible
+strategy through expression $\Prob^\strat_s(\Succ(\plans,G))$ within
+\cref{eq:plans:goal:q}.
+
+
+\begin{example}\label{ex:running:pkhadapt}
+  For all $s\in\S$, $\modelex^1,s \models \kh^{0.95}(\init,\goal)$ since 
+  $\{s_0\}\reach{\plans_{4,5}}_{0.95}G_{\goal}$.
+  %
+  However, $\modelex^2,s \models \neg\kh^{0.95}(\init,\goal)$.  This
+  is a consequence of $\{s_0\}\reach{\{\plan_1\}}_qG_{\goal}$ iff
+  $q=0$ and $\{s_0\}\reach{\plans_{\star}}_qG_{\goal}$ iff $q\leq
+  0.91$, the latter being witnessed by $\plans_{\star}$-compatible
+  strategy $\strat_5$ (see \Cref{ex:running:plans-exec}).
+\end{example}
 
 
 
@@ -978,8 +1118,8 @@ class as follows.
 \bigpedro{hasta aqu\'i lo nuevo de la secci\'on, desde aqu\'i lo viejo}
 
 
-\subsection{Probabilistic Knowing How with Linear Plans}
-Naturally, our first approach will be extending $\Khlogic$ with some form of probabilistic behaviour. 
+%% \subsection{Probabilistic Knowing How with Linear Plans}
+%% Naturally, our first approach will be extending $\Khlogic$ with some form of probabilistic behaviour. 
 
 % We will start by introducing PLTS, an extension of LTS with probabilities.
 
@@ -1025,186 +1165,186 @@ Naturally, our first approach will be extending $\Khlogic$ with some form of pro
 
 
 
-Given a set of plans $\plans\subseteq\Act^*$, we want to consider
-strategies that follow as faithfully as possible the plans of
-$\plans$.  Therefore, we say that a strategy $\strat$ is
-\emph{$\plans$-compatible} if for all $\rho\in\execf$ such that
-$\bar{\rho}\in\pref(\plans)$,
-%
-\begin{enumerate}
-\item%
-  $\strat(\rho)(a,\mu)>0$ implies $\bar{\rho}a\in\pref(\plans)$, and
-\item%
-  $\strat(\rho)(\complete)>0$ implies that either
-  $\bar{\rho}\in\plans$ or
-  $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
-\end{enumerate}
-%
-The first item states that $\strat$ can chose an $a$-labeled
-transition after the partial plan $\bar{\rho}$ if the continuation of
-$\bar{\rho}a$ is also a partial plan.
-%
-The second item states that $\strat$ is allowed to terminate after the
-partial plan $\bar{\rho}$ if either $\bar{\rho}$ is itself a valid
-plan, or $\bar{\rho}$ cannot be continued by the PLTS within some
-valid plan.
-%
-Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
-strategies.
-%
-%% Given a plan $\plan\in\Act^*$, we say that a strategy $\strat$ is
-%% $\plan$-compatible iff it is $\{\plan\}$-compatible.
+%% Given a set of plans $\plans\subseteq\Act^*$, we want to consider
+%% strategies that follow as faithfully as possible the plans of
+%% $\plans$.  Therefore, we say that a strategy $\strat$ is
+%% \emph{$\plans$-compatible} if for all $\rho\in\execf$ such that
+%% $\bar{\rho}\in\pref(\plans)$,
+%% %
+%% \begin{enumerate}
+%% \item%
+%%   $\strat(\rho)(a,\mu)>0$ implies $\bar{\rho}a\in\pref(\plans)$, and
+%% \item%
+%%   $\strat(\rho)(\complete)>0$ implies that either
+%%   $\bar{\rho}\in\plans$ or
+%%   $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
+%% \end{enumerate}
+%% %
+%% The first item states that $\strat$ can chose an $a$-labeled
+%% transition after the partial plan $\bar{\rho}$ if the continuation of
+%% $\bar{\rho}a$ is also a partial plan.
+%% %
+%% The second item states that $\strat$ is allowed to terminate after the
+%% partial plan $\bar{\rho}$ if either $\bar{\rho}$ is itself a valid
+%% plan, or $\bar{\rho}$ cannot be continued by the PLTS within some
+%% valid plan.
+%% %
+%% Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
+%% strategies.
+%% %
+%% %% Given a plan $\plan\in\Act^*$, we say that a strategy $\strat$ is
+%% %% $\plan$-compatible iff it is $\{\plan\}$-compatible.
 
 
-Let $\plans$ be a set of plans that are believed to perform
-equivalently in order to reach some goal state in $G\subseteq\S$.  We
-define the set of \emph{successful complete (finite) execution} that
-reach $G$ following some plan in $\plans$ by
-$\Succ(\plans,G)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}\in\plans
-  \text{ and } \last(\rho)\in G}\}$.
-%
-We are interested in that any $\plans$-compatible strategy $\strat$
-starting from a given state $s\in\S$ reaches a state in $G$ with a
-minimum desired probability, say $q$.  That is, we would like that
-%
-\begin{equation}\label{eq:plans:goal:q}
-  \inf_{\strat \in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G)) \geq q.
-\end{equation}
-%
-More generally, we would like that this holds from any particularly
-assumed state in a set $A\subseteq\S$ (say, a precondition).  So, we
-write $A \reach{\plans}_q G$ if and only if for all state $s\in A$,
-the condition in \cref{eq:plans:goal:q} holds.
-%
-Thus $A \reach{\plans}_q G$ means that any state in $A$ can reach the
-goal $G$ with at least probability $q$ following some plan in $\plans$
-\textcolor{red}{in an adaptively manner}.
-\pedro{ejemplo de esto tambi\'en}
+%% Let $\plans$ be a set of plans that are believed to perform
+%% equivalently in order to reach some goal state in $G\subseteq\S$.  We
+%% define the set of \emph{successful complete (finite) execution} that
+%% reach $G$ following some plan in $\plans$ by
+%% $\Succ(\plans,G)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}\in\plans
+%%   \text{ and } \last(\rho)\in G}\}$.
+%% %
+%% We are interested in that any $\plans$-compatible strategy $\strat$
+%% starting from a given state $s\in\S$ reaches a state in $G$ with a
+%% minimum desired probability, say $q$.  That is, we would like that
+%% %
+%% \begin{equation}\label{eq:plans:goal:q}
+%%   \inf_{\strat \in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G)) \geq q.
+%% \end{equation}
+%% %
+%% More generally, we would like that this holds from any particularly
+%% assumed state in a set $A\subseteq\S$ (say, a precondition).  So, we
+%% write $A \reach{\plans}_q G$ if and only if for all state $s\in A$,
+%% the condition in \cref{eq:plans:goal:q} holds.
+%% %
+%% Thus $A \reach{\plans}_q G$ means that any state in $A$ can reach the
+%% goal $G$ with at least probability $q$ following some plan in $\plans$
+%% \textcolor{red}{in an adaptively manner}.
+%% \pedro{ejemplo de esto tambi\'en}
 
 
-\bigpedro{creo que es importante pensar ahora la estructura del paper}
-
-
-
-
-\bigpedro{desde el cartel hasta aqu\'i es nuevo}
-
-
-
-Notice that, whenever $q=1$, we are in the case of SE from~\Cref{def:plans}. \raul{Chequear esto} The extended language with probabilities is given below.
-
-
-\begin{definition}
-    \label{def:syntax-extended}
-    The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
-    \[
-        \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh^q(\psi,\varphi),
-    \]
-    where $p\in\Prop$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$ with probability at least $q$''}.
-\end{definition}
+%% \bigpedro{creo que es importante pensar ahora la estructura del paper}
 
 
 
 
-Now we proceed by introducing the semantics of the new modality.
-
-\begin{definition}
-    \label{def:semantic-extended}
-    Let $\model = \tup{\S,\Act,\ra,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:
-    \[
-        \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
-        % \model, s \models p & \iffdef & p \in \V(s) \\
-        % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
-        % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
-        \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plan \in \Act^* \;\text{such that:} \\
-        & & \ \ \text{\rm (1)} \ \plan \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
-        & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
-        \end{array}
-        \] \raul{1 and 2 will be merged into one condition.}
-        where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
-\end{definition}
-
-\begin{theorem}\label{th:mc-khp-undecidable}
-The model-checking problem for $\PKh$ is undecidable.
-\end{theorem}
-
-\begin{proof}
-    Suppose we want to check whether $\model,s\models\kh^q(\psi,\varphi)$.  W.l.o.g., consider $\model$ is complete and deterministic. 
-    From the semantics, we need to check if there is $\plan\in\Act^*$ satisfying conditions (1) and (2). Consider condition (1), i.e., we need to check whether $\plan$ is $q$-executable at all $s\in\truthset{\model}{\psi}$. Fix such an $s$. Since $\model$ is deterministic and complete, it all boils down to check whether there is $\plan\in\Act^*$ such that $\Prob^\strat_s(\plan)\geq q$ (notice that $\strat$ is unique by determinism of $\model$). 
-    The latter solves the problem of checking whether the language recognized by a probabilistic (deterministic) automata is empty, which is undecidable~\cite{MadaniHC99}. 
-\end{proof}
+%% \bigpedro{desde el cartel hasta aqu\'i es nuevo}
 
 
-\subsection{A First Approach: Non-Adaptive Plans}
 
-The results in the above show a huge jump in the computational behaviour of knowing-how: while model-checking in the standard case is \PSPACE-complete, considering probabilities leads to undecidability of the same problem. Here, we will deal with the version of knowing-how, in which an agent only considers plans that belong to its uncertainty/awareness class. We will introduce two logics considering probabilities, one generalizing the logic from~\cite{AFSVQ21,AFSVQ23} (each plan in a class must be an appropriate plan) and another one in which it will suffice to have certain appropriate plans in a class. For the former, the model-checking problem again becomes undecidable (contrary to the \PTIME problem of the logic without probabilities, see e.g.~\cite{AFSVQ21,AFSVQ23,DF23}), while for the second, the problem is decidable. In what follows, apart from the technical results, we will motivate the use of the decidable logic in some examples.
-
-Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21,AFSVQ23}.
+%% Notice that, whenever $q=1$, we are in the case of SE from~\Cref{def:plans}. \raul{Chequear esto} The extended language with probabilities is given below.
 
 
-\begin{definition}\label{def:plts}
-    Let $\Prop$ be a countable set of propositional symbols and let $\AGT$ be a finite set of agents.  
-    A \emph{Probabilistic Labeled Transition System with uncertainty (PLTSU)}  is a tuple
-    $\model=\tup{\S,\Act,\ra,\sim,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is a PLTS, and 
-    \begin{itemize}
-        % \item $\S$ is a countably non-empty set of states,
-        % \item $\Act$ is a countable set of action symbols,
-        % \item $\Dist(\S)$ is the set of probability distributions over $\S$,
-        % \item ${\ra} \subseteq \S \times \Act \times \Dist(\S)$ is a transition relation,
-        \item ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$. 
-        % \item $\V: \S \ra 2^\Prop$ is a valuation function.
-    \end{itemize}
-    %Elements of $\Act^*$ are called \emph{plans}, and 
-    Each $\sim$ is called the indistinguishability relation between plan. 
-    % We write $\plan\sim_i\plan'$ whenever $(\plan,i,\plan')\in{\sim}$, and we define $\DS{i}:=\set{\plan \mid \text{ there is } \plan' \text{ s.t. } \plan\sim_i\plan'}$. 
-    By $[\plan]_{\sim}:=\set{\plan' \in \DS{} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{}$, then we define the \emph{indistinguishability set of $\model$} as $\Unc := \set{[\plan]_{\sim} \mid \plan\in\DS{}}$. 
-    %The set $\Unc:=\set{\Unc(i) \mid i\in\AGT}$ is called the \emph{uncertainty set} of $\model$. 
-    For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to a PLTS, i.e., we will use its uncertainty set instead of the indistinguishability relation.
-\end{definition}
+%% \begin{definition}
+%%     \label{def:syntax-extended}
+%%     The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
+%%     \[
+%%         \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh^q(\psi,\varphi),
+%%     \]
+%%     where $p\in\Prop$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$ with probability at least $q$''}.
+%% \end{definition}
 
-Notice that, as it is defined in~\cite{AFSVQ21,AFSVQ23}, $\Unc$ represents the perception the agent has about the reality. In turn, the relation $\sim$ is not an equivalence relation over $\Act^*$ but over $\DS{}$, as the latter contains only the plans she considers available or suitable for her purposes, while those in $\Act^*\setminus\DS{}$ are not considered by the agent, even if they are suitable plans. 
 
-% \begin{definition} \label{def:executability} \raul{TBC}
-%     Let  $\model=\tup{\S,\Act,\Dist(\S),\ra,\Unc,\V}$ be a PLTSU, let $\plan\in\Act^*$ be a plan, and let $q\in[0,1]$ a probability, we need to define two notions:
-%     \begin{enumerate}
-%         \item We say $\plan$ is \emph{$q$-executable} at $s\in\S$ iff ...  Extend it for set of plans and set of states.
-%         \item For $s,t\in\S$, we write $s \reach{\plan}_q t$ iff ... Extend it for set of plans and set of states.
-%     \end{enumerate}
-% \end{definition}
 
-In general, we will assume that PLTS are complete, as for those we can always complete the execution of a plan to a \emph{sink state}.
 
-% \begin{definition}
-%     \label{def:syntax}
-%     The set of formulas (a.k.a. the language) of $\PKhunc$ is defined by the following BNF:
-%     \[
-%         \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh_i^q(\psi,\varphi),
-%     \]
-%     where $p\in\Prop$, $i\in\AGT$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^q(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$, with probability $q$''}
-% \end{definition}
+%% Now we proceed by introducing the semantics of the new modality.
 
-\begin{definition} \label{def:semantics-non-adap}
-    Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
-    \[
-    \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
-    % \model, s \models p & \iffdef & p \in \V(s) \\
-    % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
-    % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
-    \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that for all } \plan\in\plans{:} \\
-    & & \ \ \text{\rm (1)} \ \plan \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
-    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
-    \end{array}
-    \]     \raul{1 and 2 to be merge into one.}
-    \noindent where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
-\end{definition}
+%% \begin{definition}
+%%     \label{def:semantic-extended}
+%%     Let $\model = \tup{\S,\Act,\ra,\V}$ be a PLTS and let $s\in\S$, the satisfiability relation $\models$ for $\PKh$ is inductively defined as:
+%%     \[
+%%         \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+%%         % \model, s \models p & \iffdef & p \in \V(s) \\
+%%         % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
+%%         % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
+%%         \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plan \in \Act^* \;\text{such that:} \\
+%%         & & \ \ \text{\rm (1)} \ \plan \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+%%         & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
+%%         \end{array}
+%%         \] \raul{1 and 2 will be merged into one condition.}
+%%         where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
+%% \end{definition}
 
-This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. We call this version of the logic \emph{non-adaptive} for such a reason, as the agent cannot use the ``good plans'' whenever she considers them ``equally good'' as others.  We will discuss later an alternative to this notion.
+%% \begin{theorem}\label{th:mc-khp-undecidable}
+%% The model-checking problem for $\PKh$ is undecidable.
+%% \end{theorem}
 
-For this logic, we obtain a result similar to the one in the previous section.
+%% \begin{proof}
+%%     Suppose we want to check whether $\model,s\models\kh^q(\psi,\varphi)$.  W.l.o.g., consider $\model$ is complete and deterministic. 
+%%     From the semantics, we need to check if there is $\plan\in\Act^*$ satisfying conditions (1) and (2). Consider condition (1), i.e., we need to check whether $\plan$ is $q$-executable at all $s\in\truthset{\model}{\psi}$. Fix such an $s$. Since $\model$ is deterministic and complete, it all boils down to check whether there is $\plan\in\Act^*$ such that $\Prob^\strat_s(\plan)\geq q$ (notice that $\strat$ is unique by determinism of $\model$). 
+%%     The latter solves the problem of checking whether the language recognized by a probabilistic (deterministic) automata is empty, which is undecidable~\cite{MadaniHC99}. 
+%% \end{proof}
 
-\begin{theorem}\label{th:mc-khp-nadapt-undecidable}
-    The model-checking problem for $\PKhunc$ under the semantics from Definition~\ref{def:semantics-non-adap} is undecidable.
-\end{theorem}
+
+%% \subsection{A First Approach: Non-Adaptive Plans}
+
+%% The results in the above show a huge jump in the computational behaviour of knowing-how: while model-checking in the standard case is \PSPACE-complete, considering probabilities leads to undecidability of the same problem. Here, we will deal with the version of knowing-how, in which an agent only considers plans that belong to its uncertainty/awareness class. We will introduce two logics considering probabilities, one generalizing the logic from~\cite{AFSVQ21,AFSVQ23} (each plan in a class must be an appropriate plan) and another one in which it will suffice to have certain appropriate plans in a class. For the former, the model-checking problem again becomes undecidable (contrary to the \PTIME problem of the logic without probabilities, see e.g.~\cite{AFSVQ21,AFSVQ23,DF23}), while for the second, the problem is decidable. In what follows, apart from the technical results, we will motivate the use of the decidable logic in some examples.
+
+%% Here we introduce some definitions, extending those in e.g.~\cite{AFSVQ21,AFSVQ23}.
+
+
+%% \begin{definition}\label{def:plts}
+%%     Let $\Prop$ be a countable set of propositional symbols and let $\AGT$ be a finite set of agents.  
+%%     A \emph{Probabilistic Labeled Transition System with uncertainty (PLTSU)}  is a tuple
+%%     $\model=\tup{\S,\Act,\ra,\sim,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is a PLTS, and 
+%%     \begin{itemize}
+%%         % \item $\S$ is a countably non-empty set of states,
+%%         % \item $\Act$ is a countable set of action symbols,
+%%         % \item $\Dist(\S)$ is the set of probability distributions over $\S$,
+%%         % \item ${\ra} \subseteq \S \times \Act \times \Dist(\S)$ is a transition relation,
+%%         \item ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$. 
+%%         % \item $\V: \S \ra 2^\Prop$ is a valuation function.
+%%     \end{itemize}
+%%     %Elements of $\Act^*$ are called \emph{plans}, and 
+%%     Each $\sim$ is called the indistinguishability relation between plan. 
+%%     % We write $\plan\sim_i\plan'$ whenever $(\plan,i,\plan')\in{\sim}$, and we define $\DS{i}:=\set{\plan \mid \text{ there is } \plan' \text{ s.t. } \plan\sim_i\plan'}$. 
+%%     By $[\plan]_{\sim}:=\set{\plan' \in \DS{} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{}$, then we define the \emph{indistinguishability set of $\model$} as $\Unc := \set{[\plan]_{\sim} \mid \plan\in\DS{}}$. 
+%%     %The set $\Unc:=\set{\Unc(i) \mid i\in\AGT}$ is called the \emph{uncertainty set} of $\model$. 
+%%     For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to a PLTS, i.e., we will use its uncertainty set instead of the indistinguishability relation.
+%% \end{definition}
+
+%% Notice that, as it is defined in~\cite{AFSVQ21,AFSVQ23}, $\Unc$ represents the perception the agent has about the reality. In turn, the relation $\sim$ is not an equivalence relation over $\Act^*$ but over $\DS{}$, as the latter contains only the plans she considers available or suitable for her purposes, while those in $\Act^*\setminus\DS{}$ are not considered by the agent, even if they are suitable plans. 
+
+%% % \begin{definition} \label{def:executability} \raul{TBC}
+%% %     Let  $\model=\tup{\S,\Act,\Dist(\S),\ra,\Unc,\V}$ be a PLTSU, let $\plan\in\Act^*$ be a plan, and let $q\in[0,1]$ a probability, we need to define two notions:
+%% %     \begin{enumerate}
+%% %         \item We say $\plan$ is \emph{$q$-executable} at $s\in\S$ iff ...  Extend it for set of plans and set of states.
+%% %         \item For $s,t\in\S$, we write $s \reach{\plan}_q t$ iff ... Extend it for set of plans and set of states.
+%% %     \end{enumerate}
+%% % \end{definition}
+
+%% In general, we will assume that PLTS are complete, as for those we can always complete the execution of a plan to a \emph{sink state}.
+
+%% % \begin{definition}
+%% %     \label{def:syntax}
+%% %     The set of formulas (a.k.a. the language) of $\PKhunc$ is defined by the following BNF:
+%% %     \[
+%% %         \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh_i^q(\psi,\varphi),
+%% %     \]
+%% %     where $p\in\Prop$, $i\in\AGT$ and $q\in[0,1]$. Other Boolean operators are defined as usual. Formulas of the form $\kh_i^q(\psi,\varphi)$ are read as \emph{``agent $i$ knows how to achieve $\varphi$ given $\psi$, with probability $q$''}
+%% % \end{definition}
+
+%% \begin{definition} \label{def:semantics-non-adap}
+%%     Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
+%%     \[
+%%     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+%%     % \model, s \models p & \iffdef & p \in \V(s) \\
+%%     % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
+%%     % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
+%%     \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that for all } \plan\in\plans{:} \\
+%%     & & \ \ \text{\rm (1)} \ \plan \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+%%     & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan}_q \truthset{\model}{\varphi}, 
+%%     \end{array}
+%%     \]     \raul{1 and 2 to be merge into one.}
+%%     \noindent where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
+%% \end{definition}
+
+%% This definition bears a resemblance to the one in Section~\ref{sec:khlinearplans}, except that we ask the conditions hold for \emph{every plan} belonging to a set of indistinguishable plans $\plans$. We call this version of the logic \emph{non-adaptive} for such a reason, as the agent cannot use the ``good plans'' whenever she considers them ``equally good'' as others.  We will discuss later an alternative to this notion.
+
+%% For this logic, we obtain a result similar to the one in the previous section.
+
+%% \begin{theorem}\label{th:mc-khp-nadapt-undecidable}
+%%     The model-checking problem for $\PKhunc$ under the semantics from Definition~\ref{def:semantics-non-adap} is undecidable.
+%% \end{theorem}
 
 
 \subsection{A Second Approach: Adaptive Plans}

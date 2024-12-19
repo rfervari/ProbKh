@@ -88,37 +88,34 @@ It is worth noticing that  $\Unc$ is a partition of $\DS{}$ representing the per
     \medskip
     
     
-    \begin{definition}[Strong executability of plans]\label{def:plans-exec}
-    Let $\model=\tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU. A \emph{set of plans} $\plans \subseteq \Act^*$ is \emph{strongly executable} at $u \in \S$ if and only if \emph{every} plan $\plan \in \plans$ is \emph{strongly executable} at~$u$.
-    % $\stexec(\plans) = \bigcap_{\plan \in \plans} \stexec(\plan)$ is the set of the states in $\W$ where $\plans$ is SE.
-    \end{definition}
+%%     \begin{definition}[Strong executability of plans]\label{def:plans-exec}
+%%     Let $\model=\tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU. A \emph{set of plans} $\plans \subseteq \Act^*$ is \emph{strongly executable} at $u \in \S$ if and only if \emph{every} plan $\plan \in \plans$ is \emph{strongly executable} at~$u$.
+%%     % $\stexec(\plans) = \bigcap_{\plan \in \plans} \stexec(\plan)$ is the set of the states in $\W$ where $\plans$ is SE.
+%%     \end{definition}
+
+%%     \begin{definition} \label{def:semantics-kh-uncertain}
+%%         Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
+%%         \[
+%%         \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+%%         \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that:} \\
+%%         & & \ \ \text{\rm (1)} \ \plans \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
+%%         & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans} \truthset{\model}{\varphi}, 
+%%         \end{array}
+%%         \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. 
+%%         % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
+%%     \end{definition}
 
     \begin{definition} \label{def:semantics-kh-uncertain}
         Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
         \[
         \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
-        \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that:} \\
-        & & \ \ \text{\rm (1)} \ \plans \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
-        & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans} \truthset{\model}{\varphi}, 
-        \end{array}
-        \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. 
-        % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
-    \end{definition}
-    
-    {\color{red}
-      \bigpedro{querr\'ia discutir esta definici\'on alternativa que es equivalente}
-    \begin{definition} \label{def:semantics-kh-uncertain-alt}
-        Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
-        \[
-        \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
-        \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that for all } \plan\in\plans \\
+        \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{s.t.\ for all } \plan\in\plans \\
         & & \ \ \text{\rm (1)} \ \plan \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
         & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
         \end{array}
         \]      where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. 
         % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
     \end{definition}
-    }
 
     \begin{proposition}[\cite{AFSVQ21,AFSVQ23}]
         The model-checking problem for $\Khlogic$ over LTSU is in \PTIME.

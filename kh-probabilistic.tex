@@ -637,7 +637,8 @@ definition of the semantics of $\PKh$.
   \]
   where $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,s\models\chi}$.
   %
-  %Define $\model\models\varphi$ iff $\truthset{\model}{\varphi}=\S$,
+  We write $\model\models\varphi$ iff $\truthset{\model}{\varphi}=\S$.
+  \pedro{$\model\models\varphi$ es conveniente mantenerlo para simplificar notaci\'on en los ejemplos, los cuales a\'un tengo que corregir}
   %and $\models\varphi$ iff $\model\models\varphi$, for all PLTS
   %$\model$.
   %\pedro{vamos a usar todo esto \'ultimo?}
@@ -1110,8 +1111,231 @@ strategy through expression $\Prob^\strat_s(\Succ(\plans,G))$ within
 \end{example}
 
 
+Logics $\PKhunc$ and $\PKhadapt$ are not related.
+%
+On the one hand
+$\modelex^1,s \models_\PKhadapt \kh^{0.95}(\init,\goal)$
+(see \Cref{ex:running:pkhadapt}) but
+$\modelex^1,s \models \neg\kh^{0.95}(\init,\goal)$
+(see \Cref{ex:running:pkhunc}).
+%
+In addition, consider PLTSU $\modelex^3$ in \Cref{fig:counterexamples}
+with $\Unc_3=\{\{ab,ac\}\}$.  It is not hard to check that
+$\modelex^3,s \models_\PKhunc \kh^{0.5}(\init,\goal)$ but 
+$\modelex^3,s \models_\PKhadapt \neg\kh^{0.5}(\init,\goal)$.
+The second one is explained by an $\{ab,ac\}$-compatible strategy that
+always choose wrongly: at state $s_1$ it chooses the $c$ transition
+while at state $s_2$ it chooses the $b$ transition.
+
+\begin{figure}
+  \centering%
+  \!\!%
+  \scalebox{0.86}{
+    \begin{tikzpicture}[on grid,auto,align at top]
+      \node[state] (s00)                                  {$s_0$};
+      \node[state] (s01) [below left=1.7 and 2 of s00]    {$s_1$};
+      \node[state] (s02) [below right=1.7 and 2 of s00]   {$s_2$};
+      \node[state] (s03) [below=2.3 of s01]               {$s_3$};
+      \node[state] (s04) [below=2.3 of s02]               {$s_4$};
+
+      \node (init) [above right=0.25 and 0.55 of s00] {\small $\init$};
+      \node (nok)  [below left=0.2 and 0.45 of s03]   {\normalsize $\fail$};
+      \node (ok)   [below right=0.2 and 0.45 of s04]  {\normalsize $\goal$};
+
+      \node[dot] (d1) [below=0.8 of s00]               {};
+      \node[dot] (d2) [below=0.8 of s01]               {};
+      \node[dot] (d3) [below right=0.8 and 1.2 of s01] {};
+      \node[dot] (d4) [below left=0.8 and 1.2 of s02]  {};
+      \node[dot] (d5) [below=0.8 of s02]               {};
+
+      \node (m1) [above left=0.1 and 0.3 of d1]  {$\mu_1$};
+      \node (m2) [below left=0.1 and 0.3 of d2]  {$\mu_2$};
+      \node (m3) [above right=0.3 and 0.1 of d3] {$\mu_3$};
+      \node (m4) [above left=0.3 and 0.1 of d4]  {$\mu_4$};
+      \node (m5) [below right=0.1 and 0.3 of d5] {$\mu_5$};
+
+      \path[-,line width=0.5pt]
+      (s00) edge [] node[right]          {\small $a$} (d1)
+      (s01) edge [] node[left]           {\small $b$} (d2)
+      (s01) edge [] node[right,yshift=3] {\small $c$} (d3)
+      (s02) edge [] node[left,yshift=3]  {\small $c$} (d4)
+      (s02) edge [] node[right]          {\small $b$} (d5)
+      ;
+
+      \path[-{Latex[length=2.2mm,width=1.4mm]},line width=0.5pt,dashed]
+      (d1) edge []              node[left,yshift=3]           {$0.5$} (s01)
+      (d1) edge []              node[right,yshift=3]          {$0.5$} (s02)
+      (d2) edge []              node[left]                    {$0.1$} (s03)
+      (d2) edge [bend right=18] node[right,pos=0.02,yshift=2] {$0.9$} (s04)
+      (d3) edge []              node[right,pos=0.3]           {$0.1$} (s03)
+      (d3) edge []              node[right,pos=0.03,yshift=2] {$0.9$} (s04)
+      (d4) edge []              node[left,pos=0.03,yshift=2]  {$0.9$} (s03)
+      (d4) edge []              node[left,,pos=0.3]           {$0.1$} (s04)
+      (d5) edge [bend left=18]  node[left,pos=0.02,yshift=2]  {$0.1$} (s03)
+      (d5) edge []              node[right]                   {$0.9$} (s04)
+      ;
+
+      \node (caption) [below=4.7 of s00] {\normalsize $\modelex^3$};
+      
+    \end{tikzpicture}
+  }\quad\;
+  \scalebox{0.86}{
+    \begin{tikzpicture}[on grid,auto,align at top]
+      \node[state] (s00)                                {$s_0$};
+      \node[state] (s01) [right=1.6 of s00]             {$s_1$};
+      \node[state] (s02) [below=2 of s00]               {$s_2$};
+      \node[state] (s03) [below=2 of s01]               {$s_3$};
+      \node[state] (s04) [below right=2 and 0.8 of s02] {$s_4$};
+
+      \node (init) [above left=0.25 and 0.55 of s00]  {\small $\init$};
+      \node (init) [above right=0.25 and 0.55 of s01] {\small $\init$};
+      \node (ok)   [below right=0.2 and 0.45 of s04]  {\normalsize $\goal$};
+
+      \node[dot] (d1) [below=1 of s00]               {};
+      \node[dot] (d2) [below=1 of s01]               {};
+      \node[dot] (d3) [below right=1 and 0.4 of s02] {};
+      \node[dot] (d4) [below left=1 and 0.4 of s03]  {};
+
+      \node (m1) [left=0.3 of d1]  {$\mu_1$};
+      \node (m2) [right=0.3 of d2] {$\mu_2$};
+      \node (m3) [left=0.3 of d3]  {$\mu_3$};
+      \node (m4) [right=0.3 of d4] {$\mu_4$};
+
+      \path[-,line width=0.5pt]
+      (s00) edge [] node[left]  {\small $a$} (d1)
+      (s01) edge [] node[right] {\small $b$} (d2)
+      (s02) edge [] node[left]  {\small $b$} (d3)
+      (s03) edge [] node[right] {\small $a$} (d4)
+      ;
+
+      \path[-{Latex[length=2.2mm,width=1.4mm]},line width=0.5pt,dashed]
+      (d1) edge [] node[left]  {$1$} (s02)
+      (d2) edge [] node[right] {$1$} (s03)
+      (d3) edge [] node[left]  {$1$} (s04)
+      (d4) edge [] node[right] {$1$} (s04)
+      ;
+      
+      \node (caption) [below=0.7 of s04] {\normalsize $\modelex^4$};
+
+    \end{tikzpicture}
+  }
+  
+  \caption{Counterexamples}\label{fig:counterexamples}
+
+\end{figure}
+
+It is also the case that $\Khunc$ is not as strongly related to
+$\PKhadapt$ as it is to $\PKhunc$.  Indeed, consider LTSU
+$\modelex^4$ in \Cref{fig:counterexamples} with
+$\Unc_4=\{\{ab,ba\}\}$.
+%
+Then $\modelex^4,s \models_\PKhadapt \kh^1(\init,\goal)$ but
+$\modelex^4,s \models_\Khunc \neg\kh(\init,\goal)$.
+%
+However, for a $\PKhadapt$ property $\varphi$ in which $\kh^q$ does
+not appear in the scope of a negation, if the $\fgetprob(\varphi)$
+holds in an LTSU under $\Khunc$, then $\varphi$ holds in the same LTSU
+under $\PKhadapt$.
+%
+We show this after presenting the next lemma.
+
+\begin{lemma}\label{lm:plan:plans}
+  For every LTSU $\model$ with agent's perception $\Unc$, $s\in\S$,
+  and $\plans\in\Unc$,
+  \begin{enumerate}
+  \item\label{lm:plan:plans:i}%
+    if $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$
+    for all $\plan\in\plans$, then
+    $\inf_{\strat\in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G))=1$.
+  \item\label{lm:plan:plans:ii}%
+    Moreover, for all $A,G\subseteq\S$ if $A\reach{\plan}_1G$ for all
+    $\plan\in\plans$, $A\reach{\plans}_1G$.
+  \end{enumerate}
+
+\end{lemma}
+%
+\begin{proof}
+  For \cref{lm:plan:plans:i}, suppose by contradiction that
+  $\inf_{\strat\in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G))<1$.
+  %
+  Then exits $\strat\in\Comp(\plans)$ and $\rho\in\execf$ such that
+  $\Prob^\strat_s(\{\rho\complete\})>0$ and either
+  $\bar{\rho}\notin\plans$ or $\last(\rho)\notin G$.
+  %
+  Say $\rho=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n$.  Necessarily
+  $s_0=s$.
+  %
+  Define the strategy $\strat^\star$ such that for all $0\leq k<n$,
+  $\strat^\star(\rho[..k])(a_{i+1},\Dirac_{s_{i+1}})=1$ and
+  $\strat^\star(\rho)(\complete)=1$.  Notice that
+  $\Prob^{\strat^\star}_s(\{\rho\complete\})=1$
+
+  Suppose $\bar{\rho}=\plan$ for some $\plan\in\plans$ and
+  $\last(\rho)\notin G$.  Then $\strat^\star$ is $\plan$-compatible
+  and $\Prob^{\strat^\star}_s(\Succ(\plan,G))=0$ contradicting the
+  hypothesis.
+
+  So, it must be the case that $\bar{\rho}\notin\plans$.
+  %
+  Suppose $\bar{\rho}\notin\pref(\plans)$.  Hence, for all
+  $\plan\in\plans$ exists some $0<k\leq n$ such that
+  $a_k\neq\plan[k]$.  Let $\hat{k}$ be the largest of such $k$'s.
+  %
+  Then $\bar{\rho}[..k{-}1]\in\pref(\plans)$ and
+  $\strat(\rho[..k{-}1])(a_k,\Dirac_{s_k})>0$.  However
+  $\bar{\rho}[..k{-}1]a_k\notin\pref(\plans)$ contradicting the
+  assumption that $\strat$ is $\plans$-compatible.
+
+  Therefore, there is some $\plan\in\plans$ such that
+  $\bar{\rho}\leq\plan$ but $\bar{\rho}\notin\plans$.
+  %
+  Because $\Prob^\strat_s(\{\rho\complete\})>0$,
+  $\strat(\rho)(\complete)>0$ and, since $\strat$ is
+  $\plans$-compatible, there is no $a\in\Act$ such that
+  $\bar{\rho}a\in\pref(\plans)$ and $\last(\rho)\reach{a}\mu$ for some
+  $\mu\in\Dist(\S)$.
+  %
+  In particular $\bar{\rho}a\neq\plan$ for all $a\in\Act$.  Then
+  $\strat^\star$ is $\plan$-compatible and
+  $\Prob^{\strat^\star}_s(\Succ(\plan,G))=0$ contradicting the
+  hypothesis, proving thus \cref{lm:plan:plans:i}.
+
+  \Cref{lm:plan:plans:ii} follow directly from \cref{lm:plan:plans:i}.
+\end{proof}
 
 
+\begin{proposition}\label{prop:Khunc:PKhadapt}
+  Let $\chi\in\PKhadapt$ so that no operator $\kh^q$ appears in the
+  scope of $\neg$.  For all LTSU $\model$
+  %$\model = \tup{\S,\Act,\ra,\Unc,\V}$
+  and $s\in\S$, $\model,s\models\fgetprob(\chi)$ implies
+  $\model,s\models\chi$.
+\end{proposition}
+%
+\begin{proof}
+  The proof follows by distinguishing the cases in which $\chi$
+  contains some $\kh^q$ operator or it does not.
+  %
+  If $\chi$ does not contain $\kh^q$, then straightforwardly
+  $\model,s\models\fgetprob(\chi)$ iff $\model,s\models\chi$ by
+  structural induction.
+
+  For the case in which $\chi$ does not contain $\kh^q$ it also
+  follows by structural induction.  We only consider case
+  $\kh^q(\psi,\varphi)$, but this case follows direcly from
+  \Cref{lm:plan:plans} (\cref{lm:plan:plans:i}) and
+  \Cref{prop:nonprob:prob} (\cref{prop:nonprob:prob:ii}).
+\end{proof}
+
+\bigpedro{pr\'oximamente: model checking! (verificar si el teorema queda enunciado asi)}
+
+
+\begin{theorem}\label{th:PKhadapt:mc}
+  The model-checking problem for $\PKhadapt$ is decidable provided
+  each class in $\Unc$ is a regular language. Moreover, if each
+  $\plans\in\Unc$ is given as input as a deterministic FSA, the
+  problem is in $\PTIME$.
+\end{theorem}
 
 
 \bigpedro{hasta aqu\'i lo nuevo de la secci\'on, desde aqu\'i lo viejo}
@@ -1346,31 +1570,31 @@ strategy through expression $\Prob^\strat_s(\Succ(\plans,G))$ within
 %% \end{theorem}
 
 
-\subsection{A Second Approach: Adaptive Plans}
+%% \subsection{A Second Approach: Adaptive Plans}
 
-Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptive}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately. Thus, the agent can use those plans that are good for her purposes, even in presence of non-appropriate plans that she considers indistinguishable from the good ones. \raul{Esto hay que venderlo un poco mejor.}
+%% Now we introduce a version of the logic $\PKhunc$ in which suitable plans for achieving a goal are \emph{adaptive}, in the sense that the full set $\plans$ must be $q$-executable, and not each plan $\plan\in\plans$ separately. Thus, the agent can use those plans that are good for her purposes, even in presence of non-appropriate plans that she considers indistinguishable from the good ones. \raul{Esto hay que venderlo un poco mejor.}
 
-\begin{definition} \label{def:semantics-adap}
-    Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
-    \[
-    \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
-    % \model, s \models p & \iffdef & p \in \V(s) \\
-    % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
-    % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
-    \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that:} \\
-    & & \ \ \text{\rm (1)} \ \plans \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
-    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans}_q \truthset{\model}{\varphi}, 
-    \end{array}
-    \]     \raul{1 and 2 to be merge into one.}
-    \noindent where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
-\end{definition}
+%% \begin{definition} \label{def:semantics-adap}
+%%     Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU and let $s\in\S$, the satisfiability relation $\models$ for $\PKhunc$ is inductively defined as:
+%%     \[
+%%     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+%%     % \model, s \models p & \iffdef & p \in \V(s) \\
+%%     % \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
+%%     % \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
+%%     \model, s \models \kh^q(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that:} \\
+%%     & & \ \ \text{\rm (1)} \ \plans \text{ is $q$-executable at }  \truthset{\model}{\psi}\; \text{and} \\
+%%     & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plans}_q \truthset{\model}{\varphi}, 
+%%     \end{array}
+%%     \]     \raul{1 and 2 to be merge into one.}
+%%     \noindent where: $\truthset{\model}{\chi} := \csetsc{s\in\S}{\model,w\models\chi}$. Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all PLTS $\model$.
+%% \end{definition}
 
-The general idea in condition 1 of the clause for $\kh$ establishes that all the plans in $\plans$ have a probablity of at least $q$ of succeeding. Since all plans in $\plans$ are indistinguishability, this needs to be guaranteed no matter which plan is chosen. However, there are at least two alternatives in this definition: one considering \emph{adaptability}, meaning that there is at least one possible execution of each plan in $\plans$ for which probability $q$ is guaranteed, and considering \emph{non-adaptability} whenever we need this guarantee on each possible execution of every plan in $\plans$. Condition 2 establishes that successfull states are reached with probability of at least $q$.
+%% The general idea in condition 1 of the clause for $\kh$ establishes that all the plans in $\plans$ have a probablity of at least $q$ of succeeding. Since all plans in $\plans$ are indistinguishability, this needs to be guaranteed no matter which plan is chosen. However, there are at least two alternatives in this definition: one considering \emph{adaptability}, meaning that there is at least one possible execution of each plan in $\plans$ for which probability $q$ is guaranteed, and considering \emph{non-adaptability} whenever we need this guarantee on each possible execution of every plan in $\plans$. Condition 2 establishes that successfull states are reached with probability of at least $q$.
 
-\begin{remark}
-    Notice that an equivalence class $\plans$ can be defined in terms of a Deterministic Finite State Automata (DFA) $\mathcal{A}_{\plans}$. This way, the operation of checking $q$-executability can be perfomed over the product $\model\times\mathcal{A}_{\plans}$. In short, $\plans$ is $q$-executable at $s$ iff for each $\plan\in\plans$, there exists one MDP in  $\model\times\mathcal{A}_{\plans}$ in which the probability of executing $\plan$ is at least $q$. This will be used while designing a model-checking algorithm (connected with algorithms from~\cite{AFSVQ21,AFSVQ23,DF23}).
-\end{remark}
+%% \begin{remark}
+%%     Notice that an equivalence class $\plans$ can be defined in terms of a Deterministic Finite State Automata (DFA) $\mathcal{A}_{\plans}$. This way, the operation of checking $q$-executability can be perfomed over the product $\model\times\mathcal{A}_{\plans}$. In short, $\plans$ is $q$-executable at $s$ iff for each $\plan\in\plans$, there exists one MDP in  $\model\times\mathcal{A}_{\plans}$ in which the probability of executing $\plan$ is at least $q$. This will be used while designing a model-checking algorithm (connected with algorithms from~\cite{AFSVQ21,AFSVQ23,DF23}).
+%% \end{remark}
 
-\begin{theorem}\label{th:mc-khp-adapt-decidable}
-    The model-checking problem for $\PKhunc$ under the semantics from Definition~\ref{def:semantics-adap} is decidable. Moreover, if each $\plans\in\Unc$ is given as input as a deterministic FSA, the problem is in $\PTIME$.
-\end{theorem}
+%% \begin{theorem}\label{th:mc-khp-adapt-decidable}
+%%     The model-checking problem for $\PKhunc$ under the semantics from Definition~\ref{def:semantics-adap} is decidable. Moreover, if each $\plans\in\Unc$ is given as input as a deterministic FSA, the problem is in $\PTIME$.
+%% \end{theorem}

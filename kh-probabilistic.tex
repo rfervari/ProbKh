@@ -1375,7 +1375,7 @@ checking $\PKhadapt$ properties.
   Let $\plans\subseteq\Act^*$ be a regular language accepted by the
   live DFA $\dfa$ with initial state $\tini\in\S_\dfa$.  Define
   %
-  $R_{G{\times}F} = \{{\rho\in\cexecf^{\model_{\sini}{\times}\dfa}} \mid \text{ for some }i\geq 0, \last(\rho[..i])\in{G{\times}F}\}$
+  $R_{G{\times}F} = \{{\rho\in\cexec^{\model_{\sini}{\times}\dfa}} \mid \text{ for some }i\geq 0, \last(\rho[..i])\in{G{\times}F}\}$
   %
   (viz., the set of complete executions that reach both the goal and a
   final accepting state).
@@ -1399,8 +1399,12 @@ checking $\PKhadapt$ properties.
     $\displaystyle\inf_{s\in A}\inf_{\sigma}\Prob^{\strat}_{(\sini,\tini)}(R_{G{\times}F})\geq q$.
   \end{enumerate}
 \end{lemma}
+%
+\begin{proof}
 
 
+
+\end{proof}
 
 
 

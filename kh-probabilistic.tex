@@ -1365,20 +1365,20 @@ $\model_{\sini}{\times}\dfa$.
 
 
 
-The following lemma is central to the proof of decidability of model
-checking $\PKhadapt$ properties.
+The following lemma is central to the provide a model checking
+algorithm for $\PKhadapt$ properties.
 
 \begin{lemma}\label{lm:mc:core}
   Let $\model$ be a PLTS with initial state $\sini\in\S_\model$ and
-  let $G\subseteq\S_\model$ a set of goal states.
+  let $G\subseteq\S_\model$ be a set of goal states.
   %
   Let $\plans\subseteq\Act^*$ be a regular language accepted by the
   live DFA $\dfa$ with initial state $\tini\in\S_\dfa$.  Define
   %
-  $R_{G{\times}F} = \{{\rho\in\cexec^{\model_{\sini}{\times}\dfa}} \mid \text{ for some }i\geq 0, \last(\rho[..i])\in{G{\times}F}\}$
+  $R_{G{\times}F} = \{{\rho\in\cexec^{\model_{\sini}{\times}\dfa}} \mid \last(\rho[..i])\in{G{\times}F} \text{ for some }{i\geq 0}\}$
   %
-  (viz., the set of complete executions that reach both the goal and a
-  final accepting state).
+  (viz., the set of complete executions that reach simultaneously both
+  the goal and a final accepting state).
   %
   Then:
   \begin{enumerate}
@@ -1401,9 +1401,114 @@ checking $\PKhadapt$ properties.
 \end{lemma}
 %
 \begin{proof}
+  We first state some general facts that would later simplify the the
+  proof of each of the items of the lemma.
+  %
+  First it is not hard to verify that
+  %
+  \begin{align}
+    & \textstyle
+    R_{G{\times}F} \ = \ \bigcup_{\rho\in\mathcal{R}}\Cyl(\rho) \qquad\text{ and}\label{eq:R:bigcup:cyl}\\
+    & \textstyle
+    \Succ(\plans,G) \ = \ \bigcup_{\rho\in\mathcal{S}}\Cyl(\rho) \label{eq:S:bigcup:cyl}
+  \end{align}
+  %
+  where
+  %
+  \begin{align*}
+    \mathcal{R} = {}
+    & \{{\rho\in\execf^{\model_{\sini}{\times}\dfa}} \mid \last(\rho)\in{G{\times}F}\text{ and}\\
+    & \qquad\quad\text{for all }0\leq k\leq\size{\rho},\last(\rho[..k])\notin{G{\times}F}\}
+  \end{align*}
+  %
+  and
+  %
+  \begin{align*}
+    \mathcal{S} = {}
+    & \{{\rho\in\execf^{\model_{\sini}}} \mid {\bar{\rho}\in\plans}, \ {\last(\rho)\in G} \ \text{ and}\\
+    & \ \ \text{for all }0\leq k\leq\size{\rho}, \text{ either }{\last(\rho[..k])\notin G}\text{ or }{\bar{\rho}\notin\plans}\}
+  \end{align*}
+  %
+  Let $\rho,\rho'\in\mathcal{R}$.  Then, if $\rho\leq\rho'$,
+  necessarily $\rho=\rho'$.  Therefore, if $\rho\neq\rho'$,
+  $\Cyl(\rho)\cap\Cyl(\rho')=\emptyset$.  Also notice that if
+  $\rho\in\mathcal{R}$, $\bar{\rho}$ is accepted by $\dfa$ and hence
+  $\bar{\rho}\in\plans$.
+  %
+  Similarly, for $\rho,\rho'\in\mathcal{S}$, if $\rho\leq\rho'$ then
+  $\rho=\rho'$.  Thus, if instead $\rho\neq\rho'$,
+  $\Cyl(\rho)\cap\Cyl(\rho')=\emptyset$.
+
+  Let
+  %
+  $\mathcal{R}_{\mathsf{i}}=\{{\rho\in\mathcal{R}}\mid{\first(\rho)=(\sini,\tini)}\}$
+  %
+  and
+  %
+  $\mathcal{S}_{\mathsf{i}}=\{{\rho\in\mathcal{S}}\mid{\first(\rho)=\sini}\}$.
+  %
+  By \cref{eq:R:bigcup:cyl}, for all strategies $\strat$,
+  %
+  \begin{equation}\label{eq:prob:R:bigcup:cyl}
+    \textstyle
+    \Prob^{\strat}_{(\sini,\tini)}(R_{G{\times}F}) =
+    \sum_{\rho\in\mathcal{R}_{\mathsf{i}}}\Prob^{\strat}_{(\sini,\tini)}(\Cyl(\rho)).
+  \end{equation}
+  %
+  Similarly, by \cref{eq:S:bigcup:cyl}, for all strategies $\strat$,
+  %
+  \begin{equation}\label{eq:prob:R:bigcup:cyl}
+    \textstyle
+    \Prob^{\strat}_{\sini}(\Succ(\plans,G)) =
+    \sum_{\rho\in\mathcal{S}_{\mathsf{i}}}\Prob^{\strat}_{\sini}(\Cyl(\rho)).
+  \end{equation}
+
+  Let
+  %
+  $\rho=(s_0,t_0)\, a_1\, (s_1,t_1)\ldots (s_{n-1},t_{n-1})\, a_n\, (s_n,t_n) \in\execf^{\model_{\sini}{\times}\dfa}$.
+  %
+  Define the mapping $\proy$ by
+  %
+  $\proy(\rho)=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n$.
+  %
+  It turns out that $\proy$ is a bijection from
+  $\mathcal{R}_{\mathsf{i}}$ to $\mathcal{S}_{\mathsf{i}}$.
+  %
+  Indeed, suppose $\rho,\rho'\in\mathcal{R}_{\textsf{i}}$ and $\rho$
+  is as before. Then
+  %
+  $\rho'=(s_0,t'_0)\, a_1\, (s_1,t'_1)\ldots (s_{n-1},t'_{n-1})\, a_n\, (s_n,t'_n)$.
+  %
+  Notice that $(s_0,t_0)=(\sini,\tini)=(s_0,t'_0)$.  Since $\dfa$ is
+  deterministic, then necessarily $t_k=t'_k$ for all $0\leq k\leq n$,
+  which shows that $\proy$ is injective.
+  %
+  To prove that $\proy$ is surjective, let
+  %
+  $\rho=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n\in\mathcal{S}_{\textsf{i}}$.
+  %
+  Then $s_0=\sini$ and, since $\bar{\rho}\in\plans$,
+  $a_1\, a_2\ldots a_n$ is accepted by $\dfa$.
+  %
+  As a consequence there are $t_0,t_1,\ldots,t_n\in\S_\dfa$ with
+  $t_0=\tini$, $t_n\in F$ and $t_k\reach{a_{k+1}}\Dirac_{t_{k+1}}$ for
+  all $0\leq k<n$.
+  %
+  Hence,
+  %
+  $\rho'=(s_0,t_0)\, a_1\, (s_1,t_1)\ldots (s_{n-1},t_{n-1})\, a_n\, (s_n,t_n)\in\execf^{\model_{\sini}{\times}\dfa}$.
+  %
+  If, for some $k<n$, $(s_k,t_k)\in{G{\times}F}$,
+  $a_1\, a_2\ldots a_k\in\plans$ and $s_k\in G$ contradicting that
+  $\rho\in\mathcal{S}_{\mathsf{i}}$.
+  %
+  Therefore $\rho'\in\mathcal{R}_{\mathsf{i}}$.
+
+  Now we address \cref{lm:mc:core:i}.
 
 
-
+  
+  
 \end{proof}
 
 

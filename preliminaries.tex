@@ -14,16 +14,18 @@ For $0\leq i\leq\size{\plan}$, $\plan[..i]$ denotes the $i$-th prefix
 of $\plan$, i.e., the initial segment of $\plan$ up to (and including)
 the $i$-th position (with $\plan[..0] = \epsilon$).
 %
-We say that $\plan$ is a \emph{prefix} of $\plan'$, denoted $\plan\leq\plan'$, if
-$\plan=\plan'[..i]$ for some $0\leq i\leq\size{\plan}$. For a set
-$\plans\subseteq\Act^*$, let
+We say that $\plan$ is a \emph{prefix} of $\plan'$, denoted
+$\plan\leq\plan'$, if $\plan=\plan'[..i]$ for some $0\leq
+i\leq\size{\plan}$.  For a set $\plans\subseteq\Act^*$, let
 $\pref(\plans)=\{\rho'\in\Act^*\mid{\exists{\rho\in\plans}\colon{\rho'\leq\rho}}\}$
-the set of all prefixes of $\plans$.  In particular, we write
-$\pref(\plan)$ instead of $\pref(\{\plan\})$.
+be the set of all prefixes of $\plans$.  In particular, we write
+$\pref(\plan)$ for $\pref(\{\plan\})$.
 %
-Besides, $\plan\plan'$ denotes the concatenation of $\plan$ and
-$\plan'$ and if $\plans\subseteq\Act^*$,
-$\plan\plans=\{\plan\plan'\mid{\plan'\in\plans}\}$.
+Besides, $\plan\plan'$ denotes the concatenation of $\plan$ followed by
+$\plan'$.
+%% Besides, $\plan\plan'$ denotes the concatenation of $\plan$ and
+%% $\plan'$ and if $\plans\subseteq\Act^*$,
+%% $\plan\plans=\{\plan\plan'\mid{\plan'\in\plans}\}$.
 
 % Probabilities
 
@@ -122,7 +124,7 @@ $\rho = s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n\, \complete \in \cexecf$,
 %
 \begin{align}
   &\Prob^\strat_s(\Cyl(\rho)) = {}\label{eq:def:prob:ii}\\
-  &\quad \Dirac_s(s_0)\cdot\left(\prod\limits_{i=1}^n\sum\limits_{(a_i,\mu)\in T(s_{i-1})}\strat(\rho[..(i{-}1)])(a_i,\mu)\cdot\mu(s_i)\right)\notag\\
+  &\quad \Dirac_s(s_0)\cdot\bigg(\prod\limits_{i=1}^n\sum\limits_{(a_i,\mu)\in T(s_{i-1})}\strat(\rho[..(i{-}1)])(a_i,\mu)\cdot\mu(s_i)\bigg)\notag\\
   &\phantom{\quad \Dirac_s(s_0)} \cdot \ \strat(\rho)(\complete).\notag
 \end{align}
 %
@@ -140,8 +142,8 @@ then $\mu_1=\mu_2$.
 A \emph{probabilistic finite automata} (PFA)~\cite{Rabin63,Paz71} is a
 deterministic PLTS $\model=\tup{\S,\Act,\ra,\V}$ on the set
 $\Prop=\{\init,\fin\}$, i.e., $\V:\S\to\powerset(\{\init,\fin\})$,
-such that there is a single state $s_{\textsf{i}}\in\S$, called
-\emph{initial}, with $\init\in\V(s_{\textsf{i}})$.
+such that there is a single state $\sini\in\S$, called
+\emph{initial}, with $\init\in\V(\sini)$.
 %
 $F=\{{s\in\S}\mid{\fin\in\V(s)}\}$ is the set of \emph{final} states.
 
@@ -168,7 +170,7 @@ regardless of its definition for all $\rho$ such that
 $\bar{\rho}\not\leq\plan$.) 
 %
 The word $\plan$ is accepted by the PFA $\model$ with probability
-$q\in[0,1]$ if $\Prob_{s_{\textsf{i}}}^{\strat_\plan}(\Succ(\plan,F))\geq q$, where
+$q\in[0,1]$ if $\Prob_{\sini}^{\strat_\plan}(\Succ(\plan,F))\geq q$, where
 $\Succ(\plan,F)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}=\plan \text{ and } \last(\rho)\in F}\}$.
 %
 Let $L(\model,q)$ be the set of all such words.

@@ -759,13 +759,13 @@ Let $\model$ be a PFA. Then $\model,s\models\kh^q(\init,\fin)$ holds
 if there is a plan $\plan\in \Act^*$ such that
 $\truthset{\model}{\init}\reach{\plan}_q\truthset{\model}{\fin}$, that
 is, if
-$\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{s_{\textsf{i}}}(\Succ(\plan,F)) \geq q$,
-where $\truthset{\model}{\init}=\{s_{\textsf{i}}\}$ and
+$\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{\sini}(\Succ(\plan,F)) \geq q$,
+where $\truthset{\model}{\init}=\{\sini\}$ and
 $F=\{{s\in\S}\mid{\fin\in\V(s)}\}$.
 %
 Since a PFA is deterministic,
-$\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{s_{\textsf{i}}}(\Succ(\plan,F)) =
-\Prob^{\strat_\plan}_{s_{\textsf{i}}}(\Succ(\plan,F))$
+$\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{\sini}(\Succ(\plan,F)) =
+\Prob^{\strat_\plan}_{\sini}(\Succ(\plan,F))$
 with $\strat_\plan$ defined as in \Cref{sec:preliminaries}.
 %
 As a consequence checking $\model,s\models\kh^q(\init,\fin)$ is
@@ -906,13 +906,13 @@ contrary to the \PTIME problem to the relative non-probabilistic logic
   ${\plan\in \Act^*}$ such that it does not happen that
   ${\truthset{\model}{\init}\reach{\plan}_q\truthset{\model}{\fin}}$,
   or equivalently, if there is $\plan\in \Act^*$  such that
-  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{s_{\textsf{i}}}(\Succ(\plan,F)) < q$,
-  where $\truthset{\model}{\init}=\{s_{\textsf{i}}\}$ and
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{\sini}(\Succ(\plan,F)) < q$,
+  where $\truthset{\model}{\init}=\{\sini\}$ and
   $F=\{{s\in\S}\mid{\fin\in\V(s)}\}$.
   %
   Since the PFA is deterministic, this is also equivalent to say that
   there is $\plan\in \Act^*$ such that
-  $\Prob^{\strat_\plan}_{s_{\textsf{i}}}(\Succ(\plan,F)) < q$.
+  $\Prob^{\strat_\plan}_{\sini}(\Succ(\plan,F)) < q$.
   
   \bigpedro{cuidado!!! que no parece funcionar :-/ \par Retomar en
     alg\'un momento en el futuro}
@@ -1300,7 +1300,7 @@ We show this after presenting the next lemma.
   $\Prob^{\strat^\star}_s(\Succ(\plan,G))=0$ contradicting the
   hypothesis, proving thus \cref{lm:plan:plans:i}.
 
-  \Cref{lm:plan:plans:ii} follow directly from \cref{lm:plan:plans:i}.
+  \Cref{lm:plan:plans:ii} follows directly from \cref{lm:plan:plans:i}.
 \end{proof}
 
 
@@ -1326,6 +1326,83 @@ We show this after presenting the next lemma.
   \Cref{lm:plan:plans} (\cref{lm:plan:plans:i}) and
   \Cref{prop:nonprob:prob} (\cref{prop:nonprob:prob:ii}).
 \end{proof}
+
+In the rest of this section, we show that the problem of model
+checking for $\PKhadapt$ is decidable provided that the classes of the
+agent's perception are regular languages.  Thus, we first restate
+deterministic finite automata in our setting.
+
+A \emph{deterministic finite automaton (DFA)} is a PFA that is also a
+LTS. Let $\dfa$ be a DFA.  The language accepted by $\dfa$ is defined
+by $L(\dfa)=L(\dfa,1)$, i.e., it is the language accepted with
+probability 1 by $\dfa$ seen as a PFS.
+%
+We say that $\dfa$ is \emph{live} if for all $s\in\S$ there is some
+$\rho\in\execf$ so that $\first(\rho)=s$ and $\last(\rho)\in F$ ($F$
+is the set of final states defined as for PFAs in
+\Cref{sec:preliminaries}).  That is, $\dfa$ is live if all of its
+states are involved in the acceptance of some word.  Notice that for
+any regular language there is a live DFA that accepts it.
+
+Let $\model=\tup{\S_\model,\Act,\ra_\model,\V_\model}$ be a PLTS.  Let
+$\model_{\sini}$ be the pointed PLTS $\model$ with initial state
+$\sini\in\S_\model$.
+%
+Let $\dfa=\tup{\S_\dfa,\Act,\ra_\dfa,\V_\dfa}$ be a live DFA with
+initial state $\tini$ (i.e. $\init\in\V_\dfa(\tini)$).  The product
+PLTS of $\model_{\sini}$ and $\dfa$ is defined by
+$\model_{\sini}{\times}\dfa=\tup{\S_\model{\times}\S_\dfa,\Act,\ra,\V}$
+where $\V(s,t)=\V_\model(s)\cup\V_\dfa(t)$ and
+${\ra}\in{(\S_\model{\times}\S_\dfa}\times\Act\times\Dist({\S_\model{\times}\S_\dfa})$
+is the smallest relation such that
+%
+\[s\reach{a}_\model\mu \text{ and } t\reach{a}_\dfa\Dirac_{t'} \text{ imply } (s,t)\reach{a}(\mu{\otimes}\Dirac_{t'}),\]
+%
+with $\mu{\otimes}\Dirac_{t'}$ being the usual product of distributions
+defined by $\mu{\otimes}\Dirac_{t'}(s,t)= \mu(s)\cdot\Dirac_{t'}(t)$.
+Let $(\sini,\tini)$ be the initial state of
+$\model_{\sini}{\times}\dfa$.
+
+
+
+The following lemma is central to the proof of decidability of model
+checking $\PKhadapt$ properties.
+
+\begin{lemma}\label{lm:mc:core}
+  Let $\model$ be a PLTS with initial state $\sini\in\S_\model$ and
+  let $G\subseteq\S_\model$ a set of goal states.
+  %
+  Let $\plans\subseteq\Act^*$ be a regular language accepted by the
+  live DFA $\dfa$ with initial state $\tini\in\S_\dfa$.  Define
+  %
+  $R_{G{\times}F} = \{{\rho\in\cexecf^{\model_{\sini}{\times}\dfa}} \mid \text{ for some }i\geq 0, \last(\rho[..i])\in{G{\times}F}\}$
+  %
+  (viz., the set of complete executions that reach both the goal and a
+  final accepting state).
+  %
+  Then:
+  \begin{enumerate}
+  \item\label{lm:mc:core:i}%
+    For all strategy $\strat$ of $\model_{\sini}{\times}\dfa$, there is
+    a $\plans$-compatible strategy $\strat^\star$ of $\model$ s.t.\
+    %
+    $\Prob^{\strat}_{(\sini,\tini)}(R_{G{\times}F}) = \Prob^{\strat^\star}_{\sini}(\Succ(\plans,G))$.
+  \item\label{lm:mc:core:ii}%
+    For all $\plans$-compatible strategy $\strat$ of $\model$
+    there is a strategy $\strat^\star$ of $\model_{\sini}{\times}\dfa$ s.t.\
+    %
+    $\Prob^{\strat}_{\sini}(\Succ(\plans,G)) = \Prob^{\strat^\star}_{(\sini,\tini)}(R_{G{\times}F})$.
+  \item\label{lm:mc:core:iii}%
+    $\displaystyle\inf_{\sigma\in\Comp(\plans)}\Prob^{\strat}_{\sini}(\Succ(\plans,G)) = \inf_{\sigma}\Prob^{\strat}_{(\sini,\tini)}(R_{G{\times}F})$.
+  \item\label{lm:mc:core:iv}%
+    For $A\subseteq\S_\model$, $A\reach{\plans}_qG$ iff
+    $\displaystyle\inf_{s\in A}\inf_{\sigma}\Prob^{\strat}_{(\sini,\tini)}(R_{G{\times}F})\geq q$.
+  \end{enumerate}
+\end{lemma}
+
+
+
+
 
 \bigpedro{pr\'oximamente: model checking! (verificar si el teorema queda enunciado asi)}
 

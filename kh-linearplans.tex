@@ -118,8 +118,10 @@ It is worth noticing that  $\Unc$ is a partition of $\DS{}$ representing the per
         % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
     \end{definition}
 
-    \begin{proposition}[\cite{AFSVQ21,AFSVQ23}]
+    In~\cite{AFSVQ21,DF23} two different instances of the model-checking problem for $\Khlogic$ over LTSU were investigated. In the former, $\Unc$ consists of a finite set of classes, where each of them is a finite set of plans. In the latter, $\Unc$ is finite but every class is characterized by a finite-state automaton, i.e., it is potentially infinite. Both representations lead to the same result.
+
+    \begin{proposition}[\cite{AFSVQ21,DF23}]
         The model-checking problem for $\Khlogic$ over LTSU is in \PTIME.
     \end{proposition}
     \pedro{aqui seria importante determinar de qu\'e manera se dan los lenguajes de entrada (e.g. FSA) para poder comparar complejidades }
-    \raul{en Areces et al. se muestra para U finitos, donde cada $Pi$ en U es finito; en DemriF23 se prueba para U finitos donde cada clase viene dada por un automata finito.}
+    \raul{en Areces et al. se muestra para U finitos, donde cada $Pi$ en U es finito; en DemriF23 se prueba para U finitos donde cada clase viene dada por un automata finito. Agregue el texto arriba.}

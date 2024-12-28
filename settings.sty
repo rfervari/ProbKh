@@ -7,12 +7,42 @@
 \usepackage[small]{caption}
 \usepackage{graphicx}
 \usepackage{booktabs}
-\usepackage{algorithm}
-\usepackage{algorithmic}
+%\usepackage{algorithm}
+%\usepackage{algorithmic}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Algorithms
+
+%\usepackage[vlined]{algorithm2e}
+\usepackage[vlined,linesnumbered]{algorithm2e}
+
+\SetAlCapFnt{\footnotesize}\SetAlCapNameFnt{\footnotesize}
+\SetAlCapSkip{2ex plus 0.5ex minus 1ex}
+\SetAlgoCaptionSeparator{.}
+\SetEndCharOfAlgoLine{}
+\SetArgSty{textrm}
+\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+%\SetCommentSty{textit}
+\newcommand\mycommfont[1]{\textit{\textcolor{olive}{#1}}}
+\SetCommentSty{mycommfont}
+\SetKw{Break}{break}
+\SetKwProg{Type}{type}{}{end}
+\SetKwProg{Function}{function}{}{end}
+\SetKwFor{ForEach}{foreach}{do}{}
+\SetKwFor{WhileTrue}{repeat}{}{end}
+\SetKw{Continue}{continue}
+\SetKwRepeat{DoWhile}{repeat}{while}
+\SetKwInput{KwReq}{Requires}
+\newcommand\myfuncfont[1]{{\textsl{#1}}}
+\SetFuncSty{myfuncfont}
+\SetVlineSkip{0pt}
+
+% End Algorithms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{enumerate}
 \usepackage[inline,shortlabels]{enumitem}
 
+\usepackage{setspace}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}

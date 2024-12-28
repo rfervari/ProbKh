@@ -93,7 +93,7 @@ $\Prob_s^{\strat_\plan}$.
     \strat_1(s_0\,\lift\,s_1)(\complete)=\strat_1(s_0\,\lift\,s_3)(\complete)=1\\
     \strat_1(s_0\,\lift\,s_2)(\mobile,\mu_6)=1\\
     \strat_1(s_0\,\lift\,s_2\,\mobile\,s_6)(\complete)=
-    \strat_1(s_0\,\lift\,s_2\,\mobile\,s_7)(\complete)=1
+    \strat_1(s_0\,\lift\,s_2\,\mobile\,s_7)(\complete)=1.
   \end{array}
   \]
   %
@@ -287,8 +287,8 @@ $\Prob_s^{\strat_\plan}$.
       
     \end{tikzpicture}
   }
-  
-  \caption{PLTS $\modelex$ modeling possible fire emergency escape situations in a building}\label{fig:emergencyescape}
+  \caption{PLTS $\modelex$ modeling a fire emergency situation.}\label{fig:emergencyescape}  
+  % \caption{PLTS $\modelex$ modeling possible fire emergency escape situations in a building}\label{fig:emergencyescape}
 \end{figure}
 
 
@@ -418,7 +418,7 @@ goal $G$ with at least probability $q$ following plan $\plan$.
     \strat_2(s_0\,\stairs\,s_4)(\complete)=
     \strat_2(s_0\,\stairs\,s_5)(\mobile,\mu_8)=1\\
     \strat_2(s_0\,\stairs\,s_5\,\mobile\,s_9)(\complete)=
-    \strat_2(s_0\,\stairs\,s_5\,\mobile\,s_{10})(\complete)=1
+    \strat_2(s_0\,\stairs\,s_5\,\mobile\,s_{10})(\complete)=1,
   \end{array}
   \]
   %
@@ -452,8 +452,6 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
     $\plan$ is SE at $A$ and $A \reach{\plan} G$ iff $A \reach{\plan}_1 G$.
   \end{enumerate}
 \end{proposition}
-%
-\pedro{ver si dejamos la prueba aqu\'i o la mandamos al ap\'endice}%
 %
 \begin{proof}
   First we observe that
@@ -684,8 +682,6 @@ probability~$1$.
   \end{enumerate}
 \end{lemma}
 %
-\pedro{ver si dejamos la prueba aqu\'i o la mandamos al ap\'endice}%
-%
 \begin{proof}
   For implication $(\Rightarrow)$ of \cref{lm:someprob:prob1:i}
   suppose by contradiction that
@@ -722,7 +718,6 @@ probability~$1$.
 \end{proof}
 
 Below we recursively define the mapping $\fgetprob:\PKh\to\Khlogic$ which removes probability bounds from formulas by
-\pedro{no me convence $\fgetprob$. Otro s\'imbolo/nomenclatura?}
 %
 \begin{align*}
   & \fgetprob(p) = p
@@ -769,7 +764,7 @@ $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{\sini}(\Succ(\plan,F)) =
 with $\strat_\plan$ defined as in \Cref{sec:preliminaries}.
 %
 As a consequence checking $\model,s\models\kh^q(\init,\fin)$ is
-equivalent to the emptyness problem in PFA.  By
+equivalent to the emptiness problem in PFA.  By
 \Cref{prop:empty:PFA:undecidable}, this yields the following theorem.
 
 \begin{theorem}\label{th:mc:PKh:undecidable}
@@ -861,8 +856,6 @@ captured in the next definition.
 \end{example}
 
 
-\pedro{si cambiamos la logica, cambiar $\fgetprob$}
-%
 The following proposition states the exact correspondence between
 $\Khunc$ and $\PKhunc$ over LTSUs.
 %
@@ -940,7 +933,7 @@ we might as well measure the class success as a whole.
 Thus, the decision whether to continue with $\plan_4$ and $\plan_5$
 after transition $s_0\reach{\ramp}\mu_4$ depends of the random outcome
 induced by $\mu_4$.  Notice that, by proceeding adaptively, the
-likelyhood to succeed in this case reaches $0.95$.
+likelihood to succeed in this case reaches $0.95$.
 
 In this new view, the concept of a single plan compatibility becomes
 too strong.  Thus, we rather ask strategies to be compatible with a
@@ -986,13 +979,13 @@ also $\plan$-compatible.
   is $\plans_{2,3}$-compatible but not
   $\plan_2$-compatible or $\plan_3$-compatible.
   %
-  Notice the adaptive characteristics of $\strat_3$ that chooses to
+  Notice the adaptive characteristic of $\strat_3$ that chooses to
   perform $s_4\reach{\panic}\mu_7$ after $\stairs$ if in state $s_4$
   but chooses $s_4\reach{\mobile}\mu_8$ after $\stairs$ if in
   state $s_5$.
 
   Similarly, strategy $\strat_4$, discussed at the beginning of this
-  subsection, is defined defined so that
+  subsection, is defined so that
   %
   \[
   \begin{array}{l}
@@ -1008,7 +1001,7 @@ also $\plan$-compatible.
   neither $\plan_4$-compatible nor $\plan_5$-compatible.
 \end{example}
 
-We extend some conceptes already defined for single plans to sets of
+We extend some concepts already defined for single plans to sets of
 plans.  So, let $\plans\subseteq\Act^*$ be a set of plans and le
 $G\subseteq\S$ be a set of goal states.  The set of successful
 complete executions reaching $G$ with a plan in $\plans$ is defined
@@ -1041,8 +1034,8 @@ goal $G$ with at least probability $q$ following some plan in $\plans$
 
   In $\modelex^2$, if
   $\plans_{\star}=\{\plan_2,\plan_3,\plan_4,\plan_5\}\in\Unc_2$,
-  ${\{s_0\}\reach{\plans_{\star}}_{0.91}G_{\goal}}$, which witnessed
-  by the $\plans_{\star}$-compatible strategy $\strat_5$ define by
+  ${\{s_0\}\reach{\plans_{\star}}_{0.91}G_{\goal}}$, which is witnessed
+  by the $\plans_{\star}$-compatible strategy $\strat_5$ defined so that\pedro{pongo ``defined so that'' y no ``defined by'' porque la definici\'on dada es incompleta (aunque sea lo \'unico relevante).  Podr\'ia haber aceptado igua el ``defined by'' si me salvaba el rengl[on, pero no lo hace.}
   %
   \[
   \begin{array}{l}
@@ -1050,7 +1043,7 @@ goal $G$ with at least probability $q$ following some plan in $\plans$
     \strat_5(s_0\,\stairs\,s_4)(\panic,\mu_7)=\strat_5(s_0\,\stairs\,s_5)(\mobile,\mu_8)=1\\
     \strat_5(s_0\,\stairs\,s_4\,\panic\,s_8)(\complete)=1\\
     \strat_5(s_0\,\stairs\,s_5\,\mobile\,s_9)(\complete)=
-    \strat_5(s_0\,\stairs\,s_5\,\mobile\,s_{10})(\complete)=1,
+    \strat_5(s_0\,\stairs\,s_5\,\mobile\,s_{10})(\complete)=1.
   \end{array}
   \]
   
@@ -1082,7 +1075,7 @@ semantics is captured in the next definition.
   %
 \end{definition}
 
-\pedro{\textbf{\color{red}@Ra\'ul:} este comentario t\'ecnico est\'a tratando de atajar a aquel revisor que te rechazo la priemera vuelta del paper con Andr\'es.  Fijate que te parece (o si te parece)}
+\pedro{\textbf{\color{red}@Ra\'ul:} este comentario t\'ecnico est\'a tratando de atajar a aquel revisor que te rechazo la primera vuelta del paper con Andr\'es.  Fijate que te parece (o si te parece)}
 Notice that there is a \emph{universal} cuantification on
 $\plans$-compatible strategies implicit in the ``$\inf$'' within
 expression
@@ -1094,9 +1087,9 @@ $\plans$ in \Cref{def:semantics-kh-uncertain}.
 %
 However, in \Cref{def:semantics:PKhadapt} plans in $\plans$ are
 neither existential nor universally quantified.  Instead they are
-\emph{probabililisticly} quantified for each $\plans$-compatible
+\emph{probabilistically} quantified for each $\plans$-compatible
 strategy through expression $\Prob^\strat_s(\Succ(\plans,G))$ within
-\cref{eq:plans:goal:q}.
+\cref{eq:plans:goal:q}\textcolor{red}{, meaning she can adapt to the course of action in $\plans$ with the best chance of success.}\pedro{no entiendo bien a que va esto en rojo. El esp\'iritu de la frase era indicar algo t\'ecnico: que las probabilidades nos habilitan a vivir en una especie de lugar intermedio entre la cuantificaci\'on universal y la existencial}
 
 
 \begin{example}\label{ex:running:pkhadapt}
@@ -1111,20 +1104,23 @@ strategy through expression $\Prob^\strat_s(\Succ(\plans,G))$ within
 \end{example}
 
 
-Logics $\PKhunc$ and $\PKhadapt$ are not related.
+Logics $\PKhunc$ and $\PKhadapt$ are not directly
+%\raul{pongo 'directly' porque esto no es demo en terminos de expresividad.}
+related.
 %
 On the one hand
 $\modelex^1,s \models_\PKhadapt \kh^{0.95}(\init,\goal)$
 (see \Cref{ex:running:pkhadapt}) but
 $\modelex^1,s \models_\PKhunc \neg\kh^{0.95}(\init,\goal)$
 (see \Cref{ex:running:pkhunc}).
+\pedro{aqui no me puedo escapar de la necesidad de subindicar $\models$. Ver como/hasta donde generalr esto.  Charlarlo con Ra\'ul}
 %
 On the other hand, consider PLTSU $\modelex^3$ in \Cref{fig:counterexamples}
 with $\Unc_3=\{\{ab,ac\}\}$.  It is not hard to check that
 $\modelex^3,s \models_\PKhunc \kh^{0.5}(\init,\goal)$ but 
 $\modelex^3,s \models_\PKhadapt \neg\kh^{0.5}(\init,\goal)$.
 The second one is explained by an $\{ab,ac\}$-compatible strategy that
-always choose wrongly: at state $s_1$ it chooses the $c$ transition
+always chooses wrongly: at state $s_1$ it chooses the $c$ transition
 while at state $s_2$ it chooses the $b$ transition.
 
 \begin{figure}
@@ -1220,7 +1216,7 @@ while at state $s_2$ it chooses the $b$ transition.
     \end{tikzpicture}
   }
   
-  \caption{Counterexamples}\label{fig:counterexamples}
+  \caption{Counterexamples.}\label{fig:counterexamples}
 
 \end{figure}
 

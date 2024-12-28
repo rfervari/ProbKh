@@ -50,43 +50,34 @@ The model-checking problem for a given logic is defined as follows, where models
     \item[Output:] $\model,s\models\varphi$?
 \end{description}
 
-\begin{proposition}[\cite{DemriF23}]
+\begin{proposition}[\cite{DF23}]
     The model-checking problem for $\Khlogic$ is \PSPACE-complete.
 \end{proposition}
 
 \subsection{Indistinguishability Classes in Knowing How}
 
-In what follows we introduce the generalization of $\Khlogic$ where the perception of each agent is determined by an indistinguishability relation between plans~\cite{AFSVQ21,AFSVQ23}. 
+We present the generalization of $\Khlogic$ where the agent's perception is determined by an indistinguishability relation between plans~\cite{AFSVQ21,AFSVQ23}. W.l.o.g., we consider here a single agent, unlike the multi-agent presentation from previous works.
 
 \begin{definition}[Uncertainty-based \lts]\label{def:ults}
-    An \emph{uncertainty-based \lts} (LTSU) for $\Prop$, $\Act$ is a tuple     $\model=\tup{\S,\Act,\ra,\Unc,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is an LTS, and 
-    $\Unc\subseteq \powerset(\Act^*)\setminus \emptyset$ is a non-empty collection of pairwise disjoint non-empty sets of plans, i.e., $\Unc\neq\emptyset$, for all $\plans_1,\plans_2\in\Unc$, $\plan_1\neq\plan_2$ implies  $\plan_1\cap\plan_2=\emptyset$ and $\emptyset\notin\Unc$. 
-    %  ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$ (called the indistinguishability relation between plans). 
+An \emph{uncertainty-based \lts} (LTSU) is a tuple     $\model=\tup{\S,\Act,\ra,\Unc,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is an LTS, and 
+$\Unc\subseteq \powerset(\Act^*)\setminus \emptyset$ is a non-empty collection of pairwise disjoint non-empty sets of plans, i.e., (i) $\Unc\neq\emptyset$, (ii) for all $\plans_1,\plans_2\in\Unc$, $\plans_1\neq\plans_2$ implies  $\plans_1\cap\plans_2=\emptyset$, and (iii) $\emptyset\notin\Unc$. 
+%  ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$ (called the indistinguishability relation between plans). 
 
-    % By $[\plan]_{\sim}:=\set{\plan' \in \DS{} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{}$, then we define the \emph{indistinguishability set of $\model$} as $\Unc := \set{[\plan]_{\sim} \mid \plan\in\DS{}}$. 
-        % For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to an LTSU, i.e., we will use its uncertainty set instead of the indistinguishability relation.
-    \end{definition}
-    
-Intuitively, $\DS{} = \bigcup_{\plans \in \Unc} \plans$ is the set of plans that the  agent is aware she has at her disposal, and each $\plans \in \Unc$ is an indistinguishability class. Thus, $\Unc$ is in direct correspondence to an equivalence relation over $\DS{}$, where each $\plans\in\Unc$ defines an equivalence class (see~\cite{AFSVQ21,AFSVQ23} for details). W.l.o.g., we consider here a single agent, unlike the multi-agent presentation from previous works.
+% By $[\plan]_{\sim}:=\set{\plan' \in \DS{} \mid \plan \sim_i \plan'}$ we denote $\plan$'s equivalence relation with respect to $\DS{}$, then we define the \emph{indistinguishability set of $\model$} as $\Unc := \set{[\plan]_{\sim} \mid \plan\in\DS{}}$. 
+    % For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to an LTSU, i.e., we will use its uncertainty set instead of the indistinguishability relation.
+\end{definition}
+
+Intuitively, $\DS{} = \bigcup_{\plans \in \Unc} \plans$ is the set of plans that the  agent is aware she has at her disposal, and each $\plans \in \Unc$ is an indistinguishability class. Thus, $\Unc$ is in direct correspondence to an equivalence relation over $\DS{}$, where each $\plans\in\Unc$ defines an equivalence class (see e.g.~\cite{AFSVQ23}). 
 %
-It is worth noticing that  $\Unc$ is a partition of $\DS{}$ representing the perception the agent has about the reality.  Moreover, those plans in $\Act^*\setminus\DS{}$ are not considered by the agent, even if they are suitable plans. 
+Notice that $\Unc$ is a partition of $\DS{}$ representing the perception the agent has about the reality.  Those plans in $\Act^*\setminus\DS{}$ are not considered by the agent, even if they are suitable plans. 
 
+Given her indistinguishability over $\Act^*$, the abilities of the agent depend not on what a single plan can achieve, but rather on what a set of them can guarantee.
 
-    
-    Given her indistinguishability over $\Act^*$, the abilities of the agent depend not on what a single plan can achieve, but rather on what a set of them can guarantee.
-    
-    \medskip
-    
-    \begin{definition}
-       Let $\plans \subseteq \Act^*$ and $A,G \subseteq \S$, we write $A\reach{\plans} G$ if for all $s\in A$, $\plan\in\plans$ and $t\in \S$,  $s \reach{\plan} t$ implies $t\in G$. 
-    \end{definition}
-    
-    \medskip
-    
-    In what follows, we introduce the notion of strong executability for a set of plans (see, e.g.,~\cite{AFSVQ23}), generalizing the notion introduced for a single plan.
-    
-    \medskip
-    
+\begin{definition}
+    Let $\plans \subseteq \Act^*$ and $A,G \subseteq \S$, we write $A\reach{\plans} G$ if for all $s\in A$, $\plan\in\plans$ and $t\in \S$,  $s \reach{\plan} t$ implies $t\in G$. 
+\end{definition}
+
+In what follows, we introduce the notion of strong executability for a set of plans (see, e.g.,~\cite{AFSVQ23}), generalizing the notion introduced for a single plan.
     
 %%     \begin{definition}[Strong executability of plans]\label{def:plans-exec}
 %%     Let $\model=\tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU. A \emph{set of plans} $\plans \subseteq \Act^*$ is \emph{strongly executable} at $u \in \S$ if and only if \emph{every} plan $\plan \in \plans$ is \emph{strongly executable} at~$u$.
@@ -105,20 +96,22 @@ It is worth noticing that  $\Unc$ is a partition of $\DS{}$ representing the per
 %%         % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
 %%     \end{definition}
 
-    \begin{definition} \label{def:semantics-kh-uncertain}
-        Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
-        \[
-        \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
-        \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{s.t.\ for all } \plan\in\plans \\
-        & & \ \ \text{\rm (1)} \ \plan \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
-        & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
-        \end{array}
-        \]      
-        where: $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,w\models\chi}$. 
-        % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
-    \end{definition}
+\begin{definition} \label{def:semantics-kh-uncertain}
+    Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is defined inductively as usual for the Boolean operators and
+    \[
+    \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
+    \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{s.t.\ for all } \plan\in\plans \\
+    & & \ \ \text{\rm (1)} \ \plan \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
+    & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
+    \end{array}
+    \]      
+    where: $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,w\models\chi}$. 
+    % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
+\end{definition}
 
-    \begin{proposition}[\cite{AFSVQ21,AFSVQ23}]
-        The model-checking problem for $\Khlogic$ over LTSU is in \PTIME.
-    \end{proposition}
-    \pedro{aqui seria importante determinar de qu\'e manera se dan los lenguajes de entrada (e.g. FSA) para poder comparar complejidades }
+In~\cite{AFSVQ21,DF23} two different instances of the model-checking problem for $\Khlogic$ over LTSU were studied. In the former, $\Unc$ consists of a finite set of classes, where each of them is a finite set of plans. In the latter, $\Unc$ is finite but every class is characterized by a finite-state automaton, i.e., it is potentially infinite, subsuming the finite case. Both representations lead to the same result.
+
+\begin{proposition}{\cite{DF23}}
+    The model-checking problem for $\Khlogic$ over LTSU is in \PTIME.
+\end{proposition}
+

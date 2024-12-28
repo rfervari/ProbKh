@@ -8,7 +8,7 @@
 \emph{alphabet} and let $\plan\in\Act^*$ be a word with alphabet
 $\Act$.  We use $\size{\plan}$ to denote the length of $\plan$ (with
 $\size{\epsilon}=0$) and $\plan[i]$, for $0<i\leq\size{\plan}$,
-denotes the $i$-th element of $\plan$.
+to denote the $i$-th element of $\plan$.
 %
 For $0\leq i\leq\size{\plan}$, $\plan[..i]$ denotes the $i$-th prefix
 of $\plan$, i.e., the initial segment of $\plan$ up to (and including)
@@ -145,7 +145,7 @@ $\Prop=\{\init,\fin\}$, i.e., $\V:\S\to\powerset(\{\init,\fin\})$,
 such that there is a single state $\sini\in\S$, called
 \emph{initial}, with $\init\in\V(\sini)$.
 %
-$F=\{{s\in\S}\mid{\fin\in\V(s)}\}$ is the set of \emph{final} states.
+$F=\{{s\in\S}\mid{\fin\in\V(s)}\}$ is the set of \emph{final} states. \raul{entiendo y acuerdo en que fin y $\goal$ son cosas distintas, pero quizas convendria poner un comentario al respecto}\pedro{pero $\fin$ y $\goal$ habitan dos lugares distintos. De hecho $\goal$ solo aparece en los ejemplos y para PLTS (a\'un no apareci\'o en esta preliminar) mientras $\fin$ es particular de PFA. Creo que tratar de diferenciarlos expl\'icitamente confundir\'ia.}
 
 Given an execution
 $\rho = s_0\,a_1\,s_1\ldots s_{n-1}\,a_n\,s_n \in \execf$,
@@ -176,7 +176,7 @@ $\Succ(\plan,F)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}=\plan \text{ and } \l
 Let $L(\model,q)$ be the set of all such words.
 
 \begin{proposition}{\cite{MadaniHC99}}\label{prop:empty:PFA:undecidable}
-  The emptyness problem in PFA (i.e., checking if
+  The emptiness problem in PFA (i.e., checking if
   $L(\model,q)=\emptyset$) is undecidable.
 \end{proposition}
 

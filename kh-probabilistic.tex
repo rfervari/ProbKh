@@ -1024,7 +1024,7 @@ state $s\in A$, \cref{eq:plans:goal:q} holds.
 %
 Thus $A \reach{\plans}_q G$ means that any state in $A$ can reach the
 goal $G$ with at least probability $q$ following some plan in $\plans$
-\emph{in an adaptive manner}.
+\emph{in an adaptive manner}: she can adapt to the course of action in $\plans$ with the best chance of success
 
 \begin{example}\label{ex:running:plans-exec}
   Resuming the example, $\{s_0\}\reach{\plans_{4,5}}_{0.95}G_{\goal}$
@@ -1035,7 +1035,7 @@ goal $G$ with at least probability $q$ following some plan in $\plans$
   In $\modelex^2$, if
   $\plans_{\star}=\{\plan_2,\plan_3,\plan_4,\plan_5\}\in\Unc_2$,
   ${\{s_0\}\reach{\plans_{\star}}_{0.91}G_{\goal}}$, which is witnessed
-  by the $\plans_{\star}$-compatible strategy $\strat_5$ defined so that\pedro{pongo ``defined so that'' y no ``defined by'' porque la definici\'on dada es incompleta (aunque sea lo \'unico relevante).  Podr\'ia haber aceptado igua el ``defined by'' si me salvaba el rengl[on, pero no lo hace.}
+  by the $\plans_{\star}$-compatible strategy $\strat_5$ defined so that
   %
   \[
   \begin{array}{l}
@@ -1089,8 +1089,7 @@ However, in \Cref{def:semantics:PKhadapt} plans in $\plans$ are
 neither existential nor universally quantified.  Instead they are
 \emph{probabilistically} quantified for each $\plans$-compatible
 strategy through expression $\Prob^\strat_s(\Succ(\plans,G))$ within
-\cref{eq:plans:goal:q}\textcolor{red}{, meaning she can adapt to the course of action in $\plans$ with the best chance of success.}\pedro{no entiendo bien a que va esto en rojo. El esp\'iritu de la frase era indicar algo t\'ecnico: que las probabilidades nos habilitan a vivir en una especie de lugar intermedio entre la cuantificaci\'on universal y la existencial}
-
+\cref{eq:plans:goal:q}.
 
 \begin{example}\label{ex:running:pkhadapt}
   For all $s\in\S$, $\modelex^1,s \models \kh^{0.95}(\init,\goal)$ since 
@@ -1544,6 +1543,7 @@ algorithm for $\PKhadapt$ properties.
   \cref{lm:mc:core:i} follows.
 
   \bigpedro{creo que la prueba detallada del \cref{lm:mc:core:ii} se puede comentar dado su parecido a la del \cref{lm:mc:core:i}}
+  \bigraul{estoy de acuerdo, la dejo de momento para chequearla nomas}
   {\color{red}
   For \cref{lm:mc:core:ii}, let $\strat$ be a strategy for
   $\model$ and define strategy $\strat^\star$ for
@@ -1566,7 +1566,7 @@ algorithm for $\PKhadapt$ properties.
   $\strat^\star$ is well defined for all executions that are prefixes of
   some execution in $\setRini$.
   %
-  For any other execution, $\strat^\star$ can be definied in anyway.
+  For any other execution, $\strat^\star$ can be defined in any way.
 
   Following \cref{eq:def:prob:i,eq:def:prob:ii}, it should not be hard
   to see that
@@ -1599,12 +1599,12 @@ algorithm for $\PKhadapt$ properties.
 
   \Function{\Check{$\varphi$}}{
     \Switch{$\varphi$}{
-      \lCase{$\Prop$}{\Return{$\{{s\in\S}\mid {\varphi\in\V(s)}\}$}}
+      \lCase{$p\in\Prop$}{\Return{$\{{s\in\S}\mid {p\in\V(s)}\}$}}
       \lCase{${\neg\psi}$}{\Return{$\S\setminus{}$\Check{$\psi$}}}
-      \lCase{${\psi\wedge\phi}$}{\Return{\Check{$\psi$}$\cap$\,\Check{$\phi$}}}
-      \Case{$\kh^q(\psi,\phi)$}{
+      \lCase{${\psi\wedge\chi}$}{\Return{\Check{$\psi$}$\cap$\,\Check{$\chi$}}}
+      \Case{$\kh^q(\psi,\chi)$}{
         $A:={}$\Check{$\psi$}\;
-        $G:={}$\Check{$\phi$}\;
+        $G:={}$\Check{$\chi$}\;
         \ForEach{$i\in I$}{
           Construct $\model{\times}\dfa_i$ extended with $s_A$\;
           $\mathit{qmin}:={}$\MinReachProb{$G{\times}F_i$}\;
@@ -1638,8 +1638,8 @@ techniques \cite{Puterman94,BaierK08}.
 %
 In particular, notice that in \cref{alg:ln:rettrue}, the function
 returns the whole set $\S$ of states if the $i$-th DFA witnesses the
-validity of $\kh^q(\psi,\phi)$ and, in \cref{alg:ln:retfalse}, it
-returns the empty set if no DFA witnesses $\kh^q(\psi,\phi)$.
+validity of $\kh^q(\psi,\chi)$ and, in \cref{alg:ln:retfalse}, it
+returns the empty set if no DFA witnesses $\kh^q(\psi,\chi)$.
 %
 \pedro{est\'a bien poner el algoritmo o es mucho?}
 

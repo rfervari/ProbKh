@@ -932,7 +932,7 @@ we might as well measure the class success as a whole.
 %
 Thus, the decision whether to continue with $\plan_4$ and $\plan_5$
 after transition $s_0\reach{\ramp}\mu_4$ depends of the random outcome
-induced by $\mu_4$.  Notice that, by proceeding adaptively, the
+induced by~$\mu_4$.  Notice that, by proceeding adaptively, the
 likelihood to succeed in this case reaches $0.95$.
 
 In this new view, the concept of a single plan compatibility becomes
@@ -1024,9 +1024,7 @@ state $s\in A$, \cref{eq:plans:goal:q} holds.
 %
 Thus $A \reach{\plans}_q G$ means that any state in $A$ can reach the
 goal $G$ with at least probability $q$ following some plan in $\plans$
-\emph{in an adaptive manner}: \textcolor{red}{she can adapt to the course of action in $\plans$ with the best chance of success.}
-\pedro{\textbf{@Ra\'ul:} no necesariamente con las mejores chances de \'exito: Ver  $\modelex^3$ en \Cref{fig:counterexamples} y p\'arrafo luego de \Cref{ex:running:pkhadapt} que lo explica. Fijate si te gusta m\'as lo que est\'a en azul.}%
-\textcolor{blue}{This means that the agent can adapt to the course of action in $\plans$ according to the available decisions along the chosen execution path.}
+\emph{in an adaptive manner}. Then, the agent can adapt to the best course of action in $\plans$ according to the available decisions along the chosen execution path.
 
 \begin{example}\label{ex:running:plans-exec}
   Resuming the example, $\{s_0\}\reach{\plans_{4,5}}_{0.95}G_{\goal}$

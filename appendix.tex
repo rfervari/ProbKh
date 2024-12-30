@@ -46,7 +46,7 @@ As a consequence of this, we have the next lemma.
 \end{proof}
 
 Let $\pfa=\tup{\S,\Act,\ra,\V}$ be a complete PFA.  Let $\pfa^\star$
-be exatly the same as $\pfa$ where the accepting states are exatly
+be exactly the same as $\pfa$ where the accepting states are exactly
 those that are not accepting in $\pfa$, that is
 $\pfa^\star=\tup{\S,\Act,\ra,\V^\star}$ with
 $\V^\star(s)=(\V(s)\setminus\{\fin\})\cup\{\fin\mid{\fin\notin\V(s)}\}$.
@@ -68,7 +68,7 @@ From \Cref{lm:strat:plan:complete}, it follows that for all $\plan\in\Act^*$,
 originates.)
 
 As a consequence of this observation, $L(\pfa,q)=\emptyset$ iff there
-is a word $\plan\in\Act$ such that
+is a word $\plan\in\Act^*$ such that
 $\Prob_{\pfa^\star,\sini}^{\strat_\plan}(\Succ(\plan,F^\star)) < 1-q$.
 %
 Considering \Cref{prop:empty:PFA:undecidable}, this yields the

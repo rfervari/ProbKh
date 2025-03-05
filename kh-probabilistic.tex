@@ -1589,35 +1589,64 @@ algorithm for $\PKhadapt$ properties.
   direct consequence of \cref{lm:mc:core:iii}.  
 \end{proof}
 
-\SetKwFunction{Check}{Check}%
-\SetKwFunction{MinReachProb}{MeanReachProb}%
-\begin{algorithm}[t]
-  \small
-  \setstretch{1.1}
-  \KwIn{PLTSU $\model$, with agent's perception as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ property $\varphi$.}
-  \KwOut{$\truthset{\model}{\varphi}$}
+\renewcommand{\Check}[1]{Check(#1)}%
+\newcommand{\MinReachProb}[1]{MeanReachProb(#1)}%
+\newcommand{\Return}{\textbf{return}\ \ }
+\begin{algorithm}[tb]
+  \caption{Model checking algorithm for $\PKhadapt$.}
+  \label{alg:mc:pkhadapt}
+  \textbf{Input}: PLTSU $\model$, with agent's perception as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ property $\varphi$\\
+  \textbf{Output}: $\truthset{\model}{\varphi}$ \\
+  \textbf{Function:} \Check{$\varphi$} 
+  \begin{algorithmic}[1] %[1] enables line numbers
+    \SWITCH {$\varphi$}
+    \CASELINE{$p\in\Prop$}
+      {\Return {$\{{s\in\S}\mid {p\in\V(s)}\}$}}
+    \CASELINE{${\neg\psi}$}
+      {\Return{$\S\setminus{}$\Check{$\psi$}}}
+    \CASELINE{${\psi\wedge\chi}$}
+      {\Return{\Check{$\psi$} $\cap$ \Check{$\chi$}}}
+    \CASE{$\kh^q(\psi,\chi)$}
+      \STATE \quad\quad \textbf{for each} {$i\in I$}
+          \STATE \quad\quad\quad Construct $\model{\times}\dfa_i$ extended with $s_A$\;
+          \STATE \quad\quad\quad $\mathit{qmin}:={}$\MinReachProb{$G{\times}F_i$}\;
+          \STATE \quad\quad\quad \textbf{if} {($\mathit{qmin}\geq q$)} {\Return{$\S$}}\label{alg:ln:rettrue}
+          \STATE \quad\quad\quad \Return{$\emptyset$}\label{alg:ln:retfalse}
+      \STATE \quad\quad \textbf{end for}
+    % \ENDCASE
+    \ENDSWITCH
+  \end{algorithmic}
+  \end{algorithm}
 
-  \Function{\Check{$\varphi$}}{
-    \Switch{$\varphi$}{
-      \lCase{$p\in\Prop$}{\Return{$\{{s\in\S}\mid {p\in\V(s)}\}$}}
-      \lCase{${\neg\psi}$}{\Return{$\S\setminus{}$\Check{$\psi$}}}
-      \lCase{${\psi\wedge\chi}$}{\Return{\Check{$\psi$}$\cap$\,\Check{$\chi$}}}
-      \Case{$\kh^q(\psi,\chi)$}{
-        $A:={}$\Check{$\psi$}\;
-        $G:={}$\Check{$\chi$}\;
-        \ForEach{$i\in I$}{
-          Construct $\model{\times}\dfa_i$ extended with $s_A$\;
-          $\mathit{qmin}:={}$\MinReachProb{$G{\times}F_i$}\;
-          \lIf{$\mathit{qmin}\geq q$}{\Return{$\S$}}\label{alg:ln:rettrue}
-        }
-        \Return{$\emptyset$}\label{alg:ln:retfalse}
-      }
-    }
-  }
-  \caption{Model checking algorithm for $\PKhadapt$.}\label{alg:mc:pkhadapt}
-\end{algorithm}
 
-\raul{el estilo del algoritmo no sigue las guidelines de KR. Cambiar despues.}
+% \begin{algorithm}[t]
+%   \caption{Model checking algorithm for $\PKhadapt$.}\label{alg:mc:pkhadapt}
+%   \hrule
+%   \small
+%   \setstretch{1.1}
+%   \KwIn{PLTSU $\model$, with agent's perception as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ property $\varphi$.}
+%   \KwOut{$\truthset{\model}{\varphi}$}
+
+%   \Function{\Check{$\varphi$}}{
+%     \Switch{$\varphi$}{
+%       \lCase{$p\in\Prop$}{\Return{$\{{s\in\S}\mid {p\in\V(s)}\}$}}
+%       \lCase{${\neg\psi}$}{\Return{$\S\setminus{}$\Check{$\psi$}}}
+%       \lCase{${\psi\wedge\chi}$}{\Return{\Check{$\psi$}$\cap$\,\Check{$\chi$}}}
+%       \Case{$\kh^q(\psi,\chi)$}{
+%         $A:={}$\Check{$\psi$}\;
+%         $G:={}$\Check{$\chi$}\;
+%         \ForEach{$i\in I$}{
+%           Construct $\model{\times}\dfa_i$ extended with $s_A$\;
+%           $\mathit{qmin}:={}$\MinReachProb{$G{\times}F_i$}\;
+%           \lIf{$\mathit{qmin}\geq q$}{\Return{$\S$}}\label{alg:ln:rettrue}
+%         }
+%         \Return{$\emptyset$}\label{alg:ln:retfalse}
+%       }
+%     }
+%   }
+%   \hrule
+% \end{algorithm}
+
 
 As a consequence of \cref{lm:mc:core:iv} in \Cref{lm:mc:core}, the
 validity of $A\reach{\plans}_qG$ can be checked
@@ -1638,9 +1667,9 @@ minimun reachability probability
 $\inf_{\strat}\Prob^{\strat}_{s_A}(R_{G{\times}F_i})$ using standard
 techniques \cite{Puterman94,BaierK08}.
 %
-In particular, notice that in \cref{alg:ln:rettrue}, the function
+In particular, notice that in line \ref{alg:ln:rettrue}, the function
 returns the whole set $\S$ of states if the $i$-th DFA witnesses the
-validity of $\kh^q(\psi,\chi)$ and, in \cref{alg:ln:retfalse}, it
+validity of $\kh^q(\psi,\chi)$ and, in \ref{alg:ln:retfalse}, it
 returns the empty set if no DFA witnesses $\kh^q(\psi,\chi)$.
 %
 \pedro{est\'a bien poner el algoritmo o es mucho?}

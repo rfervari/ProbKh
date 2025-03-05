@@ -7,34 +7,45 @@
 \usepackage[small]{caption}
 \usepackage{graphicx}
 \usepackage{booktabs}
-%\usepackage{algorithm}
-%\usepackage{algorithmic}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\newcommand{\SWITCH}[1]{\STATE \textbf{switch} (#1)}
+\newcommand{\ENDSWITCH}{\STATE \textbf{end switch}}
+\newcommand{\CASE}[1]{\STATE \quad \textbf{case} #1\textbf{:}}
+% \newcommand{\ENDCASE}{\end{ALC@g}}
+\newcommand{\CASELINE}[1]{\STATE \quad \textbf{case} #1\textbf{:} }
+\newcommand{\DEFAULT}{\STATE \textbf{default:} \begin{ALC@g}}
+\newcommand{\ENDDEFAULT}{\end{ALC@g}}
+\newcommand{\DEFAULTLINE}[1]{\STATE \textbf{default:} }
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Algorithms
 
 %\usepackage[vlined]{algorithm2e}
-\usepackage[vlined,linesnumbered]{algorithm2e}
+% \usepackage[vlined,linesnumbered]{algorithm2e}
 
-\SetAlCapFnt{\footnotesize}\SetAlCapNameFnt{\footnotesize}
-\SetAlCapSkip{2ex plus 0.5ex minus 1ex}
-\SetAlgoCaptionSeparator{.}
-\SetEndCharOfAlgoLine{}
-\SetArgSty{textrm}
-\SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
-%\SetCommentSty{textit}
-\newcommand\mycommfont[1]{\textit{\textcolor{olive}{#1}}}
-\SetCommentSty{mycommfont}
-\SetKw{Break}{break}
-\SetKwProg{Type}{type}{}{end}
-\SetKwProg{Function}{function}{}{end}
-\SetKwFor{ForEach}{foreach}{do}{}
-\SetKwFor{WhileTrue}{repeat}{}{end}
-\SetKw{Continue}{continue}
-\SetKwRepeat{DoWhile}{repeat}{while}
-\SetKwInput{KwReq}{Requires}
-\newcommand\myfuncfont[1]{{\textsl{#1}}}
-\SetFuncSty{myfuncfont}
-\SetVlineSkip{0pt}
+% \SetAlCapFnt{\footnotesize}\SetAlCapNameFnt{\footnotesize}
+% \SetAlCapSkip{2ex plus 0.5ex minus 1ex}
+% \SetAlgoCaptionSeparator{.}
+% \SetEndCharOfAlgoLine{}
+% \SetArgSty{textrm}
+% \SetKwInOut{Input}{Input}\SetKwInOut{Output}{Output}
+% %\SetCommentSty{textit}
+% \newcommand\mycommfont[1]{\textit{\textcolor{olive}{#1}}}
+% \SetCommentSty{mycommfont}
+% \SetKw{Break}{break}
+% \SetKwProg{Type}{type}{}{end}
+% \SetKwProg{Function}{function}{}{end}
+% \SetKwFor{ForEach}{foreach}{do}{}
+% \SetKwFor{WhileTrue}{repeat}{}{end}
+% \SetKw{Continue}{continue}
+% \SetKwRepeat{DoWhile}{repeat}{while}
+% \SetKwInput{KwReq}{Requires}
+% \newcommand\myfuncfont[1]{{\textsl{#1}}}
+% \SetFuncSty{myfuncfont}
+% \SetVlineSkip{0pt}
+% \renewcommand{\@algocf@capt@plain}{above}
 
 % End Algorithms
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

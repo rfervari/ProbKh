@@ -1542,48 +1542,46 @@ algorithm for $\PKhadapt$ properties.
   Hence, from \cref{eq:prob:R:bigcup:cyl,eq:prob:S:bigcup:cyl},
   \cref{lm:mc:core:i} follows.
 
-  \bigpedro{creo que la prueba detallada del \cref{lm:mc:core:ii} se puede comentar dado su parecido a la del \cref{lm:mc:core:i}}
-  \bigraul{estoy de acuerdo, la dejo de momento para chequearla nomas}
-  {\color{red}
-  For \cref{lm:mc:core:ii}, let $\strat$ be a strategy for
-  $\model$ and define strategy $\strat^\star$ for
-  $\model{\times}\dfa$ as follows.
-  %
-  Let
-  $\rho=(s_0,t_0)\, a_1\, (s_1,t_1)\ldots (s_{n-1},t_{n-1})\, a_n\, (s_n,t_n)\in\setRini$
-  and $0\leq k\leq\size{\rho}$, then:
-  %
-  \begin{enumerate}
-  \item%
-    If $k=\size{\rho}$, let $\strat^\star(\rho)(\complete)=1$.
-  \item%
-    If instead $k<\size{\rho}$, let
-    $\strat^\star(\rho[..k])(a_{k+1},\mu\otimes\Dirac_{t_{k+1}})=\strat(\proj(\rho[..k]))(a_{k+1},\mu)$
-    for all $\mu\in\Dist(\S)$.
-  \end{enumerate}
-  %
-  Since $\proj$ is a bijection from $\setRini$ to $\setSini$, 
-  $\strat^\star$ is well defined for all executions that are prefixes of
-  some execution in $\setRini$.
-  %
-  For any other execution, $\strat^\star$ can be defined in any way.
+  % \bigpedro{creo que la prueba detallada del \cref{lm:mc:core:ii} se puede comentar dado su parecido a la del \cref{lm:mc:core:i}}
+  % {\color{red}
+  % For \cref{lm:mc:core:ii}, let $\strat$ be a strategy for
+  % $\model$ and define strategy $\strat^\star$ for
+  % $\model{\times}\dfa$ as follows.
+  % %
+  % Let
+  % $\rho=(s_0,t_0)\, a_1\, (s_1,t_1)\ldots (s_{n-1},t_{n-1})\, a_n\, (s_n,t_n)\in\setRini$
+  % and $0\leq k\leq\size{\rho}$, then:
+  % %
+  % \begin{enumerate}
+  % \item%
+  %   If $k=\size{\rho}$, let $\strat^\star(\rho)(\complete)=1$.
+  % \item%
+  %   If instead $k<\size{\rho}$, let
+  %   $\strat^\star(\rho[..k])(a_{k+1},\mu\otimes\Dirac_{t_{k+1}})=\strat(\proj(\rho[..k]))(a_{k+1},\mu)$
+  %   for all $\mu\in\Dist(\S)$.
+  % \end{enumerate}
+  % %
+  % Since $\proj$ is a bijection from $\setRini$ to $\setSini$, 
+  % $\strat^\star$ is well defined for all executions that are prefixes of
+  % some execution in $\setRini$.
+  % %
+  % For any other execution, $\strat^\star$ can be defined in any way.
 
-  Following \cref{eq:def:prob:i,eq:def:prob:ii}, it should not be hard
-  to see that
-  %
-  $\Prob^{\strat}_{\sini}(\Cyl(\proj(\rho))) =
-  \Prob^{\strat^\star}_{(\sini,\tini)}(\{\rho\complete\}) =
-  \Prob^{\strat^\star}_{\sini}(\Cyl(\rho))$
-  %
-  Hence, from \cref{eq:prob:R:bigcup:cyl,eq:prob:S:bigcup:cyl},
-  \cref{lm:mc:core:ii} follows.
-  }
+  % Following \cref{eq:def:prob:i,eq:def:prob:ii}, it should not be hard
+  % to see that
+  % %
+  % $\Prob^{\strat}_{\sini}(\Cyl(\proj(\rho))) =
+  % \Prob^{\strat^\star}_{(\sini,\tini)}(\{\rho\complete\}) =
+  % \Prob^{\strat^\star}_{\sini}(\Cyl(\rho))$
+  % %
+  % Hence, from \cref{eq:prob:R:bigcup:cyl,eq:prob:S:bigcup:cyl},
+  % \cref{lm:mc:core:ii} follows.
+  % }
 
-  \bigpedro{alt text para cuando se comente lo de arriba}
+  % \bigpedro{alt text para cuando se comente lo de arriba}
   
   The proof of \cref{lm:mc:core:ii} follows in a similar way to that
-  of \cref{lm:mc:core:i}.
-
+  of \cref{lm:mc:core:i}. 
   \Cref{lm:mc:core:iii} follows from
   \cref{lm:mc:core:i,lm:mc:core:ii}, and \cref{lm:mc:core:iv} is a
   direct consequence of \cref{lm:mc:core:iii}.  
@@ -1593,9 +1591,9 @@ algorithm for $\PKhadapt$ properties.
 \newcommand{\MinReachProb}[1]{MeanReachProb(#1)}%
 \newcommand{\Return}{\!\textbf{return}\ \ }
 \begin{algorithm}[tb]
-  \caption{Model checking algorithm for $\PKhadapt$.}
+  \caption{Model checking algorithm for $\PKhadapt$}
   \label{alg:mc:pkhadapt}
-  \small
+  \footnotesize
   \textbf{Input}: PLTSU $\model$, with agent's perception as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ property $\varphi$\\
   \textbf{Output}: $\truthset{\model}{\varphi}$ \\
   \textbf{Function:} \Check{$\varphi$} 

@@ -1,3 +1,7 @@
 \section{Final Remarks}
+\label{sec:final}
 
-- For future work, it would be interesting to characterize the exact expressive power of $\PKhunc$ and $\PKhadapt$, and compare them. In particular, define associated notions of bisimulation and prove characterization theorems.
+We investigated the model-checking problem for probabilistic variants of knowing-how logics.
+In particular, we proved that for the direct extensions of the works from~\cite{Wang15lori} and~\cite{AFSVQ21}, respectively, the problem is indecidable. Then, we detect an interesting variant in which the agent proceeds adaptatively, for which model checking is decidable in polynomial time. We argue our results shed some new light for understanding constrained knowing how logics, and introduce novel formalisms with interesting applications, especially the one with a decidable model-checking problem.
+
+For future work, it would be interesting to characterize the exact expressive power of $\PKhunc$ and $\PKhadapt$, and compare them. In particular, define associated notions of bisimulation and prove characterization theorems. Also, it would be interesting to define proof systems for the logics we investigated. Finally, our next step will be to implement \Cref{alg:mc:pkhadapt} into the PRISM tool~\cite{KwiatkowskaNP11}.

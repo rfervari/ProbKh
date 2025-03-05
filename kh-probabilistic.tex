@@ -1591,10 +1591,11 @@ algorithm for $\PKhadapt$ properties.
 
 \renewcommand{\Check}[1]{Check(#1)}%
 \newcommand{\MinReachProb}[1]{MeanReachProb(#1)}%
-\newcommand{\Return}{\textbf{return}\ \ }
+\newcommand{\Return}{\!\textbf{return}\ \ }
 \begin{algorithm}[tb]
   \caption{Model checking algorithm for $\PKhadapt$.}
   \label{alg:mc:pkhadapt}
+  \small
   \textbf{Input}: PLTSU $\model$, with agent's perception as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ property $\varphi$\\
   \textbf{Output}: $\truthset{\model}{\varphi}$ \\
   \textbf{Function:} \Check{$\varphi$} 
@@ -1607,14 +1608,16 @@ algorithm for $\PKhadapt$ properties.
     \CASELINE{${\psi\wedge\chi}$}
       {\Return{\Check{$\psi$} $\cap$ \Check{$\chi$}}}
     \CASE{$\kh^q(\psi,\chi)$}
-      \STATE \quad\quad \textbf{for each} {$i\in I$}
-          \STATE \quad\quad\quad Construct $\model{\times}\dfa_i$ extended with $s_A$\;
-          \STATE \quad\quad\quad $\mathit{qmin}:={}$\MinReachProb{$G{\times}F_i$}\;
-          \STATE \quad\quad\quad \textbf{if} {($\mathit{qmin}\geq q$)} {\Return{$\S$}}\label{alg:ln:rettrue}
-          \STATE \quad\quad\quad \Return{$\emptyset$}\label{alg:ln:retfalse}
-      \STATE \quad\quad \textbf{end for}
+          \STATE \quad\quad $A:={}$\Check{$\psi$}
+          \STATE \quad\quad $G:={}$\Check{$\chi$}
+          \STATE \quad\quad \textbf{for each} {$i\in I$} \textbf{do} 
+              \STATE \quad\quad\quad  Construct $\model{\times}\dfa_i$ extended with $s_A$\;
+              \STATE \quad\quad\quad $\mathit{qmin}:={}$\MinReachProb{$G{\times}F_i$}\;
+              \STATE \quad\quad\quad \textbf{if} {($\mathit{qmin}\geq q$)} \textbf{then}  {\Return{$\S$}}\label{alg:ln:rettrue}
+              \STATE \quad\quad\quad \Return{$\emptyset$}\label{alg:ln:retfalse}
+      % \STATE \quad\quad \textbf{end for}
     % \ENDCASE
-    \ENDSWITCH
+    % \ENDSWITCH
   \end{algorithmic}
   \end{algorithm}
 

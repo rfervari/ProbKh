@@ -5,14 +5,21 @@
 
 We start by introducing the most basic notion of knowing how as defined in~\cite{Wang15lori,Wang16,Wang2016}. Formulas describing the abilities of an agent of achieving a certain goal, are interpreted over Labeled Transition Systems, which indicate what actions are available for execution at each state, and how they transform one state into another.
 
-In order to determine when an agent knows how to achieve a goal, we need to characterize those sequences of actions (or plans) that result appropriate for such a purpose. This is the notion of \emph{strongly executable} plans about, indicating that a plan is ``fail proof''. This notion, discussed already in~\cite{Wang15lori,Wang16,Wang2016} was inspired by conformant planning (see e.g.~\cite{Smith&Weld98,Bonet2010}).
+In order to determine when an agent knows how to achieve a goal, we need to characterize those sequences of actions (or plans) that result appropriate for such a purpose. This is the notion of \emph{strongly executable} plans about, indicating that a plan is ``fail proof''. This notion, discussed already in e.g.~\cite{Wang15lori} was inspired by conformant planning (see e.g.~\cite{Smith&Weld98,Bonet2010}).
 
+
+%%
+%%  RAUL: aca comente lo de abajo porque se repite con la definicion de palabras. Ademas, habia inconsistencia de notacion. Chequear que no meti la pata.
+%%
 \begin{definition}\label{def:plans}
     Let $\model=\tup{\S,\Act,\ra,\V}$ be an LTS. 
-    Elements of $\Act^*$ are called \emph{plans} (with $\epsilon$ the empty plan).  Let $\plan\in\Act^*$, $\size{\plan}$ denotes its length ($\size{\epsilon}=0$).
-    For  $0\leq i \leq \size{\plan}$, the plan $\plan_i$ denotes the initial segment of $\plan$ up to (and including) the $i^{th}$ position (with $\plan_0 = \epsilon$). The action $\plan[i]$ is the one appearing in $\plan$ at the $i^{th}$ position. We define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
+    Elements of $\Act^*$ are called \emph{plans} (with $\epsilon$ the empty plan).  
+    Let $\plan\in\Act^*$, 
+    % $\size{\plan}$ denotes its length ($\size{\epsilon}=0$).
+    % For  $0\leq i \leq \size{\plan}$, the plan $\plan_i$ denotes the initial segment of $\plan$ up to (and including) the $i^{th}$ position (with $\plan_0 = \epsilon$). The action $\plan[i]$ is the one appearing in $\plan$ at the $i^{th}$ position. 
+    we define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
 
-    We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan_i} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $A\subseteq \S$ if and only if it is SE at every $s\in A$. The notation $A \reach{\plan} G$ (for $A,G\subseteq\S$) indicates that for all $s\in A$,  $s\reach{\plan} t$ implies $t\in G$.
+    We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan[..i]} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $A\subseteq \S$ if and only if it is SE at every $s\in A$. The notation $A \reach{\plan} G$ (for $A,G\subseteq\S$) indicates that for all $s\in A$,  $s\reach{\plan} t$ implies $t\in G$.
 \end{definition}
 
 Now we introduce the language of knowing how.
@@ -52,7 +59,7 @@ The model-checking problem for a given logic is defined as follows, where models
 \end{description}
 
 \begin{proposition}[\cite{DF23}]
-    The model-checking problem for $\Khlogic$ is \PSPACE-complete.
+    The model-checking problem for $\Khlogic$ over LTS is \PSPACE-complete.
 \end{proposition}
 
 \subsection{Indistinguishability Classes in Knowing How}
@@ -78,7 +85,8 @@ Given her indistinguishability over $\Act^*$, the abilities of the agent depend 
     Let $\plans \subseteq \Act^*$ and $A,G \subseteq \S$, we write $A\reach{\plans} G$ if for all $s\in A$, $\plan\in\plans$ and $t\in \S$,  $s \reach{\plan} t$ implies $t\in G$. 
 \end{definition}
 
-In what follows, we introduce the notion of strong executability for a set of plans (see, e.g.,~\cite{AFSVQ23}), generalizing the notion introduced for a single plan.
+We introduce the semantics of $\Khlogic$ in this new setting.
+% notion of strong executability for a set of plans (see, e.g.,~\cite{AFSVQ23}), generalizing the notion introduced for a single plan.
     
 %%     \begin{definition}[Strong executability of plans]\label{def:plans-exec}
 %%     Let $\model=\tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU. A \emph{set of plans} $\plans \subseteq \Act^*$ is \emph{strongly executable} at $u \in \S$ if and only if \emph{every} plan $\plan \in \plans$ is \emph{strongly executable} at~$u$.

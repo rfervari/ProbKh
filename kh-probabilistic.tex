@@ -879,7 +879,7 @@ The proposition can be proven by structural induction on
 the formula, and again using \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
 %  In particular, the proof of \cref{prop:Kh:PKh:ii} uses
 % \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
-\bigraul{revisado y corregido hasta aca; hay que ver que hacemos con lo que sigue}
+\raul{revisado y corregido hasta aca; hay que ver que hacemos con lo que sigue}
 It turns out that the model checking for $\PKhunc$ is also undecidable
 contrary to the \PTIME problem to the relative non-probabilistic logic
 \cite{DF23}.
@@ -1326,11 +1326,11 @@ We show this after presenting the next lemma.
 
 In the rest of this section, we show that the problem of model
 checking for $\PKhadapt$ is decidable provided that the classes of the
-agent's perception are regular languages.  Thus, we first restate
+agent's perception are regular languages.  We first restate
 deterministic finite automata in our setting.
 
-A \emph{deterministic finite automaton (DFA)} is a PFA that is also a
-LTS. Let $\dfa$ be a DFA.  The language accepted by $\dfa$ is defined
+A \emph{deterministic finite automaton (DFA)} is a PFA that is also an 
+LTS. Let $\dfa$ be a DFA.  The language accepted by~$\dfa$ is defined
 by $L(\dfa)=L(\dfa,1)$, i.e., it is the language accepted with
 probability 1 by $\dfa$ seen as a PFS.
 %
@@ -1358,7 +1358,7 @@ defined by $\mu{\otimes}\Dirac_{t'}(s,t)= \mu(s)\cdot\Dirac_{t'}(t)$.
 
 
 The following lemma is central to provide a model checking
-algorithm for $\PKhadapt$ properties.
+algorithm for $\PKhadapt$ properties. \raul{properties/formulas}
 
 \begin{lemma}\label{lm:mc:core}
   Let $\model$ be a PLTS and let $G\subseteq\S_\model$ be a set of

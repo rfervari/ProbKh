@@ -636,6 +636,7 @@ definition of the semantics of $\PKh$.
   %
   We write $\model\models\varphi$ iff $\truthset{\model}{\varphi}=\S$.
   \pedro{$\model\models\varphi$ es conveniente mantenerlo para simplificar notaci\'on en los ejemplos, los cuales a\'un tengo que corregir}
+  \raul{ok, cuidado que tenemos $\modelex,s$, y $s$ no existe}
   %and $\models\varphi$ iff $\model\models\varphi$, for all PLTS
   %$\model$.
   %\pedro{vamos a usar todo esto \'ultimo?}
@@ -760,9 +761,10 @@ $F=\{{s\in\S}\mid{\fin\in\V(s)}\}$.
 Since a PFA is deterministic,
 $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{\sini}(\Succ(\plan,F)) =
 \Prob^{\strat_\plan}_{\sini}(\Succ(\plan,F))$
-with $\strat_\plan$ defined as in \Cref{sec:preliminaries}.
+with $\strat_\plan$ as in \Cref{sec:preliminaries}.
 %
-As a consequence checking $\model,s\models\kh^q(\init,\fin)$ is
+%As a consequence 
+Thus, checking $\model,s\models\kh^q(\init,\fin)$ is
 equivalent to the emptiness problem in PFA.  By
 \Cref{prop:empty:PFA:undecidable}, this yields the following theorem.
 

@@ -544,7 +544,7 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
   For \cref{prop:nonprob:prob:ii}, it suffices to show that for all
   $s\in A$, $\plan$ is SE at $s$ and $s \reach{\plan} t$ for some
   $t\in G$ iff
-  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$,
+  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$.
 
   For the implication $(\Rightarrow)$, assume $\plan$ is SE at $s$ and
   $s \reach{\plan} t$ implies $t\in G$.
@@ -634,10 +634,10 @@ definition of the semantics of $\PKh$.
   \]
   where $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,s\models\chi}$.
   %
-  We write $\model\models\varphi$ iff $\truthset{\model}{\varphi}=\S$.
-  \pedro{$\model\models\varphi$ es conveniente mantenerlo para simplificar notaci\'on en los ejemplos, los cuales a\'un tengo que corregir}
-  \raul{ok, cuidado que tenemos $\modelex,s$, y $s$ no existe}
-  %and $\models\varphi$ iff $\model\models\varphi$, for all PLTS
+  % We write $\model\models\varphi$ iff $\truthset{\model}{\varphi}=\S$. 
+  % \pedro{$\model\models\varphi$ es conveniente mantenerlo para simplificar notaci\'on en los ejemplos, los cuales a\'un tengo que corregir}
+  % \raul{ok, cuidado que tenemos $\modelex,s$, y $s$ no existe}
+  % %and $\models\varphi$ iff $\model\models\varphi$, for all PLTS
   %$\model$.
   %\pedro{vamos a usar todo esto \'ultimo?}
 \end{definition}
@@ -792,7 +792,7 @@ reflect uncertainty, given by a set $\Unc$ as in
     An \emph{uncertainty-based \lts} (PLTSU) is a tuple
     $\model=\tup{\S,\Act,\ra,\Unc,\V}$ such that
     $\tup{\S,\Act,\ra,\V}$ is a PLTS, and $\Unc\subseteq
-    \powerset(\Act^*)\setminus \emptyset$ is \textcolor{red}{\bf the / an}\pedro{discutir} agent's perception.
+    \powerset(\Act^*)\setminus \emptyset$ is the perception.
 \end{definition}
 
 In this setting, we reinterpret that $\kh^q(\psi,\varphi)$ can only be
@@ -1076,7 +1076,6 @@ semantics is captured in the next definition.
   %
 \end{definition}
 
-\pedro{\textbf{\color{red}@Ra\'ul:} este comentario t\'ecnico est\'a tratando de atajar a aquel revisor que te rechazo la primera vuelta del paper con Andr\'es.  Fijate que te parece (o si te parece)}
 Notice that there is a \emph{universal} cuantification on
 $\plans$-compatible strategies implicit in the ``$\inf$'' within
 expression
@@ -1104,7 +1103,7 @@ strategy through expression $\Prob^\strat_s(\Succ(\plans,G))$ within
 \end{example}
 
 
-Logics $\PKhunc$ and $\PKhadapt$ are not directly
+Logics $\PKhunc$ and $\PKhadapt$ are not directly 
 %\raul{pongo 'directly' porque esto no es demo en terminos de expresividad.}
 related.
 %
@@ -1228,7 +1227,7 @@ $\Unc_4=\{\{ab,ba\}\}$.
 Then $\modelex^4,s \models_\PKhadapt \kh^1(\init,\goal)$ but
 $\modelex^4,s \models_\Khunc \neg\kh(\init,\goal)$.
 %
-However, for an $\PKhadapt$ property $\varphi$ in which $\kh^q$ does
+However, for an $\PKhadapt$ formula $\varphi$ in which $\kh^q$ does
 not appear in the scope of a negation, if $\fgetprob(\varphi)$
 holds in an LTSU under $\Khunc$, then $\varphi$ holds in the same LTSU
 under $\PKhadapt$.
@@ -1334,7 +1333,7 @@ LTS. Let $\dfa$ be a DFA.  The language accepted by~$\dfa$ is defined
 by $L(\dfa)=L(\dfa,1)$, i.e., it is the language accepted with
 probability 1 by $\dfa$ seen as a PFS.
 %
-We say that $\dfa$ is \emph{live}\pedro{nos gusta este nombre?} if for all $s\in\S$ there is some
+We say that $\dfa$ is \emph{live} if for all $s\in\S$ there is some
 $\rho\in\execf$ so that $\first(\rho)=s$ and $\last(\rho)\in F$ ($F$
 is the set of final states defined as for PFAs in
 \Cref{sec:preliminaries}).  That is, $\dfa$ is live if all of its
@@ -1358,7 +1357,7 @@ defined by $\mu{\otimes}\Dirac_{t'}(s,t)= \mu(s)\cdot\Dirac_{t'}(t)$.
 
 
 The following lemma is central to provide a model checking
-algorithm for $\PKhadapt$ properties. \raul{properties/formulas}
+algorithm for $\PKhadapt$.
 
 \begin{lemma}\label{lm:mc:core}
   Let $\model$ be a PLTS and let $G\subseteq\S_\model$ be a set of
@@ -1595,7 +1594,7 @@ algorithm for $\PKhadapt$ properties. \raul{properties/formulas}
   \caption{Model checking algorithm for $\PKhadapt$}
   \label{alg:mc:pkhadapt}
   \footnotesize
-  \textbf{Input}: PLTSU $\model$, with agent's perception as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ property $\varphi$\\
+  \textbf{Input}: PLTSU $\model$, with agent's perception as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ formula $\varphi$\\
   \textbf{Output}: $\truthset{\model}{\varphi}$ \\
   \textbf{Function:} \Check{$\varphi$} 
   \begin{algorithmic}[1] %[1] enables line numbers
@@ -1674,7 +1673,6 @@ returns the whole set $\S$ of states if the $i$-th DFA witnesses the
 validity of $\kh^q(\psi,\chi)$ and, in \ref{alg:ln:retfalse}, it
 returns the empty set if no DFA witnesses $\kh^q(\psi,\chi)$.
 %
-\pedro{est\'a bien poner el algoritmo o es mucho?}
 
 Since $\inf_{\strat}\Prob^{\strat}_{s_A}(R_{G{\times}F_i})$ can be
 formulated as a linear optimization problem

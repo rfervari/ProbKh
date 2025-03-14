@@ -2,42 +2,7 @@
 \section{Supplementary material}
 
 
-\subsection{Proof of \Cref{lm:mc:core} (\cref{lm:mc:core:ii})}
-
-For \cref{lm:mc:core:ii}, let $\strat$ be a strategy for
-$\model$ and define strategy $\strat^\star$ for
-$\model{\times}\dfa$ as follows.
-%
-Let
-$\rho=(s_0,t_0)\, a_1\, (s_1,t_1)\ldots (s_{n-1},t_{n-1})\, a_n\, (s_n,t_n)\in\setRini$
-and $0\leq k\leq\size{\rho}$, then:
-%
-\begin{enumerate}
-\item%
-  If $k=\size{\rho}$, let $\strat^\star(\rho)(\complete)=1$.
-\item%
-  If instead $k<\size{\rho}$, let
-  $\strat^\star(\rho[..k])(a_{k+1},\mu\otimes\Dirac_{t_{k+1}})=\strat(\proj(\rho[..k]))(a_{k+1},\mu)$
-  for all $\mu\in\Dist(\S)$.
-\end{enumerate}
-%
-Since $\proj$ is a bijection from $\setRini$ to $\setSini$, 
-$\strat^\star$ is well defined for all executions that are prefixes of
-some execution in $\setRini$.
-%
-For any other execution, $\strat^\star$ can be defined in any way.
-
-Following \cref{eq:def:prob:i,eq:def:prob:ii}, it should not be hard
-to see that
-%
-$\Prob^{\strat}_{\sini}(\Cyl(\proj(\rho))) =
-\Prob^{\strat^\star}_{(\sini,\tini)}(\{\rho\complete\}) =
-\Prob^{\strat^\star}_{\sini}(\Cyl(\rho))$
-%
-Hence, from \cref{eq:prob:R:bigcup:cyl,eq:prob:S:bigcup:cyl},
-\cref{lm:mc:core:ii} follows.
-
-\subsection{Proof of ??}
+\subsection{Proof of Proposition~\ref{prop:PFA:undecidabilty}.\ref{prop:PFA:undecidabilty:low}}\label{proof:prop:PFA:undecidabilty:low}
 
 A PFA is \emph{complete} if for all $s\in\S$ and $a\in\Act$, exists
 some $\mu\in\Dist(\S)$ such that $s\reach{a}\mu$.
@@ -104,12 +69,18 @@ From \Cref{lm:strat:plan:complete}, it follows that for all $\plan\in\Act^*$,
 (We added a subscript in $\Prob$ to indicate in which PFA it
 originates.)
 
-As a consequence of this observation, $L(\pfa,q)\neq\emptyset$ iff there
-is a word $\plan\in\Act^*$ such that
+As a consequence of this observation,
+%$L(\pfa,q)\neq\emptyset$
+there is a word $\plan\in\Act^*$ such that
+$\Prob_{\pfa,\sini}^{\strat_\plan}(\Succ(\plan,F)) \geq q$
+%
+iff there is a word $\plan\in\Act^*$ such that
 $\Prob_{\pfa^\star,\sini}^{\strat_\plan}(\Succ(\plan,F^\star)) < 1-q$.
 %
-Considering \Cref{prop:empty:PFA:undecidable}, this yields the
-following proposition.
+Considering
+\Cref{prop:PFA:undecidabilty}.\ref{prop:PFA:undecidabilty:high}, this
+yields the following proposition
+(i.e. \Cref{prop:PFA:undecidabilty}.\ref{prop:PFA:undecidabilty:low}).
 
 \begin{proposition}
   The following problem is undecidable:
@@ -118,3 +89,39 @@ following proposition.
   word $\plan\in\Act^*$ such that
   $\Prob_{\sini}^{\strat_\plan}(\Succ(\plan,F)) < q$.
 \end{proposition}
+
+
+\subsection{Proof of \Cref{lm:mc:core} (\cref{lm:mc:core:ii})}
+
+For \cref{lm:mc:core:ii}, let $\strat$ be a strategy for
+$\model$ and define strategy $\strat^\star$ for
+$\model{\times}\dfa$ as follows.
+%
+Let
+$\rho=(s_0,t_0)\, a_1\, (s_1,t_1)\ldots (s_{n-1},t_{n-1})\, a_n\, (s_n,t_n)\in\setRini$
+and $0\leq k\leq\size{\rho}$, then:
+%
+\begin{enumerate}
+\item%
+  If $k=\size{\rho}$, let $\strat^\star(\rho)(\complete)=1$.
+\item%
+  If instead $k<\size{\rho}$, let
+  $\strat^\star(\rho[..k])(a_{k+1},\mu\otimes\Dirac_{t_{k+1}})=\strat(\proj(\rho[..k]))(a_{k+1},\mu)$
+  for all $\mu\in\Dist(\S)$.
+\end{enumerate}
+%
+Since $\proj$ is a bijection from $\setRini$ to $\setSini$, 
+$\strat^\star$ is well defined for all executions that are prefixes of
+some execution in $\setRini$.
+%
+For any other execution, $\strat^\star$ can be defined in any way.
+
+Following \cref{eq:def:prob:i,eq:def:prob:ii}, it should not be hard
+to see that
+%
+$\Prob^{\strat}_{\sini}(\Cyl(\proj(\rho))) =
+\Prob^{\strat^\star}_{(\sini,\tini)}(\{\rho\complete\}) =
+\Prob^{\strat^\star}_{\sini}(\Cyl(\rho))$
+%
+Hence, from \cref{eq:prob:R:bigcup:cyl,eq:prob:S:bigcup:cyl},
+\cref{lm:mc:core:ii} follows.

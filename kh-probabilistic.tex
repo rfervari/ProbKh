@@ -763,10 +763,14 @@ $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{\sini}(\Succ(\plan,F)) =
 \Prob^{\strat_\plan}_{\sini}(\Succ(\plan,F))$
 with $\strat_\plan$ as in \Cref{sec:preliminaries}.
 %
-%As a consequence 
-Thus, checking $\model,s\models\kh^q(\init,\fin)$ is
-equivalent to the emptiness problem in PFA.  By
-\Cref{prop:empty:PFA:undecidable}, this yields the following theorem.
+%% Thus, checking $\model,s\models\kh^q(\init,\fin)$ is
+%% equivalent to the emptiness problem in PFA.  By
+%% \Cref{prop:PFA:undecidability}.\ref{prop:PFA:undecidability:high}, this yields the following theorem.
+%
+Thus, checking $\model,s\models\kh^q(\init,\fin)$ is equivalent to
+check problem \ref{prop:PFA:undecidabilty:high} in
+\Cref{prop:PFA:undecidabilty},
+yielding the following theorem.
 
 \begin{theorem}\label{th:mc:PKh:undecidable}
   The model-checking problem for $\PKh$ is undecidable.
@@ -784,9 +788,8 @@ probabilistic setting.  A first natural approach is to keep the same
 spirit of $\Khlogic$ in which plans are a priori commitments that are
 followed as pre-established.
 
-First, we need to extend PLTSs with the agent's perception to
-reflect uncertainty, given by a set $\Unc$ as in
-\Cref{def:ults}.
+First, we need to extend PLTSs with a perception $\Unc$ to
+reflect uncertainty.
 
 \begin{definition}\label{def:pltsu}
     An \emph{uncertainty-based \lts} (PLTSU) is a tuple
@@ -907,10 +910,10 @@ contrary to the \PTIME problem to the relative non-probabilistic logic
   Since the PFA is deterministic, this is also equivalent to say that
   there is $\plan\in \Act^*$ such that
   $\Prob^{\strat_\plan}_{\sini}(\Succ(\plan,F)) < q$.
-  
-  \bigpedro{cuidado!!! que no parece funcionar :-/ \par Retomar en
-    alg\'un momento en el futuro}
-
+  %
+  This is exactly problem~\ref{prop:PFA:undecidabilty:low} in
+  \Cref{prop:PFA:undecidabilty}, hence yielding the theorem.
+  \pedro{revisar esta prueba}
 \end{proof}
   
 

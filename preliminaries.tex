@@ -133,7 +133,7 @@ uniquely defined in the sigma algebra~\cite{Segala95}.
 
 % PFA
 
-
+\pedro{relean lo de PFA que cambio hacia el final}
 \paragraph{Probabilistic Finite Automata.} A PLTS is deterministic if for all $s\in\S$, $a\in\Act$, and
 $\mu_1,\mu_2\in\Dist(\S)$, if $s\reach{a}\mu_1$ and $s\reach{a}\mu_2$
 then $\mu_1=\mu_2$.
@@ -173,12 +173,38 @@ The word $\plan$ is accepted by the PFA $\pfa$ with probability
 $q\in[0,1]$ if $\Prob_{\sini}^{\strat_\plan}(\Succ(\plan,F))\geq q$, where
 $\Succ(\plan,F)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}=\plan \text{ and } \last(\rho)\in F}\}$.
 %
-Let $L(\pfa,q)$ be the set of all such words.
+%Let $L(\pfa,q)$ be the set of all such words. \pedro{revisar}
 
-\begin{proposition}{\cite{Paz71,MadaniHC99}}\label{prop:empty:PFA:undecidable}
-  The emptiness problem in PFA (i.e., checking if
-  $L(\pfa,q)=\emptyset$) is undecidable.
+\begin{proposition}\label{prop:PFA:undecidabilty}
+  For a PFA and a bound $q\in[0,1]$, the following problems are undecidable:
+  \begin{enumerate}
+  \item\label{prop:PFA:undecidabilty:high}%
+    determine if $\Prob_{\sini}^{\strat_\plan}(\Succ(\plan,F)) \geq q$
+    for some $\plan\in\Act^*$;
+  \item\label{prop:PFA:undecidabilty:low}%  
+    determine if $\Prob_{\sini}^{\strat_\plan}(\Succ(\plan,F)) < q$
+    for some $\plan\in\Act^*$.
+  \end{enumerate}
+  %% \begin{enumerate}
+  %% \item\label{prop:PFA:undecidabilty:high}%
+  %%   determine if there is a word $\plan\in\Act^*$ such that
+  %%   $\Prob_{\sini}^{\strat_\plan}(\Succ(\plan,F)) \geq q$.
+  %% \item\label{prop:PFA:undecidabilty:low}%
+  %%   determine if there is a word $\plan\in\Act^*$ such that
+  %%   $\Prob_{\sini}^{\strat_\plan}(\Succ(\plan,F)) < q$.
+  %% \end{enumerate}
 \end{proposition}
 
-\pedro{cambiar esta \'ultima partecita de acuerdo al ap\'endice}
+%% The first item correspondes to the emptiness problem in PFA (i.e.,
+%% checking if $L(\pfa,q)=\emptyset$)~\cite{Paz71,MadaniHC99}. 
+The first item correspondes to the emptiness problem in
+PFA~\cite{Paz71,MadaniHC99}.
+%
+The second one is new here to the best of our knowledge and can be
+proven from the first item using complete PFAs.
+%
+The full proof can be found in the supplementary material
+(see~\Cref{proof:prop:PFA:undecidabilty:low}).
+%
+
 

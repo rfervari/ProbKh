@@ -453,138 +453,44 @@ This connection is also lifted to relate $A \reach{\plan} G$ and $A
   \end{enumerate}
 \end{proposition}
 %
-\begin{proof}
+\begin{proof}[Proof sketch.]
   Observe that
   %
-  $\Succ(\plan,S) = \{{\rho\complete}\mid{\bar{\rho}=\plan}\}$
+  %% $\Succ(\plan,S) = \{{\rho\complete}\mid{\bar{\rho}=\plan}\}$
+  %% %
+  %% and hence
   %
-  and hence
+  $\Prob^\strat_s(\Succ(\plan,\S)) =
+  \Prob^\strat_s(\{{\rho\complete}\mid{\bar{\rho}=\plan}\wedge{\first(\rho)=s}\})$~$(\star)$
   %
-  \begin{equation}\label{eq:proof:nonprob:prob:probsucc}
-    \textstyle
-    \Prob^\strat_s(\Succ(\plan,\S)) =
-    \Prob^\strat_s(\{{\rho\complete}\mid{\bar{\rho}=\plan}\wedge{\first(\rho)=s}\})
-    %\sum_{\substack{\bar{\rho}=\plan\\\first(\rho)=s}}\Prob^\strat_s(\{\rho\complete\})
-  \end{equation}
-  %
-%%   \[\Prob^\strat_s(\Succ(\plan,\S)) =
-%%   \Prob^\strat_s(\{{\rho\complete}\mid{\bar{\rho}=\plan}\}) =
-%%   \sum_{\substack{\bar{\rho}=\plan\\\first(\rho)=s}}\Prob^\strat_s(\{\rho\complete\})\]
-%%   %
-  for all $s\in\S$ and $\strat\in\Comp(\plan)$. In particular, the
-  equality considers the fact that
-  $\Prob^\strat_s(\{\rho\complete\})=0$ if $s\neq\first(\rho)$.
+  for all $s\in\S$ and $\strat\in\Comp(\plan)$.
 
-  We first show implication $(\Rightarrow)$ of
-  \cref{prop:nonprob:prob:i}.
-  %
-  For this suppose $\plan$ is SE at $s$ and
-  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,\S))<1$.
-  %
-  Because of \cref{eq:proof:nonprob:prob:probsucc}, there must exists
+  For $(\Rightarrow)$ of \cref{prop:nonprob:prob:i}, using $(\star)$
+  suppose by contradiction that that there exists
   $\strat\in\Comp(\plan)$ and $\rho\in\execf$ such that
   $\bar{\rho}\neq\pi$, $\first(\rho)=s$, and
-  $\Prob^\strat_s(\{\rho\complete\})>0$~$(\star)$.
+  $\Prob^\strat_s(\{\rho\complete\})>0$.
   %
-  Say $\rho=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n$ with $s_0=s$.
+  Analyizing $\bar{\rho}\neq\pi$ by cases $\bar{\rho}\lneq\plan$ (the
+  prefix should be proper), $\plan\lneq\bar{\rho}$, and
+  $\plan[i]\neq\bar{\rho}[i]$ for some $1\leq i
+  \leq\min(\size{\plan},\size{\bar{\rho}})$, the contradiction is
+  obtained by \cref{eq:def:prob:ii} and \Cref{def:plan:compat}.
+  
+  For $(\Leftarrow)$ of \cref{prop:nonprob:prob:i}, we
+  suppose $s\reach{\plan[..i]}t$ for $i<\size{\plan}$.  Considering
+  $(\star)$, \cref{eq:def:prob:ii} and \Cref{def:plan:compat}, a
+  $\plan$-compatible strategy $\strat$ that precisely follows
+  $\plan[..i]$ from $s$ to $t$ (which exists by hypothesis),
+  reveals the existence of a transition $t\reach{\plan[i{+}1]}v$.
 
-  Suppose first that $\bar{\rho}\leq\plan$ (the prefix should be
-  proper).  Because of \cref{eq:def:prob:ii}, necessarily
-  $\strat(\rho)(\complete) > 0$.  Besides, since $\plan$ is SE for $s$
-  and $s\reach{\bar{\rho}}s_n$ then, for some $t\in\S$,
-  $s_n\reach{\plan[n{+}1]}t$ (i.e.\ $s_n\reach{\plan[n{+}1]}\Dirac_t$).
-  %
-  Because $\bar{\rho}(\plan[n{+}1])\in\pref(\plan)$,
-  $\bar{\rho}\{a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plan)\neq\emptyset$.
-  Therefore, by \Cref{def:plan:compat}, $\strat(\rho)(\complete) = 0$
-  inducing a contradiction.
-
-  So $\bar{\rho}\notin\pref(\plan)$ and either $\plan\leq\bar{\rho}$
-  (properly) or exists some $1\leq i \leq\min(\size{\plan},\size{\bar{\rho}})$
-  such that $\plan[i]\neq\bar{\rho}[i]$.
-
-  If $\plan\leq\bar{\rho}$, then $\bar{\rho}[..\size{\plan}]=\plan$ and
-  hence, by \Cref{def:plan:compat}, necessarily
-  $\strat(\rho[..\size{\plan}])(\complete) = 1$.  By \cref{eq:def:prob:ii},
-  this implies that $\Prob^\strat_s(\{\rho\complete\})=0$,
-  contradicting $(\star)$.
-
-  If instead $\plan[i]\neq\bar{\rho}[i]=a_i$ with
-  $1\leq i \leq\min(\size{\plan},\size{\bar{\rho}})$, by \cref{eq:def:prob:ii},
-  $\strat(\rho[..(i-1)])(a_i,\mu) > 0$ for some
-  $\mu\in\Dist(\S)$ with $s_i\reach{a_i}\mu$.
-  However $\overline{\rho[..i]}a_i \notin \pref(\plan)$
-  (because $\plan[i]\neq a_i$) contradicting the assumption that
-  $\strat\in\Comp(\plan)$ (by \Cref{def:plan:compat}).
-
-  % This proves implication $(\Rightarrow)$ of \cref{prop:nonprob:prob:i}.
-
-  For implication $(\Leftarrow)$ of \cref{prop:nonprob:prob:i} suppose
-  $s\reach{\plan[..i]}t$ for $i<\size{\plan}$, that is, there are $s_0$,
-  $s_1$, \ldots $s_i$ such that $s=s_0$, $t=s_i$, and
-  $s_k\reach{\plan[k{+}1]}\Dirac_{s_{k{+}1}}$ for all $0\leq k < i$.
-  %
-  Take a $\plan$-compatible strategy $\strat$ such that, for all
-  $0\leq k < i$,
-  $\strat(s_0\,\plan[1]\,s_1\ldots s_{k{-}1}\,\plan[k]\,s_k)(\plan[k{+}1],\Dirac_{s_{k{+}1}})=1$.
-  Notice that such strategy exists and hence
-  $\Prob^\strat_s(\Succ(\plan,\S))=1$ by assumption.
-  %
-  By \cref{eq:proof:nonprob:prob:probsucc} and \cref{eq:def:prob:ii}
-  there must exist some $\rho\in\execf$ such that $\bar{\rho}=\plan$,
-  $s_0\,\plan[1]\,s_1\ldots s_{k{-}1}\,\plan[i]\,s_i = \rho[..i]$ and
-  $\Prob^\strat_s(\{\rho\complete\})>0$.  By \cref{eq:def:prob:ii}, in
-  particular, there exists $s_{i{+}1}$ such that
-  $\strat(\rho[..i])(\plan[i{+}1],\Dirac_{s_{i{+}1}})> 0$ which
-  implies that $s_i\reach{\plan[i{+}1]}\Dirac_{s_{i{+}1}}$, or
-  equivalently, $t\reach{\plan[i{+}1]}s_{i{+}1}$, since $t=s_i$.
-  %
-  Therefore $\plan$ is SE in $s$, which proves~\cref{prop:nonprob:prob:i}.
-
-  For \cref{prop:nonprob:prob:ii}, it suffices to show that for all
-  $s\in A$, $\plan$ is SE at $s$ and $s \reach{\plan} t$ for some
-  $t\in G$ iff
+  For \cref{prop:nonprob:prob:ii}, because of \cref{prop:nonprob:prob:i},
+  it suffices to show that for all $s\in A$ and SE plan $\plan$ at
+  $s$, $s \reach{\plan} t$ implies $t\in G$ iff
   $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$.
-
-  For the implication $(\Rightarrow)$, assume $\plan$ is SE at $s$ and
-  $s \reach{\plan} t$ implies $t\in G$.
   %
-  Suppose
-  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))<1$.
-  Since
-  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,\S))=1$ (by
-  \cref{prop:nonprob:prob:i}), there must be a strategy
-  $\strat\in\Comp(\plan)$ such that
-  $\Prob^\strat_s(\{\rho\complete\})>0$, for some $\rho\in\execf$ with
-  $\bar{\rho}=\plan$ and $\first(\rho)=s$ (because of
-  \cref{eq:proof:nonprob:prob:probsucc}) and also $\last(\rho)\notin G$.
-  %
-  By \cref{eq:def:prob:i,eq:def:prob:ii}, also
-  $\Prob^\strat_s(\{\rho\})>0$ from which $s\reach{\plan}\last(\rho)$,
-  contradicting the assumption that $s \reach{\plan} t$ implies
-  $t\in G$.
-
-  For $(\Leftarrow)$, suppose
-  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$.
-  Since $G\subseteq\S$,
-  $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,\S))=1$, and
-  hence $\plan$ is SE at $s$ by \cref{prop:nonprob:prob:i}.
-  %
-  Suppose now that $s \reach{\plan} t$, that is, there are $s_0$,
-  $s_1$, \ldots $s_{\size{\plan}}$ such that $s=s_0$, $t=s_{\size{\plan}}$, and
-  $s_k\reach{\plan[k{+}1]}\Dirac_{s_{k{+}1}}$ for all $0\leq k < \size{\plan}$.
-  %
-  We can construct a $\plan$-compatible strategy $\strat$
-  such that, for all $0\leq k < \size{\plan}$,
-  $\strat(s_0\,\plan[1]\,s_1\ldots s_{k{-}1}\,\plan[k]\,s_k)(\plan[k{+}1],\Dirac_{s_{k{+}1}})=1$,
-  and, in addition, for
-  $\rho = s_0\,\plan[1]\,s_1\ldots s_{\size{\plan}{-}1}\,\plan[k]\,s_{\size{\plan}}$,
-  $\strat(\rho)(\complete)=1$.
-  %
-  Thus $\Prob^\strat_s(\{\rho\bot\})>0$.  Since
-  $\Prob^\strat_s(\Succ(\plan,G))=1$, $\rho\bot\in\Succ(\plan,G)$
-  and therefore $t=\last(\rho)\in G$, which finally proves
-  \cref{prop:nonprob:prob:ii}.
+  This follows by considering $(\star)$ and
+  \cref{eq:def:prob:i,eq:def:prob:ii}.
 \end{proof}
 
 
@@ -832,7 +738,7 @@ captured in the next definition.
   Define
   $\Unc_1 = \{ \{\plan_1\}, \{\plan_2,\plan_3\}, \{\plan_4,\plan_5\}\}$
   and let $\modelex^1$ be the PLTSU extending the PLTS $\modelex$ with
-  the agent's perception $\Unc_1$.
+  perception $\Unc_1$.
   %
   Then, for all $s\in\S$,
   $\modelex^1,s \models \kh^{0.45}(\init,\goal)$.
@@ -845,7 +751,7 @@ captured in the next definition.
   Consider now
   $\Unc_2 = \{ \{\plan_1\}, \{\plan_2,\plan_3,\plan_4,\plan_5\}\}$
   and let $\modelex^2$ be the PLTSU extending the PLTS $\modelex$ with
-  the agent's perception $\Unc_2$.
+  perception $\Unc_2$.
   %
   Notice that
   $\inf_{\strat\in\Comp(\plan_1)}\Prob^\strat_{s_0}(\Succ(\plan_1,\goal)){=}0$
@@ -965,7 +871,7 @@ Notice that a strategy is $\{\plan\}$-compatible if and only if it is
 also $\plan$-compatible.
 
 \begin{example}\label{ex:running:strat-comp-adapt}
-  Consider the agent's perception $\Unc_1$ of
+  Consider perception $\Unc_1$ of
   \Cref{ex:running:pkhunc} and let $\plans_{2,3}=\{\plan_2,\plan_3\}$
   and $\plans_{4,5}=\{\plan_4,\plan_5\}$ be two of its clases.
   %
@@ -1115,7 +1021,8 @@ $\modelex^1,s \models_\PKhadapt \kh^{0.95}(\init,\goal)$
 (see \Cref{ex:running:pkhadapt}) but
 $\modelex^1,s \models_\PKhunc \neg\kh^{0.95}(\init,\goal)$
 (see \Cref{ex:running:pkhunc}).
-\pedro{aqui no me puedo escapar de la necesidad de subindicar $\models$. Ver como/hasta donde generalr esto.  Charlarlo con Ra\'ul}
+%
+\textcolor{red}{(Subscripts in $\models$ distinguish the logic in which the formula holds.)}
 %
 On the other hand, consider PLTSU $\modelex^3$ in \Cref{fig:counterexamples}
 with $\Unc_3=\{\{ab,ac\}\}$.  It is not hard to check that
@@ -1238,7 +1145,7 @@ under $\PKhadapt$.
 We show this after presenting the next lemma.
 
 \begin{lemma}\label{lm:plan:plans}
-  For every LTSU $\model$ with agent's perception $\Unc$, $s\in\S$,
+  For every LTSU $\model$ with perception $\Unc$, $s\in\S$,
   and $\plans\in\Unc$,
   \begin{enumerate}
   \item\label{lm:plan:plans:i}%
@@ -1252,53 +1159,16 @@ We show this after presenting the next lemma.
 
 \end{lemma}
 %
-\begin{proof}
-  For \cref{lm:plan:plans:i}, suppose by contradiction that
-  $\inf_{\strat\in\Comp(\plans)}\Prob^\strat_s(\Succ(\plans,G))<1$.
-  %
-  Then exist $\strat\in\Comp(\plans)$ and $\rho\in\execf$ with
+\begin{proof}[Proof sketch.]
+  The proof of \cref{lm:plan:plans:i} follows by assuming that there
+  exist $\strat\in\Comp(\plans)$ and $\rho\in\execf$ with
   $\Prob^\strat_s(\{\rho\complete\})>0$ and either
-  $\bar{\rho}\notin\plans$ or $\last(\rho)\notin G$.
-  %
-  Say $\rho=s_0\, a_1\, s_1\ldots s_{n-1}\, a_n\, s_n$.  Necessarily
-  $s_0=s$.
-  %
-  Define the strategy $\strat^\star$ such that for all $0\leq k<n$,
-  $\strat^\star(\rho[..k])(a_{i+1},\Dirac_{s_{i+1}})=1$ and
-  $\strat^\star(\rho)(\complete)=1$.  Notice that
-  $\Prob^{\strat^\star}_s(\{\rho\complete\})=1$
-
-  Suppose $\bar{\rho}=\plan$ for some $\plan\in\plans$ and
-  $\last(\rho)\notin G$.  Then $\strat^\star$ is $\plan$-compatible
-  and $\Prob^{\strat^\star}_s(\Succ(\plan,G))=0$ contradicting the
-  hypothesis.
-
-  So, inevitably, $\bar{\rho}\notin\plans$.
-  %
-  Suppose $\bar{\rho}\notin\pref(\plans)$.  Hence, for all
-  $\plan\in\plans$ exists some $0<k\leq n$ such that
-  $\bar{\rho}[..k{-}1]=\plan[..k{-}1]$ and $a_k\neq\plan[k]$.  Let
-  $\hat{k}$ be the largest of such $k$'s.
-  %
-  Then $\bar{\rho}[..k{-}1]\in\pref(\plans)$ and
-  $\strat(\rho[..k{-}1])(a_k,\Dirac_{s_k})>0$.  However
-  $\bar{\rho}[..k{-}1]a_k\notin\pref(\plans)$ contradicting the
-  assumption that $\strat$ is $\plans$-compatible.
-
-  Therefore, there is some $\plan\in\plans$ such that
-  $\bar{\rho}\leq\plan$ but $\bar{\rho}\notin\plans$.
-  %
-  Because $\Prob^\strat_s(\{\rho\complete\})>0$,
-  $\strat(\rho)(\complete)>0$ and, since $\strat$ is
-  $\plans$-compatible, there is no $a\in\Act$ such that
-  $\bar{\rho}a\in\pref(\plans)$ and $\last(\rho)\reach{a}\mu$ for some
-  $\mu\in\Dist(\S)$.
-  %
-  In particular $\bar{\rho}a\neq\plan$ for all $a\in\Act$.  Then
-  $\strat^\star$ is $\plan$-compatible and
+  $\bar{\rho}\notin\plans$ or $\last(\rho)\notin G$ and deriving from
+  $\strat$ a $\plan$-compatible strategy $\strat^\star$ with
+  $\plan\in\plans$ such that
   $\Prob^{\strat^\star}_s(\Succ(\plan,G))=0$ contradicting the
-  hypothesis, proving thus \cref{lm:plan:plans:i}.
-
+  assumption.
+%
   \Cref{lm:plan:plans:ii} follows directly from \cref{lm:plan:plans:i}.
 \end{proof}
 
@@ -1597,7 +1467,7 @@ algorithm for $\PKhadapt$.
   \caption{Model checking algorithm for $\PKhadapt$}
   \label{alg:mc:pkhadapt}
   \footnotesize
-  \textbf{Input}: PLTSU $\model$, with agent's perception as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ formula $\varphi$\\
+  \textbf{Input}: PLTSU $\model$, with perception given as a family of live DFA $\{\dfa_i\}_{i\in I}$, $\PKhadapt$ formula $\varphi$\\
   \textbf{Output}: $\truthset{\model}{\varphi}$ \\
   \textbf{Function:} \Check{$\varphi$} 
   \begin{algorithmic}[1] %[1] enables line numbers

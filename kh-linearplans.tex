@@ -1,39 +1,32 @@
 \section{Knowing How Logics}
 \label{sec:khlinearplans}
 
-% \subsection{Basic Definitions}
 
-We start by introducing the most basic notion of knowing how as defined in~\cite{Wang15lori,Wang16,Wang2016}. Formulas describing the abilities of an agent of achieving a certain goal, are interpreted over Labeled Transition Systems, which indicate what actions are available for execution at each state, and how they transform one state into another.
+\paragraph{Linear Plans.}
 
-In order to determine when an agent knows how to achieve a goal, we need to characterize those sequences of actions (or plans) that result appropriate for such a purpose. This is the notion of \emph{strongly executable} plans about, indicating that a plan is ``fail proof''. This notion, discussed already in e.g.~\cite{Wang15lori} was inspired by conformant planning (see e.g.~\cite{Smith&Weld98,Bonet2010}).
+The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
+%
+\[
+  \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh(\psi,\varphi),
+\]
+%
+where $p\in\Prop$. Other Boolean operators are defined as usual.
+%
+The distinguished formula $\kh(\psi,\varphi)$ should be read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$''} meaning that there exists a plan that allows the agent to achieve the goal $\psi$ whenever the assumed condition $\varphi$ holds.
 
+In the most basic notion of knowing how ---as defined in~\cite{Wang15lori,Wang16,Wang2016}--- a plan is a sequence of prescribed actions.
+%
+Thus, formulas are interpreted over Labeled Transition Systems which indicate what actions are available for execution at each state and how they transform one state into another.
 
-%%
-%%  RAUL: aca comente lo de abajo porque se repite con la definicion de palabras. Ademas, habia inconsistencia de notacion. Chequear que no meti la pata.
-%%
-\begin{definition}\label{def:plans}
-    Let $\model=\tup{\S,\Act,\ra,\V}$ be an LTS. 
-    Elements of $\Act^*$ are called \emph{plans} (with $\epsilon$ the empty plan).  
-    Let $\plan\in\Act^*$, 
-    % $\size{\plan}$ denotes its length ($\size{\epsilon}=0$).
-    % For  $0\leq i \leq \size{\plan}$, the plan $\plan_i$ denotes the initial segment of $\plan$ up to (and including) the $i^{th}$ position (with $\plan_0 = \epsilon$). The action $\plan[i]$ is the one appearing in $\plan$ at the $i^{th}$ position. 
-    we define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
+In order to determine when an agent knows how to achieve a goal, we need to characterize those %sequences of actions (or plans)
+plans that result appropriate for such a purpose.  The notion of \emph{strongly executable} provides such characterization and indicates that a plan is ``fail proof''. This notion, discussed already in e.g.~\cite{Wang15lori} was inspired by conformant planning (see e.g.~\cite{Smith&Weld98,Bonet2010}).
 
-    We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan[..i]} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $A\subseteq \S$ if and only if it is SE at every $s\in A$. The notation $A \reach{\plan} G$ (for $A,G\subseteq\S$) indicates that for all $s\in A$,  $s\reach{\plan} t$ implies $t\in G$.
-\end{definition}
+For an LTS $\model=\tup{\S,\Act,\ra,\V}$, elements of $\Act^*$ are called \emph{plans} (with $\epsilon$ being the empty plan).  
+%
+Given a plan $\plan\in\Act^*$, we define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
+%
+We say that a plan $\plan\in\Act^*$ is \emph{strongly executable (SE)} at a state $s\in\S$ if and only if, for all $0\leq i \leq \size{\plan}-1$ and all $t\in\S$ such that $s\reach{\plan[..i]} t$, there is $v\in\S$ such that $t\reach{\plan[i+1]} v$. The plan $\plan$ is SE at $A\subseteq \S$ if and only if it is SE at every $s\in A$. The notation $A \reach{\plan} G$ (for $A,G\subseteq\S$) indicates that for all $s\in A$,  $s\reach{\plan} t$ implies $t\in G$.
 
-Now we introduce the language of knowing how.
-
-\begin{definition}
-    \label{def:syntax}
-    The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
-    \[
-        \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh(\psi,\varphi),
-    \]
-    where $p\in\Prop$. Other Boolean operators are defined as usual. Formulas of the form $\kh(\psi,\varphi)$ are read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$''}
-\end{definition}
-
-\subsection{Semantics based on Linear Plans}
 Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state. 
 
 \begin{definition} \label{def:semantics-kh}
@@ -58,11 +51,11 @@ The model-checking problem for a given logic is defined as follows, where models
     \item[Output:] $\model,s\models\varphi$?
 \end{description}
 
-\begin{proposition}[\cite{DF23}]
+\begin{proposition}[\citeauthor{DF23}~\citeyear{DF23}]
     The model-checking problem for $\Khlogic$ over LTS is \PSPACE-complete.
 \end{proposition}
 
-\subsection{Indistinguishability Classes in Knowing How}
+\paragraph{Indistinguishability Classes in Knowing How}
 
 We present the generalization of $\Khlogic$ where the agent's perception is determined by an indistinguishability relation between plans~\cite{AFSVQ21,AFSVQ23}. W.l.o.g., we consider here a single agent, unlike the multi-agent presentation from previous works.
 
@@ -120,7 +113,7 @@ We introduce the semantics of $\Khlogic$ in this new setting.
 
 In~\cite{AFSVQ21,DF23} two different instances of the model-checking problem for $\Khlogic$ over LTSU were studied. In the former, $\Unc$ consists of a finite set of classes, where each of them is a finite set of plans. In the latter, $\Unc$ is finite but every class is characterized by a finite-state automaton, i.e., it is potentially infinite, subsuming the finite case. Both representations lead to the same result.
 
-\begin{proposition}{\cite{DF23}}
+\begin{proposition}[\citeauthor{DF23}~\citeyear{DF23}]
     The model-checking problem for $\Khlogic$ over LTSU is in \PTIME.
 \end{proposition}
 

@@ -97,15 +97,15 @@ $\Prob_s^{\strat_\plan}$.
   \end{array}
   \]
   %
-  It is easy to check that $\strat_1$ is $\plan_1$-compatible.
-  %
-  Also, notice that $\strat'_1$, defined so that
-  $\strat'_1(s_0)(\lift,\mu_2)=\strat'_1(s_0\,\lift\,s_3)(\complete)=1$,
+  It is easy to check that 
+  $\strat_1$ is $\plan_1$-compatible. 
+  Also, note that $\strat'_1$, defined so that
+  $\strat'_1(s_0)(\lift,\mu_2)={\strat'_1(s_0\,\lift\,s_3)(\complete)=1}$,
   is also $\plan_1$-compatible despite that $\strat'_1$ never manages to
   complete the plan $\plan_1$.
   %
   Instead, $\strat''_1$, defined so that
-  $\strat''_1(s_0)(\lift,\mu_1)=\strat'_1(s_0\,\lift\,s_1)(\complete)=\strat'_1(s_0\,\lift\,s_2)(\complete)=1$,
+  $\strat''_1(s_0)(\lift,\mu_1)={\strat'_1(s_0\,\lift\,s_1)(\complete)=\strat'_1(s_0\,\lift\,s_2)(\complete)=1}$,
   is not $\plan_1$-compatible since
   $\strat'_1(s_0\,\lift\,s_2)(\complete)>0$ but
   ${s_2\reach{\mobile}\mu_6}$.
@@ -606,7 +606,7 @@ probability~$1$.
   $\strat^\star(\rho)(\complete)=1$, and
   $\strat^\star(\rho')=\strat(\rho')$ for all other $\rho'\in\execf$.
   %
-  Since $\strat$ is $\plan$-compatible and  for all $0\leq i<n$,
+  Since $\strat$ is $\plan$-compatible and  for all ${0\leq i<n}$,
   $\strat(s_0\, a_1\, s_1\ldots s_{i-1}\, a_i\, s_i)(a_{i+1},\Dirac_{s_{i+1}})>0$,
   it should not be hard to check that $\strat^\star$ is also
   $\plan$-compatible.
@@ -617,10 +617,9 @@ probability~$1$.
   hypothesis that $\Prob^{\strat^\star}_s(\Succ(\plan,G))>0$.
   %
   Since implication $(\Leftarrow)$ is direct,
-  \cref{lm:someprob:prob1:i} is hence proved.
-
-  \Cref{lm:someprob:prob1:ii} is a direct consequence of
-  \cref{lm:someprob:prob1:i}.
+  \cref{lm:someprob:prob1:i} is proved.
+%
+  \Cref{lm:someprob:prob1:ii} follows directly from~\cref{lm:someprob:prob1:i}.
 \end{proof}
 
 Below we recursively define the mapping $\fgetprob:\PKh\to\Khlogic$ which removes probability bounds from formulas by
@@ -741,9 +740,9 @@ captured in the next definition.
   perception $\Unc_1$.
   %
   Then, for all $s\in\S$,
-  $\modelex^1,s \models \kh^{0.45}(\init,\goal)$.
+  $\modelex^1,s \models \kh^{0.45}(\init,\goal)$ 
   %
-  This is explained by class $\{\plan_4,\plan_5\}$ since
+  thanks to class $\{\plan_4,\plan_5\}$, since
   $\truthset{\model}{\init}\reach{\plan_4}_{0.45}\truthset{\model}{\goal}$
   and
   $\truthset{\model}{\init}\reach{\plan_5}_{0.5}\truthset{\model}{\goal}$.
@@ -802,7 +801,7 @@ contrary to the \PTIME problem to the relative non-probabilistic logic
   Let $\model=\tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU so that
   $\Unc=\{\{\Act^*\}\}$ and $\tup{\S,\Act,\ra,\V}$ is a complete PFA.
   (A PFA is complete if for all $s\in\S$ and $a\in\Act$ exists
-  $\mu\in\Dist(\S)$ such that $s\reach{a}\mu$. In addition, any PFA
+  $\mu\in\Dist(\S)$ s.t. $s\reach{a}\mu$. Any PFA
   has an equivalent complete PFA.)
 
   $\model,s\models\neg\kh^q(\init,\fin)$ holds if there is a plan
@@ -944,7 +943,7 @@ goal $G$ with at least probability $q$ following some plan in $\plans$
 
   In $\modelex^2$, if
   $\plans_{\star}=\{\plan_2,\plan_3,\plan_4,\plan_5\}\in\Unc_2$,
-  ${\{s_0\}\reach{\plans_{\star}}_{0.91}G_{\goal}}$, which is witnessed
+  ${\{s_0\}\reach{\plans_{\star}}_{0.91}G_{\goal}}$ witnessed
   by the $\plans_{\star}$-compatible strategy $\strat_5$ defined so that
   %
   \[
@@ -1020,9 +1019,9 @@ On the one hand
 $\modelex^1,s \models_\PKhadapt \kh^{0.95}(\init,\goal)$
 (see \Cref{ex:running:pkhadapt}) but
 $\modelex^1,s \models_\PKhunc \neg\kh^{0.95}(\init,\goal)$
-(see \Cref{ex:running:pkhunc}).
+(see \Cref{ex:running:pkhunc}). 
 %
-\textcolor{red}{(Subscripts in $\models$ distinguish the logic in which the formula holds.)}
+(Subscripts in $\models$ distinguish the logic in which the formula holds.)
 %
 On the other hand, consider PLTSU $\modelex^3$ in \Cref{fig:counterexamples}
 with $\Unc_3=\{\{ab,ac\}\}$.  It is not hard to check that
@@ -1189,9 +1188,9 @@ We show this after presenting the next lemma.
   $\model,s\models\fgetprob(\chi)$ iff $\model,s\models\chi$ by
   structural induction.
 
-  For the case in which $\chi$ contains $\kh^q$ it also
-  follows by structural induction.  We only consider case
-  $\kh^q(\psi,\varphi)$, but this case follows direcly from
+  The case in which $\chi$ contains $\kh^q$ also
+  follows by structural induction.  The case where 
+  $\chi=\kh^q(\psi,\varphi)$ follows direcly from
   \Cref{lm:plan:plans} (\cref{lm:plan:plans:i}) and
   \Cref{prop:nonprob:prob} (\cref{prop:nonprob:prob:ii}).
 \end{proof}

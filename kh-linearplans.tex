@@ -1,9 +1,7 @@
 \section{Knowing How Logics}
 \label{sec:khlinearplans}
 
-
-\paragraph{Linear Plans.}
-
+We introduce first the common language we will use along this section. 
 The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
 %
 \[
@@ -14,14 +12,15 @@ where $p\in\Prop$. Other Boolean operators are defined as usual.
 %
 The distinguished formula $\kh(\psi,\varphi)$ should be read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$''} meaning that there exists a plan that allows the agent to achieve the goal $\psi$ whenever the assumed condition $\varphi$ holds.
 
-In the most basic notion of knowing how ---as defined in~\cite{Wang15lori,Wang16,Wang2016}--- a plan is a sequence of prescribed actions.
+\paragraph{Linear Plans.} 
+In the most basic notion of knowing how --as defined in~\cite{Wang15lori,Wang16,Wang2016}-- a plan is a sequence of prescribed actions.
 %
 Thus, formulas are interpreted over Labeled Transition Systems which indicate what actions are available for execution at each state and how they transform one state into another.
 
-In order to determine when an agent knows how to achieve a goal, we need to characterize those %sequences of actions (or plans)
-plans that result appropriate for such a purpose.  The notion of \emph{strongly executable} provides such characterization and indicates that a plan is ``fail proof''. This notion, discussed already in e.g.~\cite{Wang15lori} was inspired by conformant planning (see e.g.~\cite{Smith&Weld98,Bonet2010}).
+In order to determine when an agent knows how to achieve a goal, it is needed to characterize those %sequences of actions (or plans)
+plans that result appropriate for such a purpose.  According to~\cite{Wang15lori}, the notion of \emph{strongly executable} provides such characterization and indicates that a plan is ``fail proof''. This notion was inspired by conformant planning (see e.g.~\cite{CimattiRT98}).
 
-For an LTS $\model=\tup{\S,\Act,\ra,\V}$, elements of $\Act^*$ are called \emph{plans} (with $\epsilon$ being the empty plan).  
+For an LTS $\model=\tup{\S,\Act,\ra,\V}$, a \emph{plan} is simply a word in $\Act^*$ (with $\epsilon$ being the empty plan).  
 %
 Given a plan $\plan\in\Act^*$, we define $\reach{\plan}$ as the composition $\reach{\plan[1]} \comp \ldots \comp \reach{\plan[\size{\plan}]}$. 
 %
@@ -55,7 +54,7 @@ The model-checking problem for a given logic is defined as follows, where models
     The model-checking problem for $\Khlogic$ over LTS is \PSPACE-complete.
 \end{proposition}
 
-\paragraph{Indistinguishability Classes in Knowing How}
+\paragraph{Indistinguishability Classes in Knowing How.}
 
 We present the generalization of $\Khlogic$ where the agent's perception is determined by an indistinguishability relation between plans~\cite{AFSVQ21,AFSVQ23}. W.l.o.g., we consider here a single agent, unlike the multi-agent presentation from previous works.
 

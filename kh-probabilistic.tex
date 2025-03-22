@@ -801,7 +801,7 @@ contrary to the \PTIME problem to the relative non-probabilistic logic
   Let $\model=\tup{\S,\Act,\ra,\Unc,\V}$ be a PLTSU so that
   $\Unc=\{\{\Act^*\}\}$ and $\tup{\S,\Act,\ra,\V}$ is a complete PFA.
   (A PFA is complete if for all $s\in\S$ and $a\in\Act$ exists
-  $\mu\in\Dist(\S)$ s.t. $s\reach{a}\mu$. Any PFA
+  $\mu\in\Dist(\S)$ s.t. $s\reach{a}\mu$ and any PFA
   has an equivalent complete PFA.)
 
   $\model,s\models\neg\kh^q(\init,\fin)$ holds if there is a plan
@@ -1189,7 +1189,7 @@ We show this after presenting the next lemma.
   structural induction.
 
   The case in which $\chi$ contains $\kh^q$ also
-  follows by structural induction.  The case where 
+  follows by structural induction.  In particular,
   $\chi=\kh^q(\psi,\varphi)$ follows direcly from
   \Cref{lm:plan:plans} (\cref{lm:plan:plans:i}) and
   \Cref{prop:nonprob:prob} (\cref{prop:nonprob:prob:ii}).

@@ -2,13 +2,13 @@
 \label{sec:khlinearplans}
 
 We introduce first the common language we will use along this section. 
-The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:
+The set of formulas (a.k.a. the language) of $\Khlogic$ is defined by the following BNF:\raul{esta def. para mi deberia ir en un env. de def., por uniformidad.}
 %
 \[
   \varphi, \psi ::= p \mid \neg \varphi \mid \varphi \vee \psi \mid \kh(\psi,\varphi),
 \]
 %
-where $p\in\Prop$. Other Boolean operators are defined as usual.
+where $p\in\Prop$. Other Boolean operators are defined as usual. 
 %
 The distinguished formula $\kh(\psi,\varphi)$ should be read as \emph{``the agent knows how to achieve $\varphi$ given $\psi$''} meaning that there exists a plan that allows the agent to achieve the goal $\psi$ whenever the assumed condition $\varphi$ holds.
 

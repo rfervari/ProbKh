@@ -784,10 +784,9 @@ $\Khunc$ and $\PKhunc$ over LTSUs.
 
 %Both items in 
 The proposition can be proven by structural induction on
-the formula, and again using \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
+the formula, and again using \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}. 
 %  In particular, the proof of \cref{prop:Kh:PKh:ii} uses
 % \Cref{lm:someprob:prob1} and \Cref{prop:nonprob:prob}.
-\raul{revisado y corregido hasta aca; hay que ver que hacemos con lo que sigue}
 It turns out that the model checking for $\PKhunc$ is also undecidable
 contrary to the \PTIME problem to the relative non-probabilistic logic
 \cite{DF23}.
@@ -1548,7 +1547,7 @@ returns the empty set if no DFA witnesses $\kh^q(\psi,\chi)$.
 
 Since $\inf_{\strat}\Prob^{\strat}_{s_A}(R_{G{\times}F_i})$ can be
 formulated as a linear optimization problem
-\cite{Puterman94,BA95,BaierK08}, \MinReachProb{} can be implemented as
+\cite{Puterman94,BA95,BaierK08}, \MinReachProb{$G{\times}F_i$} can be implemented as
 a polynomial time algorithm (e.g. \cite{Karmarkar84}).  Thus, a simple
 inspection of \Cref{alg:mc:pkhadapt} yields the next theorem.
 

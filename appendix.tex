@@ -58,12 +58,19 @@ $F^\star=\S\setminus F$.
 From \Cref{lm:strat:plan:complete}, it follows that for all $\plan\in\Act^*$,
 %
 \begin{align*}
-  \Prob_{\pfa,\sini}^{\strat_\plan}(\Succ(\plan,F)) \hspace{-4em} & \\
+  \Prob_{\pfa,\sini}^{\strat_\plan}(\Succ(\plan,F)) 
   &  =
   1 - \Prob_{\pfa,\sini}^{\strat_\plan}(\{{\rho\complete}\mid{\bar{\rho}=\plan \text{ and } \last(\rho)\notin F}\}) \\
   & =
   1 - \Prob_{\pfa^\star,\sini}^{\strat_\plan}(\Succ(\plan,F^\star)).
 \end{align*}
+%% \begin{align*}
+%%   \Prob_{\pfa,\sini}^{\strat_\plan}(\Succ(\plan,F)) \hspace{-4em} & \\
+%%   &  =
+%%   1 - \Prob_{\pfa,\sini}^{\strat_\plan}(\{{\rho\complete}\mid{\bar{\rho}=\plan \text{ and } \last(\rho)\notin F}\}) \\
+%%   & =
+%%   1 - \Prob_{\pfa^\star,\sini}^{\strat_\plan}(\Succ(\plan,F^\star)).
+%% \end{align*}
 %
 (We added a subscript in $\Prob$ to indicate in which PFA it
 originates.)
@@ -183,13 +190,19 @@ yields the following proposition
 
   For \cref{prop:nonprob:prob:ii}, it suffices to show that for all
   $s\in A$,
-  \begin{quote}
-    $\plan$ is SE at $s$ and $s \reach{\plan} t$ implies
-    $t\in G$ \newline
-    \mbox{}\hfill
-    iff\quad
-    $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$.
-  \end{quote}
+  \[
+    \plan \text{ is SE at } s \text{ and } s \reach{\plan} t \text{ implies }
+    t\in G \quad
+    \text{iff}\quad
+    \inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1.
+  \]
+%%   \begin{quote}
+%%     $\plan$ is SE at $s$ and $s \reach{\plan} t$ implies
+%%     $t\in G$ \newline
+%%     \mbox{}\hfill
+%%     iff\quad
+%%     $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_s(\Succ(\plan,G))=1$.
+%%   \end{quote}
   
   For the implication $(\Rightarrow)$, assume $\plan$ is SE at $s$ and
   $s \reach{\plan} t$ implies $t\in G$.

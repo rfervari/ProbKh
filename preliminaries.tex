@@ -70,7 +70,7 @@ $\execf= \S\times(\Act\times\S)^*$ denotes the set of all
 denotes the set of all \emph{infinite executions}.
 %
 We introduce the symbol $\complete$ to indicate that a finite
-execution has been intentionally ended and let $\cexecf=
+execution has been intentionally ended,  and let $\cexecf=
 \S\times(\Act\times\S)^*\times\{\complete\}$ denote the set of all
 \emph{complete finite executions}.  Infinite executions are also
 considered complete and hence $\cexec=\cexecf\cup\execw$ is the
@@ -134,9 +134,10 @@ uniquely defined in the sigma algebra~\cite{Segala95}.
 % PFA
 
 \pedro{relean lo de PFA que cambio hacia el final}
-\paragraph{Probabilistic Finite Automata.} A PLTS is deterministic if for all $s\in\S$, $a\in\Act$, and
-$\mu_1,\mu_2\in\Dist(\S)$, if $s\reach{a}\mu_1$ and $s\reach{a}\mu_2$
-then $\mu_1=\mu_2$.
+\paragraph{Probabilistic Finite Automata.} A PLTS is deterministic
+if $s\reach{a}\mu_1$ and $s\reach{a}\mu_2$
+implies $\mu_1=\mu_2$,  for all $s\in\S$, $a\in\Act$, and
+$\mu_1,\mu_2\in\Dist(\S)$.
 %
 A \emph{probabilistic finite automata} (PFA)~\cite{Rabin63,Paz71} is a
 deterministic PLTS $\pfa=\tup{\S,\Act,\ra,\V}$ on the set
@@ -197,10 +198,10 @@ $\Succ(\plan,F)=\{{\rho\complete\in\cexecf}\mid{\bar{\rho}=\plan \text{ and } \l
 
 %% The first item correspondes to the emptiness problem in PFA (i.e.,
 %% checking if $L(\pfa,q)=\emptyset$)~\cite{Paz71,MadaniHC99}. 
-The first item correspondes to the emptiness problem in
+The first item corresponds to the emptiness problem in
 PFA~\cite{Paz71,MadaniHC99}.
 %
-The second one is new here to the best of our knowledge and can be
+The second one,  to the best of our knowledge,  is new and can be
 proven from the first item using complete PFAs.
 %
 The full proof can be found in the supplementary material

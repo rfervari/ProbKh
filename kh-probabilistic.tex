@@ -561,7 +561,7 @@ probability is larger than or equal to $0$.
   %
   Notice also that $\modelex, s \models \neg \kh^q(\init,\goal)$ for
   any $q>0.5$. One may think this is not the case since, for example,
-  there is a way to successully realize the plan $\stairs\,\panic$
+  there is a way to successfully realize the plan $\stairs\,\panic$
   with probability $0.9$ (starting with $s_0\reach{\stairs}\mu_5$).
   However, by starting instead with $s_0\reach{\stairs}\mu_3$, the
   same plan yields probability $0.1$ (and hence
@@ -710,7 +710,7 @@ probability at least $q$.  Since the interpretation of the agent is
 that all plans in $\plans$ are equivalent, then all of them must 
 perform as desired.  This idea tries to extend to probability the
 non-probabilistic semantics of \Cref{def:semantics-kh-uncertain}.
-Under this new idea, we call the logic $\PKhunc$ and its semantics is
+Under this new idea, we call the logic $\PKhunc$, whose semantics is
 captured in the next definition.
 
 
@@ -817,7 +817,7 @@ contrary to the \PTIME problem to the relative non-probabilistic logic
   %
   This is exactly problem~\ref{prop:PFA:undecidabilty:low} in
   \Cref{prop:PFA:undecidabilty}, hence yielding the theorem.
-  \pedro{revisar esta prueba}
+ % \pedro{revisar esta prueba}
 \end{proof}
   
 
@@ -861,7 +861,7 @@ whole class as follows.
     $\{\bar{\rho}a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
   \end{enumerate}
   %
-  Let $\Comp(\plans)$ denotes the set of all $\plans$-compatible
+  Let $\Comp(\plans)$ denote the set of all $\plans$-compatible
   strategies.
 \end{definition}
 %
@@ -889,7 +889,7 @@ also $\plan$-compatible.
   %
   Notice the adaptive characteristic of $\strat_3$ that chooses to
   perform $s_4\reach{\panic}\mu_7$ after $\stairs$ if in state $s_4$
-  but chooses $s_4\reach{\mobile}\mu_8$ after $\stairs$ if in
+  but chooses $s_5\reach{\mobile}\mu_8$ after $\stairs$ if in
   state $s_5$.
 
   Similarly, strategy $\strat_4$, discussed at the beginning of this
@@ -910,7 +910,7 @@ also $\plan$-compatible.
 \end{example}
 
 We extend some concepts already defined for single plans to sets of
-plans.  So, let $\plans\subseteq\Act^*$ be a set of plans and le
+plans.  So, let $\plans\subseteq\Act^*$ be a set of plans and let 
 $G\subseteq\S$ be a set of goal states.  The set of successful
 complete executions reaching $G$ with a plan in $\plans$ is defined
 by
@@ -1284,15 +1284,15 @@ algorithm for $\PKhadapt$.
   \begin{align*}
     \setR = {}
     & \{{\rho\in\execf^{\model{\times}\dfa}} \mid \last(\rho)\in{G{\times}F}\text{ and}\\
-    & \qquad\quad\text{for all }0\leq k<\size{\rho},\last(\rho[..k])\notin{G{\times}F}\}
-  \end{align*}
+    & \qquad\quad\text{for all }0\leq k<\size{\rho},\last(\rho[..k])\notin{G{\times}F}\}, \text{ and } \\
+  % \end{align*}
   %
-  and
+  % and
   %
-  \begin{align*}
+  % \begin{align*}
     \setS = {}
     & \{{\rho\in\execf^{\model}} \mid {\bar{\rho}\in\plans}, \ {\last(\rho)\in G} \ \text{ and}\\
-    & \!\!\!\!\!\! \text{for all }0\leq k<\size{\rho}, \text{ either }{\last(\rho[..k])\notin G}\text{ or }{\bar{\rho}[..k]\notin\plans}\}
+    & \!\!\!\!\!\! \text{for all }0\leq k<\size{\rho}, \text{ either }{\last(\rho[..k])\notin G}\text{ or }{\bar{\rho}[..k]\notin\plans}\}.
   \end{align*}
   %
   Let $\rho,\rho'\in\setR$.  Then, if $\rho\leq\rho'$,

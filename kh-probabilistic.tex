@@ -673,7 +673,7 @@ with $\strat_\plan$ as in \Cref{sec:preliminaries}.
 %% \Cref{prop:PFA:undecidability}.\ref{prop:PFA:undecidability:high}, this yields the following theorem.
 %
 Thus, checking $\model,s\models\kh^q(\init,\fin)$ is equivalent to
-check problem \ref{prop:PFA:undecidabilty:high} in
+checking problem \ref{prop:PFA:undecidabilty:high} in
 \Cref{prop:PFA:undecidabilty},
 yielding the following theorem.
 
@@ -686,7 +686,7 @@ knowing-how: while model-checking for $\Khlogic$ is \PSPACE-complete,
 considering probabilities leads to undecidability of the same problem.
 
 
-\subsection{Indistinguishable Clases}\label{subsec:prob:indist:committed}
+\subsection{Indistinguishable Classes}\label{subsec:prob:indist:committed}
 
 Just like we did for $\Khlogic$, we want to extend $\Khunc$ to a
 probabilistic setting.  A first natural approach is to keep the same
@@ -857,7 +857,7 @@ whole class as follows.
     $\strat(\rho)(a,\mu)>0$ implies $\bar{\rho}a\in\pref(\plans)$, and
   \item\label{def:plans:compat:ii}%
     $\strat(\rho)(\complete)>0$ implies that either
-    $\bar{\rho}=\plan$ or
+    $\bar{\rho}\in\plans$ or
     $\{\bar{\rho}a\mid{\last(\rho)\reach{a}\mu}\}\cap\pref(\plans) = \emptyset$. 
   \end{enumerate}
   %
@@ -871,7 +871,7 @@ also $\plan$-compatible.
 \begin{example}\label{ex:running:strat-comp-adapt}
   Consider perception $\Unc_1$ of
   \Cref{ex:running:pkhunc} and let $\plans_{2,3}=\{\plan_2,\plan_3\}$
-  and $\plans_{4,5}=\{\plan_4,\plan_5\}$ be two of its clases.
+  and $\plans_{4,5}=\{\plan_4,\plan_5\}$ be two of its classes.
   %
   Strategy $\strat_3$, defined so that
   \[

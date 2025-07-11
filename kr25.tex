@@ -67,27 +67,27 @@
 }
 \fi
 % Multiple author syntax
-% \author{%
-% Pablo F. Castro$^{1,3}$\and
-% Pedro R. D'Argenio$^{2,3}$\and
-% Raul Fervari$^{2,3}$ \\
-% \affiliations
-% $^1$Universidad Nacional de R\'io Cuarto, FCEFQyN, Departamento de Computaci\'on, Argentina\\
-% $^2$Universidad Nacional de C\'ordoba, FAMAF, Argentina\\
-% $^3$Consejo Nacional de Investigaciones Cient\'ificas y T\'ecnicas (CONICET), Argentina\\
-% % \emails
-% % pcastro@dc.exa.unrc.edu.ar,
-% % \{pedro.dargenio, rfervari\}@unc.edu.ar
-% }
+\author{%
+Pablo F. Castro$^{1,3}$\and
+Pedro R. D'Argenio$^{2,3}$\and
+Raul Fervari$^{2,3}$ \\
+\affiliations
+$^1$Universidad Nacional de R\'io Cuarto, FCEFQyN, Departamento de Computaci\'on, Argentina\\
+$^2$Universidad Nacional de C\'ordoba, FAMAF, Argentina\\
+$^3$Consejo Nacional de Investigaciones Cient\'ificas y T\'ecnicas (CONICET), Argentina\\
+% \emails
+% pcastro@dc.exa.unrc.edu.ar,
+% \{pedro.dargenio, rfervari\}@unc.edu.ar
+}
 
-\author{Paper \#180}
+% \author{Paper \#180}
 
 \begin{document}
 
 \maketitle
 
 \begin{abstract}
-  We introduce a probabilistic version of knowing-how modal logics.  More precisely,  our logics extend extant approaches to model the ability of an agent to achieve a given goal with a certain probability.  On the semantic side,  we enrich the models of the logic with probability distributions over the agent's actions.  Then, we investigate different languages to describe such structures.  First,  we consider a probabilistic version of the linear plan-based logic of knowing how, and discuss its properties. Then, we consider indistinguishably classes,  and obtain two logics,  one that has `non-adaptative' plans, and another  with `adaptative' plans. In all cases we investigate the computational complexity of their model-checking problem, obtaining uncedidability results for the first and the second logic, while for the last one the problem is decidable in polynomial time. We also explore the semantics of the new logics under non-probabilistic models to compare them to the original non-probabilistic ones.
+  We introduce a probabilistic version of knowing-how modal logics.  More precisely,  our logics extend extant approaches to model the ability of an agent to achieve a given goal with a certain probability.  On the semantic side,  we enrich the models of the logic with probability distributions over the agent's actions.  Then, we investigate different languages to describe such structures.  First,  we consider a probabilistic version of the linear plan-based logic of knowing how, and discuss its properties. Then, we consider indistinguishability classes,  and obtain two logics,  one that has `non-adaptative' plans, and another  with `adaptative' plans. In all cases we investigate the computational complexity of their model-checking problem, obtaining uncedidability results for the first and the second logic, while for the last one the problem is decidable in polynomial time. We also explore the semantics of the new logics under non-probabilistic models to compare them to the original non-probabilistic ones.
   %We implemented a prototype tool of the model-checking algorithm for the decidable case which we used to analyse some case studies.
 \end{abstract}
 
@@ -97,21 +97,22 @@
 \input{kh-probabilistic}
 \input{final}
 
-% \section*{Acknowledgments}
+\section*{Acknowledgments}
 
-% %% This work was supported by Agencia I$+$D$+$i grants PICT 2022-09-00580
-% %% ({\scriptsize CoSMoSS}) and 
-% %% 2021-00400,
-% This work was supported by Agencia I$+$D$+$i grant PICT 2021-00400,
-% %
-% the EU H2020 research and innovation programme
-% under the Marie Sk{\l}odowska-Curie grant agreements 101008233
-% ({\scriptsize MISSION}),
-% %
-% the IRP SINFIN, 
-% %
-% and SeCyT-UNC grants 33620230100384CB ({\scriptsize MECANO}) and 33620230100178CB.
-% %
+%% This work was supported by Agencia I$+$D$+$i grants PICT 2022-09-00580
+%% ({\scriptsize CoSMoSS}) and 
+%% 2021-00400,
+This work was supported by Agencia I$+$D$+$i grant PICT 2021-00400,
+%
+the EU H2020 research and innovation programme
+under the Marie Sk{\l}odowska-Curie grant agreements 101008233
+({\scriptsize MISSION}),
+%
+the IRP SINFIN, 
+%
+SeCyT-UNC grants 33620230100384CB ({\scriptsize MECANO}) and 33620230100178CB,
+and as part of France 2030 program ANR-11-IDEX-0003.
+%
 % \textcolor{red}{completar}
 
 
@@ -125,11 +126,11 @@
 \bibliographystyle{kr}
 \bibliography{references}
 
-\newpage
-\onecolumn
-\appendix
+% \newpage
+% \onecolumn
+% \appendix
 
-\input{appendix}
+% \input{appendix}
 
 
 \end{document}

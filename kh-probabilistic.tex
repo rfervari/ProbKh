@@ -688,9 +688,9 @@ considering probabilities leads to undecidability of the same problem.
 
 \subsection{Indistinguishable Classes}\label{subsec:prob:indist:committed}
 
-Just like we did for $\Khlogic$, we want to extend $\Khunc$ to a
+Just like we did for $\Khlogic$, we want to extend $\Khlogic$ over LTSU to a
 probabilistic setting.  A first natural approach is to keep the same
-spirit of $\Khlogic$ in which plans are a priori commitments that are
+spirit of $\Khlogic$ over LTS, in which plans are a priori commitments that are
 followed as pre-established.
 
 First, we need to extend PLTSs with a perception $\Unc$ to
@@ -705,7 +705,7 @@ reflect uncertainty.
 
 In this setting, we reinterpret that $\kh^q(\psi,\varphi)$ can only be
 successful if there is a class $\plans\in\Unc$ such that every
-$\plan\in\plans$ that start at $\psi$ ends in $\varphi$ with
+$\plan\in\plans$ that starts at $\psi$ ends in $\varphi$ with
 probability at least $q$.  Since the interpretation of the agent is
 that all plans in $\plans$ are equivalent, then all of them must 
 perform as desired.  This idea tries to extend to probability the

@@ -55,7 +55,7 @@ The model-checking problem for a given logic is defined as follows, where models
 
 \paragraph{Indistinguishability Classes in Knowing How.}
 
-We present the generalization of $\Khlogic$ where the agent's perception is determined by an indistinguishability relation between plans~\cite{AFSVQ21,AFSVQ23}. W.l.o.g., we consider here a single agent, unlike the multi-agent presentation from previous works.
+We present the generalization of $\Khlogic$ where the agent's perception is determined by an indistinguishability relation between plans~\cite{AFSVQ21,AFSVQ25}. W.l.o.g., we consider here a single agent, unlike the multi-agent presentation from previous works.
 
 %\begin{definition}[Uncertainty-based \lts]\label{def:ults}
 An \emph{uncertainty-based \lts} (LTSU) is a tuple     $\model=\tup{\S,\Act,\ra,\Unc,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is an LTS, and 
@@ -66,7 +66,7 @@ $\Unc\subseteq \powerset(\Act^*)\setminus \emptyset$ is a non-empty collection o
     % For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to an LTSU, i.e., we will use its uncertainty set instead of the indistinguishability relation.
 %\end{definition}
 
-Intuitively, $\DS{} = \bigcup_{\plans \in \Unc} \plans$ is the set of plans that the  agent is aware she has at her disposal, and each $\plans \in \Unc$ is an indistinguishability class. Thus, $\Unc$ is in direct correspondence to an equivalence relation over $\DS{}$, where each $\plans\in\Unc$ defines an equivalence class (see e.g.~\cite{AFSVQ23}). 
+Intuitively, $\DS{} = \bigcup_{\plans \in \Unc} \plans$ is the set of plans that the  agent is aware she has at her disposal, and each $\plans \in \Unc$ is an indistinguishability class. Thus, $\Unc$ is in direct correspondence to an equivalence relation over $\DS{}$, where each $\plans\in\Unc$ defines an equivalence class (see e.g.~\cite{5}). 
 %
 Notice that $\Unc$ is a partition of $\DS{}$ representing the perception the agent has about the reality.  Those plans in $\Act^*\setminus\DS{}$ are not considered by the agent, even if they are suitable plans. 
 
@@ -77,7 +77,7 @@ Given her indistinguishability over $\Act^*$, the abilities of the agent do not 
 % \end{definition}
 
 We introduce the semantics of $\Khlogic$ in this new setting.
-% notion of strong executability for a set of plans (see, e.g.,~\cite{AFSVQ23}), generalizing the notion introduced for a single plan.
+% notion of strong executability for a set of plans (see, e.g.,~\cite{AFSVQ25}), generalizing the notion introduced for a single plan.
     
 %%     \begin{definition}[Strong executability of plans]\label{def:plans-exec}
 %%     Let $\model=\tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU. A \emph{set of plans} $\plans \subseteq \Act^*$ is \emph{strongly executable} at $u \in \S$ if and only if \emph{every} plan $\plan \in \plans$ is \emph{strongly executable} at~$u$.
@@ -105,7 +105,7 @@ We introduce the semantics of $\Khlogic$ in this new setting.
     & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 
     \end{array}
     \]      
-    where: $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,w\models\chi}$. 
+    where: $\truthset{\model}{\chi} = \csetsc{s\in\S}{\model,s\models\chi}$. 
     % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
 \end{definition}
 

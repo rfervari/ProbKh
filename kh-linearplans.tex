@@ -55,10 +55,10 @@ The model-checking problem for a given logic is defined as follows, where models
 
 \paragraph{Indistinguishability Classes in Knowing How.}
 
-We present the generalization of $\Khlogic$ where the agent's perception is determined by an indistinguishability relation between plans~\cite{AFSVQ21,AFSVQ25}. W.l.o.g., we consider here a single agent, unlike the multi-agent presentation from previous works.
+We present the generalization of $\Khlogic$ where the agent's perception is determined by an indistinguishability relation between plans~\cite{AFSVQ21,AFSVQ25}, called herein $\Khunc$. W.l.o.g., we consider here a single agent, unlike the multi-agent presentation from previous works. Thus, the languages of $\Khlogic$ and of $\Khunc$ coincide. 
 
 %\begin{definition}[Uncertainty-based \lts]\label{def:ults}
-An \emph{uncertainty-based \lts} (LTSU) is a tuple     $\model=\tup{\S,\Act,\ra,\Unc,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is an LTS, and 
+An \emph{uncertainty-based \lts} (LTSU) is a tuple $\model=\tup{\S,\Act,\ra,\Unc,\V}$ s.t. $\tup{\S,\Act,\ra,\V}$ is an LTS, and 
 $\Unc\subseteq \powerset(\Act^*)\setminus \emptyset$ is a non-empty collection of pairwise disjoint non-empty sets of plans, i.e., (i) $\Unc\neq\emptyset$, (ii) for all $\plans_1,\plans_2\in\Unc$, $\plans_1\neq\plans_2$ implies  $\plans_1\cap\plans_2=\emptyset$, and (iii) $\emptyset\notin\Unc$. The set $\Unc$ is called the \emph{perception} of the agent. 
 %  ${\sim}\subseteq \DS{}\times \DS{}$ (where $\DS{}\subseteq\Act^*$) is an equivalence relation over $\DS{}$ (called the indistinguishability relation between plans). 
 
@@ -66,7 +66,7 @@ $\Unc\subseteq \powerset(\Act^*)\setminus \emptyset$ is a non-empty collection o
     % For simplicity sake, we sometimes denote $\model=\tup{\S,\Act,\ra,\Unc,\V}$ to refer to an LTSU, i.e., we will use its uncertainty set instead of the indistinguishability relation.
 %\end{definition}
 
-Intuitively, $\DS{} = \bigcup_{\plans \in \Unc} \plans$ is the set of plans that the  agent is aware she has at her disposal, and each $\plans \in \Unc$ is an indistinguishability class. Thus, $\Unc$ is in direct correspondence to an equivalence relation over $\DS{}$, where each $\plans\in\Unc$ defines an equivalence class (see e.g.~\cite{5}). 
+Intuitively, $\DS{} = \bigcup_{\plans \in \Unc} \plans$ is the set of plans that the  agent is aware she has at her disposal, and each $\plans \in \Unc$ is an indistinguishability class. Thus, $\Unc$ is in direct correspondence to an equivalence relation over $\DS{}$, where each $\plans\in\Unc$ defines an equivalence class (see e.g.~\cite{AFSVQ25}). 
 %
 Notice that $\Unc$ is a partition of $\DS{}$ representing the perception the agent has about the reality.  Those plans in $\Act^*\setminus\DS{}$ are not considered by the agent, even if they are suitable plans. 
 
@@ -112,6 +112,6 @@ We introduce the semantics of $\Khlogic$ in this new setting.
 In~\cite{AFSVQ21,DF23} two different instances of the model-checking problem for $\Khlogic$ over LTSU were studied. In the former, $\Unc$ consists of a finite set of classes, where each of them is a finite set of plans. In the latter, $\Unc$ is finite but every class is characterized by a finite-state automaton, i.e., it is potentially infinite, subsuming the finite case. Both representations lead to the same result.
 
 \begin{proposition}[\citeauthor{DF23}~\citeyear{DF23}]
-    The model-checking problem for $\Khlogic$ over LTSU is in \PTIME.
+    The model-checking problem for $\Khunc$ is in \PTIME.
 \end{proposition}
 

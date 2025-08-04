@@ -688,9 +688,9 @@ considering probabilities leads to undecidability of the same problem.
 
 \subsection{Indistinguishable Classes}\label{subsec:prob:indist:committed}
 
-Just like we did for $\Khlogic$, we want to extend $\Khlogic$ over LTSU to a
+Just like we did for $\Khlogic$, we want to extend $\Khunc$ to a
 probabilistic setting.  A first natural approach is to keep the same
-spirit of $\Khlogic$ over LTS, in which plans are a priori commitments that are
+spirit of $\Khlogic$, in which plans are a priori commitments that are
 followed as pre-established.
 
 First, we need to extend PLTSs with a perception $\Unc$ to
@@ -806,7 +806,7 @@ contrary to the \PTIME problem to the relative non-probabilistic logic
   $\model,s\models\neg\kh^q(\init,\fin)$ holds if there is a plan
   ${\plan\in \Act^*}$ such that it does not happen that
   ${\truthset{\model}{\init}\reach{\plan}_q\truthset{\model}{\fin}}$,
-  or equivalently, if there is $\plan\in \Act^*$  such that
+  or equivalently, if there is some $\plan\in \Act^*$  such that
   $\inf_{\strat\in\Comp(\plan)}\Prob^\strat_{\sini}(\Succ(\plan,F)) < q$,
   where $\truthset{\model}{\init}=\{\sini\}$ and
   $F=\{{s\in\S}\mid{\fin\in\V(s)}\}$.
@@ -1406,9 +1406,9 @@ algorithm for $\PKhadapt$.
   Following \cref{eq:def:prob:i,eq:def:prob:ii}, it should not be hard
   to see that
   %
-  $\Prob^{\strat}_{(\sini,\tini)}(\Cyl(\rho)) =
-  \Prob^{\strat^\star}_{\sini}(\{\proj(\rho)\complete\}) =
-  \Prob^{\strat^\star}_{\sini}(\Cyl(\proj(\rho)))$
+  $\Prob^{\strat}_{(\sini,\tini)}(\Cyl(\rho)) \!=\!
+  \Prob^{\strat^\star}_{\sini}(\{\proj(\rho)\complete\}) \!=\!
+  \Prob^{\strat^\star}_{\sini}(\Cyl(\proj(\rho)))$. 
   %
   Hence, from \cref{eq:prob:R:bigcup:cyl,eq:prob:S:bigcup:cyl},
   \cref{lm:mc:core:i} follows.

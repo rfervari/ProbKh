@@ -76,7 +76,7 @@ Given her indistinguishability over $\Act^*$, the abilities of the agent do not 
 %     Let $\plans \subseteq \Act^*$ and $A,G \subseteq \S$, we write $A\reach{\plans} G$ if for all $s\in A$, $\plan\in\plans$ and $t\in \S$,  $s \reach{\plan} t$ implies $t\in G$. 
 % \end{definition}
 
-We introduce the semantics of $\Khlogic$ in this new setting.
+In this new setting, we introduce the semantics of $\Khunc$.
 % notion of strong executability for a set of plans (see, e.g.,~\cite{AFSVQ25}), generalizing the notion introduced for a single plan.
     
 %%     \begin{definition}[Strong executability of plans]\label{def:plans-exec}
@@ -85,7 +85,7 @@ We introduce the semantics of $\Khlogic$ in this new setting.
 %%     \end{definition}
 
 %%     \begin{definition} \label{def:semantics-kh-uncertain}
-%%         Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is inductively defined as:
+%%         Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khunc$ is inductively defined as:
 %%         \[
 %%         \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
 %%         \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{such that:} \\
@@ -97,7 +97,7 @@ We introduce the semantics of $\Khlogic$ in this new setting.
 %%     \end{definition}
 
 \begin{definition} \label{def:semantics-kh-uncertain}
-    Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khlogic$ is defined inductively as usual for the Boolean operators and
+    Let $\model = \tup{\S,\Act,\ra,\Unc,\V}$ be an LTSU and let $s\in\S$, the satisfiability relation $\models$ for $\Khunc$ is defined inductively as usual for the Boolean operators and
     \[
     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
     \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plans \in \Unc \;\text{s.t.\ for all } \plan\in\plans \\
@@ -109,7 +109,7 @@ We introduce the semantics of $\Khlogic$ in this new setting.
     % Define: $\model\models\varphi$ iff  $\truthset{\model}{\varphi}=\S$, and $\models\varphi$ iff $\model\models\varphi$, for all LTS $\model$.
 \end{definition}
 
-In~\cite{AFSVQ21,DF23} two different instances of the model-checking problem for $\Khlogic$ over LTSU were studied. In the former, $\Unc$ consists of a finite set of classes, where each of them is a finite set of plans. In the latter, $\Unc$ is finite but every class is characterized by a finite-state automaton, i.e., it is potentially infinite, subsuming the finite case. Both representations lead to the same result.
+In~\cite{AFSVQ21,DF23} two different instances of the model-checking problem for $\Khunc$ over LTSU were studied. In the former, $\Unc$ consists of a finite set of classes, where each of them is a finite set of plans. In the latter, $\Unc$ is finite but every class is characterized by a finite-state automaton, i.e., it is potentially infinite, subsuming the finite case. Both representations lead to the same result.
 
 \begin{proposition}[\citeauthor{DF23}~\citeyear{DF23}]
     The model-checking problem for $\Khunc$ is in \PTIME.

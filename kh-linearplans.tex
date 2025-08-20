@@ -33,7 +33,7 @@ Formulas are interpreted over pointed LTS, i.e., w.r.t. an LTS and a given state
     \begin{array}{l@{\ \ \ }c@{\ \ \  }l}
     \model, s \models p & \iffdef & p \in \V(s) \\
     \model, s\models \neg\varphi & \iffdef & \model, s \not\models \varphi \\
-    \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, w \models \varphi \\
+    \model, s \models \psi\vee\varphi & \iffdef & \model, s \models \psi \mbox{ or }\model, s \models \varphi \\
     \model, s \models \kh(\psi,\varphi) & \iffdef & \text{there is } \plan \in \Act^* \;\text{such that:} \\
     & & \ \ \text{\rm (1)} \ \plan \text{ is SE at }  \truthset{\model}{\psi}\; \text{and} \\
     & & \ \ \text{\em (2)} \ \truthset{\model}{\psi} \reach{\plan} \truthset{\model}{\varphi}, 

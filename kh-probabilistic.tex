@@ -983,7 +983,7 @@ semantics is captured in the next definition.
   %
 \end{definition}
 
-Notice that there is a \emph{universal} cuantification on
+Notice that there is a \emph{universal} quantification on
 $\plans$-compatible strategies implicit in the ``$\inf$'' within
 expression
 $\truthset{\model}{\psi}\reach{\plans}_q\truthset{\model}{\varphi}$
@@ -1068,8 +1068,8 @@ while at state $s_2$ it chooses the $b$ transition.
       \path[-{Latex[length=2.2mm,width=1.4mm]},line width=0.5pt,dashed]
       (d1) edge []              node[left,yshift=3]           {$0.5$} (s01)
       (d1) edge []              node[right,yshift=3]          {$0.5$} (s02)
-      (d2) edge []              node[left]                    {$0.1$} (s03)
-      (d2) edge [bend right=18] node[right,pos=0.02,yshift=2] {$0.9$} (s04)
+      (d2) edge []              node[left]                    {$0.9$} (s03)
+      (d2) edge [bend right=18] node[right,pos=0.02,yshift=2] {$0.1$} (s04)
       (d3) edge []              node[right,pos=0.3]           {$0.1$} (s03)
       (d3) edge []              node[right,pos=0.03,yshift=2] {$0.9$} (s04)
       (d4) edge []              node[left,pos=0.03,yshift=2]  {$0.9$} (s03)
@@ -1459,7 +1459,7 @@ algorithm for $\PKhadapt$.
 \end{proof}
 
 \renewcommand{\Check}[1]{Check(#1)}%
-\newcommand{\MinReachProb}[1]{MeanReachProb(#1)}%
+\newcommand{\MinReachProb}[1]{MinReachProb(#1)}%
 \newcommand{\Return}{\!\textbf{return}\ \ }
 \begin{algorithm}[tb]
   \caption{Model checking algorithm for $\PKhadapt$}
